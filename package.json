@@ -1,5 +1,5 @@
 {
-	"name": "auth-me-project",
+	"name": "backend-project-airbnb",
 	"version": "1.0.0",
 	"description": "",
 	"main": "index.js",
@@ -19,7 +19,7 @@
 	"author": "",
 	"license": "ISC",
 	"bugs": {
-		"url": "https://github.com/yonilurie/auth-me-project/issues"
+		"url": "https://github.com/yonilurie/backend-project-airbnb/issues"
 	},
-	"homepage": "https://github.com/yonilurie/auth-me-project#readme"
+	"homepage": "https://github.com/yonilurie/backend-project-airbnb#readme"
 }
