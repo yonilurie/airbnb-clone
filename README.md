@@ -3,7 +3,7 @@
 ## Database Schema Design
 
 `<insert database schema design here>`
-![Database Blueprint](http://db-blueprint.png)
+![Database Blueprint](./db-blueprint.png)
 
 ## API Documentation
 
