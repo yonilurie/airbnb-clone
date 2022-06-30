@@ -11,6 +11,8 @@ module.exports = {
 			ownerId: {
 				type: Sequelize.INTEGER,
 				allowNull: false,
+				references: { model: "Users" },
+				onDelete: "CASCADE",
 			},
 			address: {
 				type: Sequelize.STRING,
@@ -50,16 +52,18 @@ module.exports = {
 			},
 			numOfReviews: {
 				type: Sequelize.INTEGER,
-				allowNull: false,
+				allowNull: true,
 				defaultValue: 0,
 			},
 			createdAt: {
 				allowNull: false,
 				type: Sequelize.DATE,
+				defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
 			},
 			updatedAt: {
 				allowNull: false,
 				type: Sequelize.DATE,
+				defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
 			},
 		});
 	},

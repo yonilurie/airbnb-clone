@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
 		 */
 		static associate(models) {
 			// define association here
-      
+			Room.belongsTo(models.User, { foreignKey: "ownerId" });
 		}
 	}
 	Room.init(
@@ -56,7 +56,7 @@ module.exports = (sequelize, DataTypes) => {
 			},
 			numOfReviews: {
 				type: DataTypes.INTEGER,
-				allowNull: false,
+				allowNull: true,
 			},
 		},
 		{
