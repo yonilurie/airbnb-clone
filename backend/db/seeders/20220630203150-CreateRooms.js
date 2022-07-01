@@ -6,7 +6,7 @@ module.exports = {
 			"Rooms",
 			[
 				{
-					ownerId: 2,
+					ownerId: 1,
 					address: "123 Disney Lane",
 					city: "San Francisco",
 					state: "California",
@@ -15,8 +15,7 @@ module.exports = {
 					lng: 122.4730327,
 					name: "App Academy",
 					description: "Place where web developers are created",
-          price: 123,
-
+					price: 123,
 				},
 			],
 			{}

@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
 				foreignKey: "ownerId",
 				hooks:true
 			})
+			User.hasMany(models.Booking, {foreignKey: 'userId'})
 		}
 
 		static async signup({ username, email, password }) {
