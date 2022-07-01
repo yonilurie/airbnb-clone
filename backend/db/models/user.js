@@ -5,8 +5,8 @@ const { Model, Validator } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
 	class User extends Model {
 		toSafeObject() {
-			const { id, username, email } = this; // context will be the User instance
-			return { id, username, email };
+			const { id, username, firstName, lastName, email } = this; // context will be the User instance
+			return { id, username, firstName, lastName, email };
 		}
 
 		validatePassword(password) {
@@ -23,11 +23,19 @@ module.exports = (sequelize, DataTypes) => {
 			User.hasMany(models.UserReviewImage, { foreignKey: "userId" });
 		}
 
-		static async signup({ username, email, password }) {
+		static async signup({
+			username,
+			email,
+			password,
+			firstName,
+			lastName,
+		}) {
 			const hashedPassword = bcrypt.hashSync(password);
 			const user = await User.create({
 				username,
 				email,
+				firstName,
+				lastName,
 				hashedPassword,
 			});
 			return await User.scope("currentUser").findByPk(user.id);
