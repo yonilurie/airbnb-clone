@@ -2,20 +2,21 @@ const express = require("express");
 const router = express.Router();
 const { Room, Review, User, UserReviewImage } = require("../db/models");
 
-//Get all spots
+//Get all Rooms
 router.get("/", async (req, res) => {
 	const Rooms = await Room.findAll({
 		attributes: {
 			exclude: ["numOfReviews"],
 		},
 	});
+
 	res.status = 200;
 	res.json({
 		Rooms,
 	});
 });
 
-//get reviews of a room
+//Get all reviews of a room by id
 router.get("/:roomId/reviews", async (req, res) => {
 	let Reviews = await Review.findAll({
 		where: {
@@ -41,6 +42,7 @@ router.get("/:roomId/reviews", async (req, res) => {
 			},
 		],
 	});
+
 	if (!Reviews.length) {
 		res.status = 404;
 		res.json({
@@ -48,6 +50,7 @@ router.get("/:roomId/reviews", async (req, res) => {
 			statusCode: 404,
 		});
 	}
+	
 	res.status = 200;
 	res.json(Reviews);
 });
