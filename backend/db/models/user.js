@@ -16,9 +16,10 @@ module.exports = (sequelize, DataTypes) => {
 			// define association here
 			User.hasMany(models.Room, {
 				foreignKey: "ownerId",
-				hooks:true
-			})
-			User.hasMany(models.Booking, {foreignKey: 'userId'})
+				hooks: true,
+			});
+			User.hasMany(models.Booking, { foreignKey: "userId" });
+			User.hasMany(models.Review, { foreignKey: "userId" });
 		}
 
 		static async signup({ username, email, password }) {

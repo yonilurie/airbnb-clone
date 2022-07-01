@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
 			// define association here
 			Room.belongsTo(models.User, { foreignKey: "ownerId" });
 			Room.hasMany(models.Booking, { foreignKey: "roomId" });
+			Room.hasMany(models.Review, { foreignKey: "roomId" });
 		}
 	}
 	Room.init(
@@ -67,5 +68,3 @@ module.exports = (sequelize, DataTypes) => {
 	);
 	return Room;
 };
-
-
