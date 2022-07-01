@@ -61,4 +61,27 @@ const requireAuth = function (req, _res, next) {
 	return next(err);
 };
 
-module.exports = { setTokenCookie, restoreUser, requireAuth };
+const checkSpecificUser = (req, res, next) => {
+	console.log(req.cookies.token);
+	let token = req.cookies.token;
+
+	const payload = jwt.verify(token, secret);
+	console.log(payload, 'payload');
+	console.log(req.user.dataValues.id)
+	if (payload.data.id != req.params.userId) next(new Error('Unauthorized'))
+
+	if (req.user) return next();
+
+	const err = new Error("Unauthorized");
+	err.title = "Unauthorized";
+	err.errors = ["Unauthorized"];
+	err.status = 401;
+	return next(err);
+};
+
+module.exports = {
+	setTokenCookie,
+	restoreUser,
+	requireAuth,
+	checkSpecificUser,
+};
