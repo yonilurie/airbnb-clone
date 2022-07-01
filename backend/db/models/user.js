@@ -1,6 +1,7 @@
 "use strict";
 const bcrypt = require("bcryptjs");
 const { Model, Validator } = require("sequelize");
+const { USE } = require("sequelize/types/index-hints");
 
 module.exports = (sequelize, DataTypes) => {
 	class User extends Model {
@@ -20,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
 			});
 			User.hasMany(models.Booking, { foreignKey: "userId" });
 			User.hasMany(models.Review, { foreignKey: "userId" });
+			User.hasMany(models.UserReviewImage, { foreignKey: "userId" });
 		}
 
 		static async signup({ username, email, password }) {
