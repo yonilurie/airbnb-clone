@@ -9,6 +9,7 @@ const {
 	checkSpecificUser,
 } = require("../utils/auth");
 
+
 router.get(
 	"/:userId/rooms",
 	[restoreUser, checkSpecificUser],
