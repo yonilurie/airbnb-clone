@@ -56,4 +56,29 @@ router.get("/:roomId/reviews", async (req, res) => {
 	res.json(Reviews);
 });
 
+//Get details about a room with id
+
+router.get("/:roomId", async (req, res) => {
+	let room = await Room.findByPk(req.params.roomId, {
+		include: [
+			{
+				model: User,
+				as: 'Owner',
+				attributes: ["id", "firstName", "lastName"],
+			},
+		],
+	});
+
+	if (!room) {
+		res.status = 404;
+		res.json({
+			message: "Spot couldn't be found",
+			statusCode: 404,
+		});
+	}
+
+	res.status = 200;
+	res.json(room);
+});
+
 module.exports = router;
