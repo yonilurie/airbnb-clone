@@ -14,8 +14,8 @@ module.exports = {
 		]);
 	},
 
-  async down(queryInterface, Sequelize) {
-    	const Op = Sequelize.Op;
+	async down(queryInterface, Sequelize) {
+		const Op = Sequelize.Op;
 		return queryInterface.bulkDelete("Reviews", {
 			id: { [Op.in]: [1] },
 		});
