@@ -34,6 +34,7 @@ router.get("/:roomId/reviews", async (req, res) => {
 		include: [
 			{
 				model: User,
+				attributes: ["id", "firstName", "lastName"],
 			},
 			{
 				model: UserReviewImage,
@@ -50,7 +51,7 @@ router.get("/:roomId/reviews", async (req, res) => {
 			statusCode: 404,
 		});
 	}
-	
+
 	res.status = 200;
 	res.json(Reviews);
 });

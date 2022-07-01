@@ -1,6 +1,7 @@
 # backend-project-airbnb
 
 ## Database Schema Design
+Heroku link: https://backend-project-airbnb.herokuapp.com/
 
 ![Database Blueprint](./images//db-blueprint.png)
 
