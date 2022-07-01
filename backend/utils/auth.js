@@ -62,13 +62,21 @@ const requireAuth = function (req, _res, next) {
 };
 
 const checkSpecificUser = (req, res, next) => {
-	console.log(req.cookies.token);
 	let token = req.cookies.token;
 
-	const payload = jwt.verify(token, secret);
-	console.log(payload, 'payload');
-	console.log(req.user.dataValues.id)
-	if (payload.data.id != req.params.userId) next(new Error('Unauthorized'))
+	try {
+		const payload = jwt.verify(token, secret);
+		if (payload.data.id != req.params.userId) {
+			let error = new Error("Unauthorized");
+			error.status = 401;
+			next(error);
+		}
+	} catch (err) {
+		err.message = "Unauthorized";
+		err.status = 401;
+		err.title = "Unauthorized";
+		next(err);
+	}
 
 	if (req.user) return next();
 
