@@ -16,6 +16,8 @@ module.exports = {
 					name: "App Academy",
 					description: "Place where web developers are created",
 					price: 123,
+					previewImage:
+						"https://ohiostate.pressbooks.pub/app/uploads/sites/198/2019/06/farnsworthporch.jpg",
 				},
 			],
 			{}
