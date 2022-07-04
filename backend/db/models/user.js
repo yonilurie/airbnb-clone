@@ -17,11 +17,12 @@ module.exports = (sequelize, DataTypes) => {
 			User.hasMany(models.Room, {
 				foreignKey: "ownerId",
 				hooks: true,
-				as: 'Owner'
+				as: "Owner",
 			});
 			User.hasMany(models.Booking, { foreignKey: "userId" });
 			User.hasMany(models.Review, { foreignKey: "userId" });
 			User.hasMany(models.UserReviewImage, { foreignKey: "userId" });
+			User.hasMany(models.UserRoomImage, { foreignKey: "userId" });
 		}
 
 		static async signup({

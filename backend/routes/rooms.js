@@ -1,7 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const sequelize = require("sequelize");
-const { Room, Review, User, UserReviewImage } = require("../db/models");
+const {
+	Room,
+	Review,
+	User,
+	UserReviewImage,
+	UserRoomImage,
+} = require("../db/models");
 
 //Get all Rooms
 router.get("/", async (req, res) => {
@@ -58,7 +64,6 @@ router.get("/:roomId/reviews", async (req, res) => {
 });
 
 //Get details about a room with id
-
 router.get("/:roomId", async (req, res) => {
 	let room = await Room.findByPk(req.params.roomId, {
 		attributes: [
@@ -83,6 +88,9 @@ router.get("/:roomId", async (req, res) => {
 				sequelize.fn("AVG", sequelize.col("reviews.stars")),
 				"avgStarRating",
 			],
+			[
+				sequelize.literal('(SELECT imageUrl FROM UserReviewImages)'), 'images'
+			]
 		],
 		include: [
 			{
@@ -92,6 +100,10 @@ router.get("/:roomId", async (req, res) => {
 			},
 			{
 				model: Review,
+				attributes: [],
+			},
+			{
+				model: UserRoomImage,
 				attributes: [],
 			},
 		],

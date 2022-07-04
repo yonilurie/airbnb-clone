@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
 			});
 			Room.hasMany(models.Booking, { foreignKey: "roomId" });
 			Room.hasMany(models.Review, { foreignKey: "roomId" });
+			Room.hasMany(models.UserRoomImage, { foreignKey: "roomId" });
 		}
 	}
 	Room.init(
