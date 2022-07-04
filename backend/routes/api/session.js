@@ -1,7 +1,11 @@
 const express = require("express");
 
-const { setTokenCookie, restoreUser } = require("../../utils/auth");
-const { User } = require("../../db/models");
+const {
+	setTokenCookie,
+	restoreUser,
+	requireAuth,
+} = require("../../utils/auth");
+const { User, Room } = require("../../db/models");
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
 const router = express.Router();
@@ -52,6 +56,15 @@ router.get("/", restoreUser, (req, res) => {
 			user: user.toSafeObject(),
 		});
 	} else return res.json({});
+});
+
+router.get("/rooms", requireAuth, async (req, res) => {
+	let userId = req.user.id;
+	let Rooms = await Room.findAll({
+		where: { ownerId: userId },
+	});
+	res.status = 200;
+	res.json(Rooms);
 });
 
 module.exports = router;
