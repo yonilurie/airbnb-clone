@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
 			Review.belongsTo(models.User, { foreignKey: "userId" });
 			Review.hasMany(models.UserReviewImage, {
 				foreignKey: "reviewId",
-				as: "reviewImages",
+				as: "images",
 			});
 		}
 	}

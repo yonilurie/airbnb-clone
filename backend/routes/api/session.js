@@ -5,7 +5,7 @@ const {
 	restoreUser,
 	requireAuth,
 } = require("../../utils/auth");
-const { User, Room } = require("../../db/models");
+const { User, Room, Review, UserReviewImage } = require("../../db/models");
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
 const router = express.Router();
@@ -65,6 +65,50 @@ router.get("/rooms", requireAuth, async (req, res) => {
 	});
 	res.status = 200;
 	res.json(Rooms);
+});
+
+router.get("/reviews", requireAuth, async (req, res) => {
+	let userId = req.user.id;
+	let reviews = await Review.findAll({
+		where: { userId: userId },
+		attributes: [
+			"id",
+			"userId",
+			"roomId",
+			"review",
+			"stars",
+			"createdAt",
+			"updatedAt",
+		],
+		include: [
+			{
+				model: User,
+				attributes: ["id", "firstName", "lastName"],
+			},
+			{
+				model: Room,
+				attributes: [
+					"id",
+					"ownerId",
+					"address",
+					"city",
+					"state",
+					"country",
+					"lat",
+					"lng",
+					"name",
+					"price",
+				],
+			},
+			{
+				model: UserReviewImage,
+				as: 'images',
+				attributes: ['imageUrl']
+			}
+		],
+	});
+
+	res.json(reviews);
 });
 
 module.exports = router;
