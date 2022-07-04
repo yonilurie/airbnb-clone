@@ -14,11 +14,13 @@ module.exports = {
 				references: {
 					model: "Rooms",
 				},
+				onDelete: "CASCADE",
 			},
 			userId: {
 				type: Sequelize.INTEGER,
 				allowNull: false,
 				references: { model: "Users" },
+				onDelete: "CASCADE",
 			},
 			imageUrl: {
 				type: Sequelize.STRING,

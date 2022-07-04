@@ -8,6 +8,7 @@ const {
 	UserReviewImage,
 	UserRoomImage,
 } = require("../db/models");
+const userroomimage = require("../db/models/userroomimage");
 
 //Get all Rooms
 router.get("/", async (req, res) => {
@@ -88,11 +89,15 @@ router.get("/:roomId", async (req, res) => {
 				sequelize.fn("AVG", sequelize.col("reviews.stars")),
 				"avgStarRating",
 			],
-			[
-				sequelize.literal('(SELECT imageUrl FROM UserReviewImages)'), 'images'
-			]
+			"images.imageUrl",
 		],
+
 		include: [
+			{
+				model: UserRoomImage,
+				as: "images",
+				attributes: ["imageUrl"],
+			},
 			{
 				model: User,
 				as: "Owner",
@@ -102,11 +107,8 @@ router.get("/:roomId", async (req, res) => {
 				model: Review,
 				attributes: [],
 			},
-			{
-				model: UserRoomImage,
-				attributes: [],
-			},
 		],
+		group: "`images`.`imageUrl`",
 	});
 
 	if (!room) {
