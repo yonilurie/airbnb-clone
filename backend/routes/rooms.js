@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const sequelize = require("sequelize");
 const { Room, Review, User, UserReviewImage } = require("../db/models");
 
 //Get all Rooms
@@ -60,11 +61,38 @@ router.get("/:roomId/reviews", async (req, res) => {
 
 router.get("/:roomId", async (req, res) => {
 	let room = await Room.findByPk(req.params.roomId, {
+		attributes: [
+			"id",
+			"ownerId",
+			"address",
+			"city",
+			"state",
+			"country",
+			"lat",
+			"lng",
+			"name",
+			"description",
+			"price",
+			"createdAt",
+			"updatedAt",
+			[
+				sequelize.fn("COUNT", sequelize.col("reviews.roomId")),
+				"numReviews",
+			],
+			[
+				sequelize.fn("AVG", sequelize.col("reviews.stars")),
+				"avgStarRating",
+			],
+		],
 		include: [
 			{
 				model: User,
-				as: 'Owner',
+				as: "Owner",
 				attributes: ["id", "firstName", "lastName"],
+			},
+			{
+				model: Review,
+				attributes: [],
 			},
 		],
 	});
