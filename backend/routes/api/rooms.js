@@ -1,6 +1,6 @@
 const express = require("express");
 const { requireAuth, restoreUser } = require("../../utils/auth");
-const { Room } = require("../../db/models");
+const { Room, UserRoomImage } = require("../../db/models");
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
 const router = express.Router();
@@ -118,7 +118,7 @@ router.delete("/:roomId", requireAuth, async (req, res) => {
 	if (!room) {
 		res.status = 404;
 		return res.json({
-			message: "Spot couldn't be found",
+			message: "Room couldn't be found",
 			statusCode: 404,
 		});
 	}
@@ -159,7 +159,7 @@ router.put("/:roomId", [requireAuth, validateRoom], async (req, res) => {
 	if (!room) {
 		res.status = 400;
 		return res.json({
-			message: "Spot couldn't be found",
+			message: "Room couldn't be found",
 			statusCode: 404,
 		});
 	}
@@ -177,6 +177,36 @@ router.put("/:roomId", [requireAuth, validateRoom], async (req, res) => {
 
 	res.status = 200;
 	return res.json(room);
+});
+
+//Add an image to an owned room
+router.post("/:roomId", requireAuth, async (req, res) => {
+	const { url } = req.body;
+	const { roomId } = req.params;
+	const { id } = req.user;
+	//Check if room exists
+	let room = await Room.findOne({
+		where: { ownerId: id, id: roomId },
+	});
+	//If not return 404 code
+	if (!room) {
+		res.status = 404;
+		return res.json({
+			message: "Room couldn't be found",
+			statusCode: 404,
+		});
+	}
+	//create new User room image
+	let newImage = await UserRoomImage.build({
+		imageUrl: url,
+		userId: id,
+		roomId: roomId,
+	});
+
+	await newImage.save();
+
+	res.status = 200;
+	return res.json(newImage);
 });
 
 //Get all of a current users owned rooms
