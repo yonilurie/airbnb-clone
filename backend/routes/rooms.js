@@ -75,7 +75,6 @@ router.post(
 		let room = await Room.findByPk(roomId);
 		//If it doesnt, return a 404 code
 		if (!room) {
-			console.log("hello");
 			res.status = 404;
 			return res.json({
 				message: "Spot couldn't be found",
@@ -114,9 +113,55 @@ router.post(
 	}
 );
 
-//Add an image to an existing review
+//Edit an existing review
 router.put(
 	"/:roomId/reviews/:reviewId",
+	[restoreUser, requireAuth],
+	async (req, res) => {
+		const { roomId, reviewId } = req.params;
+		const { id } = req.user;
+		const { review, stars } = req.body;
+
+		//If the request is missing a message or a star rating, return a 400 code
+		if (!review || !stars) {
+			res.status = 400;
+			return res.json({
+				message: "Validation error",
+				statusCode: 400,
+				errors: {
+					review: "Review text is required",
+					stars: "Stars must be an integer from 1 to 5",
+				},
+			});
+		}
+		//Check if a room with that ID exists
+		let room = await Room.findByPk(roomId);
+		//If it doesnt, return a 404 code
+		if (!room) {
+			res.status = 404;
+			return res.json({
+				message: "Spot couldn't be found",
+				statusCode: 404,
+			});
+		}
+
+		let reviewToEdit = await Review.findByPk(reviewId);
+		if (reviewToEdit.userId !== id) {
+			return res.json({ message: "Can only edit your own comment" });
+		}
+
+		reviewToEdit.review = review;
+		reviewToEdit.stars = stars;
+		reviewToEdit.save();
+
+		res.status = 200;
+		return res.json(reviewToEdit);
+	}
+);
+
+//Add an image to an existing review
+router.post(
+	"/:roomId/reviews/:reviewId/add-image",
 	[restoreUser, requireAuth],
 	async (req, res) => {
 		const { roomId, reviewId } = req.params;
