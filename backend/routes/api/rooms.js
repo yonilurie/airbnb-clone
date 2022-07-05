@@ -1,8 +1,5 @@
 const express = require("express");
-const {
-	requireAuth,
-	restoreUser,
-} = require("../../utils/auth");
+const { requireAuth, restoreUser } = require("../../utils/auth");
 const { Room } = require("../../db/models");
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
@@ -105,6 +102,54 @@ router.post(
 		return res.json(room);
 	}
 );
+
+
+//Edit a spot
+router.put("/:roomId", [requireAuth, validateRoom], async (req, res) => {
+	const { roomId } = req.params;
+	const {
+		address,
+		city,
+		state,
+		country,
+		lat,
+		lng,
+		name,
+		description,
+		price,
+	} = req.body;
+	let userId = req.user.id;
+	let room = await Room.findOne({
+		exclude: "previewImage",
+		where: {
+			ownerId: userId,
+			id: roomId,
+		},
+	});
+
+	//If room cant be found return 404 code
+	if (!room) {
+		res.status = 400;
+		res.json({
+			message: "Spot couldn't be found",
+			statusCode: 404,
+		});
+	}
+
+	if (address) room.address = address;
+	if (city) room.city = city;
+	if (state) room.state = state;
+	if (country) room.country = country;
+	if (lat) room.lat = lat;
+	if (lng) room.lng = lng;
+	if (name) room.name = name;
+	if (description) room.description = description;
+	if (price) room.price = price;
+	await room.save();
+
+	res.status = 200;
+	res.json(room);
+});
 
 //Get all of a current users owned rooms
 router.get("/", requireAuth, async (req, res) => {
