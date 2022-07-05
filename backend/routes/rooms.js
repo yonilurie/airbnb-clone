@@ -9,24 +9,9 @@ const {
 	UserRoomImage,
 } = require("../db/models");
 
-
-//Get all Rooms
-router.get("/", async (req, res) => {
-	const Rooms = await Room.findAll({
-		attributes: {
-			exclude: ["numOfReviews"],
-		},
-	});
-
-	res.status = 200;
-	res.json({
-		Rooms,
-	});
-});
-
 //Get all reviews of a room by id
 router.get("/:roomId/reviews", async (req, res) => {
-	let Reviews = await Review.findAll({
+	let reviews = await Review.findAll({
 		where: {
 			roomId: req.params.roomId,
 		},
@@ -52,16 +37,16 @@ router.get("/:roomId/reviews", async (req, res) => {
 		],
 	});
 
-	if (!Reviews.length) {
+	if (!reviews.length) {
 		res.status = 404;
-		res.json({
+		return res.json({
 			message: "Spot couldn't be found",
 			statusCode: 404,
 		});
 	}
 
 	res.status = 200;
-	res.json(Reviews);
+	return res.json(reviews);
 });
 
 //Get details about a room with id
@@ -113,14 +98,26 @@ router.get("/:roomId", async (req, res) => {
 
 	if (!room) {
 		res.status = 404;
-		res.json({
+		return res.json({
 			message: "Spot couldn't be found",
 			statusCode: 404,
 		});
 	}
 
 	res.status = 200;
-	res.json(room);
+	return res.json(room);
+});
+
+//Get all Rooms
+router.get("/", async (req, res) => {
+	const rooms = await Room.findAll({
+		attributes: {
+			exclude: ["numOfReviews"],
+		},
+	});
+
+	res.status = 200;
+	return res.json({ rooms });
 });
 
 module.exports = router;

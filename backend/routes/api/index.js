@@ -11,6 +11,8 @@ const { User } = require("../../db/models");
 router.use(restoreUser);
 
 const { requireAuth } = require("../../utils/auth.js");
+
+//checks for authentication
 router.get("/require-auth", requireAuth, (req, res) => {
 	return res.json(req.user);
 });

@@ -10,6 +10,7 @@ const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
 const router = express.Router();
 
+//Validate that a login has all of the proper information
 const validateLogin = [
 	check("credential")
 		.exists({ checkFalsy: true })
@@ -21,6 +22,7 @@ const validateLogin = [
 	handleValidationErrors,
 ];
 
+//Validate that a newly POSTed room has all required information
 const validateRoom = [
 	check("address")
 		.exists({ checkFalsy: true })
@@ -63,96 +65,7 @@ const validateRoom = [
 	handleValidationErrors,
 ];
 
-// Log in
-router.post("/", validateLogin, async (req, res, next) => {
-	const { credential, password } = req.body;
-
-	const user = await User.login({ credential, password });
-
-	if (!user) {
-		const err = new Error("Login failed");
-		err.status = 401;
-		err.title = "Login failed";
-		err.errors = ["The provided credentials were invalid."];
-		return next(err);
-	}
-
-	await setTokenCookie(res, user);
-
-	return res.json({
-		user,
-	});
-});
-
-// Log out
-router.delete("/", (_req, res) => {
-	res.clearCookie("token");
-	return res.json({ message: "success" });
-});
-
-// Restore session user
-router.get("/", restoreUser, (req, res) => {
-	const { user } = req;
-	if (user) {
-		return res.json({
-			user: user.toSafeObject(),
-		});
-	} else return res.json({});
-});
-
-router.get("/rooms", requireAuth, async (req, res) => {
-	let userId = req.user.id;
-	let Rooms = await Room.findAll({
-		where: { ownerId: userId },
-	});
-	res.status = 200;
-	res.json(Rooms);
-});
-
-router.get("/reviews", requireAuth, async (req, res) => {
-	let userId = req.user.id;
-	let reviews = await Review.findAll({
-		where: { userId: userId },
-		attributes: [
-			"id",
-			"userId",
-			"roomId",
-			"review",
-			"stars",
-			"createdAt",
-			"updatedAt",
-		],
-		include: [
-			{
-				model: User,
-				attributes: ["id", "firstName", "lastName"],
-			},
-			{
-				model: Room,
-				attributes: [
-					"id",
-					"ownerId",
-					"address",
-					"city",
-					"state",
-					"country",
-					"lat",
-					"lng",
-					"name",
-					"price",
-				],
-			},
-			{
-				model: UserReviewImage,
-				as: "images",
-				attributes: ["imageUrl"],
-			},
-		],
-	});
-
-	res.json(reviews);
-});
-
+//Add a room if you are a user
 router.post(
 	"/rooms/add",
 	[restoreUser, requireAuth, validateRoom],
@@ -202,11 +115,101 @@ router.post(
 			});
 		}
 		res.status = 201;
-		res.json(room);
+		return res.json(room);
 	}
 );
 
+//Get all of a current users owned rooms
+router.get("/rooms", requireAuth, async (req, res) => {
+	let userId = req.user.id;
+	let rooms = await Room.findAll({
+		where: { ownerId: userId },
+	});
 
-router.put()
+	res.status = 200;
+	return res.json(rooms);
+});
+
+//Get all of a current users posted reviews
+router.get("/reviews", requireAuth, async (req, res) => {
+	let { id } = req.user;
+	let reviews = await Review.findAll({
+		where: { userId: id },
+		attributes: [
+			"id",
+			"userId",
+			"roomId",
+			"review",
+			"stars",
+			"createdAt",
+			"updatedAt",
+		],
+		include: [
+			{
+				model: User,
+				attributes: ["id", "firstName", "lastName"],
+			},
+			{
+				model: Room,
+				attributes: [
+					"id",
+					"ownerId",
+					"address",
+					"city",
+					"state",
+					"country",
+					"lat",
+					"lng",
+					"name",
+					"price",
+				],
+			},
+			{
+				model: UserReviewImage,
+				as: "images",
+				attributes: ["imageUrl"],
+			},
+		],
+	});
+
+	return res.json(reviews);
+});
+
+// Log in
+router.post("/", validateLogin, async (req, res, next) => {
+	const { credential, password } = req.body;
+
+	const user = await User.login({ credential, password });
+
+	if (!user) {
+		const err = new Error("Login failed");
+		err.status = 401;
+		err.title = "Login failed";
+		err.errors = ["The provided credentials were invalid."];
+		return next(err);
+	}
+
+	await setTokenCookie(res, user);
+
+	return res.json({ user });
+});
+
+// Log out
+router.delete("/", (_req, res) => {
+	res.clearCookie("token");
+	return res.json({ message: "success" });
+});
+
+// Restore session user
+router.get("/", restoreUser, (req, res) => {
+	const { user } = req;
+	if (user) {
+		return res.json({
+			user: user.toSafeObject(),
+		});
+	}
+
+	return res.json({});
+});
 
 module.exports = router;
