@@ -8,7 +8,7 @@ const {
 	UserReviewImage,
 	UserRoomImage,
 } = require("../db/models");
-const userroomimage = require("../db/models/userroomimage");
+
 
 //Get all Rooms
 router.get("/", async (req, res) => {

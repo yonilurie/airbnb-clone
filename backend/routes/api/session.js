@@ -206,4 +206,7 @@ router.post(
 	}
 );
 
+
+router.put()
+
 module.exports = router;

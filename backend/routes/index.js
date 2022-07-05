@@ -8,6 +8,8 @@ router.use("/api", apiRouter);
 router.use("/rooms", roomRouter);
 router.use("/users", userRouter);
 
+
+//Restore csrf token
 router.get("/api/csrf/restore", (req, res) => {
 	const csrfToken = req.csrfToken();
 	res.cookie("XSRF-TOKEN", csrfToken);
