@@ -3,7 +3,6 @@ const express = require("express");
 const {
 	setTokenCookie,
 	restoreUser,
-	requireAuth,
 } = require("../../utils/auth");
 const { User, Room, Review, UserReviewImage } = require("../../db/models");
 const { check } = require("express-validator");

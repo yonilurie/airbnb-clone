@@ -37,6 +37,7 @@ router.get("/:roomId/reviews", async (req, res) => {
 		],
 	});
 
+	//If no review then return 404 code
 	if (!reviews.length) {
 		res.status = 404;
 		return res.json({
@@ -95,7 +96,8 @@ router.get("/:roomId", async (req, res) => {
 		],
 		group: "`images`.`imageUrl`",
 	});
-
+	
+	//If there is no room return 404 code
 	if (!room) {
 		res.status = 404;
 		return res.json({

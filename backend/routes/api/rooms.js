@@ -1,11 +1,9 @@
 const express = require("express");
-
 const {
-	setTokenCookie,
 	requireAuth,
 	restoreUser,
 } = require("../../utils/auth");
-const { User, Room } = require("../../db/models");
+const { Room } = require("../../db/models");
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
 const router = express.Router();
@@ -84,6 +82,7 @@ router.post(
 			previewImage: previewImage,
 		});
 
+		//If  room was not created return 400 code
 		if (!room) {
 			res.status = 400;
 			res.body({

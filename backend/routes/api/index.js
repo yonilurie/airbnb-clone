@@ -5,7 +5,7 @@ const roomsRouter = require("./rooms");
 const reviewsRouter = require("./reviews");
 const { restoreUser, requireAuth } = require("../../utils/auth.js");
 const { setTokenCookie } = require("../../utils/auth.js");
-const { User, Room, Review, UserReviewImage } = require("../../db/models");
+const { User} = require("../../db/models");
 
 // Connect restoreUser middleware to the API router
 // If current user session is valid, set req.user to the user in the database
