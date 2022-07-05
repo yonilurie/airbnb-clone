@@ -146,6 +146,12 @@ router.put(
 		}
 
 		let reviewToEdit = await Review.findByPk(reviewId);
+		if (!reviewToEdit) {
+			res.status = 404;
+			return res.json({
+				message: "Review not found",
+			});
+		}
 		if (reviewToEdit.userId !== id) {
 			return res.json({ message: "Can only edit your own comment" });
 		}
