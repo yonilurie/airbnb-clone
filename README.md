@@ -55,7 +55,7 @@ Returns the information about the current user that is logged in.
 -   Request
 
     -   Method: GET
-    -   URL: /users/:userId
+    -   URL: /api/session
     -   Body: none
 
 -   Successful Response

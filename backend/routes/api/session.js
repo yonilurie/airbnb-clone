@@ -1,9 +1,6 @@
 const express = require("express");
 
-const {
-	setTokenCookie,
-	restoreUser,
-} = require("../../utils/auth");
+const { setTokenCookie, restoreUser } = require("../../utils/auth");
 const { User, Room, Review, UserReviewImage } = require("../../db/models");
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
@@ -20,7 +17,6 @@ const validateLogin = [
 		.withMessage("Please provide a password."),
 	handleValidationErrors,
 ];
-
 
 // Log in
 router.post("/", validateLogin, async (req, res, next) => {
@@ -50,9 +46,11 @@ router.delete("/", (_req, res) => {
 // Restore session user
 router.get("/", restoreUser, (req, res) => {
 	const { user } = req;
+	const token = req.cookies.token;
 	if (user) {
 		return res.json({
 			user: user.toSafeObject(),
+			token: token,
 		});
 	}
 
