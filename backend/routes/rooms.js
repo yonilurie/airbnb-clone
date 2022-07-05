@@ -115,7 +115,65 @@ router.post(
 );
 
 //Add an image to an existing review
-router.put("/:roomId/reviews/reviewId");
+router.put(
+	"/:roomId/reviews/:reviewId",
+	[restoreUser, requireAuth],
+	async (req, res) => {
+		const { roomId, reviewId } = req.params;
+		const { id } = req.user;
+		const { url } = req.body;
+		let review = await Review.findByPk(reviewId, {
+			include: [
+				{
+					model: UserReviewImage,
+					as: "images",
+					attributes: [
+						[
+							sequelize.fn("COUNT", sequelize.col("imageUrl")),
+							"imageCount",
+						],
+					],
+				},
+			],
+		});
+		//If review cant be found return 404 code
+		if (!review || review.roomId !== Number(roomId)) {
+			res.status = 404;
+			return res.json({
+				message: "Review couldn't be found",
+				statusCode: 404,
+			});
+		}
+		//If review does not belong to the current user return 400 code
+		if (review.userId !== id) {
+			res.status = 400;
+			return res.json({
+				message: "Can only add images to your own review",
+			});
+		}
+		//Check if the image limit has been reached
+		//If it has send 400 code
+		let numberOfImages = review.images[0].dataValues.imageCount;
+		if (numberOfImages >= 10) {
+			res.status = 400;
+			return res.json({
+				message:
+					"Maximum number of images for this resource was reached",
+				statusCode: 400,
+			});
+		}
+		//Create a new reviewImage
+		let reviewImage = await UserReviewImage.build({
+			reviewId: reviewId,
+			userId: id,
+			imageUrl: url,
+		});
+		await reviewImage.save();
+
+		res.status = 200;
+		return res.json(reviewImage);
+	}
+);
 
 //Get details about a room with id
 router.get("/:roomId", async (req, res) => {
