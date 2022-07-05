@@ -60,7 +60,7 @@ app.use(routes); // Connect all the routes
 
 //homepage-route
 app.get("/", async (req, res) => {
-	res.json({
+	return res.json({
 		message: "App Running",
 	});
 });
@@ -76,9 +76,9 @@ app.use((_req, _res, next) => {
 
 // Error formatter
 app.use((err, _req, res, _next) => {
-	res.status(err.status || 500);
+	res.status = err.status;
 	console.error(err);
-	res.json({
+	return res.json({
 		title: err.title || "Server Error",
 		message: err.message,
 		errors: err.errors,

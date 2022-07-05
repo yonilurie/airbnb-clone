@@ -8,6 +8,7 @@ const {
 	UserReviewImage,
 	UserRoomImage,
 } = require("../db/models");
+const { restoreUser, requireAuth } = require("../utils/auth");
 
 //Get all reviews of a room by id
 router.get("/:roomId/reviews", async (req, res) => {
@@ -50,6 +51,69 @@ router.get("/:roomId/reviews", async (req, res) => {
 	return res.json(reviews);
 });
 
+//add a review to a room
+router.post(
+	"/:roomId/reviews",
+	[restoreUser, requireAuth],
+	async (req, res) => {
+		const { roomId } = req.params;
+		const { review, stars } = req.body;
+		const { id } = req.user;
+		//If the request is missing a message or a star rating, return a 400 code
+		if (!review || !stars) {
+			res.status = 400;
+			return res.json({
+				message: "Validation error",
+				statusCode: 400,
+				errors: {
+					review: "Review text is required",
+					stars: "Stars must be an integer from 1 to 5",
+				},
+			});
+		}
+		//Check if a room with that ID exists
+		let room = await Room.findByPk(roomId);
+		//If it doesnt, return a 404 code
+		if (!room) {
+			console.log("hello");
+			res.status = 404;
+			return res.json({
+				message: "Spot couldn't be found",
+				statusCode: 404,
+			});
+		}
+		//If it does but it is owned by the reviewer, return a 403 code
+		if (room.ownerId === id) {
+			res.status = 403;
+			return res.json({
+				message: "You cannot leave a review for your own listing",
+			});
+		}
+		//Find a review on this listing by the user, if it is not found then create one
+		const [newReview, created] = await Review.findOrCreate({
+			where: {
+				roomId: roomId,
+				userId: id,
+			},
+			defaults: {
+				review: review,
+				stars: stars,
+			},
+		});
+		//If the review exists, return a 403 code
+		if (!created) {
+			res.status = 403;
+			return res.json({
+				message: "User already has a review for this spot",
+				statusCode: 403,
+			});
+		}
+
+		res.status = 200;
+		return res.json(newReview);
+	}
+);
+
 //Get details about a room with id
 router.get("/:roomId", async (req, res) => {
 	let room = await Room.findByPk(req.params.roomId, {
@@ -77,7 +141,6 @@ router.get("/:roomId", async (req, res) => {
 			],
 			"images.imageUrl",
 		],
-
 		include: [
 			{
 				model: UserRoomImage,
@@ -96,7 +159,7 @@ router.get("/:roomId", async (req, res) => {
 		],
 		group: "`images`.`imageUrl`",
 	});
-	
+
 	//If there is no room return 404 code
 	if (!room) {
 		res.status = 404;
@@ -105,7 +168,7 @@ router.get("/:roomId", async (req, res) => {
 			statusCode: 404,
 		});
 	}
-
+	
 	res.status = 200;
 	return res.json(room);
 });
