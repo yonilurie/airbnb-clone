@@ -15,7 +15,10 @@ module.exports = (sequelize, DataTypes) => {
 			});
 			Room.hasMany(models.Booking, { foreignKey: "roomId" });
 			Room.hasMany(models.Review, { foreignKey: "roomId" });
-			Room.hasMany(models.UserRoomImage, {foreignKey:'roomId', as:'images'})
+			Room.hasMany(models.UserRoomImage, {
+				foreignKey: "roomId",
+				as: "images",
+			});
 		}
 	}
 	Room.init(
@@ -51,6 +54,9 @@ module.exports = (sequelize, DataTypes) => {
 			name: {
 				type: DataTypes.STRING,
 				allowNull: false,
+				validate: {
+					len: [0, 50],
+				},
 			},
 			description: {
 				type: DataTypes.STRING,
@@ -66,7 +72,7 @@ module.exports = (sequelize, DataTypes) => {
 			},
 			previewImage: {
 				type: DataTypes.STRING,
-				allowNull: false,
+				allowNull: true,
 			},
 		},
 		{
