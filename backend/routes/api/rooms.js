@@ -117,7 +117,7 @@ router.delete("/:roomId", requireAuth, async (req, res) => {
 	//If the room is not found return a 404 code
 	if (!room) {
 		res.status = 404;
-		res.json({
+		return res.json({
 			message: "Spot couldn't be found",
 			statusCode: 404,
 		});
@@ -126,7 +126,7 @@ router.delete("/:roomId", requireAuth, async (req, res) => {
 	await room.destroy();
 
 	res.status = 200;
-	res.json({
+	return res.json({
 		message: "Successfully deleted",
 		statusCode: 200,
 	});
@@ -158,7 +158,7 @@ router.put("/:roomId", [requireAuth, validateRoom], async (req, res) => {
 	//If room cant be found return 404 code
 	if (!room) {
 		res.status = 400;
-		res.json({
+		return res.json({
 			message: "Spot couldn't be found",
 			statusCode: 404,
 		});
@@ -176,7 +176,7 @@ router.put("/:roomId", [requireAuth, validateRoom], async (req, res) => {
 	await room.save();
 
 	res.status = 200;
-	res.json(room);
+	return res.json(room);
 });
 
 //Get all of a current users owned rooms

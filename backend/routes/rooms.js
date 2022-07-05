@@ -114,6 +114,9 @@ router.post(
 	}
 );
 
+//Add an image to an existing review
+router.put("/:roomId/reviews/reviewId");
+
 //Get details about a room with id
 router.get("/:roomId", async (req, res) => {
 	let room = await Room.findByPk(req.params.roomId, {
@@ -168,7 +171,7 @@ router.get("/:roomId", async (req, res) => {
 			statusCode: 404,
 		});
 	}
-	
+
 	res.status = 200;
 	return res.json(room);
 });

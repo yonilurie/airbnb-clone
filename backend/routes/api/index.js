@@ -24,7 +24,7 @@ router.use("/reviews", reviewsRouter);
 
 //Test route
 router.post("/test", (req, res) => {
-	res.json({ requestBody: req.body });
+	return res.json({ requestBody: req.body });
 });
 
 //Generate new token cookie
