@@ -269,7 +269,7 @@ Returns all the spots owned (created) by the current user.
 -   Request
 
     -   Method: GET
-    -   URL: /api/session/rooms
+    -   URL: /api/rooms
     -   Body: none
 
 -   Successful Response
@@ -368,7 +368,7 @@ Creates and returns a new spot.
 -   Request
 
     -   Method: POST
-    -   URL: /api/session/rooms/add
+    -   URL: /api/rooms/add
     -   Headers:
         -   Content-Type: application/json
     -   Body:
@@ -446,7 +446,7 @@ Updates and returns an existing spot.
 -   Request
 
     -   Method: PUT
-    -   URL: /api/session/rooms/:roomId
+    -   URL: /api/rooms/:roomId
     -   Headers:
         -   Content-Type: application/json
     -   Body:
@@ -538,7 +538,7 @@ Deletes an existing spot.
 -   Request
 
     -   Method: DELETE
-    -   URL: /api/session/rooms/:roomId
+    -   URL: /api/rooms/:roomId
     -   Body: none
 
 -   Successful Response
@@ -577,7 +577,7 @@ Returns all the reviews written by the current user.
 -   Request
 
     -   Method: GET
-    -   URL: /api/session/reviews
+    -   URL: /api/reviews
     -   Body: none
 
 -   Successful Response
@@ -880,7 +880,7 @@ Return all the bookings that the current user has made.
 -   Request
 
     -   Method: GET
-    -   URL: /api/session/bookings
+    -   URL: /api/bookings
     -   Body: none
 
 -   Successful Response
@@ -1150,7 +1150,7 @@ Delete an existing booking.
 -   Request
 
     -   Method: DELETE
-    -   URL: /api/session/bookings/:bookingId
+    -   URL: /api/bookings/:bookingId
     -   Body: none
 
 -   Successful Response
@@ -1204,7 +1204,7 @@ Create and return a new image for a spot specified by id.
 -   Request
 
     -   Method: POST
-    -   URL: /api/session/rooms/:roomId
+    -   URL: /api/rooms/:roomId
     -   Headers:
         -   Content-Type: application/json
     -   Body:
@@ -1320,7 +1320,7 @@ Delete an existing image.
 -   Request
 
     -   Method: DELETE
-    -   URL: /api/session/images/:imageId
+    -   URL: /api/images/:imageId
     -   Body: none
 
 -   Successful Response
