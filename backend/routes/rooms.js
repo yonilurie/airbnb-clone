@@ -165,6 +165,46 @@ router.put(
 	}
 );
 
+router.delete(
+	"/:roomId/reviews/:reviewId",
+	[restoreUser, requireAuth],
+	async (req, res) => {
+		const { roomId, reviewId } = req.params;
+		const { id } = req.user;
+		//Check if room exists
+		let room = await Room.findByPk(roomId);
+		//If not return 404 code
+		if (!room) {
+			res.status = 404;
+			return res.json({
+				message: "Room couldn't be found",
+				statusCode: 404,
+			});
+		}
+		//Check if review exists
+		let review = await Review.findByPk(reviewId);
+		//If not return 404 code
+		if (!review) {
+			res.status = 200;
+			return res.json({
+				message: "Review couldn't be found",
+				statusCode: 404,
+			});
+		}
+
+		if (review.userId !== id) {
+			return res.json({ message: "Can only edit your own comment" });
+		}
+
+		await review.destroy();
+		res.status = 200;
+		return res.json({
+			message: "Successfully deleted",
+			statusCode: 200,
+		});
+	}
+);
+
 //Add an image to an existing review
 router.post(
 	"/:roomId/reviews/:reviewId/add-image",
