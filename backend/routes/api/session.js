@@ -33,8 +33,8 @@ router.post("/", validateLogin, async (req, res, next) => {
 	}
 
 	await setTokenCookie(res, user);
-
-	return res.json({ user });
+	const token = req.cookies.token;
+	return res.json({ user, token });
 });
 
 // Log out
@@ -50,7 +50,7 @@ router.get("/", restoreUser, (req, res) => {
 	if (user) {
 		return res.json({
 			user: user.toSafeObject(),
-			token: token,
+			token,
 		});
 	}
 
