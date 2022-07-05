@@ -13,7 +13,8 @@ const isProduction = environment === "production";
 
 //Initialize express application
 const app = express();
-
+//Make JSON pretty
+app.set("json spaces", 2);
 // Process sequelize errors
 app.use((err, _req, _res, next) => {
 	// check if error is a Sequelize error:
