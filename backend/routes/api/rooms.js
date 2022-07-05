@@ -103,6 +103,34 @@ router.post(
 	}
 );
 
+//delete a spot
+router.delete("/:roomId", requireAuth, async (req, res) => {
+	const { roomId } = req.params;
+	const { id } = req.user;
+	let room = await Room.findOne({
+		where: {
+			id: roomId,
+			ownerId: id,
+		},
+	});
+
+	//If the room is not found return a 404 code
+	if (!room) {
+		res.status = 404;
+		res.json({
+			message: "Spot couldn't be found",
+			statusCode: 404,
+		});
+	}
+
+	await room.destroy();
+
+	res.status = 200;
+	res.json({
+		message: "Successfully deleted",
+		statusCode: 200,
+	});
+});
 
 //Edit a spot
 router.put("/:roomId", [requireAuth, validateRoom], async (req, res) => {
