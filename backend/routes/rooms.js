@@ -198,15 +198,19 @@ router.post(
 		}
 		//Check if the image limit has been reached
 		//If it has send 400 code
-		let numberOfImages = review.images[0].dataValues.imageCount;
-		if (numberOfImages >= 10) {
-			res.status = 400;
-			return res.json({
-				message:
-					"Maximum number of images for this resource was reached",
-				statusCode: 400,
-			});
+		console.log(review.images);
+		if (review.images.length) {
+			let numberOfImages = review.images[0].dataValues.imageCount;
+			if (numberOfImages >= 10) {
+				res.status = 400;
+				return res.json({
+					message:
+						"Maximum number of images for this resource was reached",
+					statusCode: 400,
+				});
+			}
 		}
+
 		//Create a new reviewImage
 		let reviewImage = await UserReviewImage.build({
 			reviewId: reviewId,
