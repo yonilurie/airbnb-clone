@@ -285,18 +285,19 @@ router.get("/search", async (req, res) => {
 	const query = {
 		where: {
 			lat: {
-				[Op.between]: [0, 5000.0],
+				[Op.between]: [-90, 90],
 			},
-			lng: { [Op.between]: [0, 5000.0] },
-			price: { [Op.between]: [0, 5000.0] },
+			lng: { [Op.between]: [-180.0, 180.0] },
+			price: { [Op.between]: [0.0, 5000.0] },
 		},
 		order: [["id", "ASC"]],
-		offset: 0,
-		limit: 20,
 	};
 
 	if (size && size <= 20) query.limit = size;
+	else query.limit = 20
 	if (page) query.offset = query.limit * (page - 1);
+	else query.offset = 0;
+
 	if (minLat) query.where.lat[Op.between][0] = minLat;
 	if (maxLat) query.where.lat[Op.between][1] = maxLat;
 	if (minLng) query.where.lng[Op.between][0] = minLng;
@@ -307,7 +308,11 @@ router.get("/search", async (req, res) => {
 	const rooms = await Room.findAll(query);
 
 	res.status = 200;
-	res.json(rooms);
+	return res.json({
+		rooms,
+		page: query.offset,
+		size: query.limit,
+	});
 });
 
 //Get details about a room with id
