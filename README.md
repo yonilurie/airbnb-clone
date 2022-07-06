@@ -3,8 +3,6 @@ Heroku: https://backend-project-airbnb.herokuapp.com/
 
 ## Database Schema Design
 
-Heroku link: https://backend-project-airbnb.herokuapp.com/
-
 ![Database Blueprint](./images//db-blueprint.png)
 
 ## API Documentation
