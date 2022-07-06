@@ -1,4 +1,5 @@
 const express = require("express");
+const { Result } = require("express-validator");
 const router = express.Router();
 const sequelize = require("sequelize");
 const {
@@ -7,8 +8,67 @@ const {
 	User,
 	UserReviewImage,
 	UserRoomImage,
+	Booking,
 } = require("../db/models");
 const { restoreUser, requireAuth } = require("../utils/auth");
+
+//Get all of a rooms bookings
+router.get(
+	"/:roomId/bookings",
+	[restoreUser, requireAuth],
+	async (req, res) => {
+		const { roomId } = req.params;
+		const { id } = req.user;
+		//Find room
+		let room = await Room.findByPk(roomId);
+		//Check if room exists
+		if (!room) {
+			res.status = 404;
+			return res.json({
+				message: "room couldn't be found",
+				statusCode: 404,
+			});
+		}
+		//If owner
+		if (id === room.ownerId) {
+			//If room exists and user is owner, find the bookings and booked users info
+			let bookings = await Booking.findAll({
+				where: { roomId: roomId },
+				// attributes: ["roomId", "startDate", "endDate"],
+				include: [
+					{
+						model: User,
+						attributes: ["id", "firstName", "lastName"],
+					},
+				],
+			});
+
+			//if no bookings are found
+			if (!bookings.length) {
+				res.status = 200;
+				return res.json({ Bookings: "No dates booked!" });
+			}
+
+			res.status = 200;
+			return res.json(bookings);
+		}
+
+		//If not the owner
+		let bookings = await Booking.findAll({
+			where: { roomId: roomId },
+			attributes: ["roomId", "startDate", "endDate"],
+		});
+
+		//if no bookings are found
+		if (!bookings.length) {
+			res.status = 200;
+			return res.json({ Bookings: "No dates booked!" });
+		}
+
+		res.status = 200;
+		res.json(bookings);
+	}
+);
 
 //Get all reviews of a room by id
 router.get("/:roomId/reviews", async (req, res) => {
