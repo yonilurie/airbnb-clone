@@ -282,6 +282,7 @@ router.get("/search", async (req, res) => {
 		maxPrice,
 	} = req.query;
 	const { Op } = require("sequelize");
+
 	const query = {
 		where: {
 			lat: {
@@ -294,7 +295,8 @@ router.get("/search", async (req, res) => {
 	};
 
 	if (size && size <= 20) query.limit = size;
-	else query.limit = 20
+	else query.limit = 20;
+
 	if (page) query.offset = query.limit * (page - 1);
 	else query.offset = 0;
 
@@ -310,8 +312,8 @@ router.get("/search", async (req, res) => {
 	res.status = 200;
 	return res.json({
 		rooms,
-		page: query.offset,
-		size: query.limit,
+		page: Number(page),
+		size: Number(query.limit),
 	});
 });
 
