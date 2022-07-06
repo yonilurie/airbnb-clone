@@ -197,7 +197,7 @@ router.put(
 				message: "Date has passed",
 			});
 		}
-		//Check ujf any booking occur in between the given start and end timess
+		//Check if any booking occur in between the given start and end timess
 		let checkAvailability = await Booking.findOne({
 			where: {
 				startDate: { [Op.gte]: startDate },

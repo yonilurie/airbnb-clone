@@ -90,8 +90,8 @@ information.
 
         ```json
         {
-        	"email": "john.smith@gmail.com",
-        	"password": "secret password"
+        	"email": "demo@user.io",
+        	"password": "password"
         }
         ```
 
@@ -107,7 +107,7 @@ information.
         	"id": 1,
         	"firstName": "John",
         	"lastName": "Smith",
-        	"email": "john.smith@gmail.com",
+        	"email": "demo@user.io",
         	"token": ""
         }
         ```
@@ -160,11 +160,11 @@ user's information.
 
         ```json
         {
-        	"userName": "johnSmith2000",
-        	"firstName": "John",
-        	"lastName": "Smith",
-        	"email": "john.smith@gmail.com",
-        	"password": "secret password"
+        	"userName": "newtestuser",
+        	"firstName": "Test",
+        	"lastName": "User",
+        	"email": "test@user.io",
+        	"password": "passwordtest"
         }
         ```
 
@@ -177,11 +177,11 @@ user's information.
 
         ```json
         {
-        	"id": 1,
-        	"userName": "johnSmith2000",
-        	"firstName": "John",
-        	"lastName": "Smith",
-        	"email": "john.smith@gmail.com",
+        	"id": 2,
+        	"userName": "newtestuser",
+        	"firstName": "Test",
+        	"lastName": "User",
+        	"email": "test@user.io",
         	"token": ""
         }
         ```
@@ -1010,8 +1010,6 @@ Create and return a new booking from a room specified by id.
       	"startDate": "2021-11-19",
       	"endDate": "2021-11-19",
       }
-      ```
-
     ````
 
 -   Successful Response
@@ -1026,8 +1024,8 @@ Create and return a new booking from a room specified by id.
         	"id": 1,
         	"roomId": 1,
         	"userId": 2,
-        	"startDate": "2021-11-19",
-        	"endDate": "2021-11-19",
+        	"startDate": "2021-11-19T08:00:00.000Z",
+        	"endDate": "2021-11-19T08:00:00.000Z",
         	"createdAt": "2021-11-19 20:39:36",
         	"updatedAt": "2021-11-19 20:39:36"
         }
@@ -1098,8 +1096,8 @@ Update and return an existing booking.
         	"id": 1,
         	"roomId": 1,
         	"userId": 2,
-        	"startDate": "2021-11-19",
-        	"endDate": "2021-11-19",
+        	"startDate": "2021-11-19T08:00:00.000Z",
+        	"endDate": "2021-11-19T08:00:00.000Z",
         	"createdAt": "2021-11-19 20:39:36",
         	"updatedAt": "2021-11-20 10:06:40"
         }
@@ -1236,8 +1234,6 @@ Create and return a new image for a room specified by id.
         ```json
         {
         	"id": 1,
-        	"imageableId": 1,
-        	"imageableType": "room",
         	"url": "image url"
         }
         ```
@@ -1286,8 +1282,6 @@ Create and return a new image for a review specified by id.
         ```json
         {
         	"id": 1,
-        	"imageableId": 1,
-        	"imageableType": "Review",
         	"url": "image url"
         }
         ```
