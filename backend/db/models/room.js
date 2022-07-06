@@ -9,9 +9,16 @@ module.exports = (sequelize, DataTypes) => {
 		 */
 		static associate(models) {
 			// define association here
-			Room.belongsTo(models.User, { foreignKey: "ownerId" });
+			Room.belongsTo(models.User, {
+				foreignKey: "ownerId",
+				as: "Owner",
+			});
 			Room.hasMany(models.Booking, { foreignKey: "roomId" });
 			Room.hasMany(models.Review, { foreignKey: "roomId" });
+			Room.hasMany(models.UserRoomImage, {
+				foreignKey: "roomId",
+				as: "images",
+			});
 		}
 	}
 	Room.init(
@@ -39,14 +46,25 @@ module.exports = (sequelize, DataTypes) => {
 			lat: {
 				type: DataTypes.DECIMAL,
 				allowNull: false,
+				validate: {
+					min: -90.0,
+					max: 90.0,
+				},
 			},
 			lng: {
 				type: DataTypes.DECIMAL,
 				allowNull: false,
+				validate: {
+					min: -180.0,
+					max: 180.0,
+				},
 			},
 			name: {
 				type: DataTypes.STRING,
 				allowNull: false,
+				validate: {
+					len: [0, 50],
+				},
 			},
 			description: {
 				type: DataTypes.STRING,
@@ -62,7 +80,7 @@ module.exports = (sequelize, DataTypes) => {
 			},
 			previewImage: {
 				type: DataTypes.STRING,
-				allowNull: false,
+				allowNull: true,
 			},
 		},
 		{

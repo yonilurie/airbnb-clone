@@ -1,17 +1,19 @@
 "use strict";
 module.exports = {
 	async up(queryInterface, Sequelize) {
-		await queryInterface.createTable("UserReviewImages", {
+		await queryInterface.createTable("UserRoomImages", {
 			id: {
 				allowNull: false,
 				autoIncrement: true,
 				primaryKey: true,
 				type: Sequelize.INTEGER,
 			},
-			reviewId: {
+			roomId: {
 				type: Sequelize.INTEGER,
 				allowNull: false,
-				references: { model: "Reviews" },
+				references: {
+					model: "Rooms",
+				},
 				onDelete: "CASCADE",
 			},
 			userId: {
@@ -37,6 +39,6 @@ module.exports = {
 		});
 	},
 	async down(queryInterface, Sequelize) {
-		await queryInterface.dropTable("UserReviewImages");
+		await queryInterface.dropTable("UserRoomImages");
 	},
 };

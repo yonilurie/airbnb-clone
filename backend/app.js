@@ -13,7 +13,8 @@ const isProduction = environment === "production";
 
 //Initialize express application
 const app = express();
-
+//Make JSON pretty
+app.set("json spaces", 2);
 // Process sequelize errors
 app.use((err, _req, _res, next) => {
 	// check if error is a Sequelize error:
@@ -59,7 +60,7 @@ app.use(routes); // Connect all the routes
 
 //homepage-route
 app.get("/", async (req, res) => {
-	res.json({
+	return res.json({
 		message: "App Running",
 	});
 });
@@ -75,9 +76,9 @@ app.use((_req, _res, next) => {
 
 // Error formatter
 app.use((err, _req, res, _next) => {
-	res.status(err.status || 500);
+	res.status = err.status;
 	console.error(err);
-	res.json({
+	return res.json({
 		title: err.title || "Server Error",
 		message: err.message,
 		errors: err.errors,

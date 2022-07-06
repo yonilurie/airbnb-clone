@@ -61,4 +61,35 @@ const requireAuth = function (req, _res, next) {
 	return next(err);
 };
 
-module.exports = { setTokenCookie, restoreUser, requireAuth };
+const checkSpecificUser = (req, res, next) => {
+	let token = req.cookies.token;
+
+	try {
+		const payload = jwt.verify(token, secret);
+		if (payload.data.id != req.params.userId) {
+			let error = new Error("Unauthorized");
+			error.status = 401;
+			next(error);
+		}
+	} catch (err) {
+		err.message = "Unauthorized";
+		err.status = 401;
+		err.title = "Unauthorized";
+		next(err);
+	}
+
+	if (req.user) return next();
+
+	const err = new Error("Unauthorized");
+	err.title = "Unauthorized";
+	err.errors = ["Unauthorized"];
+	err.status = 401;
+	return next(err);
+};
+
+module.exports = {
+	setTokenCookie,
+	restoreUser,
+	requireAuth,
+	checkSpecificUser,
+};

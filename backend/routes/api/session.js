@@ -1,11 +1,12 @@
 const express = require("express");
 
 const { setTokenCookie, restoreUser } = require("../../utils/auth");
-const { User } = require("../../db/models");
+const { User, Room, Review, UserReviewImage } = require("../../db/models");
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
 const router = express.Router();
 
+//Validate that a login has all of the proper information
 const validateLogin = [
 	check("credential")
 		.exists({ checkFalsy: true })
@@ -18,7 +19,7 @@ const validateLogin = [
 ];
 
 // Log in
-router.post("/", validateLogin, async (req, res, next) => {
+router.post("/login", validateLogin, async (req, res, next) => {
 	const { credential, password } = req.body;
 
 	const user = await User.login({ credential, password });
@@ -32,10 +33,8 @@ router.post("/", validateLogin, async (req, res, next) => {
 	}
 
 	await setTokenCookie(res, user);
-
-	return res.json({
-		user,
-	});
+	const token = req.cookies.token;
+	return res.json({ user, token });
 });
 
 // Log out
@@ -47,11 +46,15 @@ router.delete("/", (_req, res) => {
 // Restore session user
 router.get("/", restoreUser, (req, res) => {
 	const { user } = req;
+	const token = req.cookies.token;
 	if (user) {
 		return res.json({
 			user: user.toSafeObject(),
+			token,
 		});
-	} else return res.json({});
+	}
+
+	return res.json({});
 });
 
 module.exports = router;
