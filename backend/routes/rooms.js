@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const sequelize = require("sequelize");
+const { check } = require("express-validator");
+const { Op } = require("sequelize");
 const {
 	Room,
 	Review,
@@ -113,7 +115,7 @@ router.post(
 			});
 		}
 		//Find if any bookings for the room exist within the given dates
-		const { Op } = require("sequelize");
+
 		let bookingCheck = await Booking.findOne({
 			where: {
 				startDate: { [Op.gte]: startDate },
@@ -143,6 +145,83 @@ router.post(
 		//Return new booking to user
 		res.status = 200;
 		return res.json(newBooking);
+	}
+);
+
+//Edit a booking
+router.put(
+	"/:roomId/bookings/:bookingId",
+	[validateBooking, restoreUser, requireAuth],
+	async (req, res) => {
+		const { roomId, bookingId } = req.params;
+		const { id } = req.user;
+		let { startDate, endDate } = req.body;
+		//Convert dates to date objects
+		startDate = startDate.split("-");
+		startDate[1] -= 1;
+		startDate = new Date(startDate[0], startDate[1], startDate[2]);
+		endDate = endDate.split("-");
+		endDate[1] -= 1;
+		endDate = new Date(endDate[0], endDate[1], endDate[2]);
+		//check if dates are valid
+		if (startDate >= endDate) {
+			res.status = 403;
+			return res.json({
+				message: "Start date cant be after or on end date ",
+			});
+		}
+		//Check if the booking exiss
+		let booking = await Booking.findByPk(bookingId);
+		if (!booking) {
+			res.status = 404;
+			return res.json({
+				message: "Booking couldn't be found",
+				statusCode: 404,
+			});
+		}
+		if (booking.userId !== id) {
+			return res.json({
+				message: "Can only edit your own reviews",
+			});
+		}
+		//Create current time object
+		let now = new Date();
+		let currentTime = new Date(
+			now.getFullYear(),
+			now.getMonth(),
+			now.getDate()
+		);
+		//Check if start time is before the current time
+		if (currentTime >= booking.startDate) {
+			return res.json({
+				message: "Date has passed",
+			});
+		}
+		//Check ujf any booking occur in between the given start and end timess
+		let checkAvailability = await Booking.findOne({
+			where: {
+				startDate: { [Op.gte]: startDate },
+				endDate: { [Op.lte]: endDate },
+			},
+		});
+		//if room is not available return error with 403 code
+		if (checkAvailability) {
+			res.status = 403;
+			return res.json({
+				message:
+					"Sorry, this room is already booked for the specified dates",
+				statusCode: 403,
+				errors: {
+					startDate: "Start date conflicts with an existing booking",
+					endDate: "End date conflicts with an existing booking",
+				},
+			});
+		}
+
+		booking.startDate = startDate;
+		booking.endDate = endDate;
+		await booking.save();
+		return res.json(booking);
 	}
 );
 
