@@ -334,14 +334,6 @@ router.get("/:roomId", async (req, res) => {
 			"price",
 			"createdAt",
 			"updatedAt",
-			[
-				sequelize.fn("COUNT", sequelize.col("reviews.roomId")),
-				"numReviews",
-			],
-			[
-				sequelize.fn("AVG", sequelize.col("reviews.stars")),
-				"avgStarRating",
-			],
 		],
 		include: [
 			{
@@ -354,12 +346,20 @@ router.get("/:roomId", async (req, res) => {
 				as: "Owner",
 				attributes: ["id", "firstName", "lastName"],
 			},
-			{
-				model: Review,
-				attributes: [],
-			},
 		],
 	});
+
+	let reviewInfo = await Review.findAll({
+		where: { roomId: req.params.roomId },
+		attributes: [
+			[sequelize.fn("COUNT", sequelize.col("roomId")), "numReviews"],
+			[sequelize.fn("AVG", sequelize.col("stars")), "avgStarRating"],
+		],
+	});
+	let avg = reviewInfo[0].dataValues.avgStarRating;
+	let numReviews = reviewInfo[0].dataValues.numReviews;
+	room.dataValues.avgStarRating = avg;
+	room.dataValues.numReviews = numReviews;
 
 	//If there is no room return 404 code
 	if (!room) {
