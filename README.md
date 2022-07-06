@@ -82,7 +82,7 @@ information.
 -   Request
 
     -   Method: POST
-    -   URL: /login
+    -   URL: /api/session/login
     -   Headers:
         -   Content-Type: application/json
     -   Body:
@@ -152,7 +152,7 @@ user's information.
 -   Request
 
     -   Method: POST
-    -   URL: /register
+    -   URL: /api/users/register
     -   Headers:
         -   Content-Type: application/json
     -   Body:
@@ -219,9 +219,9 @@ user's information.
         }
         ```
 
-## Get all Spots
+## Get all rooms
 
-Returns all the spots.
+Returns all the rooms.
 
 -   Require Authentication: false
 -   Request
@@ -239,7 +239,7 @@ Returns all the spots.
 
         ```json
         {
-        	"Spots": [
+        	"rooms": [
         		{
         			"id": 1,
         			"ownerId": 1,
@@ -260,9 +260,9 @@ Returns all the spots.
         }
         ```
 
-## Get all Spots owned by the Current User
+## Get all rooms owned by the Current User
 
-Returns all the spots owned (created) by the current user.
+Returns all the rooms owned (created) by the current user.
 
 -   Require Authentication: true
 -   Request
@@ -280,7 +280,7 @@ Returns all the spots owned (created) by the current user.
 
         ```json
         {
-        	"Spots": [
+        	"rooms": [
         		{
         			"id": 1,
         			"ownerId": 1,
@@ -301,9 +301,9 @@ Returns all the spots owned (created) by the current user.
         }
         ```
 
-## Get details of a Spot from an id
+## Get details of a room from an id
 
-Returns the details of a spot specified by its id.
+Returns the details of a room specified by its id.
 
 -   Require Authentication: false
 -   Request
@@ -345,7 +345,7 @@ Returns the details of a spot specified by its id.
         }
         ```
 
--   Error response: Couldn't find a Spot with the specified id
+-   Error response: Couldn't find a room with the specified id
 
     -   Status Code: 404
     -   Headers:
@@ -354,14 +354,14 @@ Returns the details of a spot specified by its id.
 
         ```json
         {
-        	"message": "Spot couldn't be found",
+        	"message": "room couldn't be found",
         	"statusCode": 404
         }
         ```
 
-## Create a Spot
+## Create a room
 
-Creates and returns a new spot.
+Creates and returns a new room.
 
 -   Require Authentication: true
 -   Request
@@ -436,12 +436,12 @@ Creates and returns a new spot.
         }
         ```
 
-## Edit a Spot
+## Edit a room
 
-Updates and returns an existing spot.
+Updates and returns an existing room.
 
 -   Require Authentication: true
--   Require proper authorization: Spot must belong to the current user
+-   Require proper authorization: room must belong to the current user
 -   Request
 
     -   Method: PUT
@@ -514,7 +514,7 @@ Updates and returns an existing spot.
         }
         ```
 
--   Error response: Couldn't find a Spot with the specified id
+-   Error response: Couldn't find a room with the specified id
 
     -   Status Code: 404
     -   Headers:
@@ -523,17 +523,17 @@ Updates and returns an existing spot.
 
         ```json
         {
-        	"message": "Spot couldn't be found",
+        	"message": "room couldn't be found",
         	"statusCode": 404
         }
         ```
 
-## Delete a Spot
+## Delete a room
 
-Deletes an existing spot.
+Deletes an existing room.
 
 -   Require Authentication: true
--   Require proper authorization: Spot must belong to the current user
+-   Require proper authorization: room must belong to the current user
 -   Request
 
     -   Method: DELETE
@@ -554,7 +554,7 @@ Deletes an existing spot.
         }
         ```
 
--   Error response: Couldn't find a Spot with the specified id
+-   Error response: Couldn't find a room with the specified id
 
     -   Status Code: 404
     -   Headers:
@@ -563,7 +563,7 @@ Deletes an existing spot.
 
         ```json
         {
-        	"message": "Spot couldn't be found",
+        	"message": "room couldn't be found",
         	"statusCode": 404
         }
         ```
@@ -592,8 +592,8 @@ Returns all the reviews written by the current user.
         		{
         			"id": 1,
         			"userId": 1,
-        			"spotId": 1,
-        			"review": "This was an awesome spot!",
+        			"roomId": 1,
+        			"review": "This was an awesome room!",
         			"stars": 5,
         			"createdAt": "2021-11-19 20:39:36",
         			"updatedAt": "2021-11-19 20:39:36",
@@ -602,7 +602,7 @@ Returns all the reviews written by the current user.
         				"firstName": "John",
         				"lastName": "Smith"
         			},
-        			"Spot": {
+        			"room": {
         				"id": 1,
         				"ownerId": 1,
         				"address": "123 Disney Lane",
@@ -620,9 +620,9 @@ Returns all the reviews written by the current user.
         }
         ```
 
-## Get all Reviews by a Spot's id
+## Get all Reviews by a room's id
 
-Returns all the reviews that belong to a spot specified by id.
+Returns all the reviews that belong to a room specified by id.
 
 -   Require Authentication: false
 -   Request
@@ -644,8 +644,8 @@ Returns all the reviews that belong to a spot specified by id.
         		{
         			"id": 1,
         			"userId": 1,
-        			"spotId": 1,
-        			"review": "This was an awesome spot!",
+        			"roomId": 1,
+        			"review": "This was an awesome room!",
         			"stars": 5,
         			"createdAt": "2021-11-19 20:39:36",
         			"updatedAt": "2021-11-19 20:39:36",
@@ -660,7 +660,7 @@ Returns all the reviews that belong to a spot specified by id.
         }
         ```
 
--   Error response: Couldn't find a Spot with the specified id
+-   Error response: Couldn't find a room with the specified id
 
     -   Status Code: 404
     -   Headers:
@@ -669,14 +669,14 @@ Returns all the reviews that belong to a spot specified by id.
 
         ```json
         {
-        	"message": "Spot couldn't be found",
+        	"message": "room couldn't be found",
         	"statusCode": 404
         }
         ```
 
-## Create a Review for a Spot based on the Spot's id
+## Create a Review for a room based on the room's id
 
-Create and return a new review for a spot specified by id.
+Create and return a new review for a room specified by id.
 
 -   Require Authentication: true
 -   Request
@@ -689,7 +689,7 @@ Create and return a new review for a spot specified by id.
 
         ```json
         {
-        	"review": "This was an awesome spot!",
+        	"review": "This was an awesome room!",
         	"stars": 5
         }
         ```
@@ -705,8 +705,8 @@ Create and return a new review for a spot specified by id.
         {
         	"id": 1,
         	"userId": 1,
-        	"spotId": 1,
-        	"review": "This was an awesome spot!",
+        	"roomId": 1,
+        	"review": "This was an awesome room!",
         	"stars": 5,
         	"createdAt": "2021-11-19 20:39:36",
         	"updatedAt": "2021-11-19 20:39:36"
@@ -731,7 +731,7 @@ Create and return a new review for a spot specified by id.
         }
         ```
 
--   Error response: Couldn't find a Spot with the specified id
+-   Error response: Couldn't find a room with the specified id
 
     -   Status Code: 404
     -   Headers:
@@ -740,12 +740,12 @@ Create and return a new review for a spot specified by id.
 
         ```json
         {
-        	"message": "Spot couldn't be found",
+        	"message": "room couldn't be found",
         	"statusCode": 404
         }
         ```
 
--   Error response: Review from the current user already exists for the Spot
+-   Error response: Review from the current user already exists for the room
 
     -   Status Code: 403
     -   Headers:
@@ -754,7 +754,7 @@ Create and return a new review for a spot specified by id.
 
         ```json
         {
-        	"message": "User already has a review for this spot",
+        	"message": "User already has a review for this room",
         	"statusCode": 403
         }
         ```
@@ -775,7 +775,7 @@ Update and return an existing review.
 
         ```json
         {
-        	"review": "This was an awesome spot!",
+        	"review": "This was an awesome room!",
         	"stars": 5
         }
         ```
@@ -791,8 +791,8 @@ Update and return an existing review.
         {
         	"id": 1,
         	"userId": 1,
-        	"spotId": 1,
-        	"review": "This was an awesome spot!",
+        	"roomId": 1,
+        	"review": "This was an awesome room!",
         	"stars": 5,
         	"createdAt": "2021-11-19 20:39:36",
         	"updatedAt": "2021-11-20 10:06:40"
@@ -894,8 +894,8 @@ Return all the bookings that the current user has made.
         	"Bookings": [
         		{
         			"id": 1,
-        			"spotId": 1,
-        			"Spot": {
+        			"roomId": 1,
+        			"room": {
         				"id": 1,
         				"ownerId": 1,
         				"address": "123 Disney Lane",
@@ -918,9 +918,9 @@ Return all the bookings that the current user has made.
         }
         ```
 
-## Get all Bookings for a Spot based on the Spot's id
+## Get all Bookings for a room based on the room's id
 
-Return all the bookings for a spot specified by id.
+Return all the bookings for a room specified by id.
 
 -   Require Authentication: true
 -   Request
@@ -929,7 +929,7 @@ Return all the bookings for a spot specified by id.
     -   URL: /rooms/:roomId/bookings
     -   Body: none
 
--   Successful Response: If you ARE NOT the owner of the spot.
+-   Successful Response: If you ARE NOT the owner of the room.
 
     -   Status Code: 200
     -   Headers:
@@ -940,7 +940,7 @@ Return all the bookings for a spot specified by id.
         {
         	"Bookings": [
         		{
-        			"spotId": 1,
+        			"roomId": 1,
         			"startDate": "2021-11-19",
         			"endDate": "2021-11-19"
         		}
@@ -948,7 +948,7 @@ Return all the bookings for a spot specified by id.
         }
         ```
 
--   Successful Response: If you ARE the owner of the spot.
+-   Successful Response: If you ARE the owner of the room.
 
     -   Status Code: 200
     -   Headers:
@@ -965,7 +965,7 @@ Return all the bookings for a spot specified by id.
         				"lastName": "Smith"
         			},
         			"id": 1,
-        			"spotId": 1,
+        			"roomId": 1,
         			"userId": 2,
         			"startDate": "2021-11-19",
         			"endDate": "2021-11-19",
@@ -976,7 +976,7 @@ Return all the bookings for a spot specified by id.
         }
         ```
 
--   Error response: Couldn't find a Spot with the specified id
+-   Error response: Couldn't find a room with the specified id
 
     -   Status Code: 404
     -   Headers:
@@ -985,17 +985,17 @@ Return all the bookings for a spot specified by id.
 
         ```json
         {
-        	"message": "Spot couldn't be found",
+        	"message": "room couldn't be found",
         	"statusCode": 404
         }
         ```
 
-## Create a Booking from a Spot based on the Spot's id
+## Create a Booking from a room based on the room's id
 
-Create and return a new booking from a spot specified by id.
+Create and return a new booking from a room specified by id.
 
 -   Require Authentication: true
--   Require proper authorization: Spot must NOT belong to the current user
+-   Require proper authorization: room must NOT belong to the current user
 -   Request
 
     -   Method: POST
@@ -1012,7 +1012,7 @@ Create and return a new booking from a spot specified by id.
         ```json
         {
         	"id": 1,
-        	"spotId": 1,
+        	"roomId": 1,
         	"userId": 2,
         	"startDate": "2021-11-19",
         	"endDate": "2021-11-19",
@@ -1021,7 +1021,7 @@ Create and return a new booking from a spot specified by id.
         }
         ```
 
--   Error response: Couldn't find a Spot with the specified id
+-   Error response: Couldn't find a room with the specified id
 
     -   Status Code: 404
     -   Headers:
@@ -1030,7 +1030,7 @@ Create and return a new booking from a spot specified by id.
 
         ```json
         {
-        	"message": "Spot couldn't be found",
+        	"message": "room couldn't be found",
         	"statusCode": 404
         }
         ```
@@ -1044,7 +1044,7 @@ Create and return a new booking from a spot specified by id.
 
         ```json
         {
-        	"message": "Sorry, this spot is already booked for the specified dates",
+        	"message": "Sorry, this room is already booked for the specified dates",
         	"statusCode": 403,
         	"errors": {
         		"startDate": "Start date conflicts with an existing booking",
@@ -1084,7 +1084,7 @@ Update and return an existing booking.
         ```json
         {
         	"id": 1,
-        	"spotId": 1,
+        	"roomId": 1,
         	"userId": 2,
         	"startDate": "2021-11-19",
         	"endDate": "2021-11-19",
@@ -1130,7 +1130,7 @@ Update and return an existing booking.
 
         ```json
         {
-        	"message": "Sorry, this spot is already booked for the specified dates",
+        	"message": "Sorry, this room is already booked for the specified dates",
         	"statusCode": 403,
         	"errors": {
         		"startDate": "Start date conflicts with an existing booking",
@@ -1145,7 +1145,7 @@ Delete an existing booking.
 
 -   Require Authentication: true
 -   Require proper authorization: Booking must belong to the current user or the
-    Spot must belong to the current user
+    room must belong to the current user
 -   Request
 
     -   Method: DELETE
@@ -1194,12 +1194,12 @@ Delete an existing booking.
         }
         ```
 
-## Add an Image to a Spot based on the Spot's id
+## Add an Image to a room based on the room's id
 
-Create and return a new image for a spot specified by id.
+Create and return a new image for a room specified by id.
 
 -   Require Authentication: true
--   Require proper authorization: Spot must belong to the current user
+-   Require proper authorization: room must belong to the current user
 -   Request
 
     -   Method: POST
@@ -1225,12 +1225,12 @@ Create and return a new image for a spot specified by id.
         {
         	"id": 1,
         	"imageableId": 1,
-        	"imageableType": "Spot",
+        	"imageableType": "room",
         	"url": "image url"
         }
         ```
 
--   Error response: Couldn't find a Spot with the specified id
+-   Error response: Couldn't find a room with the specified id
 
     -   Status Code: 404
     -   Headers:
@@ -1239,7 +1239,7 @@ Create and return a new image for a spot specified by id.
 
         ```json
         {
-        	"message": "Spot couldn't be found",
+        	"message": "room couldn't be found",
         	"statusCode": 404
         }
         ```
@@ -1350,9 +1350,9 @@ Delete an existing image.
         }
         ```
 
-## Add Query Filters to Get All Spots
+## Add Query Filters to Get All rooms
 
-Return spots filtered by query parameters.
+Return rooms filtered by query parameters.
 
 -   Require Authentication: false
 -   Request
@@ -1379,7 +1379,7 @@ Return spots filtered by query parameters.
 
         ```json
         {
-        	"Spots": [
+        	"rooms": [
         		{
         			"id": 1,
         			"ownerId": 1,
