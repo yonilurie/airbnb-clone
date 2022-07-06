@@ -270,6 +270,46 @@ router.post(
 	}
 );
 
+router.get("/search", async (req, res) => {
+	const {
+		page,
+		size,
+		minLat,
+		maxLat,
+		minLng,
+		maxLng,
+		minPrice,
+		maxPrice,
+	} = req.query;
+	const { Op } = require("sequelize");
+	const query = {
+		where: {
+			lat: {
+				[Op.between]: [0, 5000.0],
+			},
+			lng: { [Op.between]: [0, 5000.0] },
+			price: { [Op.between]: [0, 5000.0] },
+		},
+		order: [["id", "ASC"]],
+		offset: 0,
+		limit: 20,
+	};
+
+	if (size && size <= 20) query.limit = size;
+	if (page) query.offset = query.limit * (page - 1);
+	if (minLat) query.where.lat[Op.between][0] = minLat;
+	if (maxLat) query.where.lat[Op.between][1] = maxLat;
+	if (minLng) query.where.lng[Op.between][0] = minLng;
+	if (maxLng) query.where.lng[Op.between][1] = maxLng;
+	if (minPrice) query.where.price[Op.between][0] = minPrice;
+	if (maxPrice) query.where.price[Op.between][1] = maxPrice;
+
+	const rooms = await Room.findAll(query);
+
+	res.status = 200;
+	res.json(rooms);
+});
+
 //Get details about a room with id
 router.get("/:roomId", async (req, res) => {
 	let room = await Room.findByPk(req.params.roomId, {
