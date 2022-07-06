@@ -349,6 +349,15 @@ router.get("/:roomId", async (req, res) => {
 		],
 	});
 
+	//If there is no room return 404 code
+	if (!room) {
+		res.status = 404;
+		return res.json({
+			message: "Spot couldn't be found",
+			statusCode: 404,
+		});
+	}
+
 	let reviewInfo = await Review.findAll({
 		where: { roomId: req.params.roomId },
 		attributes: [
@@ -360,15 +369,6 @@ router.get("/:roomId", async (req, res) => {
 	let numReviews = reviewInfo[0].dataValues.numReviews;
 	room.dataValues.avgStarRating = avg;
 	room.dataValues.numReviews = numReviews;
-
-	//If there is no room return 404 code
-	if (!room) {
-		res.status = 404;
-		return res.json({
-			message: "Spot couldn't be found",
-			statusCode: 404,
-		});
-	}
 
 	res.status = 200;
 	return res.json(room);
