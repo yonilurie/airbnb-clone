@@ -342,7 +342,7 @@ router.get("/:roomId", async (req, res) => {
 				sequelize.fn("AVG", sequelize.col("reviews.stars")),
 				"avgStarRating",
 			],
-			"images.imageUrl",
+			// "images.imageUrl",
 		],
 		include: [
 			{
@@ -360,7 +360,7 @@ router.get("/:roomId", async (req, res) => {
 				attributes: [],
 			},
 		],
-		group: "`images`.`imageUrl`",
+		// group: "`images`.`imageUrl`",
 	});
 
 	//If there is no room return 404 code
