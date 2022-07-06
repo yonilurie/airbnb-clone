@@ -1,4 +1,5 @@
 # backend-project-airbnb
+
 Heroku: https://backend-project-airbnb.herokuapp.com/
 
 ## Database Schema Design
@@ -159,7 +160,7 @@ user's information.
 
         ```json
         {
-            "userName": "johnSmith2000",
+        	"userName": "johnSmith2000",
         	"firstName": "John",
         	"lastName": "Smith",
         	"email": "john.smith@gmail.com",
@@ -177,7 +178,7 @@ user's information.
         ```json
         {
         	"id": 1,
-            "userName": "johnSmith2000",
+        	"userName": "johnSmith2000",
         	"firstName": "John",
         	"lastName": "Smith",
         	"email": "john.smith@gmail.com",
@@ -1002,7 +1003,16 @@ Create and return a new booking from a room specified by id.
 
     -   Method: POST
     -   URL: /rooms/:roomId/bookings
-    -   Body: none
+    -   Body:
+
+    ````json
+      {
+      	"startDate": "2021-11-19",
+      	"endDate": "2021-11-19",
+      }
+      ```
+
+    ````
 
 -   Successful Response
 
