@@ -1,5 +1,4 @@
 const express = require("express");
-const { Result } = require("express-validator");
 const router = express.Router();
 const sequelize = require("sequelize");
 const {
@@ -10,7 +9,6 @@ const {
 	UserRoomImage,
 	Booking,
 } = require("../db/models");
-const booking = require("../db/models/booking");
 const { restoreUser, requireAuth } = require("../utils/auth");
 
 //Get all of a rooms bookings
@@ -43,57 +41,60 @@ router.get(
 					},
 				],
 			});
-
 			//if no bookings are found
 			if (!bookings.length) {
 				res.status = 200;
 				return res.json({ Bookings: "No dates booked!" });
 			}
-
+			//Return lsit of bookings
 			res.status = 200;
 			return res.json(bookings);
 		}
-
 		//If not the owner
 		let bookings = await Booking.findAll({
 			where: { roomId: roomId },
 			attributes: ["roomId", "startDate", "endDate"],
 		});
-
 		//if no bookings are found
 		if (!bookings.length) {
 			res.status = 200;
 			return res.json({ Bookings: "No dates booked!" });
 		}
-
+		//Return the bookings
 		res.status = 200;
 		return res.json(bookings);
 	}
 );
-
+//Checks if booking has required infos
+const validateBooking = [
+	check("startDate")
+		.exists()
+		.notEmpty()
+		.withMessage("Must provide start date"),
+	check("endDate").exists().notEmpty().withMessage("Must provide end date"),
+];
 //Create a booking with room id
 router.post(
 	"/:roomId/bookings",
-	[restoreUser, requireAuth],
+	[validateBooking, restoreUser, requireAuth],
 	async (req, res) => {
 		const { roomId } = req.params;
 		const { id } = req.user;
 		let { startDate, endDate } = req.body;
+		//Convert dates to date objects
 		startDate = startDate.split("-");
 		startDate[1] -= 1;
 		startDate = new Date(startDate[0], startDate[1], startDate[2]);
-
 		endDate = endDate.split("-");
 		endDate[1] -= 1;
 		endDate = new Date(endDate[0], endDate[1], endDate[2]);
-
 		//check if dates are valid
 		if (startDate >= endDate) {
+			res.status = 403;
 			return res.json({
 				message: "Start date cant be after or on end date ",
 			});
 		}
-
 		//Find room
 		let room = await Room.findByPk(roomId);
 		//Check if room exists
@@ -104,7 +105,6 @@ router.post(
 				statusCode: 404,
 			});
 		}
-
 		//Check if the user is the owner
 		if (id === room.ownerId) {
 			res.status = 403;
@@ -112,8 +112,7 @@ router.post(
 				message: "Cannot book your own room",
 			});
 		}
-
-		//Find if any booking for the room exist
+		//Find if any bookings for the room exist within the given dates
 		const { Op } = require("sequelize");
 		let bookingCheck = await Booking.findOne({
 			where: {
@@ -121,7 +120,7 @@ router.post(
 				endDate: { [Op.lte]: endDate },
 			},
 		});
-
+		//If they do return error message to user with 403 code
 		if (bookingCheck) {
 			res.status = 403;
 			return res.json({
@@ -136,12 +135,12 @@ router.post(
 		}
 		//Create a new booking
 		let newBookingData = req.body;
-		newBookingData.startDate = startDate;
-		newBookingData.endDate = endDate;
 		newBookingData.userId = id;
 		newBookingData.roomId = roomId;
+		newBookingData.startDate = startDate;
+		newBookingData.endDate = endDate;
 		let newBooking = await Booking.create(newBookingData);
-
+		//Return new booking to user
 		res.status = 200;
 		return res.json(newBooking);
 	}
