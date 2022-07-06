@@ -1,5 +1,5 @@
 const express = require("express");
-const { requireAuth } = require("../../utils/auth");
+const { requireAuth, restoreUser } = require("../../utils/auth");
 const { Booking, Room } = require("../../db/models");
 const router = express.Router();
 
@@ -34,7 +34,27 @@ router.get("/", requireAuth, async (req, res) => {
 	}
 
 	res.status = 200;
-	res.json(bookings);
+	return res.json(bookings);
+});
+
+//Delete a booking
+router.delete("/:bookingId", [restoreUser, requireAuth], async (req, res) => {
+	const { bookingId } = req.params;
+	let booking = await Booking.findByPk(bookingId);
+
+	if (!booking) {
+		res.status = 404;
+		return res.json({
+			message: "Booking couldn't be found",
+			statusCode: 404,
+		});
+	}
+
+	booking.destroy();
+	return res.json({
+		message: "Successfully deleted",
+		statusCode: 200,
+	});
 });
 
 module.exports = router;

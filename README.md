@@ -159,6 +159,7 @@ user's information.
 
         ```json
         {
+            "userName": "johnSmith2000",
         	"firstName": "John",
         	"lastName": "Smith",
         	"email": "john.smith@gmail.com",
@@ -176,6 +177,7 @@ user's information.
         ```json
         {
         	"id": 1,
+            "userName": "johnSmith2000",
         	"firstName": "John",
         	"lastName": "Smith",
         	"email": "john.smith@gmail.com",

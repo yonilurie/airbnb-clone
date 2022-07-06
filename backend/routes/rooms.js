@@ -138,6 +138,8 @@ router.post(
 		let newBookingData = req.body;
 		newBookingData.startDate = startDate;
 		newBookingData.endDate = endDate;
+		newBookingData.userId = id;
+		newBookingData.roomId = roomId;
 		let newBooking = await Booking.create(newBookingData);
 
 		res.status = 200;
