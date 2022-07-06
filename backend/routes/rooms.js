@@ -10,6 +10,7 @@ const {
 	UserRoomImage,
 	Booking,
 } = require("../db/models");
+const booking = require("../db/models/booking");
 const { restoreUser, requireAuth } = require("../utils/auth");
 
 //Get all of a rooms bookings
@@ -66,7 +67,81 @@ router.get(
 		}
 
 		res.status = 200;
-		res.json(bookings);
+		return res.json(bookings);
+	}
+);
+
+//Create a booking with room id
+router.post(
+	"/:roomId/bookings",
+	[restoreUser, requireAuth],
+	async (req, res) => {
+		const { roomId } = req.params;
+		const { id } = req.user;
+		let { startDate, endDate } = req.body;
+		startDate = startDate.split("-");
+		startDate[1] -= 1;
+		startDate = new Date(startDate[0], startDate[1], startDate[2]);
+
+		endDate = endDate.split("-");
+		endDate[1] -= 1;
+		endDate = new Date(endDate[0], endDate[1], endDate[2]);
+
+		//check if dates are valid
+		if (startDate >= endDate) {
+			return res.json({
+				message: "Start date cant be after or on end date ",
+			});
+		}
+
+		//Find room
+		let room = await Room.findByPk(roomId);
+		//Check if room exists
+		if (!room) {
+			res.status = 404;
+			return res.json({
+				message: "room couldn't be found",
+				statusCode: 404,
+			});
+		}
+
+		//Check if the user is the owner
+		if (id === room.ownerId) {
+			res.status = 403;
+			return res.json({
+				message: "Cannot book your own room",
+			});
+		}
+
+		//Find if any booking for the room exist
+		const { Op } = require("sequelize");
+		let bookingCheck = await Booking.findOne({
+			where: {
+				startDate: { [Op.gte]: startDate },
+				endDate: { [Op.lte]: endDate },
+			},
+		});
+
+		if (bookingCheck) {
+			res.status = 403;
+			return res.json({
+				message:
+					"Sorry, this room is already booked for the specified dates",
+				statusCode: 403,
+				errors: {
+					startDate: "Start date conflicts with an existing booking",
+					endDate: "End date conflicts with an existing booking",
+				},
+			});
+		}
+		//Create a new booking
+		let newBookingData = req.body;
+		newBookingData.startDate = startDate;
+		newBookingData.endDate = endDate;
+		let newBooking = await Booking.create(newBookingData);
+
+		res.status = 200;
+		return res.json(newBooking);
 	}
 );
 
