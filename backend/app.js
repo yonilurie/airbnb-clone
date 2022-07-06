@@ -59,7 +59,7 @@ app.use(
 app.use(routes); // Connect all the routes
 
 //homepage-route
-app.get("/", async (req, res) => {
+app.get("/", async (_req, res) => {
 	return res.json({
 		message: "App Running",
 	});
