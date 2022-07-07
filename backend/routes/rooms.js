@@ -3,6 +3,7 @@ const router = express.Router();
 const sequelize = require("sequelize");
 const { check } = require("express-validator");
 const { query } = require("express-validator/check");
+const { param } = require("express-validator/check");
 const { Op } = require("sequelize");
 const {
 	Room,
@@ -25,6 +26,12 @@ const validateBooking = [
 		.exists()
 		.notEmpty()
 		.withMessage("Must provide a valid end date"),
+	handleValidationErrors,
+];
+
+//Validate room params
+const validateRoomId = [
+	param("roomId").isNumeric().withMessage("Room id must be an integer"),
 	handleValidationErrors,
 ];
 
@@ -82,7 +89,7 @@ router.put(
 //Delete and existing review
 router.delete(
 	"/:roomId/reviews/:reviewId",
-	[restoreUser, requireAuth],
+	[validateRoomId, restoreUser, requireAuth],
 	async (req, res) => {
 		const { roomId, reviewId } = req.params;
 		const { id } = req.user;
@@ -123,7 +130,7 @@ router.delete(
 //Add an image to an existing review
 router.post(
 	"/:roomId/reviews/:reviewId/add-image",
-	[restoreUser, requireAuth],
+	[validateRoomId, restoreUser, requireAuth],
 	async (req, res) => {
 		const { roomId, reviewId } = req.params;
 		const { id } = req.user;
@@ -179,7 +186,7 @@ router.post(
 //Get all of a rooms bookings
 router.get(
 	"/:roomId/bookings",
-	[restoreUser, requireAuth],
+	[validateRoomId, restoreUser, requireAuth],
 	async (req, res) => {
 		const { roomId } = req.params;
 		const { id } = req.user;
@@ -234,7 +241,7 @@ router.get(
 //Create a booking with room id
 router.post(
 	"/:roomId/bookings",
-	[restoreUser, requireAuth, validateBooking],
+	[validateRoomId, restoreUser, requireAuth, validateBooking],
 	async (req, res) => {
 		const { roomId } = req.params;
 		const { id } = req.user;
@@ -305,7 +312,7 @@ router.post(
 );
 
 //Get all reviews of a room by id
-router.get("/:roomId/reviews", async (req, res) => {
+router.get("/:roomId/reviews", validateRoomId, async (req, res) => {
 	let reviews = await Review.findAll({
 		where: {
 			roomId: req.params.roomId,
@@ -348,7 +355,7 @@ router.get("/:roomId/reviews", async (req, res) => {
 //add a review to a room
 router.post(
 	"/:roomId/reviews",
-	[restoreUser, requireAuth],
+	[validateRoomId, restoreUser, requireAuth],
 	async (req, res) => {
 		const { roomId } = req.params;
 		const { review, stars } = req.body;
@@ -500,7 +507,7 @@ router.get("/search", checkQuery, async (req, res) => {
 });
 
 //Get details about a room with id
-router.get("/:roomId", async (req, res) => {
+router.get("/:roomId", validateRoomId, async (req, res) => {
 	let room = await Room.findByPk(req.params.roomId, {
 		attributes: [
 			"id",

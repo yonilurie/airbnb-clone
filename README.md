@@ -1261,7 +1261,7 @@ Create and return a new image for a review specified by id.
 -   Request
 
     -   Method: POST
-    -   URL: /rooms/:roomId/reviews/:reviewId
+    -   URL: /rooms/:roomId/reviews/:reviewId/add-image
     -   Headers:
         -   Content-Type: application/json
     -   Body:
@@ -1325,7 +1325,7 @@ Delete an existing image.
 -   Request
 
     -   Method: DELETE
-    -   URL: /api/rooms/images/:imageId/add-image
+    -   URL: /api/rooms/images/:imageId
     -   Body: none
 
 -   Successful Response
