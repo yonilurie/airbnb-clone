@@ -38,7 +38,7 @@ router.put(
 		}
 		//Check if the booking exists
 		let existingBooking = await Booking.findByPk(bookingId);
-		if (!booking) {
+		if (!existingBooking) {
 			res.status = 404;
 			return res.json({
 				message: "Booking couldn't be found",

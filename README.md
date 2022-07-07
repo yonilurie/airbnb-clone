@@ -90,7 +90,7 @@ information.
 
         ```json
         {
-        	"email": "demo@user.io",
+        	"credential": "demo@user.io",
         	"password": "password"
         }
         ```
