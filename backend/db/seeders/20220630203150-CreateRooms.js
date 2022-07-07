@@ -15,8 +15,7 @@ module.exports = {
 					lng: 122.4730327,
 					name: "App Academy",
 					description: "Place where web developers are created",
-					price: 123,
-					numOfReviews: 3,
+					price: 123.0,
 					previewImage:
 						"https://ohiostate.pressbooks.pub/app/uploads/sites/198/2019/06/farnsworthporch.jpg",
 				},
@@ -30,8 +29,7 @@ module.exports = {
 					lng: 122.4730327,
 					name: "App Academy Two",
 					description: "Place where web developers are created again",
-					price: 200,
-					numOfReviews: 1,
+					price: 200.0,
 					previewImage:
 						"https://upload.wikimedia.org/wikipedia/commons/7/75/Rufus_Rand_Summer_House.jpg",
 				},
@@ -45,7 +43,7 @@ module.exports = {
 					lng: -122.34792,
 					name: "App Academy Two",
 					description: "Place where web developers are created again",
-					price: 50,
+					price: 50.0,
 					previewImage:
 						"https://upload.wikimedia.org/wikipedia/commons/7/75/Rufus_Rand_Summer_House.jpg",
 				},
@@ -59,7 +57,7 @@ module.exports = {
 					lng: 20,
 					name: "Kelley Kringle's Abode",
 					description: "Place where Kelley lives",
-					price: 150,
+					price: 150.0,
 					previewImage:
 						"https://live.staticflickr.com/8002/7694480048_dbfe651ede_b.jpg",
 				},
@@ -73,7 +71,7 @@ module.exports = {
 					lng: 14.0,
 					name: "Steve Goldberg's house",
 					description: "Place where Steve lives",
-					price: 130,
+					price: 130.9,
 					previewImage:
 						"https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Dickinson_House.jpg/1280px-Dickinson_House.jpg",
 				},
@@ -87,7 +85,7 @@ module.exports = {
 					lng: 170,
 					name: "Neo's house",
 					description: "Place where Neo lives",
-					price: 99,
+					price: 99.0,
 					previewImage: "http://i.stack.imgur.com/akoPE.jpg",
 				},
 				{
@@ -100,7 +98,7 @@ module.exports = {
 					lng: 30.0,
 					name: "Morpheus's house",
 					description: "Place where Morpheus lives",
-					price: 80,
+					price: 80.5,
 					previewImage: "http://i.stack.imgur.com/akoPE.jpg",
 				},
 				{
@@ -113,7 +111,7 @@ module.exports = {
 					lng: 101.0,
 					name: "Queen's house",
 					description: "Place where the Queen lives",
-					price: 600,
+					price: 600.0,
 					previewImage:
 						"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Buckingham_Palace_aerial_view_2016_(cropped).jpg/1200px-Buckingham_Palace_aerial_view_2016_(cropped).jpg",
 				},

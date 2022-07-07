@@ -32,7 +32,7 @@ router.delete(
 );
 
 //Get all of a current users posted reviews
-router.get("/", requireAuth, async (req, res) => {
+router.get("/", [restoreUser, requireAuth], async (req, res) => {
 	let { id } = req.user;
 	let reviews = await Review.findAll({
 		where: { userId: id },

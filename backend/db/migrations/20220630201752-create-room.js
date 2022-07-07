@@ -49,13 +49,8 @@ module.exports = {
 					allowNull: false,
 				},
 				price: {
-					type: Sequelize.INTEGER,
+					type: Sequelize.DECIMAL,
 					allowNull: false,
-				},
-				numOfReviews: {
-					type: Sequelize.INTEGER,
-					allowNull: true,
-					defaultValue: 0,
 				},
 				previewImage: {
 					type: Sequelize.STRING,

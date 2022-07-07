@@ -66,7 +66,7 @@ router.delete(
 			});
 		}
 
-		await image.destroy()
+		await image.destroy();
 		res.status = 200;
 		return res.json({
 			message: "Successfully deleted",
@@ -74,7 +74,6 @@ router.delete(
 		});
 	}
 );
-
 
 //Add a room if you are a user
 router.post(
@@ -132,7 +131,7 @@ router.post(
 );
 
 //delete a spot
-router.delete("/:roomId", requireAuth, async (req, res) => {
+router.delete("/:roomId", [restoreUser, requireAuth], async (req, res) => {
 	const { roomId } = req.params;
 	const { id } = req.user;
 	let room = await Room.findOne({
@@ -161,84 +160,95 @@ router.delete("/:roomId", requireAuth, async (req, res) => {
 });
 
 //Edit a spot
-router.put("/:roomId", [requireAuth, validateRoom], async (req, res) => {
-	const { roomId } = req.params;
-	const {
-		address,
-		city,
-		state,
-		country,
-		lat,
-		lng,
-		name,
-		description,
-		price,
-	} = req.body;
-	let userId = req.user.id;
-	let room = await Room.findOne({
-		exclude: "previewImage",
-		where: {
-			ownerId: userId,
-			id: roomId,
-		},
-	});
-
-	//If room cant be found return 404 code
-	if (!room) {
-		res.status = 400;
-		return res.json({
-			message: "Room couldn't be found",
-			statusCode: 404,
+router.put(
+	"/:roomId",
+	[restoreUser, requireAuth, validateRoom],
+	async (req, res) => {
+		const { roomId } = req.params;
+		const {
+			address,
+			city,
+			state,
+			country,
+			lat,
+			lng,
+			name,
+			description,
+			price,
+		} = req.body;
+		let userId = req.user.id;
+		let room = await Room.findOne({
+			exclude: "previewImage",
+			where: {
+				ownerId: userId,
+				id: roomId,
+			},
 		});
+
+		//If room cant be found return 404 code
+		if (!room) {
+			res.status = 400;
+			return res.json({
+				message: "Room couldn't be found",
+				statusCode: 404,
+			});
+		}
+
+		if (address) room.address = address;
+		if (city) room.city = city;
+		if (state) room.state = state;
+		if (country) room.country = country;
+		if (lat) room.lat = lat;
+		if (lng) room.lng = lng;
+		if (name) room.name = name;
+		if (description) room.description = description;
+		if (price) room.price = price;
+		await room.save();
+
+		res.status = 200;
+		return res.json(room);
 	}
-
-	if (address) room.address = address;
-	if (city) room.city = city;
-	if (state) room.state = state;
-	if (country) room.country = country;
-	if (lat) room.lat = lat;
-	if (lng) room.lng = lng;
-	if (name) room.name = name;
-	if (description) room.description = description;
-	if (price) room.price = price;
-	await room.save();
-
-	res.status = 200;
-	return res.json(room);
-});
-
+);
+const checkImage = [
+	check("url").exists().withMessage("Must include image URL"),
+	handleValidationErrors,
+];
 //Add an image to an owned room
-router.post("/:roomId", requireAuth, async (req, res) => {
-	const { url } = req.body;
-	const { roomId } = req.params;
-	const { id } = req.user;
-	//Check if room exists
-	let room = await Room.findOne({
-		where: { ownerId: id, id: roomId },
-	});
-	//If not return 404 code
-	if (!room) {
-		res.status = 404;
-		return res.json({
-			message: "Room couldn't be found",
-			statusCode: 404,
+router.post(
+	"/:roomId",
+	[restoreUser, requireAuth, checkImage],
+	async (req, res) => {
+		const { url } = req.body;
+		const { roomId } = req.params;
+		const { id } = req.user;
+		//Check if room exists
+		let room = await Room.findOne({
+			where: { ownerId: id, id: roomId },
 		});
+		//If not return 404 code
+		if (!room) {
+			res.status = 404;
+			return res.json({
+				message: "Room couldn't be found",
+				statusCode: 404,
+			});
+		}
+		//create new User room image
+		let newImage = await UserRoomImage.build({
+			imageUrl: url,
+			userId: id,
+			roomId: roomId,
+		});
+
+		await newImage.save();
+
+		res.status = 200;
+		return res.json(newImage);
 	}
-	//create new User room image
-	let newImage = await UserRoomImage.build({
-		imageUrl: url,
-		userId: id,
-		roomId: roomId,
-	});
-
-	await newImage.save();
-
-	res.status = 200;
-	return res.json(newImage);
-});
+);
 
 //Get all of a current users owned rooms
-router.get("/", requireAuth, async (req, res) => {
+router.get("/", [restoreUser, requireAuth], async (req, res) => {
 	let userId = req.user.id;
 	let rooms = await Room.findAll({
 		where: { ownerId: userId },

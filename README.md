@@ -1005,12 +1005,12 @@ Create and return a new booking from a room specified by id.
     -   URL: /rooms/:roomId/bookings
     -   Body:
 
-    ````json
-      {
-      	"startDate": "2021-11-19",
-      	"endDate": "2021-11-19",
-      }
-    ````
+    ```json
+    {
+    	"startDate": "2021-11-19",
+    	"endDate": "2021-11-20"
+    }
+    ```
 
 -   Successful Response
 
@@ -1072,15 +1072,15 @@ Update and return an existing booking.
 -   Request
 
     -   Method: PUT
-    -   URL: /users/:userId/bookings/:bookingId
+    -   URL: /api/bookings/:bookingId
     -   Headers:
         -   Content-Type: application/json
     -   Body:
 
         ```json
         {
-        	"startDate": "2021-11-19",
-        	"endDate": "2021-11-19"
+        	"startDate": "2022-11-21",
+        	"endDate": "2022-11-22"
         }
         ```
 
@@ -1315,17 +1315,57 @@ Create and return a new image for a review specified by id.
         }
         ```
 
-## Delete an Image
+## Delete a room Image
 
 Delete an existing image.
 
 -   Require Authentication: true
 -   Require proper authorization: Image must belong to the current user through
-    the image's imageableId and imageableType
+
 -   Request
 
     -   Method: DELETE
-    -   URL: /api/images/:imageId
+    -   URL: /api/rooms/images/:imageId
+    -   Body: none
+
+-   Successful Response
+
+    -   Status Code: 200
+    -   Headers:
+        -   Content-Type: application/json
+    -   Body:
+
+        ```json
+        {
+        	"message": "Successfully deleted",
+        	"statusCode": 200
+        }
+        ```
+
+-   Error response: Couldn't find an Image with the specified id
+
+    -   Status Code: 404
+    -   Headers:
+        -   Content-Type: application/json
+    -   Body:
+
+        ```json
+        {
+        	"message": "Image couldn't be found",
+        	"statusCode": 404
+        }
+        ```
+
+## Delete a review Image
+
+Delete an existing image.
+
+-   Require Authentication: true
+-   Require proper authorization: Image must belong to the current user 
+-   Request
+
+    -   Method: DELETE
+    -   URL: /api/reviews/images/:imageId
     -   Body: none
 
 -   Successful Response

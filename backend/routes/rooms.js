@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const sequelize = require("sequelize");
 const { check } = require("express-validator");
+const { query } = require("express-validator/check");
 const { Op } = require("sequelize");
 const {
 	Room,
@@ -12,6 +13,177 @@ const {
 	Booking,
 } = require("../db/models");
 const { restoreUser, requireAuth } = require("../utils/auth");
+const { handleValidationErrors } = require("../utils/validation");
+
+//Checks if booking has required infos
+const validateBooking = [
+	check("startDate")
+		.exists()
+		.notEmpty()
+		.withMessage("Must provide a valid start date"),
+	check("endDate")
+		.exists()
+		.notEmpty()
+		.withMessage("Must provide a valid end date"),
+	handleValidationErrors,
+];
+
+//Edit an existing review
+router.put(
+	"/:roomId/reviews/:reviewId",
+	[restoreUser, requireAuth],
+	async (req, res) => {
+		const { roomId, reviewId } = req.params;
+		const { id } = req.user;
+		const { review, stars } = req.body;
+
+		//If the request is missing a message or a star rating, return a 400 code
+		if (!review || !stars) {
+			res.status = 400;
+			return res.json({
+				message: "Validation error",
+				statusCode: 400,
+				errors: {
+					review: "Review text is required",
+					stars: "Stars must be an integer from 1 to 5",
+				},
+			});
+		}
+		//Check if a room with that ID exists
+		let room = await Room.findByPk(roomId);
+		//If it doesnt, return a 404 code
+		if (!room) {
+			res.status = 404;
+			return res.json({
+				message: "Spot couldn't be found",
+				statusCode: 404,
+			});
+		}
+
+		let reviewToEdit = await Review.findByPk(reviewId);
+		if (!reviewToEdit) {
+			res.status = 404;
+			return res.json({
+				message: "Review not found",
+			});
+		}
+		if (reviewToEdit.userId !== id) {
+			return res.json({ message: "Can only edit your own comment" });
+		}
+
+		reviewToEdit.review = review;
+		reviewToEdit.stars = stars;
+		reviewToEdit.save();
+
+		res.status = 200;
+		return res.json(reviewToEdit);
+	}
+);
+//Delete and existing review
+router.delete(
+	"/:roomId/reviews/:reviewId",
+	[restoreUser, requireAuth],
+	async (req, res) => {
+		const { roomId, reviewId } = req.params;
+		const { id } = req.user;
+		//Check if room exists
+		let room = await Room.findByPk(roomId);
+		//If not return 404 code
+		if (!room) {
+			res.status = 404;
+			return res.json({
+				message: "Room couldn't be found",
+				statusCode: 404,
+			});
+		}
+		//Check if review exists
+		let review = await Review.findByPk(reviewId);
+		//If not return 404 code
+		if (!review) {
+			res.status = 200;
+			return res.json({
+				message: "Review couldn't be found",
+				statusCode: 404,
+			});
+		}
+
+		if (review.userId !== id) {
+			return res.json({ message: "Can only edit your own comment" });
+		}
+
+		await review.destroy();
+		res.status = 200;
+		return res.json({
+			message: "Successfully deleted",
+			statusCode: 200,
+		});
+	}
+);
+
+//Add an image to an existing review
+router.post(
+	"/:roomId/reviews/:reviewId/add-image",
+	[restoreUser, requireAuth],
+	async (req, res) => {
+		const { roomId, reviewId } = req.params;
+		const { id } = req.user;
+		const { url } = req.body;
+		let review = await Review.findByPk(reviewId, {
+			include: [
+				{
+					model: UserReviewImage,
+					as: "images",
+					attributes: [
+						[
+							sequelize.fn("COUNT", sequelize.col("imageUrl")),
+							"imageCount",
+						],
+					],
+				},
+			],
+		});
+		//If review cant be found return 404 code
+		if (!review || review.roomId !== Number(roomId)) {
+			res.status = 404;
+			return res.json({
+				message: "Review couldn't be found",
+				statusCode: 404,
+			});
+		}
+		//If review does not belong to the current user return 400 code
+		if (review.userId !== id) {
+			res.status = 400;
+			return res.json({
+				message: "Can only add images to your own review",
+			});
+		}
+		//Check if the image limit has been reached
+		//If it has send 400 code
+		console.log(review.images);
+		if (review.images.length) {
+			let numberOfImages = review.images[0].dataValues.imageCount;
+			if (numberOfImages >= 10) {
+				res.status = 400;
+				return res.json({
+					message:
+						"Maximum number of images for this resource was reached",
+					statusCode: 400,
+				});
+			}
+		}
+
+		//Create a new reviewImage
+		let reviewImage = await UserReviewImage.build({
+			reviewId: reviewId,
+			userId: id,
+			imageUrl: url,
+		});
+		await reviewImage.save();
+
+		res.status = 200;
+		return res.json(reviewImage);
+	}
+);
 
 //Get all of a rooms bookings
 router.get(
@@ -67,18 +239,11 @@ router.get(
 		return res.json(bookings);
 	}
 );
-//Checks if booking has required infos
-const validateBooking = [
-	check("startDate")
-		.exists()
-		.notEmpty()
-		.withMessage("Must provide start date"),
-	check("endDate").exists().notEmpty().withMessage("Must provide end date"),
-];
+
 //Create a booking with room id
 router.post(
 	"/:roomId/bookings",
-	[validateBooking, restoreUser, requireAuth],
+	[restoreUser, requireAuth, validateBooking],
 	async (req, res) => {
 		const { roomId } = req.params;
 		const { id } = req.user;
@@ -145,83 +310,6 @@ router.post(
 		//Return new booking to user
 		res.status = 200;
 		return res.json(newBooking);
-	}
-);
-
-//Edit a booking
-router.put(
-	"/:roomId/bookings/:bookingId",
-	[validateBooking, restoreUser, requireAuth],
-	async (req, res) => {
-		const { roomId, bookingId } = req.params;
-		const { id } = req.user;
-		let { startDate, endDate } = req.body;
-		//Convert dates to date objects
-		startDate = startDate.split("-");
-		startDate[1] -= 1;
-		startDate = new Date(startDate[0], startDate[1], startDate[2]);
-		endDate = endDate.split("-");
-		endDate[1] -= 1;
-		endDate = new Date(endDate[0], endDate[1], endDate[2]);
-		//check if dates are valid
-		if (startDate >= endDate) {
-			res.status = 403;
-			return res.json({
-				message: "Start date cant be after or on end date ",
-			});
-		}
-		//Check if the booking exiss
-		let booking = await Booking.findByPk(bookingId);
-		if (!booking) {
-			res.status = 404;
-			return res.json({
-				message: "Booking couldn't be found",
-				statusCode: 404,
-			});
-		}
-		if (booking.userId !== id) {
-			return res.json({
-				message: "Can only edit your own reviews",
-			});
-		}
-		//Create current time object
-		let now = new Date();
-		let currentTime = new Date(
-			now.getFullYear(),
-			now.getMonth(),
-			now.getDate()
-		);
-		//Check if start time is before the current time
-		if (currentTime >= booking.startDate) {
-			return res.json({
-				message: "Date has passed",
-			});
-		}
-		//Check if any booking occur in between the given start and end timess
-		let checkAvailability = await Booking.findOne({
-			where: {
-				startDate: { [Op.gte]: startDate },
-				endDate: { [Op.lte]: endDate },
-			},
-		});
-		//if room is not available return error with 403 code
-		if (checkAvailability) {
-			res.status = 403;
-			return res.json({
-				message:
-					"Sorry, this room is already booked for the specified dates",
-				statusCode: 403,
-				errors: {
-					startDate: "Start date conflicts with an existing booking",
-					endDate: "End date conflicts with an existing booking",
-				},
-			});
-		}
-
-		booking.startDate = startDate;
-		booking.endDate = endDate;
-		await booking.save();
-		return res.json(booking);
 	}
 );
 
@@ -328,165 +416,48 @@ router.post(
 	}
 );
 
-//Edit an existing review
-router.put(
-	"/:roomId/reviews/:reviewId",
-	[restoreUser, requireAuth],
-	async (req, res) => {
-		const { roomId, reviewId } = req.params;
-		const { id } = req.user;
-		const { review, stars } = req.body;
+//validate query
+const checkQuery = [
+	query("page")
+		.optional()
+		.isNumeric()
+		.isInt({ min: 0 })
+		.withMessage("Page must be greater than or equal to 0"),
+	query("size")
+		.optional()
+		.isNumeric()
+		.isInt({ min: 0 })
+		.withMessage("Size must be greater than or equal to 0"),
+	query("minLat")
+		.optional()
+		.isFloat({ min: -180.0, max: 180 })
+		.withMessage("minLat must be a number between -180.0 and 180"),
+	query("maxLat")
+		.optional()
+		.isFloat({ min: -180.0, max: 180 })
+		.withMessage("minLat must be a number between -180.0 and 180"),
+	query("minLat")
+		.optional()
+		.isFloat({ min: -180.0, max: 180 })
+		.withMessage("minLat must be a number between -180.0 and 180"),
+	query("maxLat")
+		.optional()
+		.isFloat({ min: -180.0, max: 180 })
+		.withMessage("minLat must be a number between -180.0 and 180"),
+	query("minPrice")
+		.optional()
+		.isFloat({ min: 1 })
+		.withMessage("Minimum price must be greater than 0"),
+	query("maxPrice")
+		.optional()
+		.isFloat({ min: 1 })
+		.withMessage("Maximum price must be greater than 0"),
+	handleValidationErrors,
+];
 
-		//If the request is missing a message or a star rating, return a 400 code
-		if (!review || !stars) {
-			res.status = 400;
-			return res.json({
-				message: "Validation error",
-				statusCode: 400,
-				errors: {
-					review: "Review text is required",
-					stars: "Stars must be an integer from 1 to 5",
-				},
-			});
-		}
-		//Check if a room with that ID exists
-		let room = await Room.findByPk(roomId);
-		//If it doesnt, return a 404 code
-		if (!room) {
-			res.status = 404;
-			return res.json({
-				message: "Spot couldn't be found",
-				statusCode: 404,
-			});
-		}
-
-		let reviewToEdit = await Review.findByPk(reviewId);
-		if (!reviewToEdit) {
-			res.status = 404;
-			return res.json({
-				message: "Review not found",
-			});
-		}
-		if (reviewToEdit.userId !== id) {
-			return res.json({ message: "Can only edit your own comment" });
-		}
-
-		reviewToEdit.review = review;
-		reviewToEdit.stars = stars;
-		reviewToEdit.save();
-
-		res.status = 200;
-		return res.json(reviewToEdit);
-	}
-);
-
-router.delete(
-	"/:roomId/reviews/:reviewId",
-	[restoreUser, requireAuth],
-	async (req, res) => {
-		const { roomId, reviewId } = req.params;
-		const { id } = req.user;
-		//Check if room exists
-		let room = await Room.findByPk(roomId);
-		//If not return 404 code
-		if (!room) {
-			res.status = 404;
-			return res.json({
-				message: "Room couldn't be found",
-				statusCode: 404,
-			});
-		}
-		//Check if review exists
-		let review = await Review.findByPk(reviewId);
-		//If not return 404 code
-		if (!review) {
-			res.status = 200;
-			return res.json({
-				message: "Review couldn't be found",
-				statusCode: 404,
-			});
-		}
-
-		if (review.userId !== id) {
-			return res.json({ message: "Can only edit your own comment" });
-		}
-
-		await review.destroy();
-		res.status = 200;
-		return res.json({
-			message: "Successfully deleted",
-			statusCode: 200,
-		});
-	}
-);
-
-//Add an image to an existing review
-router.post(
-	"/:roomId/reviews/:reviewId/add-image",
-	[restoreUser, requireAuth],
-	async (req, res) => {
-		const { roomId, reviewId } = req.params;
-		const { id } = req.user;
-		const { url } = req.body;
-		let review = await Review.findByPk(reviewId, {
-			include: [
-				{
-					model: UserReviewImage,
-					as: "images",
-					attributes: [
-						[
-							sequelize.fn("COUNT", sequelize.col("imageUrl")),
-							"imageCount",
-						],
-					],
-				},
-			],
-		});
-		//If review cant be found return 404 code
-		if (!review || review.roomId !== Number(roomId)) {
-			res.status = 404;
-			return res.json({
-				message: "Review couldn't be found",
-				statusCode: 404,
-			});
-		}
-		//If review does not belong to the current user return 400 code
-		if (review.userId !== id) {
-			res.status = 400;
-			return res.json({
-				message: "Can only add images to your own review",
-			});
-		}
-		//Check if the image limit has been reached
-		//If it has send 400 code
-		console.log(review.images);
-		if (review.images.length) {
-			let numberOfImages = review.images[0].dataValues.imageCount;
-			if (numberOfImages >= 10) {
-				res.status = 400;
-				return res.json({
-					message:
-						"Maximum number of images for this resource was reached",
-					statusCode: 400,
-				});
-			}
-		}
-
-		//Create a new reviewImage
-		let reviewImage = await UserReviewImage.build({
-			reviewId: reviewId,
-			userId: id,
-			imageUrl: url,
-		});
-		await reviewImage.save();
-
-		res.status = 200;
-		return res.json(reviewImage);
-	}
-);
-
-router.get("/search", async (req, res) => {
-	const {
+//Search all rooms with optional parameters
+router.get("/search", checkQuery, async (req, res) => {
+	let {
 		page,
 		size,
 		minLat,
@@ -506,14 +477,19 @@ router.get("/search", async (req, res) => {
 			lng: { [Op.between]: [-180.0, 180.0] },
 			price: { [Op.between]: [0.0, 5000.0] },
 		},
+
 		order: [["id", "ASC"]],
 	};
 
-	if (size && size <= 20) query.limit = size;
-	else query.limit = 20;
-
-	if (page) query.offset = query.limit * (page - 1);
+	//Assign limit to query
+	if (Number(size) === 0 || !size) size = 20;
+	if (!size || !(size <= 20)) query.limit = 20;
+	else query.limit = size;
+	//Assign offset to query
+	if (Number(page) === 0 || !page) page = 1;
+	if (page && page >= 1) query.offset = (page - 1) * size;
 	else query.offset = 0;
+	//So page number corresponds on JSON response
 
 	if (minLat) query.where.lat[Op.between][0] = minLat;
 	if (maxLat) query.where.lat[Op.between][1] = maxLat;
@@ -584,18 +560,13 @@ router.get("/:roomId", async (req, res) => {
 	let numReviews = reviewInfo[0].dataValues.numReviews;
 	room.dataValues.avgStarRating = avg;
 	room.dataValues.numReviews = numReviews;
-
 	res.status = 200;
 	return res.json(room);
 });
 
 //Get all Rooms
 router.get("/", async (req, res) => {
-	const rooms = await Room.findAll({
-		attributes: {
-			exclude: ["numOfReviews"],
-		},
-	});
+	const rooms = await Room.findAll({});
 
 	res.status = 200;
 	return res.json({ rooms });

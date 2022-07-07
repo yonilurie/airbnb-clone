@@ -71,12 +71,8 @@ module.exports = (sequelize, DataTypes) => {
 				allowNull: false,
 			},
 			price: {
-				type: DataTypes.INTEGER,
+				type: DataTypes.DECIMAL,
 				allowNull: false,
-			},
-			numOfReviews: {
-				type: DataTypes.INTEGER,
-				allowNull: true,
 			},
 			previewImage: {
 				type: DataTypes.STRING,
