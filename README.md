@@ -1007,8 +1007,8 @@ Create and return a new booking from a room specified by id.
 
     ```json
     {
-    	"startDate": "2021-11-19",
-    	"endDate": "2021-11-20"
+    	"startDate": "2022-11-19",
+    	"endDate": "2022-11-20"
     }
     ```
 
