@@ -58,7 +58,7 @@ router.put(
 			now.getDate()
 		);
 		console.log(currentTime, "CURRENT");
-		console.log(exisitingBooking.startDate, "BOOKING");
+		console.log(existingBooking.startDate, "BOOKING");
 		console.log(startDate);
 		//Check if booking the user want to edit has already passed
 		if (
