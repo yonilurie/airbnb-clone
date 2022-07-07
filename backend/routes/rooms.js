@@ -128,20 +128,7 @@ router.post(
 		const { roomId, reviewId } = req.params;
 		const { id } = req.user;
 		const { url } = req.body;
-		let review = await Review.findByPk(reviewId, {
-			include: [
-				{
-					model: UserReviewImage,
-					as: "images",
-					attributes: [
-						[
-							sequelize.fn("COUNT", sequelize.col("imageUrl")),
-							"imageCount",
-						],
-					],
-				},
-			],
-		});
+		let review = await Review.findByPk(reviewId);
 		//If review cant be found return 404 code
 		if (!review || review.roomId !== Number(roomId)) {
 			res.status = 404;
@@ -157,12 +144,16 @@ router.post(
 				message: "Can only add images to your own review",
 			});
 		}
+
+		//Find all review images
+		let reviewImages = await UserReviewImage.findAll({
+			where: { userId: id },
+		});
+
 		//Check if the image limit has been reached
 		//If it has send 400 code
-		console.log(review.images);
-		if (review.images.length) {
-			let numberOfImages = review.images[0].dataValues.imageCount;
-			if (numberOfImages >= 10) {
+		if (reviewImages.length) {
+			if (reviewImages.length >= 10) {
 				res.status = 400;
 				return res.json({
 					message:
