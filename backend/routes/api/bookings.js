@@ -1,9 +1,9 @@
 const express = require("express");
+const router = express.Router();
 const { requireAuth, restoreUser } = require("../../utils/auth");
 const { Booking, Room } = require("../../db/models");
 const { check } = require("express-validator");
 const { Op } = require("sequelize");
-const router = express.Router();
 
 //Checks if booking has required infos
 const validateBooking = [
@@ -14,10 +14,16 @@ const validateBooking = [
 	check("endDate").exists().notEmpty().withMessage("Must provide end date"),
 ];
 
+//Validate booking params
+const validateBookingId = [
+	param("bookingId").isNumeric().withMessage("Booking id must be an integer"),
+	handleValidationErrors,
+];
+
 //Edit a booking
 router.put(
 	"/:bookingId",
-	[validateBooking, restoreUser, requireAuth],
+	[validateBookingId, validateBooking, restoreUser, requireAuth],
 	async (req, res) => {
 		const { bookingId } = req.params;
 		const { id } = req.user;
@@ -102,35 +108,39 @@ router.put(
 );
 
 //Delete a booking
-router.delete("/:bookingId", [restoreUser, requireAuth], async (req, res) => {
-	const { bookingId } = req.params;
-	const { id } = req.user;
-	//Find the booking
-	let booking = await Booking.findByPk(bookingId);
-	//If booking not found return 404 code and message
-	if (!booking) {
-		res.status = 404;
-		return res.json({
-			message: "Booking couldn't be found",
-			statusCode: 404,
-		});
-	}
-	//Check if booking belongs oto the user
-	if (booking.userId !== id) {
-		res.status = 404;
-		return res.json({
-			message: "Booking couldn't be found",
-			statusCode: 404,
-		});
-	}
+router.delete(
+	"/:bookingId",
+	[validateBookingId, restoreUser, requireAuth],
+	async (req, res) => {
+		const { bookingId } = req.params;
+		const { id } = req.user;
+		//Find the booking
+		let booking = await Booking.findByPk(bookingId);
+		//If booking not found return 404 code and message
+		if (!booking) {
+			res.status = 404;
+			return res.json({
+				message: "Booking couldn't be found",
+				statusCode: 404,
+			});
+		}
+		//Check if booking belongs oto the user
+		if (booking.userId !== id) {
+			res.status = 404;
+			return res.json({
+				message: "Booking couldn't be found",
+				statusCode: 404,
+			});
+		}
 
-	//Delete booking and return success message
-	booking.destroy();
-	return res.json({
-		message: "Successfully deleted",
-		statusCode: 200,
-	});
-});
+		//Delete booking and return success message
+		booking.destroy();
+		return res.json({
+			message: "Successfully deleted",
+			statusCode: 200,
+		});
+	}
+);
 
 //get all of a users bookings
 router.get("/", [restoreUser, requireAuth], async (req, res) => {

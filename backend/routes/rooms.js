@@ -35,27 +35,40 @@ const validateRoomId = [
 	handleValidationErrors,
 ];
 
+//Validate review params
+const validateReview = [
+	check("review")
+		.exists()
+		.notEmpty()
+		.withMessage("Must include review message"),
+	check("stars")
+		.exists()
+		.notEmpty()
+		.isInt({ min: 1, max: 5 })
+		.withMessage("Must include stars rating"),
+];
+
 //Edit an existing review
 router.put(
 	"/:roomId/reviews/:reviewId",
-	[restoreUser, requireAuth],
+	[validateRoomId, validateReview, restoreUser, requireAuth],
 	async (req, res) => {
 		const { roomId, reviewId } = req.params;
 		const { id } = req.user;
 		const { review, stars } = req.body;
 
-		//If the request is missing a message or a star rating, return a 400 code
-		if (!review || !stars) {
-			res.status = 400;
-			return res.json({
-				message: "Validation error",
-				statusCode: 400,
-				errors: {
-					review: "Review text is required",
-					stars: "Stars must be an integer from 1 to 5",
-				},
-			});
-		}
+		// //If the request is missing a message or a star rating, return a 400 code
+		// if (!review || !stars) {
+		// 	res.status = 400;
+		// 	return res.json({
+		// 		message: "Validation error",
+		// 		statusCode: 400,
+		// 		errors: {
+		// 			review: "Review text is required",
+		// 			stars: "Stars must be an integer from 1 to 5",
+		// 		},
+		// 	});
+		// }
 		//Check if a room with that ID exists
 		let room = await Room.findByPk(roomId);
 		//If it doesnt, return a 404 code
@@ -355,23 +368,23 @@ router.get("/:roomId/reviews", validateRoomId, async (req, res) => {
 //add a review to a room
 router.post(
 	"/:roomId/reviews",
-	[validateRoomId, restoreUser, requireAuth],
+	[validateRoomId, validateReview, restoreUser, requireAuth],
 	async (req, res) => {
 		const { roomId } = req.params;
 		const { review, stars } = req.body;
 		const { id } = req.user;
-		//If the request is missing a message or a star rating, return a 400 code
-		if (!review || !stars) {
-			res.status = 400;
-			return res.json({
-				message: "Validation error",
-				statusCode: 400,
-				errors: {
-					review: "Review text is required",
-					stars: "Stars must be an integer from 1 to 5",
-				},
-			});
-		}
+		// //If the request is missing a message or a star rating, return a 400 code
+		// if (!review || !stars) {
+		// 	res.status = 400;
+		// 	return res.json({
+		// 		message: "Validation error",
+		// 		statusCode: 400,
+		// 		errors: {
+		// 			review: "Review text is required",
+		// 			stars: "Stars must be an integer from 1 to 5",
+		// 		},
+		// 	});
+		// }
 		//Check if a room with that ID exists
 		let room = await Room.findByPk(roomId);
 		//If it doesnt, return a 404 code
