@@ -1325,7 +1325,7 @@ Delete an existing image.
 -   Request
 
     -   Method: DELETE
-    -   URL: /api/rooms/images/:imageId
+    -   URL: /api/rooms/images/:imageId/add-image
     -   Body: none
 
 -   Successful Response
