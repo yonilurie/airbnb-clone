@@ -15,13 +15,19 @@ module.exports = {
 				imageUrl:
 					"https://cdn.shopify.com/s/files/1/0482/8121/products/Layer-Chair-by-DyvikDesign-Rear-view-680x1020_800x.jpg?v=1410986365",
 			},
+			{
+				roomId: 1,
+				userId: 1,
+				imageUrl:
+					"https://cdn.shopify.com/s/files/1/0482/8121/products/Layer-Chair-by-DyvikDesign-Rear-view-680x1020_800x.jpg?v=1410986365",
+			},
 		]);
 	},
 
 	async down(queryInterface, Sequelize) {
 		const Op = Sequelize.Op;
 		await queryInterface.bulkDelete("UserRoomImages", {
-			id: { [Op.in]: [1, 2] },
+			id: { [Op.in]: [1, 2, 3] },
 		});
 	},
 };

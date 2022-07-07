@@ -1,8 +1,35 @@
 const express = require("express");
 
-const { requireAuth } = require("../../utils/auth");
+const { requireAuth, restoreUser } = require("../../utils/auth");
 const { Room, User, Review, UserReviewImage } = require("../../db/models");
 const router = express.Router();
+
+//Delete review image
+router.delete(
+	"/images/:imageId",
+	[restoreUser, requireAuth],
+	async (req, res) => {
+		const { imageId } = req.params;
+		const { id } = req.user;
+
+		let image = await UserReviewImage.findByPk(imageId);
+		//Check if image exists or is not the users
+		if (!image || image.userId !== id) {
+			res.status = 404;
+			return res.json({
+				message: "Image couldn't be found",
+				statusCode: 404,
+			});
+		}
+
+		await image.destroy()
+		res.status = 200;
+		return res.json({
+			message: "Successfully deleted",
+			statusCode: 200,
+		});
+	}
+);
 
 //Get all of a current users posted reviews
 router.get("/", requireAuth, async (req, res) => {

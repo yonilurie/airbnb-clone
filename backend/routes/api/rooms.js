@@ -48,6 +48,34 @@ const validateRoom = [
 	handleValidationErrors,
 ];
 
+//Delete room image
+router.delete(
+	"/images/:imageId",
+	[restoreUser, requireAuth],
+	async (req, res) => {
+		const { imageId } = req.params;
+		const { id } = req.user;
+
+		let image = await UserRoomImage.findByPk(imageId);
+		//Check if image exists or is not the users
+		if (!image || image.userId !== id) {
+			res.status = 404;
+			return res.json({
+				message: "Image couldn't be found",
+				statusCode: 404,
+			});
+		}
+
+		await image.destroy()
+		res.status = 200;
+		return res.json({
+			message: "Successfully deleted",
+			statusCode: 200,
+		});
+	}
+);
+
+
 //Add a room if you are a user
 router.post(
 	"/add",
