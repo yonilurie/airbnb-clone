@@ -142,13 +142,7 @@ router.delete("/:roomId", [restoreUser, requireAuth], async (req, res) => {
 	});
 
 	//If the room is not found return a 404 code
-	if (!room) {
-		res.status = 404;
-		return res.json({
-			message: "Room couldn't be found",
-			statusCode: 404,
-		});
-	}
+	if (!room) return res.json(noRoomError());
 
 	await room.destroy();
 
@@ -186,13 +180,7 @@ router.put(
 		});
 
 		//If room cant be found return 404 code
-		if (!room) {
-			res.status = 400;
-			return res.json({
-				message: "Room couldn't be found",
-				statusCode: 404,
-			});
-		}
+		if (!room) return res.json(noRoomError());
 
 		if (address) room.address = address;
 		if (city) room.city = city;
@@ -226,13 +214,7 @@ router.post(
 			where: { ownerId: id, id: roomId },
 		});
 		//If not return 404 code
-		if (!room) {
-			res.status = 404;
-			return res.json({
-				message: "Room couldn't be found",
-				statusCode: 404,
-			});
-		}
+		if (!room) return res.json(noRoomError());
 		//create new User room image
 		let newImage = await UserRoomImage.build({
 			imageUrl: url,
@@ -257,5 +239,18 @@ router.get("/", [restoreUser, requireAuth], async (req, res) => {
 	res.status = 200;
 	return res.json(rooms);
 });
+
+//------------- Functions
+
+//Error for no Room being found
+function noRoomError() {
+	const err = {};
+	(err.message = "Room couldn't be found"), (err.status = 404);
+	err.errors = {
+		error: "Room couldn't be found",
+		statusCode: 404,
+	};
+	return err;
+}
 
 module.exports = router;

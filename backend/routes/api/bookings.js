@@ -1,8 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const { requireAuth, restoreUser } = require("../../utils/auth");
+const { handleValidationErrors } = require("../../utils/validation");
 const { Booking, Room } = require("../../db/models");
 const { check } = require("express-validator");
+const { param } = require("express-validator");
 const { Op } = require("sequelize");
 
 //Checks if booking has required infos
@@ -44,18 +46,10 @@ router.put(
 		}
 		//Check if the booking exists
 		let existingBooking = await Booking.findByPk(bookingId);
-		if (!existingBooking) {
-			res.status = 404;
-			return res.json({
-				message: "Booking couldn't be found",
-				statusCode: 404,
-			});
+		if (!existingBooking || existingBooking.userId !== id) {
+			return res.json(noBookingError());
 		}
-		if (existingBooking.userId !== id) {
-			return res.json({
-				message: "Can only edit your own reviews",
-			});
-		}
+
 		//Create current time object
 		let now = new Date();
 		let currentTime = new Date(
@@ -117,20 +111,8 @@ router.delete(
 		//Find the booking
 		let booking = await Booking.findByPk(bookingId);
 		//If booking not found return 404 code and message
-		if (!booking) {
-			res.status = 404;
-			return res.json({
-				message: "Booking couldn't be found",
-				statusCode: 404,
-			});
-		}
-		//Check if booking belongs oto the user
-		if (booking.userId !== id) {
-			res.status = 404;
-			return res.json({
-				message: "Booking couldn't be found",
-				statusCode: 404,
-			});
+		if (!booking || booking.userId !== id) {
+			return res.json(noBookingError());
 		}
 
 		//Delete booking and return success message
@@ -176,4 +158,16 @@ router.get("/", [restoreUser, requireAuth], async (req, res) => {
 	res.status = 200;
 	return res.json(bookings);
 });
+
+//-------------- Functions
+
+function noBookingError() {
+	const err = {};
+	(err.message = "Booking couldn't be found"), (err.status = 404);
+	err.errors = {
+		error: "Booking couldn't be found",
+		statusCode: 404,
+	};
+	return err;
+}
 module.exports = router;

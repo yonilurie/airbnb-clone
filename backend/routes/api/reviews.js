@@ -21,7 +21,7 @@ router.delete(
 			});
 		}
 
-		await image.destroy()
+		await image.destroy();
 		res.status = 200;
 		return res.json({
 			message: "Successfully deleted",

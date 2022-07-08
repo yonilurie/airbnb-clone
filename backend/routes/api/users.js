@@ -1,6 +1,6 @@
 const express = require("express");
 
-const { setTokenCookie} = require("../../utils/auth");
+const { setTokenCookie } = require("../../utils/auth");
 const { User } = require("../../db/models");
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
@@ -16,14 +16,17 @@ const validateSignup = [
 		.isLength({ min: 4 })
 		.withMessage("Please provide a username with at least 4 characters."),
 	check("username")
+		.exists({ checkFalsy: true })
 		.not()
 		.isEmail()
 		.withMessage("Username cannot be an email."),
 	check("firstName")
 		.exists({ checkFalsy: true })
+		.isAlpha()
 		.withMessage("Please provide a first name"),
 	check("lastName")
 		.exists({ checkFalsy: true })
+		.isAlpha()
 		.withMessage("Please provide a last name"),
 	check("password")
 		.exists({ checkFalsy: true })
@@ -35,10 +38,8 @@ const validateSignup = [
 // Sign up
 router.post("/register", validateSignup, async (req, res) => {
 	const { email, password, username, firstName, lastName } = req.body;
-
-	const emailCheck = await User.findAll({
-		where: { email: email },
-	});
+	//Check if any accounts with the provided emai; exist
+	const emailCheck = await User.findAll({ where: { email: email } });
 	if (emailCheck.length) {
 		const err = {};
 		err.message = "User already exists";

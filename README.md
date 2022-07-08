@@ -160,7 +160,7 @@ user's information.
 
         ```json
         {
-        	"userName": "newtestuser",
+        	"username": "newtestuser",
         	"firstName": "Test",
         	"lastName": "User",
         	"email": "test@user.io",
