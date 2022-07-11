@@ -56,6 +56,47 @@ const validateReview = [
 	handleValidationErrors,
 ];
 
+//validate query
+const checkQuery = [
+	query("page")
+		.optional()
+		.isNumeric()
+		.withMessage("Must be a number")
+		.isInt({ min: 0 })
+		.withMessage("Page must be greater than or equal to 0"),
+	query("size")
+		.optional()
+		.isNumeric()
+		.withMessage("Must be a number")
+		.isInt({ min: 0 })
+		.withMessage("Size must be greater than or equal to 0"),
+	query("minLat")
+		.optional()
+		.isFloat({ min: -180.0, max: 180 })
+		.withMessage("minLat must be a number between -180.0 and 180"),
+	query("maxLat")
+		.optional()
+		.isFloat({ min: -180.0, max: 180 })
+		.withMessage("minLat must be a number between -180.0 and 180"),
+	query("minLat")
+		.optional()
+		.isFloat({ min: -180.0, max: 180 })
+		.withMessage("minLat must be a number between -180.0 and 180"),
+	query("maxLat")
+		.optional()
+		.isFloat({ min: -180.0, max: 180 })
+		.withMessage("minLat must be a number between -180.0 and 180"),
+	query("minPrice")
+		.optional()
+		.isFloat({ min: 1 })
+		.withMessage("Minimum price must be greater than 0"),
+	query("maxPrice")
+		.optional()
+		.isFloat({ min: 1 })
+		.withMessage("Maximum price must be greater than 0"),
+	handleValidationErrors,
+];
+
 //----------------- Endpoints
 
 //Edit an existing review
@@ -383,47 +424,6 @@ router.post(
 		return res.json(newReview);
 	}
 );
-
-//validate query
-const checkQuery = [
-	query("page")
-		.optional()
-		.isNumeric()
-		.withMessage("Must be a number")
-		.isInt({ min: 0 })
-		.withMessage("Page must be greater than or equal to 0"),
-	query("size")
-		.optional()
-		.isNumeric()
-		.withMessage("Must be a number")
-		.isInt({ min: 0 })
-		.withMessage("Size must be greater than or equal to 0"),
-	query("minLat")
-		.optional()
-		.isFloat({ min: -180.0, max: 180 })
-		.withMessage("minLat must be a number between -180.0 and 180"),
-	query("maxLat")
-		.optional()
-		.isFloat({ min: -180.0, max: 180 })
-		.withMessage("minLat must be a number between -180.0 and 180"),
-	query("minLat")
-		.optional()
-		.isFloat({ min: -180.0, max: 180 })
-		.withMessage("minLat must be a number between -180.0 and 180"),
-	query("maxLat")
-		.optional()
-		.isFloat({ min: -180.0, max: 180 })
-		.withMessage("minLat must be a number between -180.0 and 180"),
-	query("minPrice")
-		.optional()
-		.isFloat({ min: 1 })
-		.withMessage("Minimum price must be greater than 0"),
-	query("maxPrice")
-		.optional()
-		.isFloat({ min: 1 })
-		.withMessage("Maximum price must be greater than 0"),
-	handleValidationErrors,
-];
 
 //Search all rooms with optional parameters
 router.get("/search", checkQuery, async (req, res) => {

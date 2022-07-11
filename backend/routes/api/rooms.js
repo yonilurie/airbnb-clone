@@ -5,6 +5,8 @@ const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
 const router = express.Router();
 
+//----------------- Validations
+
 //Validate that a newly POSTed room has all required information
 const validateRoom = [
 	check("address")
@@ -48,6 +50,12 @@ const validateRoom = [
 	handleValidationErrors,
 ];
 
+//check if url is provided
+const checkImage = [
+	check("url").exists().withMessage("Must include image URL"),
+	handleValidationErrors,
+];
+
 //Delete room image
 router.delete(
 	"/images/:imageId",
@@ -59,11 +67,7 @@ router.delete(
 		let image = await UserRoomImage.findByPk(imageId);
 		//Check if image exists or is not the users
 		if (!image || image.userId !== id) {
-			res.status = 404;
-			return res.json({
-				message: "Image couldn't be found",
-				statusCode: 404,
-			});
+			return res.json(noImageError());
 		}
 
 		await image.destroy();
@@ -106,25 +110,6 @@ router.post(
 			previewImage: previewImage,
 		});
 
-		//If  room was not created return 400 code
-		if (!room) {
-			res.status = 400;
-			res.body({
-				message: "Validation Error",
-				statusCode: 400,
-				errors: {
-					address: "Street address is required",
-					city: "City is required",
-					state: "State is required",
-					country: "Country is required",
-					lat: "Latitude is not valid",
-					lng: "Longitude is not valid",
-					name: "Name must be less than 50 characters",
-					description: "Description is required",
-					price: "Price per day is required",
-				},
-			});
-		}
 		res.status = 201;
 		return res.json(room);
 	}
@@ -170,11 +155,11 @@ router.put(
 			description,
 			price,
 		} = req.body;
-		let userId = req.user.id;
+		const { userId } = req.user;
 		let room = await Room.findOne({
 			exclude: "previewImage",
 			where: {
-				ownerId: userId,
+				ownerId: id,
 				id: roomId,
 			},
 		});
@@ -197,10 +182,7 @@ router.put(
 		return res.json(room);
 	}
 );
-const checkImage = [
-	check("url").exists().withMessage("Must include image URL"),
-	handleValidationErrors,
-];
+
 //Add an image to an owned room
 router.post(
 	"/:roomId",
@@ -248,6 +230,16 @@ function noRoomError() {
 	(err.message = "Room couldn't be found"), (err.status = 404);
 	err.errors = {
 		error: "Room couldn't be found",
+		statusCode: 404,
+	};
+	return err;
+}
+
+function noImageError() {
+	const err = {};
+	(err.message = "Image couldn't be found"), (err.status = 404);
+	err.errors = {
+		error: "Image couldn't be found",
 		statusCode: 404,
 	};
 	return err;
