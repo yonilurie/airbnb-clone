@@ -24,11 +24,6 @@ router.use("/rooms", roomsRouter);
 router.use("/reviews", reviewsRouter);
 router.use("/bookings", bookingsRouter);
 
-//Test route
-router.post("/test", (req, res) => {
-	return res.json({ requestBody: req.body });
-});
-
 //Generate new token cookie
 router.get("/set-token-cookie", async (_req, res) => {
 	const user = await User.findOne({
