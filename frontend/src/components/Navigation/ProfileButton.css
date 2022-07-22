@@ -1,0 +1,25 @@
+button {
+	width: 50px;
+	height: 40px;
+	box-sizing: border-box;
+	padding: 5px 5px 5px 12px;
+	border-radius: 11px;
+	border: solid 1px rgb(202, 198, 198);
+	z-index: 2;
+	cursor: pointer;
+}
+
+.profile-dropdown {
+	position: fixed;
+	padding: 5px 5px 5px 12px;
+	margin: 10px;
+	right: 10px;
+	border: 1px solid #dedddd;
+	border-radius: 21px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 100px;
+	z-index: 1;
+}
