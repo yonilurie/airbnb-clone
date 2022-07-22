@@ -1,0 +1,16 @@
+My Project:
+Clone: AirBnB
+Project: AirBnB
+Features:
+ScoreCard:
+Github: https://github.com/yonilurie/backend-project-airbnb
+Db SCHEMA: https://github.com/yonilurie/backend-project-airbnb/blob/main/images/db-blueprint.png
+Live Site: https://backend-project-airbnb.herokuapp.com/
+
+
+
+For WIKI
+database schema
+pseudocode for redux state shape
+features list
+readme
