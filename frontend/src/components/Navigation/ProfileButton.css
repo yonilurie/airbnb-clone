@@ -1,12 +1,16 @@
-button {
-	width: 50px;
-	height: 40px;
+.profile-button {
+	width: fit-content;
+	height: fit-content;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 	box-sizing: border-box;
 	padding: 5px 5px 5px 12px;
 	border-radius: 11px;
-	border: solid 1px rgb(202, 198, 198);
+	border: solid 1px #dedddd;
 	z-index: 2;
 	cursor: pointer;
+	background-color: #ffffff;
 }
 
 .profile-dropdown {
@@ -14,12 +18,21 @@ button {
 	padding: 5px 5px 5px 12px;
 	margin: 10px;
 	right: 10px;
-	border: 1px solid #dedddd;
+	border: 1px solid #ebebeb;
 	border-radius: 21px;
+	background-color: #ffffff;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 	width: 100px;
 	z-index: 1;
+}
+svg {
+	padding: 5px;
+}
+
+.filter-grey {
+	filter: invert(49%) sepia(1%) saturate(0%) hue-rotate(175deg)
+		brightness(89%) contrast(92%);
 }

@@ -12,4 +12,7 @@ img {
 	height: 64px;
 }
 
+.nav-container {
+	border-bottom: solid 1px #dedddd;
+}
 
