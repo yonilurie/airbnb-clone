@@ -1,0 +1,16 @@
+.room {
+	border: solid 1px black;
+	width: 332px;
+	height: 332px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+img {
+    width: 200px;
+    height: 200px;
+}
+
+

@@ -20,7 +20,7 @@ function SignupFormPage() {
 		e.preventDefault();
 		if (password === confirmPassword) {
 			setErrors([]);
-			return dispatch(
+			const trySignup = dispatch(
 				sessionActions.signup({
 					email,
 					password,
@@ -28,10 +28,22 @@ function SignupFormPage() {
 					firstName,
 					lastName,
 				})
-			).catch(async (res) => {
-				const data = await res.json();
+			).then((data) => {
+				
 				if (data && data.errors) setErrors(data.errors);
 			});
+			// return dispatch(
+			// 	sessionActions.signup({
+			// 		email,
+			// 		password,
+			// 		username,
+			// 		firstName,
+			// 		lastName,
+			// 	})
+			// ).catch(async (res) => {
+			// 	const data = await res.json();
+			// 	if (data && data.errors) setErrors(data.errors);
+			// });
 		}
 		return setErrors([
 			"Confirm Password field must be the same as the Password field",
@@ -41,7 +53,7 @@ function SignupFormPage() {
 	return (
 		<form onSubmit={handleSubmit}>
 			<ul>
-				{errors &&
+				{
 					errors.map((error, idx) => <li key={idx}>{error}</li>)}
 			</ul>
 			<label>

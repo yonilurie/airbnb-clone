@@ -34,7 +34,7 @@ export const login = (user) => async (dispatch) => {
 	});
 	const data = await response.json();
 	dispatch(setUser(data.user));
-	return response;
+	return data;
 };
 
 //Restores the user if they are logged in
@@ -59,7 +59,7 @@ export const signup = (user) => async (dispatch) => {
 	});
 	const data = await result.json();
 	dispatch(setUser(data.user));
-	return result;
+	return data;
 };
 
 // Logout a user

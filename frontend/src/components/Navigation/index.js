@@ -13,14 +13,18 @@ function Navigation({ isLoaded }) {
 		sessionLinks = <ProfileButton user={sessionuser} />;
 	} else {
 		sessionLinks = (
-			<div>
+			<>
+				<NavLink
+					to="/signup"
+					className="nav-link"
+					style={{ fontWeight: "bold" }}
+				>
+					Sign Up
+				</NavLink>
 				<NavLink to="/login" className="nav-link">
 					Log In
 				</NavLink>
-				<NavLink to="/signup" className="nav-link">
-					Sign Up
-				</NavLink>
-			</div>
+			</>
 		);
 	}
 	return (
@@ -31,7 +35,15 @@ function Navigation({ isLoaded }) {
 						<img src={logo} alt="logo"></img>
 					</NavLink>
 				</li>
-				<li>{isLoaded && sessionLinks}</li>
+				<li>
+					{isLoaded && sessionLinks && (
+						<ProfileButton
+							className="session-links"
+							user={sessionuser}
+							sessionLinks={sessionLinks}
+						></ProfileButton>
+					)}
+				</li>
 			</ul>
 		</div>
 	);

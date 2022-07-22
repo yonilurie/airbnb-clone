@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import * as sessionActions from "../../store/session";
 import "./ProfileButton.css";
 
-function ProfileButton({ user }) {
+function ProfileButton({ user, sessionLinks }) {
 	const dispatch = useDispatch();
 	const [showMenu, setShowMenu] = useState(false);
 
@@ -50,13 +50,14 @@ function ProfileButton({ user }) {
 						overflow: "visible",
 					}}
 				>
-					<g fill="none" fill-rule="nonzero">
+					<g fill="none" fillRule="nonzero">
 						<path d="m2 16h28"></path>
 						<path d="m2 24h28"></path>
 						<path d="m2 8h28"></path>
 					</g>
 				</svg>
-				<svg className="filter-grey"
+				<svg
+					className="filter-grey"
 					viewBox="0 0 32 32"
 					xmlns="http://www.w3.org/2000/svg"
 					aria-hidden="true"
@@ -75,11 +76,10 @@ function ProfileButton({ user }) {
 
 			{showMenu && (
 				<ul className="profile-dropdown">
-					<li>{user.username}</li>
-					<li>{user.email}</li>
-					<li>
-						<button onClick={logout}>Log Out</button>
-					</li>
+					<li>{user && user.username}</li>
+					<li>{user && user.email}</li>
+					<li>{user && <button onClick={logout}>Log Out</button>}</li>
+					{ !user && sessionLinks}
 				</ul>
 			)}
 		</>
