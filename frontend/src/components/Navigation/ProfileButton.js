@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useDispatch } from "react-redux";
-
 import * as sessionActions from "../../store/session";
+import LoginFormModal from "../LoginFormModal";
 import "./ProfileButton.css";
-
-function ProfileButton({ user, sessionLinks }) {
+import SessionLinks from "./SessionLinks";
+function ProfileButton({ user }) {
 	const dispatch = useDispatch();
 	const [showMenu, setShowMenu] = useState(false);
+	const [showModal, setShowModal] = useState(false);
 
 	const openMenu = () => {
 		if (showMenu) return;
@@ -31,6 +32,7 @@ function ProfileButton({ user, sessionLinks }) {
 
 	return (
 		<>
+			<LoginFormModal showModal={showModal} setShowModal={setShowModal} />
 			<button onClick={openMenu} className="profile-button">
 				<i className="fas fa-user-circle" />
 				<svg
@@ -76,12 +78,18 @@ function ProfileButton({ user, sessionLinks }) {
 
 			{showMenu && (
 				<ul className="profile-dropdown">
+					<button onClick={() => setShowModal(true)}>Log in</button>
+					{!user && (
+						<SessionLinks
+							showModal={showModal}
+							setShowModal={setShowModal}
+						/>
+					)}
 					<li hidden={!user}>{user && user.username}</li>
 					<li hidden={!user}>{user && user.email}</li>
 					<li hidden={!user}>
 						{user && <button onClick={logout}>Log Out</button>}
 					</li>
-					{!user && sessionLinks}
 				</ul>
 			)}
 		</>
