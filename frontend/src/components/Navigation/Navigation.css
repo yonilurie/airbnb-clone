@@ -4,10 +4,10 @@ ul {
 	justify-content: space-between;
 	align-items: center;
 	list-style: none;
-    /* border-bottom: solid 1px rgba(128, 128, 128, 0.445); */
+	/* border-bottom: solid 1px rgba(128, 128, 128, 0.445); */
 }
 
-img {
+#logo {
 	width: 118px;
 	height: 64px;
 }
@@ -15,4 +15,3 @@ img {
 .nav-container {
 	border-bottom: solid 1px #dedddd;
 }
-

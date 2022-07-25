@@ -32,7 +32,7 @@ function Navigation({ isLoaded }) {
 			<ul>
 				<li>
 					<NavLink exact to="/" className="nav-link">
-						<img src={logo} alt="logo"></img>
+						<img src={logo} alt="logo" id="logo"></img>
 					</NavLink>
 				</li>
 				<li>
