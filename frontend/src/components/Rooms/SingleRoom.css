@@ -1,16 +1,57 @@
 .room {
-	border: solid 1px black;
-	width: 332px;
-	height: 332px;
-	display: flex;
+	width: 312px;
+	height: 396px;
+	font-size: 16px;
+	box-sizing: border-box;
+	display: block;
+	cursor: pointer;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	position: relative;
+}
+
+.favorite {
+	width: fit-content;
+	position: absolute;
+	top: 8px;
+	right: 8px;
+}
+
+.room-info {
+	display: grid;
+	grid-template-areas:
+		"name  star"
+		"availability  ."
+		"price . ";
+}
+
+.room-detail {
+	color: rgb(113, 113, 113);
+}
+
+.room-detail.availability {
+	grid-area: availability;
+}
+
+.room-detail.price {
+	display: flex;
+	grid-area: price;
+}
+
+.room-detail.name {
+	font-weight: 600;
+	color: rgb(34, 34, 34);
+	grid-area: name;
+}
+
+.room-detail.star {
+	grid-area: star;
+	text-align: end;
 }
 
 img {
-    width: 200px;
-    height: 200px;
+	width: 312px;
+	height: 296px;
+	border-radius: 12px;
 }
-
-
