@@ -1,36 +1,32 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import * as sessionActions from "../../store/session";
-// import "./LoginForm.css";
+import "./LoginForm.css";
 
-function LoginForm() {
+function LoginForm({ setShowModal }) {
 	const dispatch = useDispatch();
 	const [credential, setCredential] = useState("");
 	const [password, setPassword] = useState("");
 	const [errors, setErrors] = useState([]);
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 		setErrors([]);
-		const tryLogin = dispatch(
+		const tryLogin = await dispatch(
 			sessionActions.login({ credential, password })
 		).then((data) => {
 			if (data && data.errors) setErrors(data.errors);
 			return data;
 		});
 
+		if (tryLogin.user) setShowModal(false);
 		return tryLogin;
-		// return dispatch(sessionActions.login({ credential, password })).catch(
-		// 	async (res) => {
-		// 		const data = await res.json();
-		// 		if (data && data.errors) setErrors(data.errors);
-		// 	}
-		// );
 	};
 
 	return (
 		<form onSubmit={handleSubmit}>
-			<ul>
+			<div className="modal-welcome">Welcome to Airbnb</div>
+			<ul className="errors">
 				{errors.map((error, idx) => (
 					<li key={idx}>{error}</li>
 				))}
@@ -53,7 +49,7 @@ function LoginForm() {
 					required
 				/>
 			</label>
-			<button type="submit">Log In</button>
+			<button type="submit" className="login-register-submit">Continue</button>
 		</form>
 	);
 }

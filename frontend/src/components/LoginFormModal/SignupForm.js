@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
-import * as sessionActions from "../../store/session";
 
-function SignupFormPage() {
+import { Redirect } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import * as sessionActions from "../../store/session";
+import "./LoginForm.css";
+
+function SignupForm({ setShowModal }) {
 	const dispatch = useDispatch();
 	const sessionUser = useSelector((state) => state.session.user);
 	const [email, setEmail] = useState("");
@@ -16,11 +18,11 @@ function SignupFormPage() {
 
 	if (sessionUser) return <Redirect to="/" />;
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 		if (password === confirmPassword) {
 			setErrors([]);
-			const trySignup = dispatch(
+			const trySignup = await dispatch(
 				sessionActions.signup({
 					email,
 					password,
@@ -30,10 +32,13 @@ function SignupFormPage() {
 				})
 			).then((data) => {
 				if (data && data.errors) return setErrors(data.errors);
+				return data;
 			});
 
+			if (trySignup.user) setShowModal(false);
 			return trySignup;
 		}
+
 		return setErrors([
 			"Confirm Password field must be the same as the Password field",
 		]);
@@ -41,7 +46,8 @@ function SignupFormPage() {
 
 	return (
 		<form onSubmit={handleSubmit}>
-			<ul>
+			<div>Sign Up</div>
+			<ul className="errors">
 				{errors.map((error, idx) => (
 					<li key={idx}>{error}</li>
 				))}
@@ -103,4 +109,4 @@ function SignupFormPage() {
 	);
 }
 
-export default SignupFormPage;
+export default SignupForm;

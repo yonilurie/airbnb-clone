@@ -1,0 +1,42 @@
+form {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+ul {
+	display: flex;
+	flex-direction: column;
+}
+
+.modal-welcome {
+	font-size: 22px;
+	font-weight: 600;
+}
+
+.login-register-submit {
+	box-sizing: border-box;
+	transition-duration: 1.25s;
+	background-image: radial-gradient(
+		circle at center center,
+		rgb(255, 56, 92) 0%,
+		rgb(230, 30, 77) 27.5%,
+		rgb(227, 28, 95) 40%,
+		rgb(215, 4, 102) 57.5%,
+		rgb(189, 30, 89) 75%,
+		rgb(189, 30, 89) 100%
+	);
+	background-size: 200% 200%;
+	font-size: 16px;
+	color: rgb(255, 255, 255);
+	height: 48px;
+	min-width: 200px;
+}
+
+.errors{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}

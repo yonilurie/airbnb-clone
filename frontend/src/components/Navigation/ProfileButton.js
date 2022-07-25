@@ -8,7 +8,7 @@ function ProfileButton({ user }) {
 	const dispatch = useDispatch();
 	const [showMenu, setShowMenu] = useState(false);
 	const [showModal, setShowModal] = useState(false);
-
+	const [interaction, setIneraction] = useState();
 	const openMenu = () => {
 		if (showMenu) return;
 		setShowMenu(true);
@@ -32,7 +32,11 @@ function ProfileButton({ user }) {
 
 	return (
 		<>
-			<LoginFormModal showModal={showModal} setShowModal={setShowModal} />
+			<LoginFormModal
+				showModal={showModal}
+				setShowModal={setShowModal}
+				interaction={interaction}
+			/>
 			<button onClick={openMenu} className="profile-button">
 				<i className="fas fa-user-circle" />
 				<svg
@@ -78,7 +82,26 @@ function ProfileButton({ user }) {
 
 			{showMenu && (
 				<ul className="profile-dropdown">
-					<button onClick={() => setShowModal(true)}>Log in</button>
+					{!user && (
+						<>
+							<button
+								onClick={() => {
+									setShowModal(true);
+									setIneraction("login");
+								}}
+							>
+								Log in
+							</button>
+							<button
+								onClick={() => {
+									setShowModal(true);
+									setIneraction("signup");
+								}}
+							>
+								Sign Up
+							</button>
+						</>
+					)}
 					{!user && (
 						<SessionLinks
 							showModal={showModal}

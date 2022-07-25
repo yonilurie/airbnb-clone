@@ -8,13 +8,6 @@ const SessionLinks = ({ showModal, setShowModal }) => {
 	const dispatch = useDispatch();
 	return (
 		<>
-			<NavLink
-				to="/signup"
-				className="nav-link"
-				style={{ fontWeight: "bold" }}
-			>
-				Sign Up
-			</NavLink>
 			<button
 				onClick={() =>
 					dispatch(
