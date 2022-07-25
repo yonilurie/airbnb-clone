@@ -1,12 +1,14 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import * as sessionActions from "../../store/session";
 import ProfileButton from "./ProfileButton";
 import LoginFormModal from "../LoginFormModal";
 import "./Navigation.css";
 import logo from "../../images/logo.svg";
 
 function Navigation({ isLoaded }) {
+	const dispatch = useDispatch();
 	const sessionuser = useSelector((state) => state.session.user);
 
 	let sessionLinks;
@@ -15,7 +17,7 @@ function Navigation({ isLoaded }) {
 	} else {
 		sessionLinks = (
 			<>
-					<LoginFormModal />
+				<LoginFormModal />
 				<NavLink
 					to="/signup"
 					className="nav-link"
@@ -23,8 +25,18 @@ function Navigation({ isLoaded }) {
 				>
 					Sign Up
 				</NavLink>
-
-			
+				<button
+					onClick={() =>
+						dispatch(
+							sessionActions.login({
+								credential: "Demo-lition",
+								password: "password",
+							})
+						)
+					}
+				>
+					Demo
+				</button>
 			</>
 		);
 	}
