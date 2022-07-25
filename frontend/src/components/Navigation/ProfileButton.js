@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useDispatch } from "react-redux";
+
 import * as sessionActions from "../../store/session";
 import "./ProfileButton.css";
 
 function ProfileButton({ user, sessionLinks }) {
 	const dispatch = useDispatch();
 	const [showMenu, setShowMenu] = useState(false);
+
 	const openMenu = () => {
 		if (showMenu) return;
 		setShowMenu(true);
@@ -79,9 +81,9 @@ function ProfileButton({ user, sessionLinks }) {
 					<li hidden={!user}>
 						{user && <button onClick={logout}>Log Out</button>}
 					</li>
+					{!user && sessionLinks}
 				</ul>
 			)}
-			{!user && sessionLinks}
 		</>
 	);
 }

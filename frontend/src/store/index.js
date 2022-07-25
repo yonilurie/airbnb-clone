@@ -3,9 +3,14 @@ import thunk from "redux-thunk";
 
 import sessionReducer from "./session";
 import roomReducer from "./rooms";
+import imagesReducer from "./roomImages";
+import reviewsReducer from "./reviews";
+
 const rootReducer = combineReducers({
 	session: sessionReducer,
 	rooms: roomReducer,
+	roomImages: imagesReducer,
+	reviews: reviewsReducer
 });
 
 let enhancer;

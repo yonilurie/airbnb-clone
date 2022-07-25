@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 import { getRooms } from "../../store/rooms";
 import SingleRoom from "./SingleRoom";
-import "./RoomContainer.css"
+import "./RoomContainer.css";
+
 function Rooms() {
 	const dispatch = useDispatch();
 

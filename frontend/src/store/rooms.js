@@ -1,6 +1,7 @@
 //String literals for thunk action
 const GET_ROOMS = "/rooms";
 const GET_SPECIFIC_ROOM = "/rooms/:roomId";
+const CREATE_ROOM = "/rooms/add";
 
 const getRoomsData = (rooms) => {
 	return {
@@ -16,11 +17,20 @@ const getSpecificRoomData = (room) => {
 	};
 };
 
+const createARoom = (room) => {
+	return {
+		type: CREATE_ROOM,
+		room,
+	};
+};
+
 export const getRooms = () => async (dispatch) => {
 	const response = await fetch("/rooms", {
 		method: "GET",
 	});
+
 	const data = await response.json();
+
 	dispatch(getRoomsData(data));
 	return data;
 };
@@ -33,6 +43,8 @@ export const getRoomInfo = (room) => async (dispatch) => {
 
 	return data;
 };
+
+export const createRoom = () => {};
 
 const initialState = {};
 

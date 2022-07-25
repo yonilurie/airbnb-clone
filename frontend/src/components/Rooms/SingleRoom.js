@@ -1,13 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import roomReducer, { getRooms, getRoomInfo } from "../../store/rooms";
+import React from "react";
+import { useDispatch } from "react-redux";
+import { Link, useHistory } from "react-router-dom";
+
 import "./SingleRoom.css";
+
 function SingleRoom({ room }) {
 	const dispatch = useDispatch();
+	const history = useHistory();
+
 	const showRoomDetails = (e) => {
 		console.log(room.id);
-		
+		let path = `/rooms/${room.id}`;
+		history.push(path);
 	};
 	return (
 		<div className="room" onClick={(e) => showRoomDetails(e)}>
@@ -17,7 +21,7 @@ function SingleRoom({ room }) {
 				alt={`image for room ${room.id}`}
 			></img>
 			<div className="room-info" onClick={showRoomDetails}>
-				<div className="room-detail name">{room.name}</div>
+				<div className="room-detail name"></div>
 				<div className="room-detail star">Star 5.0</div>
 				<div className="room-detail availability">{"availability"}</div>
 				<div className="room-detail price">
@@ -25,7 +29,6 @@ function SingleRoom({ room }) {
 					night
 				</div>
 			</div>
-			<Link to={`/${room.id}`}>DETAILS</Link>
 		</div>
 	);
 }
