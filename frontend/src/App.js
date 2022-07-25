@@ -3,9 +3,10 @@ import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import LoginFormPage from "./components/LoginFormPage";
 import SignupFormPage from "./components/SignupFormPage";
+import SingleRoomInfo from "./components/Rooms/SingleRoomInfo";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
-import Rooms from "./components/Rooms"
+import Rooms from "./components/Rooms";
 function App() {
 	const dispatch = useDispatch();
 	const [isLoaded, setIsLoaded] = useState(false);
@@ -18,11 +19,14 @@ function App() {
 			<Navigation isLoaded={isLoaded} />
 			{isLoaded && (
 				<Switch>
-					<Route path="/login">
+					<Route exact path="/login">
 						<LoginFormPage />
 					</Route>
-					<Route path="/signup">
+					<Route exact path="/signup">
 						<SignupFormPage />
+					</Route>
+					<Route path="/:roomId">
+						<SingleRoomInfo></SingleRoomInfo>
 					</Route>
 				</Switch>
 			)}

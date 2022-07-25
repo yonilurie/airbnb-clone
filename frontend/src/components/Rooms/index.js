@@ -7,7 +7,7 @@ function Rooms() {
 	const dispatch = useDispatch();
 
 	const rooms = Object.values(useSelector((state) => state.rooms));
-	console.log("ROOMS", rooms);
+
 	useEffect(() => {
 		dispatch(getRooms());
 	}, []);
