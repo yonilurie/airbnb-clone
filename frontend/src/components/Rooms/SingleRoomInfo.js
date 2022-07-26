@@ -39,7 +39,8 @@ const SingleRoomInfo = () => {
 	//Will delete a room an redirect user to home screen
 	const deleteARoom = () => {
 		dispatch(deleteRoom(roomId));
-		history.push("/api/rooms");
+		history.push("/my-rooms");
+		history.go("/my-rooms");
 	};
 
 	return (

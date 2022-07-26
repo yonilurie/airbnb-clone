@@ -82,7 +82,7 @@ const CreateRoomForm = () => {
 			setPrice(100);
 
 			//Redirect user to home page
-			history.push("/");
+			history.push("/my-rooms");
 		}
 	};
 

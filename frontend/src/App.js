@@ -27,10 +27,10 @@ function App() {
 					<Route path="/rooms/:roomId">
 						<SingleRoomInfo></SingleRoomInfo>
 					</Route>
-					<Route path="/api/become-a-host">
+					<Route path="/become-a-host">
 						<CreateRoomForm></CreateRoomForm>
 					</Route>
-					<Route path="/api/rooms">
+					<Route path="/my-rooms" >
 						<MyRooms></MyRooms>
 					</Route>
 					<Route>

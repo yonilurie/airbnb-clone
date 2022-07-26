@@ -118,7 +118,7 @@ function ProfileButton({ user }) {
 					<li hidden={!user}>{user && user.email}</li>
 					<li hidden={!user}>
 						{user && <button onClick={logout}>Log Out</button>}
-						{user && <NavLink to="/api/rooms">My Rooms</NavLink>}
+						{user && <NavLink to="/my-rooms">My Rooms</NavLink>}
 					</li>
 				</ul>
 			)}

@@ -48,7 +48,7 @@ function Navigation({ isLoaded }) {
 				</li>
 				<li>
 					{sessionuser && (
-						<NavLink to="/api/become-a-host">Become a Host</NavLink>
+						<NavLink to="/become-a-host">Become a Host</NavLink>
 					)}
 				</li>
 				<li>

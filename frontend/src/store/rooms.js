@@ -83,11 +83,8 @@ const roomReducer = (state = initialState, action) => {
 		}
 		case DELETE_ROOM: {
 			newState = { ...state };
-			console.log(newState, "NEWSTATE");
-			console.log(action, "ACTION");
 			delete newState[action.roomId];
 			return newState;
-			// return state
 		}
 		default:
 			return state;
