@@ -39,6 +39,7 @@ export const getRoomInfo = (room) => async (dispatch) => {
 	const response = await fetch(`/rooms/${room.id}`);
 
 	const data = await response.json();
+
 	dispatch(getSpecificRoomData(room));
 
 	return data;
@@ -53,6 +54,7 @@ const roomReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case GET_ROOMS:
 			newState = Object.assign({}, action.rooms.rooms);
+			console.log("ACTION", action);
 			return newState;
 
 		case GET_SPECIFIC_ROOM: {

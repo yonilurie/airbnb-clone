@@ -9,7 +9,6 @@ import logo from "../../images/logo.svg";
 import * as sessionActions from "../../store/session";
 import "./Navigation.css";
 
-
 function Navigation({ isLoaded }) {
 	const dispatch = useDispatch();
 	const sessionuser = useSelector((state) => state.session.user);
@@ -50,6 +49,9 @@ function Navigation({ isLoaded }) {
 					<NavLink exact to="/" className="nav-link">
 						<img src={logo} alt="logo" id="logo"></img>
 					</NavLink>
+				</li>
+				<li>
+					{sessionuser && <NavLink to="/rooms/1">Become a Host</NavLink>}
 				</li>
 				<li>
 					{isLoaded && sessionLinks && (

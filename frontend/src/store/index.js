@@ -5,12 +5,14 @@ import sessionReducer from "./session";
 import roomReducer from "./rooms";
 import imagesReducer from "./roomImages";
 import reviewsReducer from "./reviews";
+import singleRoomReducer from "./CurrentRoom";
 
 const rootReducer = combineReducers({
 	session: sessionReducer,
 	rooms: roomReducer,
 	roomImages: imagesReducer,
-	reviews: reviewsReducer
+	reviews: reviewsReducer,
+	currentRoom: singleRoomReducer
 });
 
 let enhancer;
