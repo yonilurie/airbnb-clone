@@ -6,7 +6,7 @@ import SignupFormPage from "./components/SignupFormPage";
 import SingleRoomInfo from "./components/Rooms/SingleRoomInfo";
 import Navigation from "./components/Navigation";
 import Rooms from "./components/Rooms";
-
+import CreateRoomForm from "./components/Rooms/CreateRoomForm";
 import * as sessionActions from "./store/session";
 
 function App() {
@@ -29,6 +29,9 @@ function App() {
 					</Route>
 					<Route path="/rooms/:roomId">
 						<SingleRoomInfo></SingleRoomInfo>
+					</Route>
+					<Route path="/create">
+						<CreateRoomForm></CreateRoomForm>
 					</Route>
 				</Switch>
 			)}

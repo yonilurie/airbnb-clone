@@ -22,7 +22,7 @@ const SingleRoomInfo = () => {
 		dispatch(getRoomReviews(roomId));
 	}, []);
 
-	const currentRoom = useSelector((state) => state.rooms[roomId]);
+	const currentRoom = useSelector((state) => state.rooms[roomId - 1]);
 	const currentRoomImages = Object.values(
 		useSelector((state) => state.roomImages)
 	);

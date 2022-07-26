@@ -44,7 +44,7 @@ export const getRoomInfo = (room) => async (dispatch) => {
 	return data;
 };
 
-export const createRoom = () => {};
+export const createRoom = (room) => {};
 
 const initialState = {};
 
