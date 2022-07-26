@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import "./SingleRoom.css";
@@ -32,6 +32,7 @@ function SingleRoom({ room }) {
 					night
 				</div>
 			</div>
+		
 		</div>
 	);
 }

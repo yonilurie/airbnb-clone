@@ -33,6 +33,9 @@ function App() {
 					<Route path="/api/rooms">
 						<MyRooms></MyRooms>
 					</Route>
+					<Route>
+						<div>404: PAGE NOT FOUND</div>
+					</Route>
 				</Switch>
 			)}
 		</>

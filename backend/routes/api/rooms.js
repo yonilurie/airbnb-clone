@@ -112,6 +112,7 @@ router.post(
 //delete a spot
 router.delete("/:roomId", [restoreUser, requireAuth], async (req, res) => {
 	const { roomId } = req.params;
+	console.log(req.user)
 	const { id } = req.user;
 	let room = await Room.findOne({
 		where: {

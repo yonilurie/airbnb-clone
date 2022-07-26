@@ -1,30 +1,31 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 import { getRoomImages } from "../../store/roomImages";
 import { getRoomReviews } from "../../store/reviews";
 import { getRoomInfo } from "../../store/CurrentRoom";
-
+import { deleteRoom } from "../../store/rooms";
 import "./SingleRoomInfo.css";
 
 const SingleRoomInfo = () => {
 	const dispatch = useDispatch();
-
+	const history = useHistory();
+	const sessionuser = useSelector((state) => state.session.user);
 	const { roomId } = useParams();
 
 	//Get room info, images, and reviews
 	useEffect(() => {
 		dispatch(getRoomInfo(roomId));
-	}, []);
+	}, [dispatch, roomId]);
 
 	useEffect(() => {
 		dispatch(getRoomImages(roomId));
-	}, []);
+	}, [dispatch, roomId]);
 
 	useEffect(() => {
 		dispatch(getRoomReviews(roomId));
-	}, []);
+	}, [dispatch, roomId]);
 
 	//Assign room, images, and reviews to variables for easier access
 	const currentRoom = useSelector((state) => state.currentRoom);
@@ -34,6 +35,11 @@ const SingleRoomInfo = () => {
 	const currentRoomReviews = Object.values(
 		useSelector((state) => state.reviews)
 	);
+
+	const deleteARoom = () => {
+		dispatch(deleteRoom(roomId));
+		history.push("/");
+	};
 
 	return (
 		<>
@@ -73,6 +79,9 @@ const SingleRoomInfo = () => {
 						</div>
 					)}
 				</div>
+			)}
+			{sessionuser && sessionuser.id === currentRoom.ownerId && (
+				<button onClick={deleteARoom}>Delete</button>
 			)}
 		</>
 	);

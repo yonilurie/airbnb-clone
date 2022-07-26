@@ -7,13 +7,14 @@ import "./RoomContainer.css";
 
 function Rooms() {
 	const dispatch = useDispatch();
+
+
 	useEffect(() => {
 		dispatch(getRooms());
 	}, []);
 
 	//Fetch all rooms from DB
 	const rooms = Object.values(useSelector((state) => state.rooms));
-
 
 	return (
 		<div>
@@ -26,6 +27,8 @@ function Rooms() {
 						);
 					})}
 			</div>
+
+		
 		</div>
 	);
 }
