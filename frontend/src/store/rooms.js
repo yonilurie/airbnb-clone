@@ -1,3 +1,5 @@
+import { csrfFetch } from "./csrf";
+
 //String literals for thunk action
 const GET_ROOMS = "/rooms";
 const GET_SPECIFIC_ROOM = "/rooms/:roomId";
@@ -45,7 +47,19 @@ export const getRoomInfo = (room) => async (dispatch) => {
 	return data;
 };
 
-export const createRoom = (room) => {};
+export const createRoom = (room) => async (dispatch) => {
+	const response = await csrfFetch("/api/rooms/add", {
+		method: "POST",
+		headers: {
+			contentType: "application/json",
+		},
+		body: room,
+	});
+
+	const data = await response.json();
+
+	dispatch(createARoom(data));
+};
 
 const initialState = {};
 
@@ -59,6 +73,11 @@ const roomReducer = (state = initialState, action) => {
 
 		case GET_SPECIFIC_ROOM: {
 			newState = Object.assign({}, action.room.rooms);
+			return newState;
+		}
+		case CREATE_ROOM: {
+			console.log(action);
+			newState = { state };
 			return newState;
 		}
 		default:

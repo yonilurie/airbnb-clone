@@ -30,7 +30,7 @@ function App() {
 					<Route path="/rooms/:roomId">
 						<SingleRoomInfo></SingleRoomInfo>
 					</Route>
-					<Route path="/create">
+					<Route path="/api/become-a-host">
 						<CreateRoomForm></CreateRoomForm>
 					</Route>
 				</Switch>
