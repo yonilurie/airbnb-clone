@@ -6,13 +6,15 @@ import roomReducer from "./rooms";
 import imagesReducer from "./roomImages";
 import reviewsReducer from "./reviews";
 import singleRoomReducer from "./CurrentRoom";
+import myRoomReducer from "./myRooms"; 
 
 const rootReducer = combineReducers({
 	session: sessionReducer,
 	rooms: roomReducer,
 	roomImages: imagesReducer,
 	reviews: reviewsReducer,
-	currentRoom: singleRoomReducer
+	currentRoom: singleRoomReducer,
+	myRooms: myRoomReducer
 });
 
 let enhancer;

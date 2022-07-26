@@ -6,6 +6,7 @@ import SingleRoomInfo from "./components/Rooms/SingleRoomInfo";
 import Navigation from "./components/Navigation";
 import Rooms from "./components/Rooms";
 import CreateRoomForm from "./components/Rooms/CreateRoomForm";
+import MyRooms from "./components/Rooms/MyRooms";
 import * as sessionActions from "./store/session";
 
 function App() {
@@ -28,6 +29,9 @@ function App() {
 					</Route>
 					<Route path="/api/become-a-host">
 						<CreateRoomForm></CreateRoomForm>
+					</Route>
+					<Route path="/api/rooms">
+						<MyRooms></MyRooms>
 					</Route>
 				</Switch>
 			)}

@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
+import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import LoginFormModal from "../LoginFormModal";
 import SessionLinks from "./SessionLinks";
+import MyRooms from "../Rooms/MyRooms";
 
 import * as sessionActions from "../../store/session";
 import "./ProfileButton.css";
@@ -116,7 +118,7 @@ function ProfileButton({ user }) {
 					<li hidden={!user}>{user && user.email}</li>
 					<li hidden={!user}>
 						{user && <button onClick={logout}>Log Out</button>}
-						{user && <button>Add a room</button>}
+						{user && <NavLink to="/api/rooms">My Rooms</NavLink>}
 					</li>
 				</ul>
 			)}
