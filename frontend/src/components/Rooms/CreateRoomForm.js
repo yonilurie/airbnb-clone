@@ -5,12 +5,14 @@ import { Redirect, useHistory } from "react-router-dom";
 import { createRoom } from "../../store/rooms";
 
 const CreateRoomForm = () => {
-	const history = useHistory()
+	const history = useHistory();
 	const sessionuser = useSelector((state) => state.session.user);
 	const dispatch = useDispatch();
+
+	// State
 	const [name, setName] = useState("");
 	const [address, setAddress] = useState("");
-	const [city, setCity] = useState();
+	const [city, setCity] = useState("");
 	const [state, setState] = useState("WA");
 	const [country, setCountry] = useState("United States");
 	const [latitude, setLatitude] = useState(0);
@@ -21,19 +23,19 @@ const CreateRoomForm = () => {
 	const [validationErrors, setValidationErrors] = useState([]);
 	const [isLoaded, setIsLoaded] = useState(false);
 
+	//On initial render set isLoaded to false
 	useEffect(() => {
 		setIsLoaded(false);
 	}, []);
 
+	//Validate user form input and render errors if they are present
 	useEffect(() => {
 		const errors = [];
-		console.log("NAME", name);
 		if (name.length > 50 || name.length < 4) {
 			errors.push("Name must be between 4 and 50 characters");
 		}
 
 		setValidationErrors(errors);
-		console.log(validationErrors);
 	}, [
 		name,
 		address,
@@ -46,8 +48,10 @@ const CreateRoomForm = () => {
 		price,
 	]);
 
+	//If the user is not logged in, redirect the user to home page
 	if (!sessionuser) return <Redirect to="/" />;
 
+	//When for/ is submitted
 	const onSubmit = (e) => {
 		e.preventDefault();
 
@@ -63,7 +67,6 @@ const CreateRoomForm = () => {
 			price,
 			previewImage,
 		};
-		console.log(room);
 
 		if (!validationErrors.length) {
 			dispatch(createRoom(JSON.stringify(room)));
@@ -78,7 +81,8 @@ const CreateRoomForm = () => {
 			setDescription("");
 			setPrice(100);
 
-			history.push("/")
+			//Redirect user to home page
+			history.push("/");
 		}
 	};
 
@@ -95,9 +99,7 @@ const CreateRoomForm = () => {
 					id="name"
 					value={name}
 					onChange={(e) => {
-						console.log(e.target.value);
 						setName(e.target.value);
-						console.log(name);
 					}}
 					required
 				></input>
@@ -552,11 +554,7 @@ const CreateRoomForm = () => {
 					onChange={(e) => setPreviewImage(e.target.value)}
 					required
 				></input>
-				<button
-				// disabled={validationErrors.length > 0}
-				>
-					Submit
-				</button>
+				<button>Submit</button>
 			</form>
 		</>
 	);

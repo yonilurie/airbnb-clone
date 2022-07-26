@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import "./SingleRoom.css";
 
@@ -8,11 +8,12 @@ function SingleRoom({ room }) {
 	const dispatch = useDispatch();
 	const history = useHistory();
 
+	//Redirects user to room they click on
 	const showRoomDetails = (e) => {
-		console.log(room.id);
 		let path = `/rooms/${room.id}`;
 		history.push(path);
 	};
+
 	return (
 		<div className="room" onClick={(e) => showRoomDetails(e)}>
 			<div className="favorite">♥️</div>
@@ -21,7 +22,9 @@ function SingleRoom({ room }) {
 				alt={`image for room ${room.id}`}
 			></img>
 			<div className="room-info" onClick={showRoomDetails}>
-				<div className="room-detail name">{room.city}, {room.state}</div>
+				<div className="room-detail name">
+					{room.city}, {room.state}
+				</div>
 				<div className="room-detail star">Star 5.0</div>
 				<div className="room-detail availability">{"availability"}</div>
 				<div className="room-detail price">

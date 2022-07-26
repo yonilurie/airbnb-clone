@@ -1,13 +1,12 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 
-import { Redirect } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import * as sessionActions from "../../store/session";
 import "./LoginForm.css";
 
 function SignupForm({ setShowModal }) {
 	const dispatch = useDispatch();
-	const sessionUser = useSelector((state) => state.session.user);
+	//State
 	const [email, setEmail] = useState("");
 	const [username, setUsername] = useState("");
 	const [lastName, setLastName] = useState("");
@@ -16,8 +15,7 @@ function SignupForm({ setShowModal }) {
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [errors, setErrors] = useState([]);
 
-	if (sessionUser) return <Redirect to="/" />;
-
+	//On submit if errors are present, setErrors and they will be rendered to user
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		if (password === confirmPassword) {
@@ -35,10 +33,11 @@ function SignupForm({ setShowModal }) {
 				return data;
 			});
 
+			//if no errors, close the modal
 			if (trySignup.user) setShowModal(false);
 			return trySignup;
 		}
-
+		
 		return setErrors([
 			"Confirm Password field must be the same as the Password field",
 		]);

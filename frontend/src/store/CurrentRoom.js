@@ -1,5 +1,7 @@
+//String literals for thunk action
 const GET_SPECIFIC_ROOM = "/rooms/:roomId";
 
+//Thunk actions
 const getSpecificRoomData = (room) => {
 	return {
 		type: GET_SPECIFIC_ROOM,
@@ -7,6 +9,9 @@ const getSpecificRoomData = (room) => {
 	};
 };
 
+//Thunk action creators
+
+//Get info of a room
 export const getRoomInfo = (id) => async (dispatch) => {
 	const response = await fetch(`/rooms/${id}`);
 
@@ -19,6 +24,7 @@ export const getRoomInfo = (id) => async (dispatch) => {
 
 const initialState = {};
 
+//Reducer
 const singleRoomReducer = (state = initialState, action) => {
 	let newState;
 	switch (action.type) {

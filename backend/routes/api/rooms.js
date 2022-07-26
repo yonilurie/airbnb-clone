@@ -25,14 +25,8 @@ const validateRoom = [
 		.exists({ checkFalsy: true })
 		.notEmpty()
 		.withMessage("Country is required"),
-	check("lat")
-		.exists({ checkFalsy: true })
-		.notEmpty()
-		.withMessage("Latitude is not valid"),
-	check("lng")
-		.exists({ checkFalsy: true })
-		.notEmpty()
-		.withMessage("Longitude is not valid"),
+	check("lat").notEmpty().withMessage("Latitude is not valid"),
+	check("lng").notEmpty().withMessage("Longitude is not valid"),
 	check("name")
 		.exists({ checkFalsy: true })
 		.notEmpty()

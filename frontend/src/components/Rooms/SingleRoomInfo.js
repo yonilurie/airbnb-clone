@@ -2,26 +2,31 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
-import { getRooms } from "../../store/rooms";
 import { getRoomImages } from "../../store/roomImages";
 import { getRoomReviews } from "../../store/reviews";
 import { getRoomInfo } from "../../store/CurrentRoom";
+
 import "./SingleRoomInfo.css";
 
 const SingleRoomInfo = () => {
 	const dispatch = useDispatch();
+
 	const { roomId } = useParams();
 
+	//Get room info, images, and reviews
 	useEffect(() => {
 		dispatch(getRoomInfo(roomId));
 	}, []);
+
 	useEffect(() => {
 		dispatch(getRoomImages(roomId));
 	}, []);
+
 	useEffect(() => {
 		dispatch(getRoomReviews(roomId));
 	}, []);
 
+	//Assign room, images, and reviews to variables for easier access
 	const currentRoom = useSelector((state) => state.currentRoom);
 	const currentRoomImages = Object.values(
 		useSelector((state) => state.roomImages)

@@ -13,20 +13,16 @@ function Navigation({ isLoaded }) {
 	const dispatch = useDispatch();
 	const sessionuser = useSelector((state) => state.session.user);
 
+	//Determines what will render in the navbar depending on whether user is logged in
+	//Passed as prop to Profile button component
 	let sessionLinks;
 	if (sessionuser) {
 		sessionLinks = <ProfileButton user={sessionuser} />;
 	} else {
+		//if user is not logged in a login and and signup button will be displayed in the profile button
 		sessionLinks = (
 			<>
 				<LoginFormModal />
-				<NavLink
-					to="/signup"
-					className="nav-link"
-					style={{ fontWeight: "bold" }}
-				>
-					Sign Up
-				</NavLink>
 				<button
 					onClick={() =>
 						dispatch(
@@ -51,7 +47,9 @@ function Navigation({ isLoaded }) {
 					</NavLink>
 				</li>
 				<li>
-					{sessionuser && <NavLink to="/api/become-a-host">Become a Host</NavLink>}
+					{sessionuser && (
+						<NavLink to="/api/become-a-host">Become a Host</NavLink>
+					)}
 				</li>
 				<li>
 					{isLoaded && sessionLinks && (

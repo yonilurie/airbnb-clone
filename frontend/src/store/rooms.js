@@ -2,20 +2,14 @@ import { csrfFetch } from "./csrf";
 
 //String literals for thunk action
 const GET_ROOMS = "/rooms";
-const GET_SPECIFIC_ROOM = "/rooms/:roomId";
-const CREATE_ROOM = "/rooms/add";
+const CREATE_ROOM = "/api/rooms/add";
 
+//Thunk actions
+//
 const getRoomsData = (rooms) => {
 	return {
 		type: GET_ROOMS,
 		rooms,
-	};
-};
-
-const getSpecificRoomData = (room) => {
-	return {
-		type: GET_SPECIFIC_ROOM,
-		room,
 	};
 };
 
@@ -26,6 +20,9 @@ const createARoom = (room) => {
 	};
 };
 
+//Thunk action creators
+//
+//Get all rooms
 export const getRooms = () => async (dispatch) => {
 	const response = await fetch("/rooms", {
 		method: "GET",
@@ -37,16 +34,7 @@ export const getRooms = () => async (dispatch) => {
 	return data;
 };
 
-export const getRoomInfo = (room) => async (dispatch) => {
-	const response = await fetch(`/rooms/${room.id}`);
-
-	const data = await response.json();
-
-	dispatch(getSpecificRoomData(room));
-
-	return data;
-};
-
+//Create a room
 export const createRoom = (room) => async (dispatch) => {
 	const response = await csrfFetch("/api/rooms/add", {
 		method: "POST",
@@ -57,27 +45,23 @@ export const createRoom = (room) => async (dispatch) => {
 	});
 
 	const data = await response.json();
-
+	console.log(response);
 	dispatch(createARoom(data));
 };
 
 const initialState = {};
 
+//Reducer
 const roomReducer = (state = initialState, action) => {
 	let newState;
 	switch (action.type) {
 		case GET_ROOMS:
 			newState = Object.assign({}, action.rooms.rooms);
-			console.log("ACTION", action);
 			return newState;
 
-		case GET_SPECIFIC_ROOM: {
-			newState = Object.assign({}, action.room.rooms);
-			return newState;
-		}
 		case CREATE_ROOM: {
-			console.log(action);
-			newState = { state };
+			const room = action.room;
+			newState = Object.assign(state, room);
 			return newState;
 		}
 		default:
