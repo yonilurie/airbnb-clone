@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 
 import { createRoom } from "../../store/rooms";
 
 const CreateRoomForm = () => {
+	const history = useHistory()
 	const sessionuser = useSelector((state) => state.session.user);
 	const dispatch = useDispatch();
 	const [name, setName] = useState("");
@@ -65,7 +66,19 @@ const CreateRoomForm = () => {
 		console.log(room);
 
 		if (!validationErrors.length) {
-			return dispatch(createRoom(JSON.stringify(room)));
+			dispatch(createRoom(JSON.stringify(room)));
+
+			setName("");
+			setAddress("");
+			setCity("");
+			setState("WA");
+			setCountry("United States");
+			setLatitude(0);
+			setLongitude(0);
+			setDescription("");
+			setPrice(100);
+
+			history.push("/")
 		}
 	};
 
@@ -92,6 +105,7 @@ const CreateRoomForm = () => {
 				<input
 					type="text"
 					id="address"
+					value={address}
 					onChange={(e) => setAddress(e.target.value)}
 					required
 				></input>
@@ -99,6 +113,7 @@ const CreateRoomForm = () => {
 				<input
 					type="text"
 					id="city"
+					value={city}
 					onChange={(e) => setCity(e.target.value)}
 				></input>
 				<label htmlFor="state">State</label>
@@ -495,6 +510,7 @@ const CreateRoomForm = () => {
 					max="90"
 					step="any"
 					id="latitude"
+					value={latitude}
 					onChange={(e) => setLatitude(e.target.value)}
 					required
 				></input>
@@ -505,6 +521,7 @@ const CreateRoomForm = () => {
 					max="180"
 					step="any"
 					id="longitude"
+					value={longitude}
 					onChange={(e) => setLongitude(e.target.value)}
 					required
 				></input>
@@ -513,6 +530,7 @@ const CreateRoomForm = () => {
 					type="textArea"
 					placeholder="Tell us a little bit about your place"
 					id="description"
+					value={description}
 					onChange={(e) => setDescription(e.target.value)}
 					required
 				></textarea>
