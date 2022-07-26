@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 
@@ -13,6 +13,14 @@ const SingleRoomInfo = () => {
 	const history = useHistory();
 	const sessionuser = useSelector((state) => state.session.user);
 	const { roomId } = useParams();
+
+	const [isDisplayed, setIsDisplayed] = useState(false);
+
+	useEffect(() => {
+		setInterval(() => {
+			setIsDisplayed(true);
+		}, 100);
+	}, []);
 
 	//Get room info, images, and reviews
 	useEffect(() => {
@@ -45,8 +53,7 @@ const SingleRoomInfo = () => {
 
 	return (
 		<>
-			{!currentRoom && <div>LOADING</div>}
-			{currentRoom && (
+			{isDisplayed && currentRoom && (
 				<div>
 					<div>{currentRoom.name}</div>
 					<div>
@@ -80,10 +87,10 @@ const SingleRoomInfo = () => {
 								})}
 						</div>
 					)}
+					{sessionuser && sessionuser.id === currentRoom.ownerId && (
+						<button onClick={deleteARoom}>Delete</button>
+					)}
 				</div>
-			)}
-			{sessionuser && sessionuser.id === currentRoom.ownerId && (
-				<button onClick={deleteARoom}>Delete</button>
 			)}
 		</>
 	);
