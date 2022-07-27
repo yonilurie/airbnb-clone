@@ -44,7 +44,6 @@ export const getRooms = () => async (dispatch) => {
 	});
 
 	const data = await response.json();
-	console.log("DATA", data);
 	dispatch(getRoomsData(data));
 	return data;
 };
@@ -60,7 +59,6 @@ export const createRoom = (room) => async (dispatch) => {
 	});
 
 	const data = await response.json();
-	console.log(response);
 	dispatch(createARoom(data));
 };
 

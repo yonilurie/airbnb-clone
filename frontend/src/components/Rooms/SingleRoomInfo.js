@@ -6,6 +6,7 @@ import { getRoomImages } from "../../store/roomImages";
 import { getRoomReviews } from "../../store/reviews";
 import { getRoomInfo } from "../../store/CurrentRoom";
 import { deleteRoom } from "../../store/rooms";
+import { create } from "../../store/reviews";
 
 import Reviews from "./Reviews";
 
@@ -54,6 +55,20 @@ const SingleRoomInfo = () => {
 		history.go("/my-rooms");
 	};
 
+	const addAReview = () => {
+		dispatch(
+			create([
+				roomId,
+				JSON.stringify({
+					review: "This was an awesome room!",
+					stars: 4,
+				}),
+			])
+		);
+		history.push(`/rooms/${roomId}`);
+		history.go(`/rooms/${roomId}`);
+	};
+
 	return (
 		<>
 			{isDisplayed && currentRoom && (
@@ -85,7 +100,11 @@ const SingleRoomInfo = () => {
 						<img src={currentRoom.previewImage} alt="preview"></img>
 					)}
 
-				{	currentRoom.Owner && (<h2>Entire home hosted by {currentRoom.Owner.firstName}</h2>)}
+					{currentRoom.Owner && (
+						<h2>
+							Entire home hosted by {currentRoom.Owner.firstName}
+						</h2>
+					)}
 
 					{currentRoomReviews.length > 0 && (
 						<div className="reviews-container">
@@ -100,11 +119,18 @@ const SingleRoomInfo = () => {
 										"Room couldn't be found" &&
 									currentRoomReviews.map((review) => {
 										return (
-											<Reviews review={review}></Reviews>
+											<Reviews
+												review={review}
+												key={review.id}
+											></Reviews>
 										);
 									})}
 							</div>
 						</div>
+					)}
+
+					{sessionuser && (
+						<button onClick={addAReview}>Add review</button>
 					)}
 					{sessionuser && sessionuser.id === currentRoom.ownerId && (
 						<>
