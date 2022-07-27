@@ -138,6 +138,7 @@ const EditRoomForm = () => {
 
 			//Redirect user to home page
 			history.push("/my-rooms");
+			history.go("/my-rooms");
 		} else {
 			setIsLoaded(true);
 		}
