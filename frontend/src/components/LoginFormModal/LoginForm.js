@@ -29,35 +29,47 @@ function LoginForm({ setShowModal }) {
 	};
 
 	return (
-		<form onSubmit={handleSubmit}>
-			<div className="modal-welcome">Welcome to Airbnb</div>
-			<ul className="errors">
-				{errors.map((error, idx) => (
-					<li key={idx}>{error}</li>
-				))}
-			</ul>
-			<label>
-				Username or Email
+		<div className="modal-body">
+			<button
+				className="modal-exit-btn"
+				onClick={() => setShowModal(false)}
+			>
+				X
+			</button>
+			<div className="modal-header">
+				<div className="modal-title">Log in or sign up</div>
+			</div>
+
+			<form onSubmit={handleSubmit}>
+				<h3 className="modal-welcome">Welcome to Airbnb</h3>
+				{errors.length > 0 && (
+					<ul className="errors">
+						{errors.map((error, idx) => (
+							<li key={idx}>{error}</li>
+						))}
+					</ul>
+				)}
 				<input
+					className="modal-input"
 					type="text"
+					placeholder="Email or Username"
 					value={credential}
 					onChange={(e) => setCredential(e.target.value)}
 					required
 				/>
-			</label>
-			<label>
-				Password
 				<input
+					className="modal-input"
 					type="password"
+					placeholder="Password"
 					value={password}
 					onChange={(e) => setPassword(e.target.value)}
 					required
 				/>
-			</label>
-			<button type="submit" className="login-register-submit">
-				Continue
-			</button>
-		</form>
+				<button type="submit" className="login-register-submit">
+					Continue
+				</button>
+			</form>
+		</div>
 	);
 }
 
