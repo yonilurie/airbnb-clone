@@ -95,7 +95,7 @@ const roomReducer = (state = initialState, action) => {
 	let newState;
 	switch (action.type) {
 		case GET_ROOMS:
-			newState = Object.assign({}, action.rooms.rooms);
+			newState = Object.assign({}, action.rooms);
 			return newState;
 
 		case CREATE_ROOM: {
