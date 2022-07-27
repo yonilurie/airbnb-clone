@@ -70,7 +70,7 @@ const EditRoomForm = () => {
 			setLongitude(lng);
 			setDescription(description);
 			setPrice(price);
-			// setPreviewImage(previewImage);
+			setPreviewImage(previewImage);
 		}
 	}, [currentRoom]);
 
