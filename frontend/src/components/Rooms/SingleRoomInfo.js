@@ -85,7 +85,7 @@ const SingleRoomInfo = () => {
 						<img src={currentRoom.previewImage} alt="preview"></img>
 					)}
 
-					<h2>Entire home hosted by {currentRoom.Owner.firstName}</h2>
+				{	currentRoom.Owner && (<h2>Entire home hosted by {currentRoom.Owner.firstName}</h2>)}
 
 					{currentRoomReviews.length > 0 && (
 						<div className="reviews-container">
