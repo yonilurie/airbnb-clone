@@ -4,7 +4,7 @@ import { csrfFetch } from "./csrf";
 const GET_ROOMS = "/rooms";
 const CREATE_ROOM = "/api/rooms/add";
 const DELETE_ROOM = "/api/rooms/:roomId";
-
+const EDIT_ROOM = "/api/rooms/:roomId";
 //Thunk actions
 //
 const getRoomsData = (rooms) => {
@@ -25,6 +25,13 @@ const deleteARoom = (id) => {
 	return {
 		type: DELETE_ROOM,
 		id,
+	};
+};
+
+const editARoom = (room) => {
+	return {
+		type: EDIT_ROOM,
+		room,
 	};
 };
 
@@ -66,6 +73,14 @@ export const deleteRoom = (roomId) => async (dispatch) => {
 	dispatch(deleteARoom(roomId));
 };
 
+//edit a room
+export const editRoom = (roomEdits) => async (dispatch) => {
+	const response = await csrfFetch(`/api/rooms/${roomEdits.id}`);
+
+	const data = await response.json();
+	dispatch(editARoom(data));
+};
+
 const initialState = {};
 
 //Reducer
@@ -84,6 +99,11 @@ const roomReducer = (state = initialState, action) => {
 		case DELETE_ROOM: {
 			newState = { ...state };
 			delete newState[action.roomId];
+			return newState;
+		}
+		case EDIT_ROOM: {
+			newState = { ...state };
+			newState[action.room.id] = action.room;
 			return newState;
 		}
 		default:

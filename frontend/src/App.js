@@ -6,6 +6,7 @@ import SingleRoomInfo from "./components/Rooms/SingleRoomInfo";
 import Navigation from "./components/Navigation";
 import Rooms from "./components/Rooms";
 import CreateRoomForm from "./components/Rooms/CreateRoomForm";
+import EditRoomForm from "./components/Rooms/EditRoomForm";
 import MyRooms from "./components/Rooms/MyRooms";
 import * as sessionActions from "./store/session";
 
@@ -24,7 +25,7 @@ function App() {
 					<Route exact path="/">
 						<Rooms></Rooms>
 					</Route>
-					<Route path="/rooms/:roomId">
+					<Route exact path="/rooms/:roomId">
 						<SingleRoomInfo></SingleRoomInfo>
 					</Route>
 					<Route path="/become-a-host">
@@ -32,6 +33,9 @@ function App() {
 					</Route>
 					<Route path="/my-rooms" >
 						<MyRooms></MyRooms>
+					</Route>
+					<Route path="/rooms/:roomId/edit">
+						<EditRoomForm></EditRoomForm>
 					</Route>
 					<Route>
 						<div>404: PAGE NOT FOUND</div>
