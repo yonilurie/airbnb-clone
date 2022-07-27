@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { NavLink } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import LoginFormModal from "../LoginFormModal";
 import SessionLinks from "./SessionLinks";
@@ -11,7 +11,7 @@ import "./ProfileButton.css";
 
 function ProfileButton({ user }) {
 	const dispatch = useDispatch();
-
+	const sessionuser = useSelector((state) => state.session.user);
 	//State
 	const [showMenu, setShowMenu] = useState(false);
 	const [showModal, setShowModal] = useState(false);
@@ -91,7 +91,7 @@ function ProfileButton({ user }) {
 					{!user && (
 						<>
 							<div
-								style={{fontWeight:"600"}}
+								style={{ fontWeight: "600" }}
 								className="profile-button-options"
 								onClick={() => {
 									setShowModal(true);
@@ -100,8 +100,12 @@ function ProfileButton({ user }) {
 							>
 								Log in
 							</div>
+							<SessionLinks
+								showModal={showModal}
+								setShowModal={setShowModal}
+							/>
 							<div
-									className="profile-button-options"
+								className="profile-button-options"
 								onClick={() => {
 									setShowModal(true);
 									setInteraction("signup");
@@ -111,18 +115,39 @@ function ProfileButton({ user }) {
 							</div>
 						</>
 					)}
-					{!user && (
-						<SessionLinks
-							showModal={showModal}
-							setShowModal={setShowModal}
-						/>
+
+					{user && (
+						<>
+							<li
+								className="profile-button-options"
+								hidden={!user}
+							>
+								{user && user.username}
+							</li>
+							<li
+								className="profile-button-options"
+								hidden={!user}
+							>
+								{user && user.email}
+							</li>
+							<li className="profile-button-options">
+								<NavLink to="/become-a-host">
+									Become a Host
+								</NavLink>
+							</li>
+							<li className="profile-button-options">
+								<NavLink to="/my-rooms">My Rooms</NavLink>
+							</li>
+							<li>
+								<div
+									className="profile-button-options"
+									onClick={logout}
+								>
+									Log Out
+								</div>
+							</li>
+						</>
 					)}
-					<li hidden={!user}>{user && user.username}</li>
-					<li hidden={!user}>{user && user.email}</li>
-					<li hidden={!user}>
-						{user && <div onClick={logout}>Log Out</div>}
-						{user && <NavLink to="/my-rooms">My Rooms</NavLink>}
-					</li>
 				</ul>
 			)}
 		</>

@@ -46,11 +46,7 @@ function Navigation({ isLoaded }) {
 						<img src={logo} alt="logo" id="logo"></img>
 					</NavLink>
 				</li>
-				<li>
-					{sessionuser && (
-						<NavLink to="/become-a-host">Become a Host</NavLink>
-					)}
-				</li>
+
 				<li>
 					{isLoaded && sessionLinks && (
 						<ProfileButton

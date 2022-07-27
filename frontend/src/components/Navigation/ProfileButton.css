@@ -1,3 +1,8 @@
+a {
+	text-decoration: none;
+	color: black;
+}
+
 svg {
 	padding: 5px;
 }
@@ -28,7 +33,7 @@ svg {
 	font-weight: 400;
 	width: 100%;
 	text-align: left;
-	padding: 12px 16px ;
+	padding: 12px 16px;
 	cursor: pointer;
 }
 
