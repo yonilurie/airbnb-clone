@@ -491,6 +491,7 @@ router.get("/:roomId", validateRoomId, async (req, res) => {
 			"name",
 			"description",
 			"price",
+			"previewImage",
 			"createdAt",
 			"updatedAt",
 		],
@@ -530,6 +531,18 @@ router.get("/:roomId", validateRoomId, async (req, res) => {
 //Get all Rooms
 router.get("/", async (req, res) => {
 	const rooms = await Room.findAll({});
+
+	for (let i = 0; i < rooms.length; i++) {
+		let reviewInfo = await Review.findAll({
+			where: { roomId: rooms[i].id },
+			attributes: [
+				[sequelize.fn("AVG", sequelize.col("stars")), "avgStarRating"],
+			],
+		});
+		const avg = reviewInfo[0].dataValues.avgStarRating;
+		rooms[i].dataValues.avgStarRating = avg;
+	}
+
 	res.status = 200;
 	return res.json({ rooms });
 });

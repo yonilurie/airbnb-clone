@@ -44,7 +44,7 @@ export const getRooms = () => async (dispatch) => {
 	});
 
 	const data = await response.json();
-
+	console.log("DATA", data);
 	dispatch(getRoomsData(data));
 	return data;
 };
@@ -78,13 +78,13 @@ export const editRoom = (roomEdits) => async (dispatch) => {
 	const response = await csrfFetch(`/api/rooms/${roomEdits.id}`, {
 		method: "PUT",
 		headers: {
-		contentType: "application/json",
+			contentType: "application/json",
 		},
 		body: roomEdits,
 	});
 
 	const data = await response.json();
-	console.log(data)
+	console.log(data);
 	dispatch(editARoom(data));
 };
 

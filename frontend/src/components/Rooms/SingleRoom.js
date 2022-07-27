@@ -25,14 +25,21 @@ function SingleRoom({ room }) {
 				<div className="room-detail name">
 					{room.city}, {room.state}
 				</div>
-				<div className="room-detail star">Star 5.0</div>
+				{room.avgStarRating && (
+					<div className="room-detail star">
+						{room.avgStarRating} Stars
+					</div>
+				)}
+
+				{!room.avgStarRating && (
+					<div className="room-detail star">No Reviews</div>
+				)}
 				<div className="room-detail availability">{"availability"}</div>
 				<div className="room-detail price">
 					<b style={{ color: "rgb(34, 34, 34)" }}>${room.price}</b>
 					night
 				</div>
 			</div>
-		
 		</div>
 	);
 }

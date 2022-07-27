@@ -22,6 +22,7 @@ function Rooms() {
 				{!rooms && <div>LOADING...</div>}
 				{rooms &&
 					rooms.map((room) => {
+						console.log(room)
 						return (
 							<SingleRoom room={room} key={room.id}></SingleRoom>
 						);
