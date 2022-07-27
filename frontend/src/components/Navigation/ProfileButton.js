@@ -138,13 +138,8 @@ function ProfileButton({ user }) {
 							<li className="profile-button-options">
 								<NavLink to="/my-rooms">My Rooms</NavLink>
 							</li>
-							<li>
-								<div
-									className="profile-button-options"
-									onClick={logout}
-								>
-									Log Out
-								</div>
+							<li className="profile-button-options">
+								<div onClick={logout}>Log Out</div>
 							</li>
 						</>
 					)}

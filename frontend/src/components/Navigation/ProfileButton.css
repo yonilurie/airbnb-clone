@@ -20,6 +20,7 @@ svg {
 	align-items: center;
 	box-sizing: border-box;
 	padding: 5px 5px 5px 12px;
+
 	border-radius: 90px;
 	border: solid 1px #dedddd;
 	z-index: 2;
@@ -31,10 +32,16 @@ svg {
 	font-size: 14px;
 	line-height: 18px;
 	font-weight: 400;
+	box-sizing: border-box;
 	width: 100%;
 	text-align: left;
 	padding: 12px 16px;
 	cursor: pointer;
+	overflow: hidden;
+}
+
+.profile-button-options:hover {
+	background-color: hsl(0, 0%, 97%);
 }
 
 .profile-button:hover {
@@ -43,14 +50,15 @@ svg {
 }
 
 .profile-dropdown {
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18);
 	position: fixed;
-	padding: 5px 5px 5px 12px;
+	padding: 8px 0px;
 	margin: 10px;
 	width: 240px;
 	height: fit-content;
-	right: 10px;
+	right: 80px;
 	border: 1px solid #ebebeb;
-	border-radius: 21px;
+	border-radius: 12px;
 	background-color: #ffffff;
 	display: flex;
 	flex-direction: column;
