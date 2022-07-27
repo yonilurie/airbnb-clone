@@ -152,6 +152,7 @@ const EditRoomForm = () => {
 				validationErrors.map((error) => {
 					return <div key={error}>{error}</div>;
 				})}
+			<h1 className="form-description">Edit home information</h1>
 			<form className="create-room-form" onSubmit={onSubmit}>
 				<label htmlFor="name">Name</label>
 				<input

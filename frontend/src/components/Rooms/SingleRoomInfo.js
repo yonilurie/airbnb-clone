@@ -7,6 +7,8 @@ import { getRoomReviews } from "../../store/reviews";
 import { getRoomInfo } from "../../store/CurrentRoom";
 import { deleteRoom } from "../../store/rooms";
 
+import Reviews from "./Reviews";
+
 import "./SingleRoomInfo.css";
 
 const SingleRoomInfo = () => {
@@ -56,13 +58,23 @@ const SingleRoomInfo = () => {
 		<>
 			{isDisplayed && currentRoom && (
 				<div>
-					<div>{currentRoom.name}</div>
+					<h1 className="room-name">{currentRoom.name}</h1>
 					{currentRoom.avgStarRating >= 1 && (
-						<div>
-							Star {Number(currentRoom.avgStarRating).toFixed(2)}
+						<div className="room-reviews-and-location">
+							★{Number(currentRoom.avgStarRating).toFixed(2)}
+							{" · "}
+							{Number(currentRoom.numReviews)} review(s){" · "}
+							{currentRoom.city},{currentRoom.state},
+							{currentRoom.country}
 						</div>
 					)}
-					{currentRoom.avgStarRating < 1 && <div>No Reviews Yet</div>}
+					{currentRoom.avgStarRating < 1 && (
+						<div>
+							No Reviews Yet {currentRoom.city},
+							{currentRoom.state},{currentRoom.country}
+						</div>
+					)}
+					<div></div>
 					{currentRoomImages.length > 0 && (
 						<img
 							src={`${currentRoomImages[0].imageUrl}`}
@@ -72,28 +84,26 @@ const SingleRoomInfo = () => {
 					{currentRoomImages.length <= 0 && (
 						<img src={currentRoom.previewImage} alt="preview"></img>
 					)}
-					<div>
-						{currentRoom.city},{currentRoom.state},
-						{currentRoom.country}
-					</div>
+
+					<h2>Entire home hosted by {currentRoom.Owner.firstName}</h2>
+
 					{currentRoomReviews.length > 0 && (
 						<div className="reviews-container">
-							<div>Reviews</div>
-							{currentRoomReviews.length > 0 &&
-								currentRoomReviews[0] !==
-									"Room couldn't be found" &&
-								currentRoomReviews.map((review) => {
-									return (
-										<ul
-											key={review.id}
-											className="review-content"
-										>
-											<li>{review.stars}</li>
-											<li>{review.userId}</li>
-											<li>{review.review}</li>
-										</ul>
-									);
-								})}
+							<h2 className="reviews-overview">
+								★{Number(currentRoom.avgStarRating).toFixed(2)}{" "}
+								{" · "}
+								{Number(currentRoom.numReviews)} review(s)
+							</h2>
+							<div className="reviews">
+								{currentRoomReviews.length > 0 &&
+									currentRoomReviews[0] !==
+										"Room couldn't be found" &&
+									currentRoomReviews.map((review) => {
+										return (
+											<Reviews review={review}></Reviews>
+										);
+									})}
+							</div>
 						</div>
 					)}
 					{sessionuser && sessionuser.id === currentRoom.ownerId && (

@@ -536,15 +536,18 @@ router.get("/", async (req, res) => {
 		let reviewInfo = await Review.findAll({
 			where: { roomId: rooms[i].id },
 			attributes: [
+				[sequelize.fn("COUNT", sequelize.col("roomId")), "numReviews"],
 				[sequelize.fn("AVG", sequelize.col("stars")), "avgStarRating"],
 			],
 		});
 		const avg = reviewInfo[0].dataValues.avgStarRating;
+		const numReviews = reviewInfo[0].dataValues.numReviews;
 		rooms[i].dataValues.avgStarRating = avg;
+		rooms[i].dataValues.numReviews = numReviews;
 	}
 
 	res.status = 200;
-	return res.json( rooms );
+	return res.json(rooms);
 });
 
 //------------- Functions
@@ -571,6 +574,3 @@ function noReviewError() {
 }
 
 module.exports = router;
-
-
-

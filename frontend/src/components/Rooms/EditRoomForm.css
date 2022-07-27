@@ -36,41 +36,6 @@ form {
 	border: solid 2px black;
 }
 
-.modal-header {
-	box-sizing: border-box;
-	border-bottom: solid 1px rgb(235, 235, 235);
-	display: flex;
-	font-size: 16px;
-	font-weight: 800;
-	line-height: 20px;
-	min-height: 64px;
-	padding-left: 24px;
-	padding-right: 24px;
-}
-
-.modal-exit-btn {
-	position: absolute;
-	width: fit-content;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	left: 8px;
-	top: 8px;
-	border-radius: 90px;
-	border: none;
-	background-color: rgba(0, 0, 0, 0);
-	height: 32px;
-	width: 32px;
-}
-.modal-exit-btn:hover {
-	cursor: pointer;
-	background-color: rgb(246, 246, 246);
-}
-
-.modal-title {
-	margin: auto;
-}
-
 .submit-form-btn {
 	box-sizing: border-box;
 	transition-duration: 0.25s;
@@ -91,9 +56,10 @@ form {
 	width: 520px;
 	height: 48px;
 	margin-top: 30px;
+	cursor: pointer;
 }
 
-.login-register-submit:active {
+.submit-form-btn:active {
 	transform: scale(0.96);
 }
 
