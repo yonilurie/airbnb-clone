@@ -6,7 +6,7 @@ import { getRoomImages } from "../../store/roomImages";
 import { getRoomReviews } from "../../store/reviews";
 import { getRoomInfo } from "../../store/CurrentRoom";
 import { deleteRoom } from "../../store/rooms";
-import { editRoom } from "../../store/rooms";
+
 import "./SingleRoomInfo.css";
 
 const SingleRoomInfo = () => {
@@ -44,15 +44,9 @@ const SingleRoomInfo = () => {
 	const currentRoomReviews = Object.values(
 		useSelector((state) => state.reviews)
 	);
-	console.log(
-		"87634987598437584375893475843759873485734895734987589347589437598347589347589",
-		currentRoomReviews
-	);
 
 	//Will delete a room an redirect user to home screen
 	const deleteARoom = () => {
-		alert("TEST");
-		console.log("test");
 		dispatch(deleteRoom(roomId));
 		history.push("/my-rooms");
 		history.go("/my-rooms");
