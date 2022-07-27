@@ -1,6 +1,7 @@
 a {
 	text-decoration: none;
 	color: black;
+	width: 100%;
 }
 
 svg {
@@ -28,7 +29,7 @@ svg {
 	background-color: #ffffff;
 }
 
-.profile-button-options {
+.profile-button-options, .profile-button-info {
 	font-size: 14px;
 	line-height: 18px;
 	font-weight: 400;

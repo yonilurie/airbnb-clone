@@ -1,6 +1,6 @@
 .room {
-	width: 312px;
-	height: 396px;
+	/* width: 312px;
+	height: 396px; */
 	font-size: 16px;
 	box-sizing: border-box;
 	display: block;
@@ -9,6 +9,8 @@
 	justify-content: center;
 	align-items: center;
 	position: relative;
+	/* margin-block-end: 24px;
+	margin-block-start: 24px; */
 }
 
 .favorite {
@@ -53,5 +55,6 @@
 img {
 	width: 312px;
 	height: 296px;
+	object-fit: fill;
 	border-radius: 12px;
 }

@@ -118,26 +118,27 @@ function ProfileButton({ user }) {
 
 					{user && (
 						<>
-							<li
-								className="profile-button-options"
-								hidden={!user}
-							>
+							<div className="profile-button-info" hidden={!user}>
 								{user && user.username}
-							</li>
-							<li
-								className="profile-button-options"
-								hidden={!user}
-							>
+							</div>
+							<div className="profile-button-info" hidden={!user}>
 								{user && user.email}
-							</li>
-							<li className="profile-button-options">
-								<NavLink to="/become-a-host">
-									Become a Host
-								</NavLink>
-							</li>
-							<li className="profile-button-options">
-								<NavLink to="/my-rooms">My Rooms</NavLink>
-							</li>
+							</div>
+
+							<NavLink
+								to="/become-a-host"
+								className="profile-button-options"
+							>
+								Become a Host
+							</NavLink>
+
+							<NavLink
+								to="/my-rooms"
+								className="profile-button-options"
+							>
+								My Rooms
+							</NavLink>
+
 							<li className="profile-button-options">
 								<div onClick={logout}>Log Out</div>
 							</li>

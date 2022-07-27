@@ -1,11 +1,13 @@
 .rooms-container {
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr;
-	gap: 32px;
-	margin: auto;
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	gap: 20px;
+	margin-top: 20px;
+	/* margin: auto; */
 
 	/* row-gap: 40px;
 	column-gap: 32px; */
-
-	
 }
