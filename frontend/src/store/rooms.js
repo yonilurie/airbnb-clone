@@ -75,9 +75,16 @@ export const deleteRoom = (roomId) => async (dispatch) => {
 
 //edit a room
 export const editRoom = (roomEdits) => async (dispatch) => {
-	const response = await csrfFetch(`/api/rooms/${roomEdits.id}`);
+	const response = await csrfFetch(`/api/rooms/${roomEdits.id}`, {
+		method: "PUT",
+		headers: {
+		contentType: "application/json",
+		},
+		body: roomEdits,
+	});
 
 	const data = await response.json();
+	console.log(data)
 	dispatch(editARoom(data));
 };
 
@@ -102,6 +109,7 @@ const roomReducer = (state = initialState, action) => {
 			return newState;
 		}
 		case EDIT_ROOM: {
+			console.log("ACTION", action);
 			newState = { ...state };
 			newState[action.room.id] = action.room;
 			return newState;

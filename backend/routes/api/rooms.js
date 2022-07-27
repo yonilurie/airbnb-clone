@@ -112,7 +112,7 @@ router.post(
 //delete a spot
 router.delete("/:roomId", [restoreUser, requireAuth], async (req, res) => {
 	const { roomId } = req.params;
-	console.log(req.user)
+	console.log(req.user);
 	const { id } = req.user;
 	let room = await Room.findOne({
 		where: {
@@ -139,6 +139,7 @@ router.put(
 	[restoreUser, requireAuth, validateRoom],
 	async (req, res) => {
 		const { roomId } = req.params;
+		const ownerId = req.user.id;
 		const {
 			address,
 			city,
@@ -149,13 +150,14 @@ router.put(
 			name,
 			description,
 			price,
+			id,
 		} = req.body;
 		const { userId } = req.user;
 		let room = await Room.findOne({
 			exclude: "previewImage",
 			where: {
-				ownerId: id,
-				id: roomId,
+				ownerId,
+				id,
 			},
 		});
 
