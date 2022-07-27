@@ -57,9 +57,12 @@ const SingleRoomInfo = () => {
 			{isDisplayed && currentRoom && (
 				<div>
 					<div>{currentRoom.name}</div>
-					<div>
-						Star {Number(currentRoom.avgStarRating).toFixed(2)}
-					</div>
+					{currentRoom.avgStarRating >= 1 && (
+						<div>
+							Star {Number(currentRoom.avgStarRating).toFixed(2)}
+						</div>
+					)}
+					{currentRoom.avgStarRating < 1 && <div>No Reviews Yet</div>}
 					{currentRoomImages.length > 0 && (
 						<img
 							src={`${currentRoomImages[0].imageUrl}`}
@@ -67,10 +70,7 @@ const SingleRoomInfo = () => {
 						></img>
 					)}
 					{currentRoomImages.length <= 0 && (
-						<img
-							src="https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg"
-							alt="preview"
-						></img>
+						<img src={currentRoom.previewImage} alt="preview"></img>
 					)}
 					<div>
 						{currentRoom.city},{currentRoom.state},
