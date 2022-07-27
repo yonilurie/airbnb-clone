@@ -37,74 +37,83 @@ function SignupForm({ setShowModal }) {
 			if (trySignup.user) setShowModal(false);
 			return trySignup;
 		}
-		
+
 		return setErrors([
 			"Confirm Password field must be the same as the Password field",
 		]);
 	};
 
 	return (
-		<form onSubmit={handleSubmit}>
-			<div>Sign Up</div>
-			<ul className="errors">
-				{errors.map((error, idx) => (
-					<li key={idx}>{error}</li>
-				))}
-			</ul>
-			<label>
-				Email
+		<div className="modal-body">
+			<button
+				className="modal-exit-btn"
+				onClick={() => setShowModal(false)}
+			>
+				X
+			</button>
+			<div className="modal-header">
+				<div className="modal-title">Sign Up</div>
+			</div>
+			<form onSubmit={handleSubmit}>
+				<h3 className="modal-welcome">Welcome to Airbnb</h3>
+				{errors.length > 0 && (
+					<ul className="errors">
+						{errors.map((error, idx) => (
+							<li key={idx}>{error}</li>
+						))}
+					</ul>
+				)}
 				<input
+					className="modal-input"
 					type="text"
+					placeholder="Email"
 					value={email}
 					onChange={(e) => setEmail(e.target.value)}
 					required
 				/>
-			</label>
-			<label>
-				Username
 				<input
+					className="modal-input"
 					type="text"
+					placeholder="Username"
 					value={username}
 					onChange={(e) => setUsername(e.target.value)}
 					required
 				/>
-			</label>
-			<label>
-				First Name
 				<input
+					className="modal-input"
 					type="text"
+					placeholder="First Name"
 					value={firstName}
 					onChange={(e) => setFirstName(e.target.value)}
 				/>
-			</label>
-			<label>
-				Last Name
 				<input
+					className="modal-input"
 					type="text"
+					placeholder="Last Name"
 					value={lastName}
 					onChange={(e) => setLastName(e.target.value)}
 				/>
-			</label>
-			<label>
-				Password
 				<input
+					className="modal-input"
 					type="password"
+					placeholder="Password"
 					value={password}
 					onChange={(e) => setPassword(e.target.value)}
 					required
 				/>
-			</label>
-			<label>
-				Confirm Password
 				<input
+					className="modal-input"
 					type="password"
+					placeholder="Confirm Password"
 					value={confirmPassword}
 					onChange={(e) => setConfirmPassword(e.target.value)}
 					required
 				/>
-			</label>
-			<button type="submit">Sign Up</button>
-		</form>
+				<button type="submit" className="login-register-submit">
+					Sign Up
+				</button>
+			</form>
+		</div>
 	);
 }
 

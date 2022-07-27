@@ -37,7 +37,7 @@ function LoginForm({ setShowModal }) {
 				X
 			</button>
 			<div className="modal-header">
-				<div className="modal-title">Log in or sign up</div>
+				<div className="modal-title">Log in</div>
 			</div>
 
 			<form onSubmit={handleSubmit}>
@@ -66,7 +66,7 @@ function LoginForm({ setShowModal }) {
 					required
 				/>
 				<button type="submit" className="login-register-submit">
-					Continue
+					Log in
 				</button>
 			</form>
 		</div>
