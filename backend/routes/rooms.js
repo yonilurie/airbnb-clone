@@ -544,7 +544,7 @@ router.get("/", async (req, res) => {
 	}
 
 	res.status = 200;
-	return res.json({ rooms });
+	return res.json( rooms );
 });
 
 //------------- Functions
@@ -571,3 +571,6 @@ function noReviewError() {
 }
 
 module.exports = router;
+
+
+
