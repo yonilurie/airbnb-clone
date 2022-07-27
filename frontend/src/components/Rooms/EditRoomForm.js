@@ -79,6 +79,9 @@ const EditRoomForm = () => {
 		if (name.length > 50 || name.length < 4) {
 			errors.push("Name must be between 4 and 50 characters");
 		}
+		if (description.length > 500) {
+			errors.push("Description must be less that 500 characters");
+		}
 
 		setValidationErrors(errors);
 	}, [
@@ -93,12 +96,13 @@ const EditRoomForm = () => {
 		price,
 	]);
 
-	if (!sessionuser) return <Redirect to="/" />;
-	if (currentRoom.ownerId && currentRoom.ownerId !== sessionuser.id) {
+	//If user is not logged in or is not the owner of the room, redirect them
+	if (
+		!sessionuser ||
+		(currentRoom.ownerId && currentRoom.ownerId !== sessionuser.id)
+	) {
 		return <Redirect to="/"></Redirect>;
 	}
-
-	//If the user is not logged in, redirect the user to home page
 
 	//When form is submitted
 	const onSubmit = (e) => {
