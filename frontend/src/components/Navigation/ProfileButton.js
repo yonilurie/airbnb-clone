@@ -126,10 +126,10 @@ function ProfileButton({ user }) {
 							</div>
 
 							<NavLink
-								to="/become-a-host"
+								to="/host-your-home"
 								className="profile-button-options"
 							>
-								Become a Host
+								Host your Home
 							</NavLink>
 
 							<NavLink

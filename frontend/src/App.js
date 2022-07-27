@@ -28,7 +28,7 @@ function App() {
 					<Route exact path="/rooms/:roomId">
 						<SingleRoomInfo></SingleRoomInfo>
 					</Route>
-					<Route path="/become-a-host">
+					<Route path="/host-your-home">
 						<CreateRoomForm></CreateRoomForm>
 					</Route>
 					<Route path="/my-rooms" >
