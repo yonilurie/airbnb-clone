@@ -90,22 +90,25 @@ function ProfileButton({ user }) {
 				<ul className="profile-dropdown">
 					{!user && (
 						<>
-							<button
+							<div
+								style={{fontWeight:"600"}}
+								className="profile-button-options"
 								onClick={() => {
 									setShowModal(true);
 									setInteraction("login");
 								}}
 							>
 								Log in
-							</button>
-							<button
+							</div>
+							<div
+									className="profile-button-options"
 								onClick={() => {
 									setShowModal(true);
 									setInteraction("signup");
 								}}
 							>
 								Sign Up
-							</button>
+							</div>
 						</>
 					)}
 					{!user && (
@@ -117,7 +120,7 @@ function ProfileButton({ user }) {
 					<li hidden={!user}>{user && user.username}</li>
 					<li hidden={!user}>{user && user.email}</li>
 					<li hidden={!user}>
-						{user && <button onClick={logout}>Log Out</button>}
+						{user && <div onClick={logout}>Log Out</div>}
 						{user && <NavLink to="/my-rooms">My Rooms</NavLink>}
 					</li>
 				</ul>

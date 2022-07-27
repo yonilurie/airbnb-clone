@@ -8,7 +8,8 @@ const SessionLinks = ({ showModal, setShowModal }) => {
 	const dispatch = useDispatch();
 	return (
 		<>
-			<button
+			<div
+				className="profile-button-options"
 				onClick={() =>
 					dispatch(
 						sessionActions.login({
@@ -19,7 +20,7 @@ const SessionLinks = ({ showModal, setShowModal }) => {
 				}
 			>
 				Demo
-			</button>
+			</div>
 		</>
 	);
 };
