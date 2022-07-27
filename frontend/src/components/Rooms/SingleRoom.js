@@ -27,7 +27,7 @@ function SingleRoom({ room }) {
 				</div>
 				{room.avgStarRating && (
 					<div className="room-detail star">
-						{room.avgStarRating} Stars
+						{Number(room.avgStarRating).toFixed(2)} Stars
 					</div>
 				)}
 
