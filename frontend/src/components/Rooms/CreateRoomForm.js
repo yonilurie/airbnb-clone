@@ -34,6 +34,9 @@ const CreateRoomForm = () => {
 		if (name.length > 50 || name.length < 4) {
 			errors.push("Name must be between 4 and 50 characters");
 		}
+		if (description.length > 500) {
+			errors.push("Description must be less that 500 characters");
+		}
 
 		setValidationErrors(errors);
 	}, [
@@ -83,12 +86,15 @@ const CreateRoomForm = () => {
 
 			//Redirect user to home page
 			history.push("/my-rooms");
+		} else {
+			setIsLoaded(true);
 		}
 	};
 
 	return (
 		<>
-			{validationErrors.length > 0 &&
+			{isLoaded &&
+				validationErrors.length > 0 &&
 				validationErrors.map((error) => {
 					return <div key={error}>{error}</div>;
 				})}
