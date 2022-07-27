@@ -8,6 +8,8 @@ import { getRoomInfo } from "../../store/CurrentRoom";
 import { deleteRoom } from "../../store/rooms";
 import { create } from "../../store/reviews";
 
+import ReviewFormModal from "../Review";
+
 import Reviews from "./Reviews";
 
 import "./SingleRoomInfo.css";
@@ -17,6 +19,8 @@ const SingleRoomInfo = () => {
 	const history = useHistory();
 	const sessionuser = useSelector((state) => state.session.user);
 	const { roomId } = useParams();
+
+	const [showModal, setShowModal] = useState(false);
 
 	const [isDisplayed, setIsDisplayed] = useState(false);
 
@@ -55,19 +59,6 @@ const SingleRoomInfo = () => {
 		history.go("/my-rooms");
 	};
 
-	const addAReview = () => {
-		dispatch(
-			create([
-				roomId,
-				JSON.stringify({
-					review: "This was an awesome room!",
-					stars: 4,
-				}),
-			])
-		);
-		history.push(`/rooms/${roomId}`);
-		history.go(`/rooms/${roomId}`);
-	};
 
 	return (
 		<>
@@ -130,7 +121,15 @@ const SingleRoomInfo = () => {
 					)}
 
 					{sessionuser && (
-						<button onClick={addAReview}>Add review</button>
+						<>
+							<ReviewFormModal
+								showModal={showModal}
+								setShowModal={setShowModal}
+							/>
+							<button onClick={() => setShowModal(true)}>
+								Add review
+							</button>
+						</>
 					)}
 					{sessionuser && sessionuser.id === currentRoom.ownerId && (
 						<>
