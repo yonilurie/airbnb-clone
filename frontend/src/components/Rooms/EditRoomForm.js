@@ -7,9 +7,7 @@ import { editRoom } from "../../store/rooms";
 
 const EditRoomForm = () => {
 	const history = useHistory();
-	const sessionuser = useSelector((state) => state.session.user);
 	const dispatch = useDispatch();
-	const { roomId } = useParams();
 
 	// State
 	const [name, setName] = useState("");
@@ -25,27 +23,28 @@ const EditRoomForm = () => {
 	const [validationErrors, setValidationErrors] = useState([]);
 	const [isLoaded, setIsLoaded] = useState(false);
 
-	// const [name, setName] = useState(currentRoom.name);
-	// const [address, setAddress] = useState(currentRoom.address);
-	// const [city, setCity] = useState(currentRoom.city);
-	// const [state, setState] = useState(currentRoom.state);
-	// const [country, setCountry] = useState(currentRoom.country);
-	// const [latitude, setLatitude] = useState(currentRoom.latitude);
-	// const [longitude, setLongitude] = useState(currentRoom.longitude);
-	// const [description, setDescription] = useState(currentRoom.description);
-	// const [price, setPrice] = useState(currentRoom.price);
-	// const [previewImage, setPreviewImage] = useState(currentRoom.previewImage);
-	// const [validationErrors, setValidationErrors] = useState([]);
-	// const [isLoaded, setIsLoaded] = useState(false);
+	const sessionuser = useSelector((state) => state.session.user);
+	const { roomId } = useParams();
 
+	// On initial render set isLoaded to false
+	useEffect(() => {
+		setIsLoaded(false);
+	}, []);
+
+	//Get the info of the current room
 	useEffect(() => {
 		dispatch(getRoomInfo(roomId));
 	}, [dispatch, roomId]);
 
+	//Assign current room to variable
 	const currentRoom = useSelector((state) => state.currentRoom);
 
+	//Once room is loaded update state with the rooms information
+	//This information will now show up in the form inputs
+	//so the user does not have tot ype them in again
 	useEffect(() => {
-		// console.log("inside useEffect", currentRoom);
+		//If the currentRoom is loaded and and has an Id
+		//Destructure it
 		if (currentRoom.id) {
 			const {
 				name,
@@ -59,6 +58,8 @@ const EditRoomForm = () => {
 				price,
 				previewImage,
 			} = currentRoom;
+
+			//Set all the states with the rooms information
 			setName(name);
 			setAddress(address);
 			setCity(city);
@@ -72,39 +73,34 @@ const EditRoomForm = () => {
 		}
 	}, [currentRoom]);
 
+	// Validate user form input and render errors if they are present
+	useEffect(() => {
+		const errors = [];
+		if (name.length > 50 || name.length < 4) {
+			errors.push("Name must be between 4 and 50 characters");
+		}
+
+		setValidationErrors(errors);
+	}, [
+		name,
+		address,
+		city,
+		state,
+		country,
+		latitude,
+		longitude,
+		description,
+		price,
+	]);
+
 	if (!sessionuser) return <Redirect to="/" />;
 	if (currentRoom.ownerId && currentRoom.ownerId !== sessionuser.id) {
 		return <Redirect to="/"></Redirect>;
 	}
 
-	//On initial render set isLoaded to false
-	// useEffect(() => {
-	// 	setIsLoaded(false);
-	// }, []);
-
-	//Validate user form input and render errors if they are present
-	// useEffect(() => {
-	// 	const errors = [];
-	// 	if (name.length > 50 || name.length < 4) {
-	// 		errors.push("Name must be between 4 and 50 characters");
-	// 	}
-
-	// 	setValidationErrors(errors);
-	// }, [
-	// 	name,
-	// 	address,
-	// 	city,
-	// 	state,
-	// 	country,
-	// 	latitude,
-	// 	longitude,
-	// 	description,
-	// 	price,
-	// ]);
-
 	//If the user is not logged in, redirect the user to home page
 
-	//When for/ is submitted
+	//When form is submitted
 	const onSubmit = (e) => {
 		e.preventDefault();
 		const { id } = currentRoom;
@@ -121,7 +117,7 @@ const EditRoomForm = () => {
 			price,
 			previewImage,
 		};
-		console.log("ROOM", room);
+
 		if (!validationErrors.length) {
 			dispatch(editRoom(JSON.stringify(room)));
 			// dispatch(editRoom(room));
@@ -138,6 +134,8 @@ const EditRoomForm = () => {
 
 			//Redirect user to home page
 			history.push("/my-rooms");
+		} else {
+			setIsLoaded(true);
 		}
 	};
 
@@ -145,7 +143,8 @@ const EditRoomForm = () => {
 		<>
 			{/* {currentRoom && ( */}
 			<>
-				{validationErrors.length > 0 &&
+				{isLoaded &&
+					validationErrors.length > 0 &&
 					validationErrors.map((error) => {
 						return <div key={error}>{error}</div>;
 					})}
