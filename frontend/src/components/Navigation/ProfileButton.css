@@ -29,7 +29,8 @@ svg {
 	background-color: #ffffff;
 }
 
-.profile-button-options, .profile-button-info {
+.profile-button-options,
+.profile-button-info {
 	font-size: 14px;
 	line-height: 18px;
 	font-weight: 400;
@@ -51,7 +52,7 @@ svg {
 }
 
 .profile-dropdown {
-		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18);
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18);
 	position: fixed;
 	padding: 8px 0px;
 	margin: 10px;
