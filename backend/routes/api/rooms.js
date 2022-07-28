@@ -156,7 +156,14 @@ router.put(
 		//Check if room exists
 		if (!room) return res.json(noRoomError());
 		//Find review that needs editing
-		let reviewToEdit = await Review.findByPk(reviewId);
+		let reviewToEdit = await Review.findByPk(reviewId, {
+				include: [
+					{
+						model: User,
+						attributes: ["id", "firstName", "lastName"],
+					},
+				],
+		});
 		//if it doesnt exist or belongs to the wrong room
 		if (!reviewToEdit || reviewToEdit.roomId !== Number(roomId)) {
 			return res.json(noRoomError());
