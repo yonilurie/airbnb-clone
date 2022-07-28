@@ -9,6 +9,8 @@ const getSpecificRoomData = (room) => {
 	};
 };
 
+
+
 //Thunk action creators
 
 //Get info of a room
@@ -32,6 +34,7 @@ const singleRoomReducer = (state = initialState, action) => {
 			newState = Object.assign({}, action.room);
 			return newState;
 		}
+	
 		default:
 			return state;
 	}

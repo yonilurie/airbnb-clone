@@ -6,7 +6,7 @@ import { getRoomImages } from "../../store/roomImages";
 import { getRoomReviews } from "../../store/reviews";
 import { getRoomInfo } from "../../store/CurrentRoom";
 import { deleteRoom } from "../../store/rooms";
-import { create } from "../../store/reviews";
+import { getARoomsBookings } from "../../store/bookings";
 
 import ReviewFormModal from "../Review";
 
@@ -43,6 +43,10 @@ const SingleRoomInfo = () => {
 		dispatch(getRoomReviews(roomId));
 	}, [dispatch, roomId]);
 
+	useEffect(() => {
+		dispatch(getARoomsBookings(roomId));
+	}, [dispatch, roomId]);
+
 	//Assign room, images, and reviews to variables for easier access
 	const currentRoom = useSelector((state) => state.currentRoom);
 	const currentRoomImages = Object.values(
@@ -58,7 +62,6 @@ const SingleRoomInfo = () => {
 		history.push("/my-rooms");
 		history.go("/my-rooms");
 	};
-
 
 	return (
 		<>
