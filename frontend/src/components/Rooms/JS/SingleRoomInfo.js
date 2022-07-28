@@ -33,19 +33,19 @@ const SingleRoomInfo = () => {
 
 	//Get room info, images, and reviews
 	useEffect(() => {
-		dispatch(getRoomInfo(roomId));
+		dispatch(getRoomInfo(Number(roomId)));
 	}, [dispatch, roomId]);
 
 	useEffect(() => {
-		dispatch(getRoomImages(roomId));
+		dispatch(getRoomImages(Number(roomId)));
 	}, [dispatch, roomId]);
 
 	useEffect(() => {
-		dispatch(getRoomReviews(roomId));
+		dispatch(getRoomReviews(Number(roomId)));
 	}, [dispatch, roomId]);
 
 	useEffect(() => {
-		dispatch(getARoomsBookings(roomId));
+		dispatch(getARoomsBookings(Number(roomId)));
 	}, [dispatch, roomId]);
 
 	useEffect(() => {
