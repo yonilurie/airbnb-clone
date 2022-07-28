@@ -1,7 +1,7 @@
 import React from "react";
 import { Modal } from "../../context/Modal";
-import LoginForm from "./LoginForm";
-import SignupForm from "./SignupForm";
+import LoginForm from "./JS/LoginForm";
+import SignupForm from "./JS/SignupForm";
 
 function LoginFormModal({ showModal, setShowModal, interaction }) {
 	return (

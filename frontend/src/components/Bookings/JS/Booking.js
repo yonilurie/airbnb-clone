@@ -1,9 +1,5 @@
-import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import ReviewFormModal from "../Review";
 const Booking = ({ booking, reviewDisabled }) => {
-	const [showModal, setShowModal] = useState(false);
 
 	const [startYear, startMonth, startDay] = booking.startDate.split("-");
 	const [endYear, endMonth, endDay] = booking.endDate.split("-");

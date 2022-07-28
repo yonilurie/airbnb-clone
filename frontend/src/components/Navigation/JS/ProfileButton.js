@@ -2,12 +2,12 @@ import React, { useState, useEffect, useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import LoginFormModal from "../LoginFormModal";
+import LoginFormModal from "../../LoginFormModal";
 import SessionLinks from "./SessionLinks";
 
 
-import * as sessionActions from "../../store/session";
-import "./ProfileButton.css";
+import * as sessionActions from "../../../store/session";
+import "../CSS/ProfileButton.css";
 
 function ProfileButton({ user }) {
 	const dispatch = useDispatch();

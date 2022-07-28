@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { create } from "../../store/reviews";
+import { create } from "../../../store/reviews";
 
 function ReviewForm({ setShowModal }) {
 	const history = useHistory();

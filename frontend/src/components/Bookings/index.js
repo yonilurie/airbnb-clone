@@ -1,11 +1,11 @@
 import { useEffect } from "react";
-import { Redirect, useHistory, NavLink } from "react-router-dom";
+import { Redirect, useHistory} from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getAUsersBookings } from "../../store/myBookings";
 
-import Booking from "./Booking";
-import "./Bookings.css";
-import SingleRoom from "../Rooms/JS/SingleRoom";
+import Booking from "./JS/Booking";
+import "./CSS/Bookings.css";
+
 
 const Bookings = () => {
 	const dispatch = useDispatch();
@@ -59,6 +59,7 @@ const Bookings = () => {
 						<img
 							src="https://a0.muscache.com/im/pictures/d727f355-3f10-44b5-9750-d1efca2438fc.jpg?im_w=720"
 							className="empty-bookings-img"
+							alt='no future bookings'
 						></img>
 					</div>
 				</div>

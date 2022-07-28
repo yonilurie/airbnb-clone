@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import * as sessionActions from "../../store/session";
+import * as sessionActions from "../../../store/session";
 
-import "./LoginForm.css";
+import "../CSS/LoginForm.css";
 
 function LoginForm({ setShowModal }) {
 	const dispatch = useDispatch();
