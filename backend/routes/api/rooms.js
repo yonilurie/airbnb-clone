@@ -169,7 +169,7 @@ router.put(
 		reviewToEdit.review = review;
 		reviewToEdit.stars = stars;
 		await reviewToEdit.save();
-
+		console.log(reviewToEdit)
 		res.status = 200;
 		return res.json(reviewToEdit);
 	}
