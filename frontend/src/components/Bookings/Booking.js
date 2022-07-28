@@ -1,6 +1,10 @@
+import { useState } from "react";
+import { NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import ReviewFormModal from "../Review";
+const Booking = ({ booking, reviewDisabled }) => {
+	const [showModal, setShowModal] = useState(false);
 
-
-const Booking = ({ booking }) => {
 	const [startYear, startMonth, startDay] = booking.startDate.split("-");
 	const [endYear, endMonth, endDay] = booking.endDate.split("-");
 	const months = [
@@ -39,21 +43,28 @@ const Booking = ({ booking }) => {
 	bookingDuration[1] = `${durationStartDay}-${durationEndDay},`;
 
 	return (
-		<div className="booking">
-			<div className="booking-image">
-				<img
-                    src={booking.Room.previewImage}
-                    alt="preview"
-					className="preview-image"
-				></img>
-			</div>
-			<div className="booking-info">
-				<div className="city">{booking.Room.city}</div>
-				<div className="owner">
-					Hosted by user {booking.Room.ownerId}
+		<div className="single-booking-container">
+			<NavLink to={`/rooms/${booking.Room.id}`} className="booking">
+				<div className="booking-image">
+					<img
+						src={booking.Room.previewImage}
+						alt="preview"
+						className="preview-image"
+					></img>
 				</div>
-				<div className="duration">{bookingDuration.join(" ")}</div>
-			</div>
+				<div className="booking-info">
+					<div className="city">{booking.Room.city}</div>
+					<div className="owner">
+						Hosted by user {booking.Room.ownerId}
+					</div>
+					<div className="duration">{bookingDuration.join(" ")}</div>
+				</div>
+			</NavLink>
+			{!reviewDisabled && (
+				<NavLink to={`/add-review/${booking.Room.id}`}>
+					Add review
+				</NavLink>
+			)}
 		</div>
 	);
 };

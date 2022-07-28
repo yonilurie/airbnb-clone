@@ -8,7 +8,7 @@ import { getRoomInfo } from "../../store/CurrentRoom";
 import { deleteRoom } from "../../store/rooms";
 import { getARoomsBookings } from "../../store/bookings";
 
-import ReviewFormModal from "../Review";
+
 
 import Reviews from "./Reviews";
 
@@ -20,7 +20,7 @@ const SingleRoomInfo = () => {
 	const sessionuser = useSelector((state) => state.session.user);
 	const { roomId } = useParams();
 
-	const [showModal, setShowModal] = useState(false);
+
 
 	const [isDisplayed, setIsDisplayed] = useState(false);
 
@@ -47,6 +47,10 @@ const SingleRoomInfo = () => {
 		dispatch(getARoomsBookings(roomId));
 	}, [dispatch, roomId]);
 
+	useEffect(() => {
+		document.title = `Room ${roomId}`;
+	}, []);
+
 	//Assign room, images, and reviews to variables for easier access
 	const currentRoom = useSelector((state) => state.currentRoom);
 	const currentRoomImages = Object.values(
@@ -56,7 +60,9 @@ const SingleRoomInfo = () => {
 		useSelector((state) => state.reviews)
 	);
 
-	const currentRoomBookings = Object.values(useSelector((state) => state.bookings));
+	const currentRoomBookings = Object.values(
+		useSelector((state) => state.bookings)
+	);
 	console.log(currentRoomBookings[0]);
 
 	//Will delete a room an redirect user to home screen
@@ -126,17 +132,7 @@ const SingleRoomInfo = () => {
 						</div>
 					)}
 
-					{sessionuser && (
-						<>
-							<ReviewFormModal
-								showModal={showModal}
-								setShowModal={setShowModal}
-							/>
-							<button onClick={() => setShowModal(true)}>
-								Add review
-							</button>
-						</>
-					)}
+				
 					{sessionuser && sessionuser.id === currentRoom.ownerId && (
 						<>
 							<button onClick={deleteARoom}>Delete</button>
