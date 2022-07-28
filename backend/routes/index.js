@@ -3,7 +3,7 @@ const router = express.Router();
 const apiRouter = require("./api");
 const roomRouter = require("./rooms");
 router.use("/api", apiRouter);
-router.use("/rooms", roomRouter);
+// router.use("/rooms", roomRouter);
 
 // Static routes
 // Serve React build files in production

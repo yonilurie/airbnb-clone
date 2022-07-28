@@ -27,14 +27,15 @@ function App() {
 					<Route exact path="/">
 						<Rooms></Rooms>
 					</Route>
-					<Route exact path="/rooms/:roomId">
-						<SingleRoomInfo></SingleRoomInfo>
-					</Route>
+
 					<Route path="/host-your-home">
 						<CreateRoomForm></CreateRoomForm>
 					</Route>
 					<Route path="/my-rooms">
 						<MyRooms></MyRooms>
+					</Route>
+					<Route exact path="/rooms/:roomId">
+						<SingleRoomInfo></SingleRoomInfo>
 					</Route>
 					<Route path="/rooms/:roomId/edit">
 						<EditRoomForm></EditRoomForm>

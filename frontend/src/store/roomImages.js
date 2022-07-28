@@ -1,4 +1,4 @@
-const GET_IMAGES = "images/get";
+const GET_IMAGES = "/images/get";
 
 const getImages = (room) => {
 	return {
@@ -9,7 +9,7 @@ const getImages = (room) => {
 
 export const getRoomImages = (roomId) => async (dispatch) => {
 	const roomIdNumber = Number(roomId);
-	const response = await fetch(`/rooms/${roomIdNumber}`);
+	const response = await fetch(`/api/rooms/${roomIdNumber}`);
 	const data = await response.json();
 	dispatch(getImages(data));
 	return data;

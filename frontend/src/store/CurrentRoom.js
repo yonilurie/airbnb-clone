@@ -1,5 +1,5 @@
 //String literals for thunk action
-const GET_SPECIFIC_ROOM = "/rooms/:roomId";
+const GET_SPECIFIC_ROOM = "/api/rooms/:roomId";
 
 //Thunk actions
 const getSpecificRoomData = (room) => {
@@ -15,7 +15,7 @@ const getSpecificRoomData = (room) => {
 
 //Get info of a room
 export const getRoomInfo = (id) => async (dispatch) => {
-	const response = await fetch(`/rooms/${id}`);
+	const response = await fetch(`/api/rooms/${id}`);
 
 	const data = await response.json();
 

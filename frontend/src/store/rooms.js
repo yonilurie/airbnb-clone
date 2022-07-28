@@ -1,7 +1,7 @@
 import { csrfFetch } from "./csrf";
 
 //String literals for thunk action
-const GET_ROOMS = "/rooms";
+const GET_ROOMS = "/api/rooms";
 const CREATE_ROOM = "/api/rooms/add";
 const DELETE_ROOM = "/api/rooms/:roomId";
 const EDIT_ROOM = "/api/rooms/:roomId";
@@ -39,7 +39,7 @@ const editARoom = (room) => {
 //
 //Get all rooms
 export const getRooms = () => async (dispatch) => {
-	const response = await fetch("/rooms", {
+	const response = await fetch("/api/rooms", {
 		method: "GET",
 	});
 
