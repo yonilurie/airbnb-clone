@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { getRooms } from "../../store/rooms";
-import SingleRoom from "./SingleRoom";
-import "./RoomContainer.css";
+import SingleRoom from "./JS/SingleRoom";
+import "./CSS/RoomContainer.css";
 
 function Rooms() {
 	const dispatch = useDispatch();

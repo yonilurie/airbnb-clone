@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import LoginFormModal from "../LoginFormModal";
 import SessionLinks from "./SessionLinks";
-import MyRooms from "../Rooms/MyRooms";
+
 
 import * as sessionActions from "../../store/session";
 import "./ProfileButton.css";

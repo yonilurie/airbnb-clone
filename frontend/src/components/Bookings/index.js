@@ -5,7 +5,7 @@ import { getAUsersBookings } from "../../store/myBookings";
 
 import Booking from "./Booking";
 import "./Bookings.css";
-import SingleRoom from "../Rooms/SingleRoom";
+import SingleRoom from "../Rooms/JS/SingleRoom";
 
 const Bookings = () => {
 	const dispatch = useDispatch();

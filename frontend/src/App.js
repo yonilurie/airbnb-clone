@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 
-import SingleRoomInfo from "./components/Rooms/SingleRoomInfo";
+import SingleRoomInfo from "./components/Rooms/JS/SingleRoomInfo";
 import Navigation from "./components/Navigation";
 import Rooms from "./components/Rooms";
-import CreateRoomForm from "./components/Rooms/CreateRoomForm";
-import EditRoomForm from "./components/Rooms/EditRoomForm";
-import MyRooms from "./components/Rooms/MyRooms";
+import CreateRoomForm from "./components/Rooms/JS/CreateRoomForm";
+import EditRoomForm from "./components/Rooms/JS/EditRoomForm";
+import MyRooms from "./components/Rooms/JS/MyRooms";
 import Bookings from "./components/Bookings";
 import CreateReview from "./components/Review";
 import * as sessionActions from "./store/session";

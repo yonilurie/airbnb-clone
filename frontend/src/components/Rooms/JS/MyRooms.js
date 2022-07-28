@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getMyRoomsData } from "../../store/myRooms";
+import { getMyRoomsData } from "../../../store/myRooms";
 
 import SingleRoom from "./SingleRoom";
 
-import "./RoomContainer.css";
+import "../CSS/RoomContainer.css";
 
 const MyRooms = () => {
 	const dispatch = useDispatch();

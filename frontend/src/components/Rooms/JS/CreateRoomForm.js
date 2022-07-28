@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 
-import { createRoom } from "../../store/rooms";
-import "./CreateRoom.css";
+import { createRoom } from "../../../store/rooms";
+import "../CSS/CreateRoom.css";
 
 const CreateRoomForm = () => {
 	const history = useHistory();

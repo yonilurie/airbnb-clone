@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
-import "./SingleRoom.css";
+import "../CSS/SingleRoom.css";
 
 function SingleRoom({ room }) {
 	const dispatch = useDispatch();

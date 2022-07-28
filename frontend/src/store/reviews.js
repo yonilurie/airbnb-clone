@@ -1,8 +1,10 @@
 import { csrfFetch } from "./csrf";
 
+//String literals for thunk action
 const GET_REVIEWS = "reviews/get";
 const CREATE_REVIEW = "/reviews/create";
 
+//Thunk actions
 const getReviews = (reviews) => {
 	return {
 		type: GET_REVIEWS,
@@ -17,6 +19,10 @@ const createReview = (reviewInfo) => {
 	};
 };
 
+
+//Thunk action creators
+
+//Get al reviews of a room by its id
 export const getRoomReviews = (roomId) => async (dispatch) => {
 	const roomIdNumber = Number(roomId);
 	const response = await fetch(`/api/rooms/${roomIdNumber}/reviews`);
@@ -26,6 +32,7 @@ export const getRoomReviews = (roomId) => async (dispatch) => {
 	return data;
 };
 
+//Create a review of a room, requires reviews as a JSON.stringify string and roomId
 export const create = (reviewData) => async (dispatch) => {
 	const [roomId, review] = reviewData;
 
@@ -44,6 +51,7 @@ export const create = (reviewData) => async (dispatch) => {
 
 const initialState = {};
 
+//Reducer
 const reviewsReducer = (state = initialState, action) => {
 	let newState;
 	switch (action.type) {

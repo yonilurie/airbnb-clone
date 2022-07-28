@@ -1,5 +1,7 @@
+//String literals for thunk action
 const GET_IMAGES = "/images/get";
 
+//Thunk actions
 const getImages = (room) => {
 	return {
 		type: GET_IMAGES,
@@ -7,6 +9,9 @@ const getImages = (room) => {
 	};
 };
 
+//Thunk action creators
+
+//Get the images posted by the owner of a room by its id
 export const getRoomImages = (roomId) => async (dispatch) => {
 	const roomIdNumber = Number(roomId);
 	const response = await fetch(`/api/rooms/${roomIdNumber}`);
@@ -17,6 +22,7 @@ export const getRoomImages = (roomId) => async (dispatch) => {
 
 const initialState = {};
 
+//Reducer
 const imagesReducer = (state = initialState, action) => {
 	let newState;
 	switch (action.type) {

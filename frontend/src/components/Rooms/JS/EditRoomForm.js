@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect, useHistory, useParams } from "react-router-dom";
 
-import { getRoomInfo } from "../../store/CurrentRoom";
-import { editRoom } from "../../store/rooms";
-import "./EditRoomForm.css";
+import { getRoomInfo } from "../../../store/CurrentRoom";
+import { editRoom } from "../../../store/rooms";
+import "../CSS/EditRoomForm.css";
 
 const EditRoomForm = () => {
 	const history = useHistory();

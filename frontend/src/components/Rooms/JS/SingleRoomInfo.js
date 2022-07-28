@@ -2,15 +2,15 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useHistory, NavLink } from "react-router-dom";
 
-import { getRoomImages } from "../../store/roomImages";
-import { getRoomReviews } from "../../store/reviews";
-import { getRoomInfo } from "../../store/CurrentRoom";
-import { deleteRoom } from "../../store/rooms";
-import { getARoomsBookings } from "../../store/bookings";
+import { getRoomImages } from "../../../store/roomImages";
+import { getRoomReviews } from "../../../store/reviews";
+import { getRoomInfo } from "../../../store/CurrentRoom";
+import { deleteRoom } from "../../../store/rooms";
+import { getARoomsBookings } from "../../../store/bookings";
 
 import Reviews from "./Reviews";
 
-import "./SingleRoomInfo.css";
+import "../CSS/SingleRoomInfo.css";
 
 const SingleRoomInfo = () => {
 	const dispatch = useDispatch();

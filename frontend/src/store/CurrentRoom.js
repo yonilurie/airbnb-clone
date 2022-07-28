@@ -9,8 +9,6 @@ const getSpecificRoomData = (room) => {
 	};
 };
 
-
-
 //Thunk action creators
 
 //Get info of a room

@@ -1,4 +1,4 @@
-import "./Review.css"
+import "../CSS/Review.css"
 
 
 const Reviews = ({ review }) => {
