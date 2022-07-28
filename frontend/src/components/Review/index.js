@@ -19,7 +19,7 @@ function CreateReview() {
 	//Get reviews for the room to check if user has already made one
 	useEffect(() => {
 		dispatch(getRoomReviews(roomId));
-	}, [dispatch, roomId]);
+	}, []);
 
 	//Form validation
 	useEffect(() => {
@@ -53,7 +53,7 @@ function CreateReview() {
 
 		if (!validationErrors.length) {
 			await dispatch(create([roomId, JSON.stringify(reviewData)]));
-
+			dispatch(getRoomReviews(roomId));
 			history.push(`/rooms/${roomId}`);
 			history.go(`/rooms/${roomId}`);
 		}
@@ -65,6 +65,7 @@ function CreateReview() {
 		e.preventDefault();
 		const data = [usersReview.id, roomId];
 		dispatch(deleteAReview(data));
+		dispatch(getRoomReviews(roomId));
 	};
 
 	return (

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { editAReview } from "../../../store/reviews";
-
+import { getRoomReviews } from "../../../store/reviews";
 const EditReviewFormModal = ({ showModal, setShowModal, review }) => {
 	const dispatch = useDispatch();
 
@@ -19,7 +19,8 @@ const EditReviewFormModal = ({ showModal, setShowModal, review }) => {
 			review: reviewMessage,
 		};
 
-		dispatch(editAReview([newReview, review.id, review.roomId]));
+        dispatch(editAReview([newReview, review.id, review.roomId]));
+        dispatch(getRoomReviews(review.roomId))
 		setShowModal(false);
 		return;
 	};

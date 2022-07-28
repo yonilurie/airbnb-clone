@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
-
+import { useHistory, useParams } from "react-router-dom";
+import { getRoomReviews } from "../../../store/reviews";
 import "../CSS/SingleRoom.css";
 
 function SingleRoom({ room }) {
 	const dispatch = useDispatch();
 	const history = useHistory();
+	const { roomId } = useParams()
+	
+	useEffect(() => {
+		dispatch(getRoomReviews(roomId))
+	}, [])
+
 
 	//Redirects user to room they click on
 	const showRoomDetails = (e) => {
