@@ -14,7 +14,6 @@ const Bookings = () => {
 	}, [dispatch]);
 
 	const bookings = Object.values(useSelector((state) => state.myBookings));
-	console.log(bookings);
 
 	const sessionuser = useSelector((state) => state.session.user);
 	if (!sessionuser) return <Redirect to="/" />;
@@ -25,15 +24,17 @@ const Bookings = () => {
 
 	return (
 		<>
-			<h1>Trips</h1>
-			<h3>No trips booked...yet!</h3>
-			<div>
-				Time to dust off your bags and start planning your next
-				adventure
+			<div className="current-bookings-empty">
+				<h1>Trips</h1>
+				<h3>No trips booked...yet!</h3>
+				<div>
+					Time to dust off your bags and start planning your next
+					adventure
+				</div>
+				<button onClick={home} className="search-btn">
+					Start searching
+				</button>
 			</div>
-			<button onClick={home} className="search-btn">
-				Start Searching
-			</button>
 
 			<div className="past-bookings-container">
 				<h2>Where you've been</h2>
@@ -42,12 +43,7 @@ const Bookings = () => {
 						bookings[0] !== "No bookings yet" &&
 						bookings.map((booking) => {
 							return (
-								<NavLink
-									to={`/rooms/${booking.Room.id}`}
-									key={booking.id}
-								>
-									<Booking booking={booking} />
-								</NavLink>
+								<Booking booking={booking} key={booking.id} />
 							);
 						})}
 

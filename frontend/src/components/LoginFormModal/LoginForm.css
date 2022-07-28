@@ -16,6 +16,7 @@ ul {
 	width: 568px;
 	height: 682px;
 	display: flex;
+	align-items: center;
 	flex-direction: column;
 }
 .modal-welcome {
