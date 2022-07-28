@@ -124,6 +124,12 @@ function ProfileButton({ user }) {
 							<div className="profile-button-info" hidden={!user}>
 								{user && user.email}
 							</div>
+							<NavLink
+								to="/trips"
+								className="profile-button-options"
+							>
+								Trips
+							</NavLink>
 
 							<NavLink
 								to="/host-your-home"

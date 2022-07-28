@@ -40,3 +40,30 @@ a {
 	justify-content: center;
 	gap: 0px 200px;
 }
+
+.search-btn {
+	box-sizing: border-box;
+	transition-duration: 0.25s;
+	background-image: radial-gradient(
+		circle at center center,
+		rgb(255, 56, 92) 0%,
+		rgb(230, 30, 77) 27.5%,
+		rgb(227, 28, 95) 40%,
+		rgb(215, 4, 102) 57.5%,
+		rgb(189, 30, 89) 75%,
+		rgb(189, 30, 89) 100%
+	);
+	background-size: 200% 200%;
+	border: none;
+	border-radius: 12px;
+	font-size: 16px;
+	color: rgb(255, 255, 255);
+	width: 200px;
+	height: 48px;
+	margin-top: 20px;
+	cursor: pointer;
+}
+
+.search-btn:active {
+	transform: scale(0.96);
+}

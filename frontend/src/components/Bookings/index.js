@@ -31,7 +31,9 @@ const Bookings = () => {
 				Time to dust off your bags and start planning your next
 				adventure
 			</div>
-			<button onClick={home}>Start Searching</button>
+			<button onClick={home} className="search-btn">
+				Start Searching
+			</button>
 
 			<div className="past-bookings-container">
 				<h2>Where you've been</h2>
@@ -40,11 +42,11 @@ const Bookings = () => {
 						bookings[0] !== "No bookings yet" &&
 						bookings.map((booking) => {
 							return (
-								<NavLink to={`/rooms/${booking.Room.id}`}>
-									<Booking
-										booking={booking}
-										key={booking.id}
-									/>
+								<NavLink
+									to={`/rooms/${booking.Room.id}`}
+									key={booking.id}
+								>
+									<Booking booking={booking} />
 								</NavLink>
 							);
 						})}
