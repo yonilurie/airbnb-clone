@@ -21,7 +21,6 @@ const SingleRoomInfo = () => {
 	const [isDisplayed, setIsDisplayed] = useState(false);
 
 	if (isNaN(Number(roomId))) {
-		console.log(typeof Number(roomId));
 		history.push("/my-rooms");
 		history.go("/my-rooms");
 	}
@@ -65,7 +64,6 @@ const SingleRoomInfo = () => {
 	const currentRoomBookings = Object.values(
 		useSelector((state) => state.bookings)
 	);
-
 
 	//Will delete a room an redirect user to home screen
 	const deleteARoom = () => {
@@ -123,11 +121,10 @@ const SingleRoomInfo = () => {
 									currentRoomReviews[0] !==
 										"Room couldn't be found" &&
 									currentRoomReviews.map((review) => {
-										console.log(review)
 										return (
 											<Reviews
 												review={review}
-												key={review}
+												key={review.id}
 											></Reviews>
 										);
 									})}

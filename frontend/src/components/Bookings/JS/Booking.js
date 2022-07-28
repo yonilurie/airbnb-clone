@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 const Booking = ({ booking, reviewDisabled }) => {
-
+console.log(booking)
 	const [startYear, startMonth, startDay] = booking.startDate.split("-");
 	const [endYear, endMonth, endDay] = booking.endDate.split("-");
 	const months = [
