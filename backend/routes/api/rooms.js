@@ -75,8 +75,6 @@ const validateRoomId = [
 	handleValidationErrors,
 ];
 
-
-
 //Validate review params
 const validateReview = [
 	check("review")
@@ -101,8 +99,6 @@ const checkImage = [
 	check("url").exists().withMessage("Must include image URL"),
 	handleValidationErrors,
 ];
-
-
 
 //validate query
 const checkQuery = [
@@ -145,7 +141,6 @@ const checkQuery = [
 	handleValidationErrors,
 ];
 
-
 //Edit an existing review
 router.put(
 	"/:roomId/reviews/:reviewId",
@@ -157,16 +152,13 @@ router.put(
 
 		//Check if a room with that ID exists
 		let room = await Room.findByPk(roomId);
+		console.log(room);
 		//Check if room exists
 		if (!room) return res.json(noRoomError());
 		//Find review that needs editing
 		let reviewToEdit = await Review.findByPk(reviewId);
 		//if it doesnt exist or belongs to the wrong room
-		if (
-			!reviewToEdit ||
-			reviewToEdit.id !== Number(id) ||
-			reviewToEdit.roomId !== Number(roomId)
-		) {
+		if (!reviewToEdit || reviewToEdit.roomId !== Number(roomId)) {
 			return res.json(noRoomError());
 		}
 
@@ -176,15 +168,14 @@ router.put(
 
 		reviewToEdit.review = review;
 		reviewToEdit.stars = stars;
-		reviewToEdit.save();
+		await reviewToEdit.save();
 
 		res.status = 200;
 		return res.json(reviewToEdit);
 	}
 );
 
-
-//Delete and existing review
+//Delete an existing review
 router.delete(
 	"/:roomId/reviews/:reviewId",
 	[validateRoomId, restoreUser, requireAuth],
@@ -468,11 +459,11 @@ router.post(
 			};
 			return res.json(err);
 		}
-
+		newReview.firstName = user.firstName;
 		res.status = 200;
 		return res.json(newReview);
-	});
-
+	}
+);
 
 //Search all rooms with optional parameters
 router.get("/search", checkQuery, async (req, res) => {
@@ -600,7 +591,6 @@ router.get("/:roomId", validateRoomId, async (req, res) => {
 	return res.json(room);
 });
 
-
 //Get all Rooms
 router.get("/", async (req, res) => {
 	const rooms = await Room.findAll({});
@@ -622,14 +612,6 @@ router.get("/", async (req, res) => {
 	res.status = 200;
 	return res.json(rooms);
 });
-
-
-
-
-
-
-
-
 
 //Delete room image
 router.delete(
@@ -689,7 +671,6 @@ router.post(
 		return res.json(room);
 	}
 );
-
 
 //delete a spot
 router.delete("/:roomId", [restoreUser, requireAuth], async (req, res) => {
@@ -789,8 +770,6 @@ router.post(
 		return res.json(newImage);
 	}
 );
-
-
 
 //------------- Functions
 

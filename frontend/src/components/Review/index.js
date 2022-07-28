@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useHistory, Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { create, getRoomReviews } from "../../store/reviews";
+import { create, getRoomReviews, deleteAReview } from "../../store/reviews";
+import Reviews from "../Rooms/JS/Reviews";
+import EditReviewModal from "./JS/EditReviewModal";
 
 function CreateReview() {
 	const history = useHistory();
@@ -12,6 +14,7 @@ function CreateReview() {
 	const [review, setReview] = useState("");
 	const [validationErrors, setValidationErrors] = useState([]);
 	const [isSubmitted, setIsSubmitted] = useState(false);
+	const [showModal, setShowModal] = useState(false);
 
 	//Get reviews for the room to check if user has already made one
 	useEffect(() => {
@@ -30,7 +33,7 @@ function CreateReview() {
 		}
 
 		setValidationErrors(errors);
-	}, [stars, review]);
+	}, [stars, review, dispatch]);
 
 	const sessionuser = useSelector((state) => state.session.user);
 	const reviewsArray = Object.values(useSelector((state) => state.reviews));
@@ -38,7 +41,7 @@ function CreateReview() {
 	if (!sessionuser) return <Redirect to="/" />;
 
 	//Check reviews for one made by the user
-	const usersReview = reviewsArray.find(
+	let usersReview = reviewsArray.find(
 		(review) => review.userId == sessionuser.id
 	);
 
@@ -57,8 +60,20 @@ function CreateReview() {
 
 		setIsSubmitted(true);
 	};
+
+	const deleteReview = (e) => {
+		e.preventDefault();
+		const data = [usersReview.id, roomId];
+		dispatch(deleteAReview(data));
+	};
+
 	return (
 		<>
+			<EditReviewModal
+				review={usersReview}
+				showModal={showModal}
+				setShowModal={setShowModal}
+			></EditReviewModal>
 			{usersReview === undefined && (
 				<form onSubmit={handleSubmit}>
 					<h1>Review</h1>
@@ -92,11 +107,11 @@ function CreateReview() {
 			{usersReview !== undefined && (
 				<div>
 					<h1>Review already created</h1>
-					<div className="review">
-						<div>{usersReview.User.firstName}</div>
-						<div>{usersReview.createdAt.split("-")[0]}</div>
-						<div>{usersReview.review}</div>
-					</div>
+					<Reviews review={usersReview}></Reviews>
+					<button onClick={() => setShowModal(true)}>
+						Edit Review
+					</button>
+					<button onClick={deleteReview}>Delete Review</button>
 				</div>
 			)}
 		</>
