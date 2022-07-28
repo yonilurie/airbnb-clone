@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useHistory, useParams } from "react-router-dom";
 import { editAReview } from "../../../store/reviews";
 import { getRoomReviews } from "../../../store/reviews";
 const EditReviewFormModal = ({ showModal, setShowModal, review }) => {
 	const dispatch = useDispatch();
-
+    const history = useHistory();
+    const {roomId} = useParams()
 	//State
 	const [stars, setStars] = useState(review.stars);
 	const [reviewMessage, setReviewMessage] = useState(review.review);
@@ -19,8 +21,9 @@ const EditReviewFormModal = ({ showModal, setShowModal, review }) => {
 			review: reviewMessage,
 		};
 
-        dispatch(editAReview([newReview, review.id, review.roomId]));
-        dispatch(getRoomReviews(review.roomId))
+		dispatch(editAReview([newReview, review.id, review.roomId]));
+		history.push(`/rooms/${roomId}`);
+
 		setShowModal(false);
 		return;
 	};
