@@ -20,6 +20,7 @@ const Bookings = () => {
 	if (!sessionuser) return <Redirect to="/" />;
 
 	const home = () => {
+	
 		history.push("/");
 	};
 
