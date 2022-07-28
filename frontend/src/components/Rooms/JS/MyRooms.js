@@ -10,6 +10,7 @@ import "../CSS/RoomContainer.css";
 const MyRooms = () => {
 	const dispatch = useDispatch();
 	const sessionuser = useSelector((state) => state.session.user);
+	
 	useEffect(() => {
 		dispatch(getMyRoomsData());
 	}, []);

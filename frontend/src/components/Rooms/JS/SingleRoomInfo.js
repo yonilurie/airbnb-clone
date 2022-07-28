@@ -50,7 +50,7 @@ const SingleRoomInfo = () => {
 
 	useEffect(() => {
 		document.title = `Room ${roomId}`;
-	}, []);
+	}, [roomId]);
 
 	//Assign room, images, and reviews to variables for easier access
 	const currentRoom = useSelector((state) => state.currentRoom);
@@ -61,9 +61,9 @@ const SingleRoomInfo = () => {
 		useSelector((state) => state.reviews)
 	);
 
-	const currentRoomBookings = Object.values(
-		useSelector((state) => state.bookings)
-	);
+	// const currentRoomBookings = Object.values(
+	// 	useSelector((state) => state.bookings)
+	// );
 
 	//Will delete a room an redirect user to home screen
 	const deleteARoom = () => {
@@ -118,15 +118,14 @@ const SingleRoomInfo = () => {
 							</h2>
 							<div className="reviews">
 								{currentRoomReviews.length > 0 &&
-									currentRoomReviews[0] !==
-										"Room couldn't be found" &&
+									typeof currentRoomReviews[0] === 'object' &&
 									currentRoomReviews.map((review) => {
 										console.log("CURRENT ROOM REVIEWS",currentRoomReviews)
 										console.log("INDIVIDUAL REVIEW", review)
 										return (
 											<Reviews
 												review={review}
-												// key={review.id}
+												key={review.id}
 											></Reviews>
 										);
 									})}
