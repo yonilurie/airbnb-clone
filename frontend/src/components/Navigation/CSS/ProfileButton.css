@@ -27,6 +27,8 @@ svg {
 	z-index: 2;
 	cursor: pointer;
 	background-color: #ffffff;
+	width: 77px;
+	height: 42px;
 }
 
 .profile-button-options,
@@ -42,8 +44,30 @@ svg {
 	overflow: hidden;
 }
 
+.profile-button-info {
+	cursor: auto;
+	color: rgb(34, 34, 34);
+	font-weight: 600;
+}
+
+.profile-button-info.trips {
+	box-sizing: border-box;
+	border-bottom: solid 1px rgb(221, 221, 221);
+	cursor: pointer;
+	color: rgb(34, 34, 34);
+	font-weight: 600;
+}
+
+.profile-button-options.logout {
+	box-sizing: border-box;
+	border-top: solid 1px rgb(221, 221, 221);
+}
+
 .profile-button-options:hover {
 	background-color: hsl(0, 0%, 97%);
+}
+.profile-button-options:active {
+	background-color: white;
 }
 
 .profile-button:hover {

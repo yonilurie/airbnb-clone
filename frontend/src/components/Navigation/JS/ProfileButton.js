@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import LoginFormModal from "../../LoginFormModal";
 import SessionLinks from "./SessionLinks";
 
-
 import * as sessionActions from "../../../store/session";
 import "../CSS/ProfileButton.css";
 
@@ -119,14 +118,14 @@ function ProfileButton({ user }) {
 					{user && (
 						<>
 							<div className="profile-button-info" hidden={!user}>
-								{user && user.username}
+								User: {user.firstName + " " + user.lastName}
 							</div>
 							<div className="profile-button-info" hidden={!user}>
-								{user && user.email}
+								E-mail: {user.email}
 							</div>
 							<NavLink
 								to="/trips"
-								className="profile-button-options"
+								className="profile-button-info  profile-button-options trips"
 							>
 								Trips
 							</NavLink>
@@ -145,7 +144,7 @@ function ProfileButton({ user }) {
 								My Rooms
 							</NavLink>
 
-							<li className="profile-button-options">
+							<li className="profile-button-options logout">
 								<div onClick={logout}>Log Out</div>
 							</li>
 						</>

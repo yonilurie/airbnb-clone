@@ -10,9 +10,10 @@ html {
 	}
 }
 
+html,
 body {
-	padding-right: 80px;
-	padding-left: 80px;
+	margin: 0;
+	height: 100%;
 }
 
 textarea {

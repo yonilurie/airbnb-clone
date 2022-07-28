@@ -40,14 +40,14 @@ function Navigation({ isLoaded }) {
 	}
 	return (
 		<div className="nav-container">
-			<ul>
-				<li>
+			
+				<div>
 					<NavLink exact to="/" className="nav-link">
 						<img src={logo} alt="logo" id="logo"></img>
 					</NavLink>
-				</li>
+				</div>
 
-				<li>
+				<div>
 					{isLoaded && sessionLinks && (
 						<ProfileButton
 							className="session-links"
@@ -55,8 +55,8 @@ function Navigation({ isLoaded }) {
 							sessionLinks={sessionLinks}
 						></ProfileButton>
 					)}
-				</li>
-			</ul>
+				</div>
+		
 		</div>
 	);
 }
