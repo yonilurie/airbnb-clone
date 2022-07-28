@@ -24,6 +24,28 @@ a {
 	height: 72px;
 }
 
+.current-bookings-empty-text {
+	box-sizing: border-box;
+	padding: 20px;
+}
+
+.empty-bookings-placeholder {
+	display: flex;
+	margin-top: 20px;
+	justify-content: center;
+	width: fit-content;
+	align-items: center;
+	border: solid 1px rgb(221, 221, 221);
+	border-radius: 12px;
+}
+
+.empty-bookings-img {
+	object-fit: cover;
+	border-top-left-radius: 0px;
+	border-bottom-left-radius: 0px;
+	margin-left: -10px;
+}
+
 .booking {
 	display: flex;
 	width: 200px;

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import ReviewFormModal from "../Review";
-const Booking = ({ booking }) => {
+const Booking = ({ booking, reviewDisabled }) => {
 	const [showModal, setShowModal] = useState(false);
 
 	const [startYear, startMonth, startDay] = booking.startDate.split("-");
@@ -42,9 +42,6 @@ const Booking = ({ booking }) => {
 	const durationEndDay = Number(endDay.slice(0, 2));
 	bookingDuration[1] = `${durationStartDay}-${durationEndDay},`;
 
-
-
-
 	return (
 		<div className="single-booking-container">
 			<NavLink to={`/rooms/${booking.Room.id}`} className="booking">
@@ -63,8 +60,11 @@ const Booking = ({ booking }) => {
 					<div className="duration">{bookingDuration.join(" ")}</div>
 				</div>
 			</NavLink>
-
-			<NavLink to={`/add-review/${booking.Room.id}`} >Add review</NavLink>
+			{!reviewDisabled && (
+				<NavLink to={`/add-review/${booking.Room.id}`}>
+					Add review
+				</NavLink>
+			)}
 		</div>
 	);
 };

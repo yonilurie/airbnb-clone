@@ -3,7 +3,7 @@ import { useParams, useHistory, Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { create, getRoomReviews } from "../../store/reviews";
 
-function CreateReview({ setShowModal }) {
+function CreateReview() {
 	const history = useHistory();
 	const dispatch = useDispatch();
 	const { roomId } = useParams();
@@ -12,7 +12,6 @@ function CreateReview({ setShowModal }) {
 	const [review, setReview] = useState("");
 	const [validationErrors, setValidationErrors] = useState([]);
 	const [isSubmitted, setIsSubmitted] = useState(false);
-	const [hasReviewed, setHasReviewed] = useState(false);
 
 	//Get reviews for the room to check if user has already made one
 	useEffect(() => {
@@ -42,8 +41,6 @@ function CreateReview({ setShowModal }) {
 	const usersReview = reviewsArray.find(
 		(review) => review.userId == sessionuser.id
 	);
-
-	console.log(usersReview);
 
 	//On submit if errors are present, setErrors and they will be rendered to user
 	const handleSubmit = async (e) => {
