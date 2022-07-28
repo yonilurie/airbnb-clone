@@ -40,6 +40,7 @@ const deleteReview = (roomId) => {
 //Get al reviews of a room by its id
 export const getRoomReviews = (roomId) => async (dispatch) => {
 	const roomIdNumber = Number(roomId);
+	console.log(roomIdNumber)
 	const response = await fetch(`/api/rooms/${roomIdNumber}/reviews`);
 	const data = await response.json();
 

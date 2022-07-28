@@ -1,9 +1,8 @@
-import "../CSS/Review.css"
-
+import "../CSS/Review.css";
 
 const Reviews = ({ review }) => {
 	const [year, month] = review.createdAt.split("-");
-
+	console.log(review);
 	const months = [
 		"January",
 		"February",
@@ -30,10 +29,8 @@ const Reviews = ({ review }) => {
 					<div className="Date">
 						{reviewMonth} {year}
 					</div>
-                </div>
-                <div className="review-content">
-                    {review.review}
-                </div>
+				</div>
+				<div className="review-content">{review.review}</div>
 			</div>
 		</div>
 	);

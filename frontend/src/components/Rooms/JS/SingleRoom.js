@@ -7,17 +7,18 @@ import "../CSS/SingleRoom.css";
 function SingleRoom({ room }) {
 	const dispatch = useDispatch();
 	const history = useHistory();
-	const { roomId } = useParams()
-	
-	useEffect(() => {
-		dispatch(getRoomReviews(roomId))
-	}, [])
+	const { roomId } = useParams();
 
+	useEffect(() => {
+		if (roomId) {
+			dispatch(getRoomReviews(roomId));
+		}
+	}, [dispatch]);
 
 	//Redirects user to room they click on
 	const showRoomDetails = (e) => {
 		let path = `/rooms/${room.id}`;
-				window.open(path)
+		window.open(path);
 	};
 	console.log(room);
 	return (
