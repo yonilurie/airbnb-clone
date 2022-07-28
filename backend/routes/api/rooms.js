@@ -1,8 +1,9 @@
 const express = require("express");
 const { requireAuth, restoreUser } = require("../../utils/auth");
-const { Room, UserRoomImage } = require("../../db/models");
+const { Room, UserRoomImage, Review } = require("../../db/models");
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
+const sequelize = require("sequelize");
 const router = express.Router();
 
 //----------------- Validations
@@ -214,6 +215,18 @@ router.get("/", [restoreUser, requireAuth], async (req, res) => {
 	let rooms = await Room.findAll({
 		where: { ownerId: userId },
 	});
+
+	for (let i = 0; i < rooms.length; i++) {
+		let reviewInfo = await Review.findAll({
+			where: { roomId: rooms[i].id },
+			attributes: [
+				[sequelize.fn("COUNT", sequelize.col("roomId")), "numReviews"],
+				[sequelize.fn("AVG", sequelize.col("stars")), "avgStarRating"],
+			],
+		});
+		const avg = reviewInfo[0].dataValues.avgStarRating;
+		rooms[i].dataValues.avgStarRating = avg;
+	}
 
 	res.status = 200;
 	return res.json(rooms);

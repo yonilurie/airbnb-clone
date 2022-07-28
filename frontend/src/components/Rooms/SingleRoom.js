@@ -13,7 +13,7 @@ function SingleRoom({ room }) {
 		let path = `/rooms/${room.id}`;
 		history.push(path);
 	};
-
+	console.log(room);
 	return (
 		<div className="room" onClick={(e) => showRoomDetails(e)}>
 			<div className="favorite">♥️</div>
