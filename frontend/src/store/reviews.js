@@ -40,7 +40,7 @@ const deleteReview = (roomId) => {
 //Get al reviews of a room by its id
 export const getRoomReviews = (roomId) => async (dispatch) => {
 	const roomIdNumber = Number(roomId);
-	console.log(roomIdNumber)
+	
 	const response = await fetch(`/api/rooms/${roomIdNumber}/reviews`);
 	const data = await response.json();
 
@@ -110,7 +110,7 @@ const reviewsReducer = (state = initialState, action) => {
 
 		case CREATE_REVIEW: {
 			const review = action.reviewInfo;
-			console.log("REVIEW", action.reviewInfo)
+			
 			newState = { ...state, review };
 			return newState;
 		}
@@ -123,7 +123,7 @@ const reviewsReducer = (state = initialState, action) => {
 		}
 
 		case DELETE_REVIEW: {
-			console.log(action.reviews)
+			
 			newState = { ...action.reviews };
 			return newState;
 		}

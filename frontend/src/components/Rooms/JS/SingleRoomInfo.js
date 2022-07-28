@@ -120,8 +120,7 @@ const SingleRoomInfo = () => {
 								{currentRoomReviews.length > 0 &&
 									typeof currentRoomReviews[0] === 'object' &&
 									currentRoomReviews.map((review) => {
-										console.log("CURRENT ROOM REVIEWS",currentRoomReviews)
-										console.log("INDIVIDUAL REVIEW", review)
+								
 										return (
 											<Reviews
 												review={review}

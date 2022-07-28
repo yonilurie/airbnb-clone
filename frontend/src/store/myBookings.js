@@ -18,7 +18,7 @@ export const getAUsersBookings = () => async (dispatch) => {
 	const response = await csrfFetch("/api/bookings");
 
     const data = await response.json();
-    console.log(data)
+    
 	dispatch(getUserBookings(data));
 	return data;
 };

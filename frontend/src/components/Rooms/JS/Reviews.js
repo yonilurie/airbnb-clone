@@ -2,7 +2,7 @@ import "../CSS/Review.css";
 
 const Reviews = ({ review }) => {
 	const [year, month] = review.createdAt.split("-");
-	console.log(review);
+
 	const months = [
 		"January",
 		"February",

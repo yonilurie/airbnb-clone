@@ -39,7 +39,7 @@ function CreateReview() {
 	const reviewsArray = Object.values(useSelector((state) => state.reviews));
 
 	if (!sessionuser) return <Redirect to="/" />;
-	console.log(reviewsArray[0].userId);
+
 	//Check reviews for one made by the user
 	let usersReview = reviewsArray.find(
 		(review) => review.userId == sessionuser.id

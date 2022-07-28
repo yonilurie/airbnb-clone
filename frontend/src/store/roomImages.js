@@ -27,7 +27,7 @@ const imagesReducer = (state = initialState, action) => {
 	let newState;
 	switch (action.type) {
 		case GET_IMAGES: {
-			console.log(action);
+			
 			newState = Object.assign({}, action.room.images);
 			return newState;
 		}

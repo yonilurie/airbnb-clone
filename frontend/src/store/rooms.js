@@ -82,7 +82,7 @@ export const editRoom = (roomEdits) => async (dispatch) => {
 	});
 
 	const data = await response.json();
-	console.log(data);
+
 	dispatch(editARoom(data));
 };
 
@@ -107,7 +107,6 @@ const roomReducer = (state = initialState, action) => {
 			return newState;
 		}
 		case EDIT_ROOM: {
-			console.log("ACTION", action);
 			newState = { ...state };
 			newState[action.room.id] = action.room;
 			return newState;
