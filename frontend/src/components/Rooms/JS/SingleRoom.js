@@ -23,7 +23,7 @@ function SingleRoom({ room }) {
 	
 	return (
 		<div className="room" onClick={(e) => showRoomDetails(e)}>
-			<div className="favorite">♥️</div>
+			{/* <div className="favorite">♥️</div> */}
 			<img
 				src={room.previewImage}
 				alt={`image for room ${room.id}`}
@@ -33,15 +33,15 @@ function SingleRoom({ room }) {
 					{room.city}, {room.state}
 				</div>
 				{room.avgStarRating && (
-					<div className="room-detail star">
-						{Number(room.avgStarRating).toFixed(2)} Stars
+					<div className="room-detail">
+						<span className="star">★</span>{Number(room.avgStarRating).toFixed(2)}
 					</div>
 				)}
 
 				{!room.avgStarRating && (
 					<div className="room-detail star">No Reviews</div>
 				)}
-				<div className="room-detail availability">{"availability"}</div>
+				{/* <div className="room-detail availability">{"availability"}</div> */}
 				<div className="room-detail price">
 					<b style={{ color: "rgb(34, 34, 34)" }}>${room.price}</b>
 					night

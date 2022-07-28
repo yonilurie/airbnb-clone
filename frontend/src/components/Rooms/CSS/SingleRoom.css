@@ -1,24 +1,25 @@
 .room {
-	/* width: 312px;
-	height: 396px; */
 	font-size: 16px;
 	box-sizing: border-box;
-	display: block;
+	/* display: block; */
 	cursor: pointer;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	position: relative;
-	/* margin-block-end: 24px;
-	margin-block-start: 24px; */
+
+
 }
 
-.favorite {
+.star {
+	color: black;
+	font-size: 15px;
+}
+/* .favorite {
 	width: fit-content;
 	position: absolute;
 	top: 8px;
 	right: 8px;
-}
+} */
 
 .room-info {
 	display: grid;
