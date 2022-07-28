@@ -1,7 +1,7 @@
 import { csrfFetch } from "./csrf";
 
 //String literals for thunk action
-const GET_MY_ROOMS= "/api/rooms";
+const GET_MY_ROOMS= "/api/my-rooms";
 
 //Thunk actions
 const getMyRooms = (room) => {
@@ -15,7 +15,7 @@ const getMyRooms = (room) => {
 
 //Get info of a room
 export const getMyRoomsData = () => async (dispatch) => {
-	const response = await csrfFetch(`/api/rooms`);
+	const response = await csrfFetch(`/api/rooms/my-rooms`);
 
     const data = await response.json();
     

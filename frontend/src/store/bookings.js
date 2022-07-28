@@ -1,6 +1,6 @@
 
 
-const GET_ROOM_BOOKINGS = "/rooms/:roomId/bookings";
+const GET_ROOM_BOOKINGS = "/api/rooms/:roomId/bookings";
 
 
 const getRoomBookings = (bookings) => {
@@ -13,7 +13,7 @@ const getRoomBookings = (bookings) => {
 
 
 export const getARoomsBookings = (id) => async (dispatch) => {
-	const response = await fetch(`/rooms/${id}/bookings`);
+	const response = await fetch(`/api/rooms/${id}/bookings`);
 
 	const data = await response.json();
 	

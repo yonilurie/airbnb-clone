@@ -19,7 +19,7 @@ const createReview = (reviewInfo) => {
 
 export const getRoomReviews = (roomId) => async (dispatch) => {
 	const roomIdNumber = Number(roomId);
-	const response = await fetch(`/rooms/${roomIdNumber}/reviews`);
+	const response = await fetch(`/api/rooms/${roomIdNumber}/reviews`);
 	const data = await response.json();
 
 	dispatch(getReviews(data));
@@ -29,7 +29,7 @@ export const getRoomReviews = (roomId) => async (dispatch) => {
 export const create = (reviewData) => async (dispatch) => {
 	const [roomId, review] = reviewData;
 
-	const response = await csrfFetch(`/rooms/${Number(roomId)}/reviews`, {
+	const response = await csrfFetch(`/api/rooms/${Number(roomId)}/reviews`, {
 		method: "POST",
 		headers: {
 			contentType: "application/json",
