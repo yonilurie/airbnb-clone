@@ -121,6 +121,8 @@ const SingleRoomInfo = () => {
 									currentRoomReviews[0] !==
 										"Room couldn't be found" &&
 									currentRoomReviews.map((review) => {
+										console.log("CURRENT ROOM REVIEWS",currentRoomReviews)
+										console.log("INDIVIDUAL REVIEW", review)
 										return (
 											<Reviews
 												review={review}
