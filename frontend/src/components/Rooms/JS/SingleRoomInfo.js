@@ -65,7 +65,7 @@ const SingleRoomInfo = () => {
 	const currentRoomBookings = Object.values(
 		useSelector((state) => state.bookings)
 	);
-	console.log(currentRoomBookings[0]);
+
 
 	//Will delete a room an redirect user to home screen
 	const deleteARoom = () => {
@@ -123,10 +123,11 @@ const SingleRoomInfo = () => {
 									currentRoomReviews[0] !==
 										"Room couldn't be found" &&
 									currentRoomReviews.map((review) => {
+										console.log(review)
 										return (
 											<Reviews
 												review={review}
-												key={review.id}
+												key={review}
 											></Reviews>
 										);
 									})}
