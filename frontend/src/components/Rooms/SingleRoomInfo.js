@@ -8,8 +8,6 @@ import { getRoomInfo } from "../../store/CurrentRoom";
 import { deleteRoom } from "../../store/rooms";
 import { getARoomsBookings } from "../../store/bookings";
 
-
-
 import Reviews from "./Reviews";
 
 import "./SingleRoomInfo.css";
@@ -20,9 +18,13 @@ const SingleRoomInfo = () => {
 	const sessionuser = useSelector((state) => state.session.user);
 	const { roomId } = useParams();
 
-
-
 	const [isDisplayed, setIsDisplayed] = useState(false);
+
+	if (isNaN(Number(roomId))) {
+		console.log(typeof Number(roomId));
+		history.push("/my-rooms");
+		history.go("/my-rooms");
+	}
 
 	useEffect(() => {
 		setInterval(() => {
@@ -132,7 +134,6 @@ const SingleRoomInfo = () => {
 						</div>
 					)}
 
-				
 					{sessionuser && sessionuser.id === currentRoom.ownerId && (
 						<>
 							<button onClick={deleteARoom}>Delete</button>

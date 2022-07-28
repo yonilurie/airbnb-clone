@@ -224,7 +224,7 @@ Returns all the rooms.
 -   Request
 
     -   Method: GET
-    -   URL: /rooms
+    -   URL: /api/rooms
     -   Body: none
 
 -   Successful Response
@@ -265,7 +265,7 @@ Returns all the rooms owned (created) by the current user.
 -   Request
 
     -   Method: GET
-    -   URL: /api/rooms
+    -   URL: /api/rooms/my-rooms
     -   Body: none
 
 -   Successful Response
@@ -306,7 +306,7 @@ Returns the details of a room specified by its id.
 -   Request
 
     -   Method: GET
-    -   URL: /rooms/:roomId
+    -   URL: /api/rooms/:roomId
     -   Body: none
 
 -   Successful Response
@@ -625,7 +625,7 @@ Returns all the reviews that belong to a room specified by id.
 -   Request
 
     -   Method: GET
-    -   URL: /rooms/:roomId/reviews
+    -   URL: /api/rooms/:roomId/reviews
     -   Body: none
 
 -   Successful Response
@@ -679,7 +679,7 @@ Create and return a new review for a room specified by id.
 -   Request
 
     -   Method: POST
-    -   URL: /rooms/:roomId/reviews
+    -   URL: /api/rooms/:roomId/reviews
     -   Headers:
         -   Content-Type: application/json
     -   Body:
@@ -765,7 +765,7 @@ Update and return an existing review.
 -   Request
 
     -   Method: PUT
-    -   URL: /rooms/:roomId/reviews/:reviewId
+    -   URL: /api/rooms/:roomId/reviews/:reviewId
     -   Headers:
         -   Content-Type: application/json
     -   Body:
@@ -837,7 +837,7 @@ Delete an existing review.
 -   Request
 
     -   Method: DELETE
-    -   URL: /rooms/:roomId/reviews/:reviewId
+    -   URL: /api/rooms/:roomId/reviews/:reviewId
     -   Body: none
 
 -   Successful Response
@@ -923,7 +923,7 @@ Return all the bookings for a room specified by id.
 -   Request
 
     -   Method: GET
-    -   URL: /rooms/:roomId/bookings
+    -   URL: /api/rooms/:roomId/bookings
     -   Body: none
 
 -   Successful Response: If you ARE NOT the owner of the room.
@@ -996,7 +996,7 @@ Create and return a new booking from a room specified by id.
 -   Request
 
     -   Method: POST
-    -   URL: /rooms/:roomId/bookings
+    -   URL: /api/rooms/:roomId/bookings
     -   Body:
 
     ```json
@@ -1255,7 +1255,7 @@ Create and return a new image for a review specified by id.
 -   Request
 
     -   Method: POST
-    -   URL: /rooms/:roomId/reviews/:reviewId/add-image
+    -   URL: /api/rooms/:roomId/reviews/:reviewId/add-image
     -   Headers:
         -   Content-Type: application/json
     -   Body:
@@ -1355,7 +1355,7 @@ Delete an existing image.
 Delete an existing image.
 
 -   Require Authentication: true
--   Require proper authorization: Image must belong to the current user 
+-   Require proper authorization: Image must belong to the current user
 -   Request
 
     -   Method: DELETE
@@ -1398,7 +1398,7 @@ Return rooms filtered by query parameters.
 -   Request
 
     -   Method: GET
-    -   URL: /rooms/search
+    -   URL: /api/rooms/search
     -   Query Parameters
         -   page: integer, minimum: 0, maximum: 10, default: 0
         -   size: integer, minimum: 0, maximum: 20, default: 20
