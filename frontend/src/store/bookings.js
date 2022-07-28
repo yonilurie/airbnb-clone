@@ -41,9 +41,8 @@ const bookingsReducer = (state = initialState, action) => {
 	let newState;
 	switch (action.type) {
 		case GET_ROOM_BOOKINGS: {
-			console.log(action.bookings);
 			newState = Object.assign({}, action.bookings);
-			console.log(newState);
+
 			return newState;
 		}
 

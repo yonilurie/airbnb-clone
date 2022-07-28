@@ -56,6 +56,9 @@ const SingleRoomInfo = () => {
 		useSelector((state) => state.reviews)
 	);
 
+	const currentRoomBookings = Object.values(useSelector((state) => state.bookings));
+	console.log(currentRoomBookings[0]);
+
 	//Will delete a room an redirect user to home screen
 	const deleteARoom = () => {
 		dispatch(deleteRoom(roomId));
