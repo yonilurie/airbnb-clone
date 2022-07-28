@@ -8,6 +8,7 @@ import Rooms from "./components/Rooms";
 import CreateRoomForm from "./components/Rooms/CreateRoomForm";
 import EditRoomForm from "./components/Rooms/EditRoomForm";
 import MyRooms from "./components/Rooms/MyRooms";
+import Bookings from "./components/Bookings";
 import * as sessionActions from "./store/session";
 
 function App() {
@@ -31,11 +32,14 @@ function App() {
 					<Route path="/host-your-home">
 						<CreateRoomForm></CreateRoomForm>
 					</Route>
-					<Route path="/my-rooms" >
+					<Route path="/my-rooms">
 						<MyRooms></MyRooms>
 					</Route>
 					<Route path="/rooms/:roomId/edit">
 						<EditRoomForm></EditRoomForm>
+					</Route>
+					<Route>
+						<Bookings></Bookings>
 					</Route>
 					<Route>
 						<div>404: PAGE NOT FOUND</div>

@@ -4,6 +4,24 @@ module.exports = {
 	async up(queryInterface, Sequelize) {
 		return queryInterface.bulkInsert("Bookings", [
 			{
+				roomId: 6,
+				userId: 1,
+				startDate: new Date(2020, 6, 11),
+				endDate: new Date(2020, 6, 15),
+			},
+			{
+				roomId: 7,
+				userId: 1,
+				startDate: new Date(2020, 6, 11),
+				endDate: new Date(2020, 6, 15),
+			},
+			{
+				roomId: 1,
+				userId: 8,
+				startDate: new Date(2023, 6, 11),
+				endDate: new Date(2022, 6, 15),
+			},
+			{
 				roomId: 1,
 				userId: 3,
 				startDate: new Date(2022, 6, 11),

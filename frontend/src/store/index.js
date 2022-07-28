@@ -8,6 +8,7 @@ import reviewsReducer from "./reviews";
 import singleRoomReducer from "./CurrentRoom";
 import myRoomReducer from "./myRooms";
 import bookingsReducer from "./bookings";
+import myBookingsReducer from "./myBookings";
 
 const rootReducer = combineReducers({
 	session: sessionReducer,
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
 	currentRoom: singleRoomReducer,
 	myRooms: myRoomReducer,
 	bookings: bookingsReducer,
+	myBookings: myBookingsReducer,
 });
 
 let enhancer;

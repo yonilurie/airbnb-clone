@@ -1,0 +1,42 @@
+a {
+	width: fit-content;
+}
+
+.city {
+	font-size: 16px;
+	font-weight: 600;
+	line-height: 20px;
+}
+
+.owner,
+.duration {
+	font-size: 14px;
+	color: rgb(113, 113, 113);
+	font-weight: 400;
+	line-height: 20px;
+	white-space: normal;
+}
+
+.preview-image {
+	border-radius: 8px;
+	box-sizing: border-box;
+	width: 72px;
+	height: 72px;
+}
+
+.booking {
+	display: flex;
+	width: 200px;
+	height: 96px;
+	padding: 12px 0px;
+	justify-content: space-between;
+	flex-direction: row;
+}
+
+.past-bookings {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	gap: 0px 200px;
+}
