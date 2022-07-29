@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 
 import * as sessionActions from "../../../store/session";
 import "../CSS/LoginForm.css";
 
-function SignupForm({ showModal, setShowModal }) {
+function SignupForm({ setShowModal }) {
 	const dispatch = useDispatch();
 	//State
 	const [email, setEmail] = useState("");

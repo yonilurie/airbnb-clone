@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams, useHistory, NavLink } from "react-router-dom";
+import { useParams, useHistory} from "react-router-dom";
 
 import { getRoomImages } from "../../../store/roomImages";
 import { getRoomReviews } from "../../../store/reviews";
@@ -49,19 +49,19 @@ const SingleRoomInfo = () => {
 	//Get room info, images, and reviews
 	useEffect(() => {
 		dispatch(getRoomInfo(Number(roomId)));
-	}, [dispatch]);
+	}, [dispatch, roomId]);
 
 	useEffect(() => {
 		dispatch(getRoomImages(Number(roomId)));
-	}, [dispatch]);
+	}, [dispatch, roomId]);
 
 	useEffect(() => {
 		dispatch(getRoomReviews(Number(roomId)));
-	}, [dispatch]);
+	}, [dispatch, roomId]);
 
 	useEffect(() => {
 		dispatch(getARoomsBookings(Number(roomId)));
-	}, [dispatch]);
+	}, [dispatch, roomId]);
 
 	// useEffect(() => {
 	// 	if (currentRoom.Owner) {
@@ -136,9 +136,9 @@ const SingleRoomInfo = () => {
 									</div>
 								)}
 								{currentRoom.avgStarRating < 1 && (
-									<div>
-										No Reviews Yet {currentRoom.city},
-										{currentRoom.state},
+									<div className="room-reviews-and-location">
+										No Reviews Yet {currentRoom.city}, {' '}
+										{currentRoom.state}, {' '}
 										{currentRoom.country}
 									</div>
 								)}
@@ -161,12 +161,22 @@ const SingleRoomInfo = () => {
 								)}
 							</div>
 							{currentRoom.Owner && (
-								<h2>
-									Entire home hosted by{" "}
-									{currentRoom.Owner.firstName}
-								</h2>
+								<>
+									<h2>
+										Entire home hosted by{" "}
+										{currentRoom.Owner.firstName}
+									</h2>
+								</>
 							)}
 						</div>
+
+						{currentRoom.description && (
+							<div className="description-container">
+								<div className="description">
+									{currentRoom.description}
+								</div>
+							</div>
+						)}
 
 						{currentRoomReviews.length > 0 && (
 							<div className="reviews-container">

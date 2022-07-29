@@ -37,7 +37,7 @@ const EditRoomForm = () => {
 	//Get the info of the current room
 	useEffect(() => {
 		dispatch(getRoomInfo(roomId));
-	}, [dispatch]);
+	}, [dispatch, roomId]);
 
 	//Assign current room to variable
 

@@ -4,7 +4,7 @@ import * as sessionActions from "../../../store/session";
 
 import "../CSS/LoginForm.css";
 
-function LoginForm({ showModal, setShowModal }) {
+function LoginForm({ setShowModal }) {
 	const dispatch = useDispatch();
 
 	//State

@@ -1,14 +1,13 @@
 #logo {
 	width: 118px;
-	height: 64px ;  
+	height: 64px;
 	object-fit: fill !important;
 	padding-left: 0px;
 }
 
-.nav-items{
+.nav-items {
 	width: 100%;
 	max-width: 2150px;
-
 
 	height: 80px;
 	box-sizing: border-box;
@@ -19,10 +18,10 @@
 	align-items: center;
 }
 
-
 .nav-container {
 	width: 100%;
 	display: flex;
 	justify-content: center;
 	border-bottom: solid 1px #dedddd;
+	margin-bottom: 1rem;
 }

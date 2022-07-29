@@ -37,7 +37,6 @@ function ReviewForm({ setShowModal }) {
 			dispatch(getRoomReviews(roomId));
 
 			history.push(`/rooms/${roomId}`);
-			history.go(`/rooms/${roomId}`);
 		}
 
 		setIsSubmitted(true);
@@ -64,6 +63,7 @@ function ReviewForm({ setShowModal }) {
 						))}
 					</ul>
 				)}
+
 				<input
 					className="modal-input"
 					type="number"

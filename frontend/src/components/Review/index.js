@@ -20,7 +20,7 @@ function CreateReview() {
 	//Get reviews for the room to check if user has already made one
 	useEffect(() => {
 		dispatch(getRoomReviews(roomId));
-	}, []);
+	}, [dispatch, roomId]);
 
 	//Form validation
 	useEffect(() => {
@@ -43,7 +43,7 @@ function CreateReview() {
 
 	//Check reviews for one made by the user
 	let usersReview = reviewsArray.find(
-		(review) => review.userId == sessionuser.id
+		(review) => Number(review.userId) === Number(sessionuser.id)
 	);
 
 	//On submit if errors are present, setErrors and they will be rendered to user

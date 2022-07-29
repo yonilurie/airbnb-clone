@@ -5,8 +5,8 @@ import { editAReview } from "../../../store/reviews";
 import { getRoomReviews } from "../../../store/reviews";
 const EditReviewFormModal = ({ showModal, setShowModal, review }) => {
 	const dispatch = useDispatch();
-    const history = useHistory();
-    const {roomId} = useParams()
+	const history = useHistory();
+	const { roomId } = useParams();
 	//State
 	const [stars, setStars] = useState(review.stars);
 	const [reviewMessage, setReviewMessage] = useState(review.review);
@@ -49,22 +49,35 @@ const EditReviewFormModal = ({ showModal, setShowModal, review }) => {
 						))}
 					</ul>
 				)}
-				<input
-					className="modal-input"
-					type="number"
-					min="0"
-					max="5"
-					placeholder="Star rating from 1-5"
-					value={stars}
-					onChange={(e) => setStars(e.target.value)}
-					required
-				/>
-				<textarea
-					className="modal-input"
-					value={reviewMessage}
-					onChange={(e) => setReviewMessage(e.target.value)}
-					required
-				/>
+				<div>
+					<div className="modal-input-label" hidden={!stars}>
+						Stars
+					</div>
+
+					<input
+						className="modal-input"
+						type="number"
+						min="0"
+						max="5"
+						placeholder="Star rating from 1-5"
+						value={stars}
+						onChange={(e) => setStars(e.target.value)}
+						required
+					/>
+				</div>
+				<div className="input-container">
+					{" "}
+					<div className="modal-input-label" hidden={!stars}>
+						Review
+					</div>
+					<textarea
+						className="modal-input"
+						value={reviewMessage}
+						onChange={(e) => setReviewMessage(e.target.value)}
+						required
+					/>
+				</div>
+
 				<button type="submit" className="login-register-submit">
 					Submit Review
 				</button>

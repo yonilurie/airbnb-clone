@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import LoginFormModal from "../../LoginFormModal";
 import SessionLinks from "./SessionLinks";
@@ -10,7 +10,7 @@ import "../CSS/ProfileButton.css";
 
 function ProfileButton({ user }) {
 	const dispatch = useDispatch();
-	const sessionuser = useSelector((state) => state.session.user);
+	// const sessionuser = useSelector((state) => state.session.user);
 	//State
 	const [showMenu, setShowMenu] = useState(false);
 	const [showModal, setShowModal] = useState(false);

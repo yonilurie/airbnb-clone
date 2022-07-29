@@ -13,6 +13,24 @@
 .reviews {
 	display: flex;
 	flex-wrap: wrap;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.description-container {
+	display: flex;
+	justify-content: flex-start;
+	border-top: solid 1px rgb(221, 221, 221);
+	border-bottom: solid 1px rgb(221, 221, 221);
+	width: 60%;
+	padding: 20px;
+	align-self: flex-start;
+}
+
+.description {
+	font-size: 16px;
+	font-weight: 400;
+	color: #484848;
 }
 
 .room-content {
@@ -66,7 +84,6 @@
 	margin-bottom: 30px;
 	cursor: pointer;
 }
-
 
 .delete-btn:active,
 .edit-btn:active {

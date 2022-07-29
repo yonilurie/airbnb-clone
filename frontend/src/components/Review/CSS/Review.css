@@ -23,7 +23,7 @@
 	border-radius: 12px;
 	font-size: 16px;
 	color: rgb(255, 255, 255);
-	
+
 	height: 48px;
 	cursor: pointer;
 }
@@ -31,4 +31,15 @@
 .edit-btn:active,
 .delete-btn:active {
 	transform: scale(0.96);
+}
+
+.modal-input-label {
+	font-size: 10px;
+	position: absolute;
+	z-index: 2;
+	padding: 5px;
+	margin-top: 5px;
+	margin-left: 5px;
+
+	color: rgb(117, 117, 117);
 }
