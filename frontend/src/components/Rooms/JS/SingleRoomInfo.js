@@ -11,6 +11,7 @@ import { getARoomsBookings } from "../../../store/bookings";
 import Reviews from "./Reviews";
 
 import "../CSS/SingleRoomInfo.css";
+import { getMyRoomsData } from "../../../store/myRooms";
 
 const SingleRoomInfo = () => {
 	const dispatch = useDispatch();
@@ -72,7 +73,7 @@ const SingleRoomInfo = () => {
 	//Will delete a room an redirect user to home screen
 	const deleteARoom = () => {
 		dispatch(deleteRoom(roomId));
-		dispatch(getRooms());
+		dispatch(getMyRoomsData());
 		history.push("/my-rooms");
 	};
 
