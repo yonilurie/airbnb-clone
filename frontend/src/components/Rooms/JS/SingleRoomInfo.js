@@ -62,12 +62,12 @@ const SingleRoomInfo = () => {
 		dispatch(getARoomsBookings(Number(roomId)));
 	}, [dispatch]);
 
-	useEffect(() => {
-		if (currentRoom.Owner) {
-			const roomName = currentRoom.name;
-			document.title = `${roomName}`;
-		}
-	}, [currentRoom]);
+	// useEffect(() => {
+	// 	if (currentRoom.Owner) {
+	// 		const roomName = currentRoom.name;
+	// 		document.title = `${roomName}`;
+	// 	}
+	// }, [currentRoom]);
 
 	//Will delete a room an redirect user to home screen
 	const deleteARoom = () => {

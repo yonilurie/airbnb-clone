@@ -13,8 +13,8 @@ function Navigation({ isLoaded }) {
 	const dispatch = useDispatch();
 	const sessionuser = useSelector((state) => state.session.user);
 
-	const store = useSelector((state) => state);
-	console.log("STORE",store);
+	// const store = useSelector((state) => state);
+	// console.log("STORE",store);
 	//Determines what will render in the navbar depending on whether user is logged in
 	//Passed as prop to Profile button component
 	let sessionLinks;

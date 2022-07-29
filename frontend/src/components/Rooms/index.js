@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { getRooms } from "../../store/rooms";
-import { getRoomInfo } from "../../store/CurrentRoom";
 import SingleRoom from "./JS/SingleRoom";
 import "./CSS/RoomContainer.css";
 
@@ -15,8 +14,10 @@ function Rooms() {
 		dispatch(getRooms());
 	}, [dispatch]);
 
+	// useEffect(() => {
+	// 	document.title = "Airbnb Clone";
+	// }, []);
 	//Fetch all rooms from DB
-
 
 	return (
 		<div className="rooms-container">
