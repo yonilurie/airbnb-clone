@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { getRoomReviews } from "../../../store/reviews";
+
+import { getMyRoomsData } from "../../../store/myRooms";
 import "../CSS/SingleRoom.css";
 
 function SingleRoom({ room }) {
@@ -10,6 +12,7 @@ function SingleRoom({ room }) {
 	const { roomId } = useParams();
 
 	useEffect(() => {
+		dispatch(getMyRoomsData());
 		if (roomId) {
 			dispatch(getRoomReviews(roomId));
 		}
@@ -18,9 +21,9 @@ function SingleRoom({ room }) {
 	//Redirects user to room they click on
 	const showRoomDetails = (e) => {
 		let path = `/rooms/${room.id}`;
-		window.open(path);
+		history.push(path);
 	};
-	
+
 	return (
 		<div className="room" onClick={(e) => showRoomDetails(e)}>
 			{/* <div className="favorite">♥️</div> */}
@@ -34,7 +37,8 @@ function SingleRoom({ room }) {
 				</div>
 				{room.avgStarRating && (
 					<div className="room-detail">
-						<span className="star">★</span>{Number(room.avgStarRating).toFixed(2)}
+						<span className="star">★</span>
+						{Number(room.avgStarRating).toFixed(2)}
 					</div>
 				)}
 

@@ -8,10 +8,9 @@ import "./CSS/RoomContainer.css";
 function Rooms() {
 	const dispatch = useDispatch();
 
-
 	useEffect(() => {
 		dispatch(getRooms());
-	}, []);
+	}, [dispatch]);
 
 	//Fetch all rooms from DB
 	const rooms = Object.values(useSelector((state) => state.rooms));
@@ -22,14 +21,11 @@ function Rooms() {
 				{!rooms && <div>LOADING...</div>}
 				{rooms &&
 					rooms.map((room) => {
-					
 						return (
 							<SingleRoom room={room} key={room.id}></SingleRoom>
 						);
 					})}
 			</div>
-
-		
 		</div>
 	);
 }

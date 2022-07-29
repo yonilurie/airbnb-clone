@@ -5,7 +5,7 @@ import { useParams, useHistory, NavLink } from "react-router-dom";
 import { getRoomImages } from "../../../store/roomImages";
 import { getRoomReviews } from "../../../store/reviews";
 import { getRoomInfo } from "../../../store/CurrentRoom";
-import { deleteRoom } from "../../../store/rooms";
+import { deleteRoom, getRooms } from "../../../store/rooms";
 import { getARoomsBookings } from "../../../store/bookings";
 
 import Reviews from "./Reviews";
@@ -68,8 +68,10 @@ const SingleRoomInfo = () => {
 	//Will delete a room an redirect user to home screen
 	const deleteARoom = () => {
 		dispatch(deleteRoom(roomId));
-		history.push("/my-rooms");
-		history.go("/my-rooms");
+		dispatch(getRooms())
+		history.push("/");
+		// history.push("/my-rooms");
+	
 	};
 
 	return (
@@ -135,6 +137,7 @@ const SingleRoomInfo = () => {
 					{sessionuser && sessionuser.id === currentRoom.ownerId && (
 						<>
 							<button onClick={deleteARoom}>Delete</button>
+							
 							<NavLink to={`/rooms/${roomId}/edit`}>Edit</NavLink>
 						</>
 					)}

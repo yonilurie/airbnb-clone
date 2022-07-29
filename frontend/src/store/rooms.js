@@ -3,8 +3,8 @@ import { csrfFetch } from "./csrf";
 //String literals for thunk action
 const GET_ROOMS = "/api/rooms";
 const CREATE_ROOM = "/api/rooms/add";
-const DELETE_ROOM = "/api/rooms/:roomId";
-const EDIT_ROOM = "/api/rooms/:roomId";
+const DELETE_ROOM = "/api/rooms/:roomId/delete";
+const EDIT_ROOM = "/api/rooms/:roomId/edit";
 //Thunk actions
 //
 const getRoomsData = (rooms) => {
@@ -93,7 +93,7 @@ const roomReducer = (state = initialState, action) => {
 	let newState;
 	switch (action.type) {
 		case GET_ROOMS:
-			newState = Object.assign({}, action.rooms);
+			newState = { ...action.rooms };
 			return newState;
 
 		case CREATE_ROOM: {
@@ -103,7 +103,8 @@ const roomReducer = (state = initialState, action) => {
 		}
 		case DELETE_ROOM: {
 			newState = { ...state };
-			delete newState[action.roomId];
+
+			delete newState[action.id];
 			return newState;
 		}
 		case EDIT_ROOM: {

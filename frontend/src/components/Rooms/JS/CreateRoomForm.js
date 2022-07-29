@@ -11,16 +11,18 @@ const CreateRoomForm = () => {
 	const dispatch = useDispatch();
 
 	// State
-	const [name, setName] = useState("");
-	const [address, setAddress] = useState("");
-	const [city, setCity] = useState("");
+	const [name, setName] = useState(`test${Math.random()}`);
+	const [address, setAddress] = useState("test");
+	const [city, setCity] = useState("test");
 	const [state, setState] = useState("WA");
 	const [country, setCountry] = useState("United States");
-	const [latitude, setLatitude] = useState();
-	const [longitude, setLongitude] = useState();
-	const [description, setDescription] = useState("");
+	const [latitude, setLatitude] = useState(`${10 * Math.random()}`);
+	const [longitude, setLongitude] = useState(`${10 * Math.random()}`);
+	const [description, setDescription] = useState("test");
 	const [price, setPrice] = useState(100);
-	const [previewImage, setPreviewImage] = useState("");
+	const [previewImage, setPreviewImage] = useState(
+		"http://www.photoeverywhere.co.uk/east/melbourne/rialto_tower_melbourne.jpg"
+	);
 	const [validationErrors, setValidationErrors] = useState([]);
 	const [isLoaded, setIsLoaded] = useState(false);
 
@@ -87,7 +89,7 @@ const CreateRoomForm = () => {
 
 			//Redirect user to home page
 			history.push("/my-rooms");
-			history.go("/my-rooms");
+		
 		} else {
 			setIsLoaded(true);
 		}

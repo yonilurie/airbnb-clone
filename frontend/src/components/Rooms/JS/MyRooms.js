@@ -7,17 +7,19 @@ import SingleRoom from "./SingleRoom";
 
 import "../CSS/RoomContainer.css";
 
+
 const MyRooms = () => {
 	const dispatch = useDispatch();
 	const sessionuser = useSelector((state) => state.session.user);
-	
+
+	const rooms = Object.values(useSelector((state) => state.myRooms));
+
 	useEffect(() => {
 		dispatch(getMyRoomsData());
-	}, []);
+	}, [dispatch]);
 
 	//If the user is not logged in, redirect the user to home page
 
-	const rooms = Object.values(useSelector((state) => state.myRooms));
 	if (!sessionuser) return <Redirect to="/" />;
 
 	return (
