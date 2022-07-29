@@ -4,8 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getRoomReviews } from "../../../store/reviews";
 const Reviews = ({ review }) => {
+	console.log(review);
 	const dispatch = useDispatch();
 	const { roomId } = useParams();
+
 	useEffect(() => {
 		dispatch(getRoomReviews(Number(roomId)));
 	}, [dispatch, roomId]);
@@ -29,19 +31,23 @@ const Reviews = ({ review }) => {
 	const reviewMonth = months[Number(month) - 1];
 
 	return (
-		<div className="review">
-			<div key={review.id} className="review-content">
-				<div className="user-info">
-					<h3 className="review-user-name">
-						{review.User.firstName}
-					</h3>
-					<div className="Date">
-						{reviewMonth} {year}
+		<>
+			{review && (
+				<div className="review">
+					<div key={review.id} className="review-content">
+						<div className="user-info">
+							<h3 className="review-user-name">
+								{review.User.firstName}
+							</h3>
+							<div className="Date">
+								{reviewMonth} {year}
+							</div>
+						</div>
+						<div className="review-content">{review.review}</div>
 					</div>
 				</div>
-				<div className="review-content">{review.review}</div>
-			</div>
-		</div>
+			)}
+		</>
 	);
 };
 
