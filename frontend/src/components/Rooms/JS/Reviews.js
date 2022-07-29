@@ -4,9 +4,9 @@ import { useDispatch } from "react-redux";
 import { getRoomReviews } from "../../../store/reviews";
 const Reviews = ({ review }) => {
 	const dispatch = useDispatch()
-	useEffect(() => {
-		dispatch(getRoomReviews(Number(review.roomId)));
-	}, [review.roomId]);
+	// useEffect(() => {
+	// 	dispatch(getRoomReviews(Number(review.roomId)));
+	// }, [review.roomId]);
 
 	const [year, month] = review.createdAt.split("-");
 
