@@ -1,6 +1,6 @@
 import "../CSS/Review.css";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getRoomReviews } from "../../../store/reviews";
 const Reviews = ({ review }) => {
