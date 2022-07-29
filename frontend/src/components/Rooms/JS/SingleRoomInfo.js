@@ -56,7 +56,7 @@ const SingleRoomInfo = () => {
 
 	useEffect(() => {
 		dispatch(getRoomReviews(Number(roomId)));
-	}, [dispatch, roomId]);
+	}, [dispatch]);
 
 	useEffect(() => {
 		dispatch(getARoomsBookings(Number(roomId)));

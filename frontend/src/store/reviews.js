@@ -40,7 +40,7 @@ const deleteReview = (roomId) => {
 //Get al reviews of a room by its id
 export const getRoomReviews = (roomId) => async (dispatch) => {
 	const roomIdNumber = Number(roomId);
-	
+
 	const response = await fetch(`/api/rooms/${roomIdNumber}/reviews`);
 	const data = await response.json();
 
@@ -68,13 +68,16 @@ export const create = (reviewData) => async (dispatch) => {
 export const editAReview = (reviewData) => async (dispatch) => {
 	const [review, reviewId, roomId] = reviewData;
 
-	const response = await csrfFetch(`/api/rooms/${roomId}/reviews/${reviewId}`, {
-		method: "PUT",
-		headers: {
-			contentType: "application/json",
-		},
-		body: JSON.stringify(review),
-	});
+	const response = await csrfFetch(
+		`/api/rooms/${roomId}/reviews/${reviewId}`,
+		{
+			method: "PUT",
+			headers: {
+				contentType: "application/json",
+			},
+			body: JSON.stringify(review),
+		}
+	);
 
 	const data = await response.json();
 
@@ -110,20 +113,24 @@ const reviewsReducer = (state = initialState, action) => {
 
 		case CREATE_REVIEW: {
 			const review = action.reviewInfo;
-			
+
 			newState = { ...state, review };
 			return newState;
 		}
 		case EDIT_REVIEW: {
-			const review = action.review;
-
 			newState = { ...state };
-			newState[review.id] = review;
+
+			for (const key in newState) {
+				if (Number(newState[key].id) === Number(action.review.id)) {
+					newState[key] = action.review;
+					return newState;
+				}
+			}
+
 			return newState;
 		}
 
 		case DELETE_REVIEW: {
-			
 			newState = { ...action.reviews };
 			return newState;
 		}

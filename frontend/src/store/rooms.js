@@ -104,12 +104,26 @@ const roomReducer = (state = initialState, action) => {
 		case DELETE_ROOM: {
 			newState = { ...state };
 
-			delete newState[action.id];
+			for (const key in newState) {
+				if (Number(newState[key].id) === Number(action.id)) {
+					delete newState[key].id;
+					return newState;
+				}
+			}
+
+			// delete newState[action.id];
 			return newState;
 		}
 		case EDIT_ROOM: {
 			newState = { ...state };
-			newState[action.room.id] = action.room;
+
+			for (const key in newState) {
+				if (Number(newState[key].roomId) === Number(action.room.id)) {
+					newState[key].roomId = action.room;
+					return newState;
+				}
+			}
+
 			return newState;
 		}
 		default:

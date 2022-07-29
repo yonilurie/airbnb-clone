@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect , useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { getRooms } from "../../store/rooms";
@@ -7,7 +7,7 @@ import "./CSS/RoomContainer.css";
 
 function Rooms() {
 	const dispatch = useDispatch();
-
+	const [isDisplayed, setIsDisplayed] = useState(false);
 	const rooms = Object.values(useSelector((state) => state.rooms));
 
 	useEffect(() => {
@@ -19,10 +19,18 @@ function Rooms() {
 	// }, []);
 	//Fetch all rooms from DB
 
+	useEffect(() => {
+		const timeout = setTimeout(() => {
+			setIsDisplayed(true);
+		}, 300);
+
+		return () => clearTimeout(timeout);
+	}, []);
+
 	return (
 		<div className="rooms-container">
-			{!rooms && <div>LOADING...</div>}
-			{rooms &&
+			{!rooms && !isDisplayed &&  <div>LOADING...</div>}
+			{rooms  && isDisplayed&&
 				rooms.map((room) => {
 					return <SingleRoom room={room} key={room.id}></SingleRoom>;
 				})}

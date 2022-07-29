@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getMyRoomsData } from "../../../store/myRooms";
@@ -10,8 +10,16 @@ import "../CSS/RoomContainer.css";
 const MyRooms = () => {
 	const dispatch = useDispatch();
 	const sessionuser = useSelector((state) => state.session.user);
-
+	const [isDisplayed, setIsDisplayed] = useState();
 	const rooms = Object.values(useSelector((state) => state.myRooms));
+
+	useEffect(() => {
+		const timeout = setTimeout(() => {
+			setIsDisplayed(true);
+		}, 300);
+
+		return () => clearTimeout(timeout);
+	}, []);
 
 	useEffect(() => {
 		dispatch(getMyRoomsData());
@@ -24,15 +32,20 @@ const MyRooms = () => {
 	return (
 		<>
 			<h1>Your rooms</h1>
-			<div className="rooms-container">
-				{rooms &&
-					rooms.length > 0 &&
-					rooms.map((room) => {
-						return (
-							<SingleRoom room={room} key={room.id}></SingleRoom>
-						);
-					})}
-			</div>
+			{isDisplayed && (
+				<div className="rooms-container">
+					{rooms &&
+						rooms.length > 0 &&
+						rooms.map((room) => {
+							return (
+								<SingleRoom
+									room={room}
+									key={room.id}
+								></SingleRoom>
+							);
+						})}
+				</div>
+			)}
 		</>
 	);
 };
