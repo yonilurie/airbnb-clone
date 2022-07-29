@@ -1,5 +1,6 @@
 .rooms-container {
 	width: 100%;
+	max-width: 2346px;
 	display: flex;
 	flex-wrap: wrap;
 	align-items: stretch;

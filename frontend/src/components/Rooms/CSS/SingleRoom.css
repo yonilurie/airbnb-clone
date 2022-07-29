@@ -6,8 +6,6 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-
-
 }
 
 .star {
@@ -56,6 +54,8 @@
 img {
 	width: 312px;
 	height: 296px;
+
 	object-fit: fill;
 	border-radius: 12px;
+	object-fit: cover;
 }

@@ -104,7 +104,7 @@ function ProfileButton({ user }) {
 								setShowModal={setShowModal}
 							/>
 							<div
-								className="profile-button-options"
+								className="profile-button-options signup"
 								onClick={() => {
 									setShowModal(true);
 									setInteraction("signup");

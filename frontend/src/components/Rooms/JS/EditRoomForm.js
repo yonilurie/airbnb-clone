@@ -137,7 +137,7 @@ const EditRoomForm = () => {
 			setPrice(100);
 
 			//Redirect user to home page
-			history.push("/my-rooms");
+			history.push(`/rooms/${roomId}`);
 		} else {
 			setIsLoaded(true);
 		}

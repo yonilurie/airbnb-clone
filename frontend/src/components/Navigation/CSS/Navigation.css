@@ -2,7 +2,8 @@
 
 #logo {
 	width: 118px;
-	height: 64px;
+	height: 64px ;  
+	object-fit: fill !important;
 	padding-left: 0px;
 }
 

@@ -98,3 +98,9 @@ svg {
 	justify-content: center;
 	align-items: center;
 }
+
+
+.profile-button-options.signup {
+	box-sizing: border-box;
+	border-top:  1px solid #ebebeb;
+}

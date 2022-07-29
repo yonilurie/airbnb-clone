@@ -21,8 +21,7 @@ const SingleRoomInfo = () => {
 	const [isDisplayed, setIsDisplayed] = useState(false);
 
 	if (isNaN(Number(roomId))) {
-		history.push("/my-rooms");
-		history.go("/my-rooms");
+		history.push("/");
 	}
 
 	useEffect(() => {
@@ -30,6 +29,19 @@ const SingleRoomInfo = () => {
 			setIsDisplayed(true);
 		}, 100);
 	}, []);
+
+	//Assign room, images, and reviews to variables for easier access
+	const currentRoom = useSelector((state) => state.currentRoom);
+	const currentRoomImages = Object.values(
+		useSelector((state) => state.roomImages)
+	);
+	const currentRoomReviews = Object.values(
+		useSelector((state) => state.reviews)
+	);
+
+	// const currentRoomBookings = Object.values(
+	// 	useSelector((state) => state.bookings)
+	// );
 
 	//Get room info, images, and reviews
 	useEffect(() => {
@@ -49,21 +61,11 @@ const SingleRoomInfo = () => {
 	}, [dispatch, roomId]);
 
 	useEffect(() => {
-		document.title = `Room ${roomId}`;
-	}, [roomId]);
-
-	//Assign room, images, and reviews to variables for easier access
-	const currentRoom = useSelector((state) => state.currentRoom);
-	const currentRoomImages = Object.values(
-		useSelector((state) => state.roomImages)
-	);
-	const currentRoomReviews = Object.values(
-		useSelector((state) => state.reviews)
-	);
-
-	// const currentRoomBookings = Object.values(
-	// 	useSelector((state) => state.bookings)
-	// );
+		if (currentRoom.Owner) {
+			const roomName = currentRoom.name;
+			document.title = `${roomName}`;
+		}
+	}, [currentRoom]);
 
 	//Will delete a room an redirect user to home screen
 	const deleteARoom = () => {
@@ -73,49 +75,74 @@ const SingleRoomInfo = () => {
 	};
 
 	return (
-		<>
+		<div className="content-container">
 			{isDisplayed && currentRoom && (
-				<div>
-					<h1 className="room-name">{currentRoom.name}</h1>
-					{currentRoom.avgStarRating >= 1 && (
-						<div className="room-reviews-and-location">
-							★{Number(currentRoom.avgStarRating).toFixed(2)}
-							{" · "}
-							{Number(currentRoom.numReviews)} review(s){" · "}
-							{currentRoom.city},{currentRoom.state},
-							{currentRoom.country}
+				<div className="room-content">
+					<div>
+						<div className="room-details">
+							<h1 className="room-name">{currentRoom.name}</h1>
+							{currentRoom.avgStarRating >= 1 && (
+								<div className="room-reviews-and-location">
+									★
+									{Number(currentRoom.avgStarRating).toFixed(
+										2
+									)}
+									{" · "}
+									{Number(currentRoom.numReviews)} review(s)
+									{" · "}
+									{currentRoom.city},{currentRoom.state},
+									{currentRoom.country}
+								</div>
+							)}
+							{currentRoom.avgStarRating < 1 && (
+								<div>
+									No Reviews Yet {currentRoom.city},
+									{currentRoom.state},{currentRoom.country}
+								</div>
+							)}
 						</div>
-					)}
-					{currentRoom.avgStarRating < 1 && (
-						<div>
-							No Reviews Yet {currentRoom.city},
-							{currentRoom.state},{currentRoom.country}
-						</div>
-					)}
-					<div></div>
-					{currentRoomImages.length > 0 && (
-						<img
-							src={`${currentRoomImages[0].imageUrl}`}
-							alt="first"
-						></img>
-					)}
-					{currentRoomImages.length <= 0 && (
-						<img src={currentRoom.previewImage} alt="preview"></img>
-					)}
 
-					{currentRoom.Owner && (
-						<h2>
-							Entire home hosted by {currentRoom.Owner.firstName}
-						</h2>
-					)}
+						<div className="room-images">
+							{currentRoomImages.length > 0 && (
+								<img
+									src={`${currentRoomImages[0].imageUrl}`}
+									alt="first"
+									className="main-image"
+								></img>
+							)}
+							{currentRoomImages.length <= 0 && (
+								<img
+									src={currentRoom.previewImage}
+									alt="preview"
+									className="main-image"
+								></img>
+							)}
+						</div>
+						{currentRoom.Owner && (
+							<h2>
+								Entire home hosted by{" "}
+								{currentRoom.Owner.firstName}
+							</h2>
+						)}
+					</div>
 
 					{currentRoomReviews.length > 0 && (
 						<div className="reviews-container">
-							<h2 className="reviews-overview">
-								★{Number(currentRoom.avgStarRating).toFixed(2)}{" "}
-								{" · "}
-								{Number(currentRoom.numReviews)} review(s)
-							</h2>
+							{currentRoom.avgStarRating >= 1 && (
+								<h2 className="reviews-overview">
+									★
+									{Number(currentRoom.avgStarRating).toFixed(
+										2
+									)}
+									{" · "}
+									{Number(currentRoom.numReviews)} review(s)
+								</h2>
+							)}
+							{currentRoom.avgStarRating < 1 && (
+								<h2 className="reviews-overview">
+									No Reviews Yet
+								</h2>
+							)}
 							<div className="reviews">
 								{currentRoomReviews.length > 0 &&
 									typeof currentRoomReviews[0] === "object" &&
@@ -133,14 +160,24 @@ const SingleRoomInfo = () => {
 
 					{sessionuser && sessionuser.id === currentRoom.ownerId && (
 						<>
-							<button onClick={deleteARoom}>Delete</button>
+							<button
+								onClick={deleteARoom}
+								className="delete-btn"
+							>
+								Delete room
+							</button>
 
-							<NavLink to={`/rooms/${roomId}/edit`}>Edit</NavLink>
+							<NavLink
+								to={`/rooms/${roomId}/edit`}
+								className="edit"
+							>
+								<span>Edit room</span>
+							</NavLink>
 						</>
 					)}
 				</div>
 			)}
-		</>
+		</div>
 	);
 };
 

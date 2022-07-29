@@ -1,6 +1,13 @@
 import "../CSS/Review.css";
-
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { getRoomReviews } from "../../../store/reviews";
 const Reviews = ({ review }) => {
+	const dispatch = useDispatch()
+	useEffect(() => {
+		dispatch(getRoomReviews(Number(review.roomId)));
+	}, [dispatch]);
+
 	const [year, month] = review.createdAt.split("-");
 
 	const months = [

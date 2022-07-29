@@ -1,10 +1,74 @@
 .room-name {
 	font-size: 26px;
 	font-weight: 600;
-	margin-bottom: 10px;
+	line-height: 26px;
 }
 
 .reviews {
 	display: flex;
+	flex-wrap: wrap;
+}
 
+.room-content {
+	padding-left: 80px;
+	padding-right: 80px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	min-width: fit-content;
+}
+
+.room-images {
+	height: 584px;
+
+	max-width: 1320px;
+}
+
+.main-image {
+	object-fit: cover;
+	height: 560px;
+
+	width: auto;
+	max-width: 560px;
+}
+
+.content-container {
+	display: flex;
+	justify-content: center;
+}
+
+.delete-btn,
+.edit {
+	box-sizing: border-box;
+	transition-duration: 0.25s;
+	background-image: radial-gradient(
+		circle at center center,
+		rgb(255, 56, 92) 0%,
+		rgb(230, 30, 77) 27.5%,
+		rgb(227, 28, 95) 40%,
+		rgb(215, 4, 102) 57.5%,
+		rgb(189, 30, 89) 75%,
+		rgb(189, 30, 89) 100%
+	);
+	background-size: 200% 200%;
+	border: none;
+	border-radius: 12px;
+	font-size: 16px;
+	color: rgb(255, 255, 255);
+	width: 50%;
+	height: 48px;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	cursor: pointer;
+}
+
+.delete-btn:active,
+.edit:active {
+	transform: scale(0.96);
+}
+
+.edit {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
