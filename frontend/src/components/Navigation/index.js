@@ -40,8 +40,8 @@ function Navigation({ isLoaded }) {
 	}
 	return (
 		<div className="nav-container">
-			
-				<div>
+			<div className="nav-items">
+					<div>
 					<NavLink exact to="/" className="nav-link">
 						<img src={logo} alt="logo" id="logo"></img>
 					</NavLink>
@@ -56,6 +56,8 @@ function Navigation({ isLoaded }) {
 						></ProfileButton>
 					)}
 				</div>
+			</div>
+			
 		
 		</div>
 	);

@@ -20,7 +20,7 @@ function App() {
 	}, [dispatch]);
 
 	return (
-		<>
+		< div className="content-container" style={{display:"flex", flexDirection:'column', justifyContent:"center", alignItems:"center"}}>
 			<Navigation isLoaded={isLoaded} />
 			{isLoaded && (
 				<Switch>
@@ -51,7 +51,7 @@ function App() {
 					</Route>
 				</Switch>
 			)}
-		</>
+		</ div>
 	);
 }
 

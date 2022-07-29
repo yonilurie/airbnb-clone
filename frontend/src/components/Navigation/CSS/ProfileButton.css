@@ -31,6 +31,17 @@ svg {
 	height: 42px;
 }
 
+.profile-button-info {
+	cursor: auto;
+	color: rgb(34, 34, 34);
+	font-weight: 600;
+}
+
+.profile-button-options.signup {
+	box-sizing: border-box;
+	border-top: 1px solid #ebebeb;
+}
+
 .profile-button-options,
 .profile-button-info {
 	font-size: 14px;
@@ -44,10 +55,9 @@ svg {
 	overflow: hidden;
 }
 
-.profile-button-info {
-	cursor: auto;
-	color: rgb(34, 34, 34);
-	font-weight: 600;
+.profile-button-options.logout {
+	box-sizing: border-box;
+	border-top: solid 1px rgb(221, 221, 221);
 }
 
 .profile-button-info.trips {
@@ -56,11 +66,6 @@ svg {
 	cursor: pointer;
 	color: rgb(34, 34, 34);
 	font-weight: 600;
-}
-
-.profile-button-options.logout {
-	box-sizing: border-box;
-	border-top: solid 1px rgb(221, 221, 221);
 }
 
 .profile-button-options:hover {
@@ -97,10 +102,4 @@ svg {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-}
-
-
-.profile-button-options.signup {
-	box-sizing: border-box;
-	border-top:  1px solid #ebebeb;
 }

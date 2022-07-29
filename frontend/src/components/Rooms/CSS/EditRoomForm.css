@@ -8,6 +8,12 @@ form {
 	padding: 24px;
 }
 
+.errors {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
 .form-container {
 	box-sizing: border-box;
 	display: flex;
@@ -61,10 +67,4 @@ form {
 
 .submit-form-btn:active {
 	transform: scale(0.96);
-}
-
-.errors {
-	display: flex;
-	justify-content: center;
-	align-items: center;
 }

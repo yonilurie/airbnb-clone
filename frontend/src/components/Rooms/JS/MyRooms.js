@@ -7,7 +7,6 @@ import SingleRoom from "./SingleRoom";
 
 import "../CSS/RoomContainer.css";
 
-
 const MyRooms = () => {
 	const dispatch = useDispatch();
 	const sessionuser = useSelector((state) => state.session.user);
@@ -23,13 +22,18 @@ const MyRooms = () => {
 	if (!sessionuser) return <Redirect to="/" />;
 
 	return (
-		<div className="rooms-container">
-			{rooms &&
-				rooms.length > 0 &&
-				rooms.map((room) => {
-					return <SingleRoom room={room} key={room.id}></SingleRoom>;
-				})}
-		</div>
+		<>
+			<h1>Your rooms</h1>
+			<div className="rooms-container">
+				{rooms &&
+					rooms.length > 0 &&
+					rooms.map((room) => {
+						return (
+							<SingleRoom room={room} key={room.id}></SingleRoom>
+						);
+					})}
+			</div>
+		</>
 	);
 };
 

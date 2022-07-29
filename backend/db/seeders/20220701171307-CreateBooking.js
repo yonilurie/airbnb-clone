@@ -16,7 +16,7 @@ module.exports = {
 				endDate: new Date(2020, 6, 17),
 			},
 			{
-				roomId: 1,
+				roomId: 7,
 				userId: 1,
 				startDate: new Date(2023, 6, 11),
 				endDate: new Date(2023, 6, 15),

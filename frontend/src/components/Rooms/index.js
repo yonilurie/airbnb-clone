@@ -16,7 +16,6 @@ function Rooms() {
 	const rooms = Object.values(useSelector((state) => state.rooms));
 
 	return (
-		<div>
 			<div className="rooms-container">
 				{!rooms && <div>LOADING...</div>}
 				{rooms &&
@@ -26,7 +25,7 @@ function Rooms() {
 						);
 					})}
 			</div>
-		</div>
+		
 	);
 }
 
