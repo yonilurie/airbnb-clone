@@ -32,12 +32,11 @@ svg {
 }
 
 .profile-button-info {
-	cursor: auto;
 	color: rgb(34, 34, 34);
 	font-weight: 600;
 }
 
-.profile-button-options.signup {
+.profile-button-info .profile-button-options.signup {
 	box-sizing: border-box;
 	border-top: 1px solid #ebebeb;
 }
@@ -51,7 +50,7 @@ svg {
 	width: 100%;
 	text-align: left;
 	padding: 12px 16px;
-	cursor: pointer;
+
 	overflow: hidden;
 }
 

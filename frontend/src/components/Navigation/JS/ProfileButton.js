@@ -117,10 +117,10 @@ function ProfileButton({ user }) {
 
 					{user && (
 						<>
-							<div className="profile-button-info" hidden={!user}>
+							<div className="profile-button-info name" hidden={!user}>
 								User: {user.firstName + " " + user.lastName}
 							</div>
-							<div className="profile-button-info" hidden={!user}>
+							<div className="profile-button-info email" hidden={!user}>
 								E-mail: {user.email}
 							</div>
 							<NavLink
