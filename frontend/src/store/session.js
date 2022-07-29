@@ -72,7 +72,7 @@ export const logout = () => async (dispatch) => {
 };
 
 //Initial state for session
-const initialState = { user: null };
+const initialState = { user: null , reviews: null};
 
 // Reducer
 //

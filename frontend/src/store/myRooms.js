@@ -31,9 +31,7 @@ const myRoomReducer = (state = initialState, action) => {
 	let newState;
 	switch (action.type) {
 		case GET_MY_ROOMS: {
-		
 			newState = { ...action.rooms };
-			
 			return newState;
 		}
 		default:

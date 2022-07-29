@@ -36,7 +36,7 @@ function SingleRoom({ room }) {
 					{room.city}, {room.state}
 				</div>
 				{room.avgStarRating && (
-					<div className="room-detail">
+					<div className="room-detail star">
 						<span className="star">★</span>
 						{Number(room.avgStarRating).toFixed(2)}
 					</div>

@@ -9,9 +9,14 @@ import "../CSS/RoomContainer.css";
 
 const MyRooms = () => {
 	const dispatch = useDispatch();
-	const sessionuser = useSelector((state) => state.session.user);
 	const [isDisplayed, setIsDisplayed] = useState();
+	const sessionuser = useSelector((state) => state.session.user);
+
 	const rooms = Object.values(useSelector((state) => state.myRooms));
+
+	useEffect(() => {
+		dispatch(getMyRoomsData());
+	}, [dispatch]);
 
 	useEffect(() => {
 		const timeout = setTimeout(() => {
@@ -20,10 +25,6 @@ const MyRooms = () => {
 
 		return () => clearTimeout(timeout);
 	}, []);
-
-	useEffect(() => {
-		dispatch(getMyRoomsData());
-	}, [dispatch]);
 
 	//If the user is not logged in, redirect the user to home page
 

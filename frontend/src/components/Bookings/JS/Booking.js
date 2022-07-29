@@ -57,7 +57,7 @@ const Booking = ({ booking, reviewDisabled }) => {
 			</NavLink>
 			{!reviewDisabled && (
 				<NavLink to={`/add-review/${booking.Room.id}`}>
-					Add review
+					<button className="review-btn">Review</button>
 				</NavLink>
 			)}
 		</div>
