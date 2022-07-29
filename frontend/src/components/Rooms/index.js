@@ -13,7 +13,7 @@ function Rooms() {
 
 	useEffect(() => {
 		dispatch(getRooms());
-	}, [rooms]);
+	}, [dispatch]);
 
 	//Fetch all rooms from DB
 
