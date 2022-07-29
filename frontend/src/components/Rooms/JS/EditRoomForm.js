@@ -135,6 +135,7 @@ const EditRoomForm = () => {
 			setLongitude(0);
 			setDescription("");
 			setPrice(100);
+			
 			dispatch(getRoomInfo(roomId));
 			//Redirect user to home page
 			history.push(`/rooms/${roomId}`);
