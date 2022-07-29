@@ -6,7 +6,7 @@ const Reviews = ({ review }) => {
 	const dispatch = useDispatch()
 	useEffect(() => {
 		dispatch(getRoomReviews(Number(review.roomId)));
-	}, [dispatch]);
+	}, [review.roomId]);
 
 	const [year, month] = review.createdAt.split("-");
 
