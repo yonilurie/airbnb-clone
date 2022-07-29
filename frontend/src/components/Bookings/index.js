@@ -9,23 +9,19 @@ import "./CSS/Bookings.css";
 const Bookings = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
-	const [isDisplayed, setIsDisplayed] = useState(false);
+	const [isDisplayed, setIsDisplayed] = useState(true);
 
 	useEffect(() => {
 		dispatch(getAUsersBookings());
 	}, [dispatch]);
 
-	useEffect(() => {
-		// dispatch()
-	}, [dispatch]);
+	// useEffect(() => {
+	// 	const timeout = setTimeout(() => {
+	// 		setIsDisplayed(true);
+	// 	}, 300);
 
-	useEffect(() => {
-		const timeout = setTimeout(() => {
-			setIsDisplayed(true);
-		}, 300);
-
-		return () => clearTimeout(timeout);
-	}, []);
+	// 	return () => clearTimeout(timeout);
+	// }, [dispatch]);
 
 	const bookings = Object.values(useSelector((state) => state.myBookings));
 
@@ -55,7 +51,7 @@ const Bookings = () => {
 	return (
 		<>
 			<h1>Trips</h1>
-			{isDisplayed && (
+			{isDisplayed && bookings.length > 1 && (
 				<div>
 					{futureBookings.length < 1 && (
 						<div className="empty-bookings-placeholder">

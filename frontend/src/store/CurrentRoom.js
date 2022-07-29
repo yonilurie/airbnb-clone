@@ -29,11 +29,10 @@ const singleRoomReducer = (state = initialState, action) => {
 	let newState;
 	switch (action.type) {
 		case GET_SPECIFIC_ROOM: {
-			
-			newState = {...action.room };
+			newState = { ...action.room };
 			return newState;
 		}
-	
+
 		default:
 			return state;
 	}

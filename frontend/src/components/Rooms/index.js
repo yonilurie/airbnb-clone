@@ -1,4 +1,4 @@
-import React, { useEffect , useState} from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { getRooms } from "../../store/rooms";
@@ -22,15 +22,16 @@ function Rooms() {
 	useEffect(() => {
 		const timeout = setTimeout(() => {
 			setIsDisplayed(true);
-		}, 300);
+		}, 100);
 
 		return () => clearTimeout(timeout);
 	}, []);
 
 	return (
 		<div className="rooms-container">
-			{!rooms && !isDisplayed &&  <div>LOADING...</div>}
-			{rooms  && isDisplayed&&
+			{!rooms && !isDisplayed && <div>LOADING...</div>}
+			{rooms &&
+				isDisplayed &&
 				rooms.map((room) => {
 					return <SingleRoom room={room} key={room.id}></SingleRoom>;
 				})}

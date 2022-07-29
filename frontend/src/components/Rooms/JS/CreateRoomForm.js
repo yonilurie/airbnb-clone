@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 
-import { createRoom } from "../../../store/rooms";
+import { createRoom, getRooms } from "../../../store/rooms";
 import "../CSS/CreateRoom.css";
 
 const CreateRoomForm = () => {
@@ -76,7 +76,7 @@ const CreateRoomForm = () => {
 
 		if (!validationErrors.length) {
 			dispatch(createRoom(JSON.stringify(room)));
-
+			dispatch(getRooms())
 			setName("");
 			setAddress("");
 			setCity("");

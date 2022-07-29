@@ -9,7 +9,7 @@ import "../CSS/RoomContainer.css";
 
 const MyRooms = () => {
 	const dispatch = useDispatch();
-	const [isDisplayed, setIsDisplayed] = useState();
+	const [isDisplayed, setIsDisplayed] = useState(true);
 	const sessionuser = useSelector((state) => state.session.user);
 
 	const rooms = Object.values(useSelector((state) => state.myRooms));

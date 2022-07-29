@@ -7,7 +7,7 @@ import { getRoomReviews } from "../../../store/reviews";
 import { getRoomInfo } from "../../../store/CurrentRoom";
 import { deleteRoom, getRooms } from "../../../store/rooms";
 import { getARoomsBookings } from "../../../store/bookings";
-
+import { deleteARoom } from "../../../store/myRooms";
 import Reviews from "./Reviews";
 
 import "../CSS/SingleRoomInfo.css";
@@ -19,11 +19,21 @@ const SingleRoomInfo = () => {
 	const sessionuser = useSelector((state) => state.session.user);
 	const { roomId } = useParams();
 
-	const [isDisplayed, setIsDisplayed] = useState(false);
+	const [isDisplayed, setIsDisplayed] = useState(true);
 
 	if (isNaN(Number(roomId))) {
 		history.push("/");
 	}
+
+	//Assign room, images, and reviews to variables for easier access
+	let currentRoom = useSelector((state) => state.currentRoom);
+
+	const currentRoomImages = Object.values(
+		useSelector((state) => state.roomImages)
+	);
+	const currentRoomReviews = Object.values(
+		useSelector((state) => state.reviews)
+	);
 
 	useEffect(() => {
 		const timeout = setTimeout(() => {
@@ -32,15 +42,6 @@ const SingleRoomInfo = () => {
 
 		return () => clearTimeout(timeout);
 	}, []);
-
-	//Assign room, images, and reviews to variables for easier access
-	const currentRoom = useSelector((state) => state.currentRoom);
-	const currentRoomImages = Object.values(
-		useSelector((state) => state.roomImages)
-	);
-	const currentRoomReviews = Object.values(
-		useSelector((state) => state.reviews)
-	);
 
 	// const currentRoomBookings = Object.values(
 	// 	useSelector((state) => state.bookings)
@@ -71,15 +72,17 @@ const SingleRoomInfo = () => {
 	// }, [currentRoom]);
 
 	//Will delete a room an redirect user to home screen
-	const deleteARoom = () => {
+	const deletedRoom = () => {
+		dispatch(deleteARoom(roomId));
 		dispatch(deleteRoom(roomId));
-		dispatch(getMyRoomsData());
+
+		// dispatch(getMyRoomsData());
 		history.push("/my-rooms");
 	};
 
 	return (
 		<div className="content-container">
-			{!isDisplayed && (
+			{!isDisplayed && !currentRoom && (
 				<div className="placeholder-container">
 					<div className="placeholder-loading-section-1">
 						<div className="loading-strip-1"></div>
@@ -110,107 +113,115 @@ const SingleRoomInfo = () => {
 				</div>
 			)}
 
-			{isDisplayed && currentRoom && (
-				<div className="room-content">
-					<div>
-						<div className="room-details">
-							<h1 className="room-name">{currentRoom.name}</h1>
-							{currentRoom.avgStarRating >= 1 && (
-								<div className="room-reviews-and-location">
-									★
-									{Number(currentRoom.avgStarRating).toFixed(
-										2
-									)}
-									{" · "}
-									{Number(currentRoom.numReviews)} review(s)
-									{" · "}
-									{currentRoom.city},{currentRoom.state},
-									{currentRoom.country}
-								</div>
-							)}
-							{currentRoom.avgStarRating < 1 && (
-								<div>
-									No Reviews Yet {currentRoom.city},
-									{currentRoom.state},{currentRoom.country}
-								</div>
+			{isDisplayed &&
+				currentRoom &&
+				Number(currentRoom.id) === Number(roomId) && (
+					<div className="room-content">
+						<div>
+							<div className="room-details">
+								<h1 className="room-name">
+									{currentRoom.name}
+								</h1>
+								{currentRoom.avgStarRating >= 1 && (
+									<div className="room-reviews-and-location">
+										★
+										{Number(
+											currentRoom.avgStarRating
+										).toFixed(2)}
+										{" · "}
+										{Number(currentRoom.numReviews)}{" "}
+										review(s)
+										{" · "}
+										{currentRoom.city},{currentRoom.state},
+										{currentRoom.country}
+									</div>
+								)}
+								{currentRoom.avgStarRating < 1 && (
+									<div>
+										No Reviews Yet {currentRoom.city},
+										{currentRoom.state},
+										{currentRoom.country}
+									</div>
+								)}
+							</div>
+
+							<div className="room-images">
+								{currentRoomImages.length > 0 && (
+									<img
+										src={`${currentRoomImages[0].imageUrl}`}
+										alt="first"
+										className="main-image"
+									></img>
+								)}
+								{currentRoomImages.length <= 0 && (
+									<img
+										src={currentRoom.previewImage}
+										alt="preview"
+										className="main-image"
+									></img>
+								)}
+							</div>
+							{currentRoom.Owner && (
+								<h2>
+									Entire home hosted by{" "}
+									{currentRoom.Owner.firstName}
+								</h2>
 							)}
 						</div>
 
-						<div className="room-images">
-							{currentRoomImages.length > 0 && (
-								<img
-									src={`${currentRoomImages[0].imageUrl}`}
-									alt="first"
-									className="main-image"
-								></img>
-							)}
-							{currentRoomImages.length <= 0 && (
-								<img
-									src={currentRoom.previewImage}
-									alt="preview"
-									className="main-image"
-								></img>
-							)}
-						</div>
-						{currentRoom.Owner && (
-							<h2>
-								Entire home hosted by{" "}
-								{currentRoom.Owner.firstName}
-							</h2>
+						{currentRoomReviews.length > 0 && (
+							<div className="reviews-container">
+								{currentRoom.avgStarRating >= 1 && (
+									<h2 className="reviews-overview">
+										★
+										{Number(
+											currentRoom.avgStarRating
+										).toFixed(2)}
+										{" · "}
+										{Number(currentRoom.numReviews)}{" "}
+										review(s)
+									</h2>
+								)}
+								{currentRoom.avgStarRating < 1 && (
+									<h2 className="reviews-overview">
+										No Reviews Yet
+									</h2>
+								)}
+								<div className="reviews">
+									{currentRoomReviews.length > 0 &&
+										typeof currentRoomReviews[0] ===
+											"object" &&
+										currentRoomReviews.map((review) => {
+											return (
+												<Reviews
+													review={review}
+													key={review.id}
+												></Reviews>
+											);
+										})}
+								</div>
+							</div>
+						)}
+
+						{sessionuser && sessionuser.id === currentRoom.ownerId && (
+							<>
+								<button
+									onClick={deletedRoom}
+									className="delete-btn"
+								>
+									Delete room
+								</button>
+
+								<NavLink
+									to={`/rooms/${roomId}/edit`}
+									className="edit"
+								>
+									<span>Edit room</span>
+								</NavLink>
+							</>
 						)}
 					</div>
-
-					{currentRoomReviews.length > 0 && (
-						<div className="reviews-container">
-							{currentRoom.avgStarRating >= 1 && (
-								<h2 className="reviews-overview">
-									★
-									{Number(currentRoom.avgStarRating).toFixed(
-										2
-									)}
-									{" · "}
-									{Number(currentRoom.numReviews)} review(s)
-								</h2>
-							)}
-							{currentRoom.avgStarRating < 1 && (
-								<h2 className="reviews-overview">
-									No Reviews Yet
-								</h2>
-							)}
-							<div className="reviews">
-								{currentRoomReviews.length > 0 &&
-									typeof currentRoomReviews[0] === "object" &&
-									currentRoomReviews.map((review) => {
-										return (
-											<Reviews
-												review={review}
-												key={review.id}
-											></Reviews>
-										);
-									})}
-							</div>
-						</div>
-					)}
-
-					{sessionuser && sessionuser.id === currentRoom.ownerId && (
-						<>
-							<button
-								onClick={deleteARoom}
-								className="delete-btn"
-							>
-								Delete room
-							</button>
-
-							<NavLink
-								to={`/rooms/${roomId}/edit`}
-								className="edit"
-							>
-								<span>Edit room</span>
-							</NavLink>
-						</>
-					)}
-				</div>
-			)}
+				)}
 		</div>
 	);
 };
