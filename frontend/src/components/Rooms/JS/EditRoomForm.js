@@ -27,6 +27,8 @@ const EditRoomForm = () => {
 	const sessionuser = useSelector((state) => state.session.user);
 	const { roomId } = useParams();
 
+	const currentRoom = useSelector((state) => state.currentRoom);
+
 	// On initial render set isLoaded to false
 	useEffect(() => {
 		setIsLoaded(false);
@@ -38,7 +40,6 @@ const EditRoomForm = () => {
 	}, [dispatch]);
 
 	//Assign current room to variable
-	const currentRoom = useSelector((state) => state.currentRoom);
 
 	//Once room is loaded update state with the rooms information
 	//This information will now show up in the form inputs
@@ -135,7 +136,7 @@ const EditRoomForm = () => {
 			setLongitude(0);
 			setDescription("");
 			setPrice(100);
-			
+
 			dispatch(getRoomInfo(roomId));
 			//Redirect user to home page
 			history.push(`/rooms/${roomId}`);
