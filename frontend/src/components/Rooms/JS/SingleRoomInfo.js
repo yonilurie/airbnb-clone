@@ -25,9 +25,11 @@ const SingleRoomInfo = () => {
 	}
 
 	useEffect(() => {
-		setInterval(() => {
+		const timeout = setTimeout(() => {
 			setIsDisplayed(true);
-		}, 1000);
+		}, 300);
+
+		return () => clearTimeout(timeout)
 	}, []);
 
 	//Assign room, images, and reviews to variables for easier access
