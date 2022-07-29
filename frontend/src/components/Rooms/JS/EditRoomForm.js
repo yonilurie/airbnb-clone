@@ -154,170 +154,206 @@ const EditRoomForm = () => {
 				})}
 			<h1 className="form-description">Edit home information</h1>
 			<form className="create-room-form" onSubmit={onSubmit}>
-				<label htmlFor="name">Name</label>
-				<input
-					type="text"
-					id="name"
-					className="form-input"
-					placeholder="Name of your home"
-					value={name}
-					onChange={(e) => {
-						setName(e.target.value);
-					}}
-					required
-				></input>
-				<label htmlFor="address">Address</label>
-				<input
-					type="text"
-					id="address"
-					className="form-input"
-					placeholder="Address"
-					value={address}
-					onChange={(e) => setAddress(e.target.value)}
-					required
-				></input>
-				<label htmlFor="city">City</label>
-				<input
-					type="text"
-					id="city"
-					className="form-input"
-					placeholder="City"
-					value={city}
-					onChange={(e) => setCity(e.target.value)}
-				></input>
-				{country === "United States" && (
-					<>
-						<label htmlFor="state">State</label>
-
-						<select
-							name="state"
-							id="state"
+				<div className="input-container-flex">
+					<div className="input-container">
+						<label htmlFor="name">Name</label>
+						<input
+							type="text"
+							id="name"
 							className="form-input"
-							value={state}
-							onChange={(e) => setState(e.target.value)}
+							placeholder="Name of your home"
+							value={name}
+							onChange={(e) => {
+								setName(e.target.value);
+							}}
+							required
+						></input>
+					</div>
+					<div className="input-container">
+						{" "}
+						<label htmlFor="address">Address</label>
+						<input
+							type="text"
+							id="address"
+							className="form-input"
+							placeholder="Address"
+							value={address}
+							onChange={(e) => setAddress(e.target.value)}
+							required
+						></input>
+					</div>
+
+					<div className="input-container">
+						{" "}
+						<label htmlFor="city">City</label>
+						<input
+							type="text"
+							id="city"
+							className="form-input"
+							placeholder="City"
+							value={city}
+							onChange={(e) => setCity(e.target.value)}
+						></input>
+					</div>
+
+					{country === "United States" && (
+						<div className="input-container">
+							<label htmlFor="state">State</label>
+
+							<select
+								name="state"
+								id="state"
+								className="form-input"
+								value={state}
+								onChange={(e) => setState(e.target.value)}
+							>
+								<option value="AL">Alabama</option>
+								<option value="AK">Alaska</option>
+								<option value="AZ">Arizona</option>
+								<option value="AR">Arkansas</option>
+								<option value="CA">California</option>
+								<option value="CO">Colorado</option>
+								<option value="CT">Connecticut</option>
+								<option value="DE">Delaware</option>
+								<option value="FL">Florida</option>
+								<option value="GA">Georgia</option>
+								<option value="HI">Hawaii</option>
+								<option value="ID">Idaho</option>
+								<option value="IL">Illinois</option>
+								<option value="IN">Indiana</option>
+								<option value="IA">Iowa</option>
+								<option value="KS">Kansas</option>
+								<option value="KY">Kentucky</option>
+								<option value="LA">Louisiana</option>
+								<option value="ME">Maine</option>
+								<option value="MD">Maryland</option>
+								<option value="MA">Massachusetts</option>
+								<option value="MI">Michigan</option>
+								<option value="MN">Minnesota</option>
+								<option value="MS">Mississippi</option>
+								<option value="MO">Missouri</option>
+								<option value="MT">Montana</option>
+								<option value="NE">Nebraska</option>
+								<option value="NV">Nevada</option>
+								<option value="NH">New Hampshire</option>
+								<option value="NJ">New Jersey</option>
+								<option value="NM">New Mexico</option>
+								<option value="NY">New York</option>
+								<option value="NC">North Carolina</option>
+								<option value="ND">North Dakota</option>
+								<option value="OH">Ohio</option>
+								<option value="OK">Oklahoma</option>
+								<option value="OR">Oregon</option>
+								<option value="PA">Pennsylvania</option>
+								<option value="RI">Rhode Island</option>
+								<option value="SC">South Carolina</option>
+								<option value="SD">South Dakota</option>
+								<option value="TN">Tennessee</option>
+								<option value="TX">Texas</option>
+								<option value="UT">Utah</option>
+								<option value="VT">Vermont</option>
+								<option value="VA">Virginia</option>
+								<option value="WA">Washington</option>
+								<option value="WV">West Virginia</option>
+								<option value="WI">Wisconsin</option>
+								<option value="WY">Wyoming</option>
+							</select>
+						</div>
+					)}
+
+					<div className="input-container">
+						{" "}
+						<label htmlFor="country">Country</label>
+						<select
+							id="country"
+							className="form-input"
+							name="country"
+							placeholder="Country"
+							value={country}
+							onChange={(e) => setCountry(e.target.value)}
 						>
-							<option value="AL">Alabama</option>
-							<option value="AK">Alaska</option>
-							<option value="AZ">Arizona</option>
-							<option value="AR">Arkansas</option>
-							<option value="CA">California</option>
-							<option value="CO">Colorado</option>
-							<option value="CT">Connecticut</option>
-							<option value="DE">Delaware</option>
-							<option value="FL">Florida</option>
-							<option value="GA">Georgia</option>
-							<option value="HI">Hawaii</option>
-							<option value="ID">Idaho</option>
-							<option value="IL">Illinois</option>
-							<option value="IN">Indiana</option>
-							<option value="IA">Iowa</option>
-							<option value="KS">Kansas</option>
-							<option value="KY">Kentucky</option>
-							<option value="LA">Louisiana</option>
-							<option value="ME">Maine</option>
-							<option value="MD">Maryland</option>
-							<option value="MA">Massachusetts</option>
-							<option value="MI">Michigan</option>
-							<option value="MN">Minnesota</option>
-							<option value="MS">Mississippi</option>
-							<option value="MO">Missouri</option>
-							<option value="MT">Montana</option>
-							<option value="NE">Nebraska</option>
-							<option value="NV">Nevada</option>
-							<option value="NH">New Hampshire</option>
-							<option value="NJ">New Jersey</option>
-							<option value="NM">New Mexico</option>
-							<option value="NY">New York</option>
-							<option value="NC">North Carolina</option>
-							<option value="ND">North Dakota</option>
-							<option value="OH">Ohio</option>
-							<option value="OK">Oklahoma</option>
-							<option value="OR">Oregon</option>
-							<option value="PA">Pennsylvania</option>
-							<option value="RI">Rhode Island</option>
-							<option value="SC">South Carolina</option>
-							<option value="SD">South Dakota</option>
-							<option value="TN">Tennessee</option>
-							<option value="TX">Texas</option>
-							<option value="UT">Utah</option>
-							<option value="VT">Vermont</option>
-							<option value="VA">Virginia</option>
-							<option value="WA">Washington</option>
-							<option value="WV">West Virginia</option>
-							<option value="WI">Wisconsin</option>
-							<option value="WY">Wyoming</option>
+							<option value="United States">United States</option>
 						</select>
-					</>
-				)}
+					</div>
 
-				<label htmlFor="country">Country</label>
-				<select
-					id="country"
-					className="form-input"
-					name="country"
-					placeholder="Country"
-					value={country}
-					onChange={(e) => setCountry(e.target.value)}
-				>
-					<option value="United States">United States</option>
-				</select>
+					<div className="input-container">
+						{" "}
+						<label htmlFor="latitude">Latitude</label>
+						<input
+							type="number"
+							className="form-input"
+							min="-90"
+							max="90"
+							step="any"
+							id="latitude"
+							placeholder="Latitude (Between -90 to 90)"
+							value={latitude}
+							onChange={(e) => setLatitude(e.target.value)}
+							required
+						></input>
+					</div>
 
-				<label htmlFor="latitude">Latitude</label>
-				<input
-					type="number"
-					className="form-input"
-					min="-90"
-					max="90"
-					step="any"
-					id="latitude"
-					placeholder="Latitude (Between -90 to 90)"
-					value={latitude}
-					onChange={(e) => setLatitude(e.target.value)}
-					required
-				></input>
-				<label htmlFor="longitude">Longitude</label>
-				<input
-					type="number"
-					className="form-input"
-					min="-180"
-					max="180"
-					step="any"
-					id="longitude"
-					placeholder="Longitude (Between -180 to 180)"
-					value={longitude}
-					onChange={(e) => setLongitude(e.target.value)}
-					required
-				></input>
-				<label htmlFor="description">Description</label>
-				<textarea
-					type="textArea"
-					className="form-input"
-					id="description"
-					value={description}
-					onChange={(e) => setDescription(e.target.value)}
-					required
-				></textarea>
-				<label htmlFor="price">Price Per Night ${price}</label>
-				<input
-					type="range"
-					className="form-input"
-					min="0"
-					max="1000"
-					value={price}
-					id="price"
-					onChange={(e) => setPrice(e.target.value)}
-					required
-				></input>
-				<label htmlFor="previewImage">Add a preview Image</label>
-				<input
-					type="url"
-					className="form-input"
-					id="previewImage"
-					value={previewImage}
-					placeholder="Preview image URL"
-					onChange={(e) => setPreviewImage(e.target.value)}
-					required
-				></input>
+					<div className="input-container">
+						{" "}
+						<label htmlFor="longitude">Longitude</label>
+						<input
+							type="number"
+							className="form-input"
+							min="-180"
+							max="180"
+							step="any"
+							id="longitude"
+							placeholder="Longitude (Between -180 to 180)"
+							value={longitude}
+							onChange={(e) => setLongitude(e.target.value)}
+							required
+						></input>
+					</div>
+
+					<div className="input-container">
+						{" "}
+						<label htmlFor="description">Description</label>
+						<textarea
+							type="textArea"
+							className="form-input"
+							id="description"
+							value={description}
+							onChange={(e) => setDescription(e.target.value)}
+							required
+						></textarea>
+					</div>
+
+					<div className="input-container">
+						{" "}
+						<label htmlFor="price">Price Per Night ${price}</label>
+						<input
+							type="range"
+							className="form-input"
+							min="0"
+							max="1000"
+							value={price}
+							id="price"
+							onChange={(e) => setPrice(e.target.value)}
+							required
+						></input>
+					</div>
+
+					<div className="input-container">
+						{" "}
+						<label htmlFor="previewImage">
+							Add a preview Image
+						</label>
+						<input
+							type="url"
+							className="form-input"
+							id="previewImage"
+							value={previewImage}
+							placeholder="Preview image URL"
+							onChange={(e) => setPreviewImage(e.target.value)}
+							required
+						></input>
+					</div>
+				</div>
 				<button className="submit-form-btn">Submit</button>
 			</form>
 		</div>

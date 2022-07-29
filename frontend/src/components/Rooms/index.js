@@ -29,7 +29,6 @@ function Rooms() {
 
 	return (
 		<div className="rooms-container">
-			{!rooms && !isDisplayed && <div>LOADING...</div>}
 			{rooms &&
 				isDisplayed &&
 				rooms.map((room) => {

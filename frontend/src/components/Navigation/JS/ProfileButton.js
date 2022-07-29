@@ -35,6 +35,14 @@ function ProfileButton({ user }) {
 		dispatch(sessionActions.logout());
 	};
 
+	useEffect(() => {
+		if (showModal) {
+			document.body.style.overflow = "hidden";
+		} else {
+			document.body.style.overflow = "unset";
+		}
+	}, [showModal]);
+
 	return (
 		<>
 			<LoginFormModal

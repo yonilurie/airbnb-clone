@@ -19,3 +19,8 @@ body {
 textarea {
 	font-family: "Inter var", sans-serif;
 }
+
+
+button {
+	cursor: pointer;
+}

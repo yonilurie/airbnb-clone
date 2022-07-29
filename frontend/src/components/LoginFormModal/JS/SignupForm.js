@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
 import * as sessionActions from "../../../store/session";
 import "../CSS/LoginForm.css";
 
-function SignupForm({ setShowModal }) {
+function SignupForm({ showModal, setShowModal }) {
 	const dispatch = useDispatch();
 	//State
 	const [email, setEmail] = useState("");
@@ -63,52 +63,93 @@ function SignupForm({ setShowModal }) {
 						))}
 					</ul>
 				)}
-				<input
-					className="modal-input"
-					type="text"
-					placeholder="Email"
-					value={email}
-					onChange={(e) => setEmail(e.target.value)}
-					required
-				/>
-				<input
-					className="modal-input"
-					type="text"
-					placeholder="Username"
-					value={username}
-					onChange={(e) => setUsername(e.target.value)}
-					required
-				/>
-				<input
-					className="modal-input"
-					type="text"
-					placeholder="First Name"
-					value={firstName}
-					onChange={(e) => setFirstName(e.target.value)}
-				/>
-				<input
-					className="modal-input"
-					type="text"
-					placeholder="Last Name"
-					value={lastName}
-					onChange={(e) => setLastName(e.target.value)}
-				/>
-				<input
-					className="modal-input"
-					type="password"
-					placeholder="Password"
-					value={password}
-					onChange={(e) => setPassword(e.target.value)}
-					required
-				/>
-				<input
-					className="modal-input"
-					type="password"
-					placeholder="Confirm Password"
-					value={confirmPassword}
-					onChange={(e) => setConfirmPassword(e.target.value)}
-					required
-				/>
+
+				<div>
+					<div className="modal-input-label" hidden={!email}>
+						Email
+					</div>
+
+					<input
+						className="modal-input"
+						type="text"
+						placeholder="Email"
+						value={email}
+						onChange={(e) => setEmail(e.target.value)}
+						required
+					/>
+				</div>
+
+				<div>
+					<div className="modal-input-label" hidden={!username}>
+						Username
+					</div>
+					<input
+						className="modal-input"
+						type="text"
+						placeholder="Username"
+						value={username}
+						onChange={(e) => setUsername(e.target.value)}
+						required
+					/>
+				</div>
+
+				<div>
+					<div className="modal-input-label" hidden={!firstName}>
+						First Name
+					</div>
+					<input
+						className="modal-input"
+						type="text"
+						placeholder="First Name"
+						value={firstName}
+						onChange={(e) => setFirstName(e.target.value)}
+					/>
+				</div>
+
+				<div>
+					<div className="modal-input-label" hidden={!lastName}>
+						Last Name
+					</div>
+					<input
+						className="modal-input"
+						type="text"
+						placeholder="Last Name"
+						value={lastName}
+						onChange={(e) => setLastName(e.target.value)}
+					/>
+				</div>
+
+				<div>
+					<div className="modal-input-label" hidden={!password}>
+						Password
+					</div>
+					<input
+						className="modal-input"
+						type="password"
+						placeholder="Password"
+						value={password}
+						onChange={(e) => setPassword(e.target.value)}
+						required
+					/>
+				</div>
+
+				<div>
+					<div
+						className="modal-input-label"
+						hidden={!confirmPassword}
+					>
+						Confirm Password
+					</div>
+					<input
+						className="modal-input"
+						type="password"
+						placeholder="Confirm Password"
+						value={confirmPassword}
+						onChange={(e) => setConfirmPassword(e.target.value)}
+						required
+					/>
+				</div>
+
 				<button type="submit" className="login-register-submit">
 					Sign Up
 				</button>

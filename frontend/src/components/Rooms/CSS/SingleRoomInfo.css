@@ -1,3 +1,9 @@
+.button-container {
+	display: flex;
+	justify-content: space-between;
+	width: 450px;
+}
+
 .room-name {
 	font-size: 26px;
 	font-weight: 600;
@@ -37,7 +43,7 @@
 }
 
 .delete-btn,
-.edit {
+.edit-btn {
 	box-sizing: border-box;
 	transition-duration: 0.25s;
 	background-image: radial-gradient(
@@ -54,15 +60,16 @@
 	border-radius: 12px;
 	font-size: 16px;
 	color: rgb(255, 255, 255);
-	width: 50%;
+	width: 150px;
 	height: 48px;
 	margin-top: 30px;
 	margin-bottom: 30px;
 	cursor: pointer;
 }
 
+
 .delete-btn:active,
-.edit:active {
+.edit-btn:active {
 	transform: scale(0.96);
 }
 
@@ -152,5 +159,4 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	
 }

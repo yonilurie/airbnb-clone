@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { create, getRoomReviews, deleteAReview } from "../../store/reviews";
 import Reviews from "../Rooms/JS/Reviews";
 import EditReviewModal from "./JS/EditReviewModal";
+import "./CSS/Review.css";
 
 function CreateReview() {
 	const history = useHistory();
@@ -109,10 +110,17 @@ function CreateReview() {
 				<div>
 					<h1>Review already created</h1>
 					<Reviews review={usersReview}></Reviews>
-					<button onClick={() => setShowModal(true)}>
-						Edit Review
-					</button>
-					<button onClick={deleteReview}>Delete Review</button>
+					<div className="button-container">
+						<button
+							onClick={() => setShowModal(true)}
+							className="edit-btn"
+						>
+							Edit Review
+						</button>
+						<button onClick={deleteReview} className="delete-btn">
+							Delete Review
+						</button>
+					</div>
 				</div>
 			)}
 		</>

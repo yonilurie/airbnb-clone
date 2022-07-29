@@ -4,7 +4,7 @@ import * as sessionActions from "../../../store/session";
 
 import "../CSS/LoginForm.css";
 
-function LoginForm({ setShowModal }) {
+function LoginForm({ showModal, setShowModal }) {
 	const dispatch = useDispatch();
 
 	//State
@@ -49,22 +49,34 @@ function LoginForm({ setShowModal }) {
 						))}
 					</ul>
 				)}
-				<input
-					className="modal-input"
-					type="text"
-					placeholder="Email or Username"
-					value={credential}
-					onChange={(e) => setCredential(e.target.value)}
-					required
-				/>
-				<input
-					className="modal-input"
-					type="password"
-					placeholder="Password"
-					value={password}
-					onChange={(e) => setPassword(e.target.value)}
-					required
-				/>
+				<div>
+					<div className="modal-input-label" hidden={!credential}>
+						Email or Username
+					</div>
+
+					<input
+						className="modal-input"
+						type="text"
+						placeholder="Email or Username"
+						value={credential}
+						onChange={(e) => setCredential(e.target.value)}
+						required
+					/>
+				</div>
+
+				<div>
+					<div className="modal-input-label" hidden={!password}>
+						Password
+					</div>
+					<input
+						className="modal-input"
+						type="password"
+						placeholder="Password"
+						value={password}
+						onChange={(e) => setPassword(e.target.value)}
+						required
+					/>
+				</div>
 				<button type="submit" className="login-register-submit">
 					Log in
 				</button>

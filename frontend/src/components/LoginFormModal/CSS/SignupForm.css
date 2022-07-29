@@ -20,9 +20,11 @@ ul {
 	flex-direction: column;
 }
 .modal-welcome {
-	font-size: 22px;
+	font-size: 90px;
 	font-weight: 600;
 	align-self: flex-start;
+	padding-left: 20px;
+
 }
 
 .modal-input {
@@ -39,6 +41,16 @@ ul {
 
 .modal-input:focus-within {
 	border: solid 2px black;
+}
+
+.modal-input-label {
+	font-size: 10px;
+	position: absolute;
+	z-index: 2;
+	padding: 5px;
+	margin-top: 5px;
+	margin-left: 5px;
+	
 }
 
 .modal-header {

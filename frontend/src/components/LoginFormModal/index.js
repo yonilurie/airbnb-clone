@@ -9,10 +9,16 @@ function LoginFormModal({ showModal, setShowModal, interaction }) {
 			{showModal && (
 				<Modal onClose={() => setShowModal(false)}>
 					{interaction === "login" && (
-						<LoginForm setShowModal={setShowModal} />
+						<LoginForm
+							setShowModal={setShowModal}
+							showModal={showModal}
+						/>
 					)}
 					{interaction === "signup" && (
-						<SignupForm setShowModal={setShowModal} />
+						<SignupForm
+							setShowModal={setShowModal}
+							showModal={showModal}
+						/>
 					)}
 				</Modal>
 			)}

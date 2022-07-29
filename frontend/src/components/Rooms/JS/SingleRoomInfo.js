@@ -131,7 +131,7 @@ const SingleRoomInfo = () => {
 										{Number(currentRoom.numReviews)}{" "}
 										review(s)
 										{" · "}
-										{currentRoom.city},{currentRoom.state},
+										{currentRoom.city}, {currentRoom.state},{" "}
 										{currentRoom.country}
 									</div>
 								)}
@@ -203,7 +203,7 @@ const SingleRoomInfo = () => {
 						)}
 
 						{sessionuser && sessionuser.id === currentRoom.ownerId && (
-							<>
+							<div className="button-container">
 								<button
 									onClick={deletedRoom}
 									className="delete-btn"
@@ -211,13 +211,15 @@ const SingleRoomInfo = () => {
 									Delete room
 								</button>
 
-								<NavLink
-									to={`/rooms/${roomId}/edit`}
-									className="edit"
+								<button
+									className="edit-btn"
+									onClick={() =>
+										history.push(`/rooms/${roomId}/edit`)
+									}
 								>
-									<span>Edit room</span>
-								</NavLink>
-							</>
+									Edit room
+								</button>
+							</div>
 						)}
 					</div>
 				)}

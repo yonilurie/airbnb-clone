@@ -8,6 +8,13 @@ form {
 	padding: 24px;
 }
 
+label {
+	margin-bottom: 5px;
+}
+input {
+	padding: 5px;
+}
+
 .errors {
 	display: flex;
 	justify-content: center;
@@ -42,6 +49,17 @@ form {
 	border: solid 2px black;
 }
 
+.input-container {
+	display: flex;
+	flex-direction: column;
+	margin: 10px 0px;
+}
+
+.input-container-flex {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
 .submit-form-btn {
 	box-sizing: border-box;
 	transition-duration: 0.25s;
