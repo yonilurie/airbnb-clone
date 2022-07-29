@@ -35,7 +35,7 @@ const EditRoomForm = () => {
 	//Get the info of the current room
 	useEffect(() => {
 		dispatch(getRoomInfo(roomId));
-	}, [dispatch, roomId]);
+	}, [dispatch]);
 
 	//Assign current room to variable
 	const currentRoom = useSelector((state) => state.currentRoom);
@@ -135,7 +135,7 @@ const EditRoomForm = () => {
 			setLongitude(0);
 			setDescription("");
 			setPrice(100);
-
+			dispatch(getRoomInfo(roomId));
 			//Redirect user to home page
 			history.push(`/rooms/${roomId}`);
 		} else {

@@ -52,7 +52,7 @@ const SingleRoomInfo = () => {
 
 	useEffect(() => {
 		dispatch(getRoomImages(Number(roomId)));
-	}, [dispatch, roomId]);
+	}, [dispatch]);
 
 	useEffect(() => {
 		dispatch(getRoomReviews(Number(roomId)));
@@ -60,7 +60,7 @@ const SingleRoomInfo = () => {
 
 	useEffect(() => {
 		dispatch(getARoomsBookings(Number(roomId)));
-	}, [dispatch, roomId]);
+	}, [dispatch]);
 
 	useEffect(() => {
 		if (currentRoom.Owner) {
