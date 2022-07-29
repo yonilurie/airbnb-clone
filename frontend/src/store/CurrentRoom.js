@@ -29,7 +29,7 @@ const singleRoomReducer = (state = initialState, action) => {
 	let newState;
 	switch (action.type) {
 		case GET_SPECIFIC_ROOM: {
-			newState = Object.assign({}, action.room);
+			newState = { ...action.room };
 			return newState;
 		}
 	

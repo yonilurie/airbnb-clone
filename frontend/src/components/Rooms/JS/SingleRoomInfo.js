@@ -48,7 +48,7 @@ const SingleRoomInfo = () => {
 	//Get room info, images, and reviews
 	useEffect(() => {
 		dispatch(getRoomInfo(Number(roomId)));
-	}, [dispatch, roomId]);
+	}, [dispatch]);
 
 	useEffect(() => {
 		dispatch(getRoomImages(Number(roomId)));
