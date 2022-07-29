@@ -125,7 +125,6 @@ const EditRoomForm = () => {
 
 		if (!validationErrors.length) {
 			dispatch(editRoom(JSON.stringify(room)));
-			// dispatch(editRoom(room));
 
 			setName("");
 			setAddress("");

@@ -68,10 +68,8 @@ const SingleRoomInfo = () => {
 	//Will delete a room an redirect user to home screen
 	const deleteARoom = () => {
 		dispatch(deleteRoom(roomId));
-		dispatch(getRooms())
-		history.push("/");
-		// history.push("/my-rooms");
-	
+		dispatch(getRooms());
+		history.push("/my-rooms");
 	};
 
 	return (
@@ -120,9 +118,8 @@ const SingleRoomInfo = () => {
 							</h2>
 							<div className="reviews">
 								{currentRoomReviews.length > 0 &&
-									typeof currentRoomReviews[0] === 'object' &&
+									typeof currentRoomReviews[0] === "object" &&
 									currentRoomReviews.map((review) => {
-								
 										return (
 											<Reviews
 												review={review}
@@ -137,7 +134,7 @@ const SingleRoomInfo = () => {
 					{sessionuser && sessionuser.id === currentRoom.ownerId && (
 						<>
 							<button onClick={deleteARoom}>Delete</button>
-							
+
 							<NavLink to={`/rooms/${roomId}/edit`}>Edit</NavLink>
 						</>
 					)}
