@@ -56,7 +56,6 @@ function CreateReview() {
 			await dispatch(create([roomId, JSON.stringify(reviewData)]));
 			dispatch(getRoomReviews(roomId));
 			history.push(`/rooms/${roomId}`);
-			history.go(`/rooms/${roomId}`);
 		}
 
 		setIsSubmitted(true);
