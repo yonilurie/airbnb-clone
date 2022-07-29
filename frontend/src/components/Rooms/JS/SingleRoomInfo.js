@@ -27,7 +27,7 @@ const SingleRoomInfo = () => {
 	useEffect(() => {
 		setInterval(() => {
 			setIsDisplayed(true);
-		}, 100);
+		}, 1000);
 	}, []);
 
 	//Assign room, images, and reviews to variables for easier access
