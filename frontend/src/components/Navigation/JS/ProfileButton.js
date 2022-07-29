@@ -117,10 +117,16 @@ function ProfileButton({ user }) {
 
 					{user && (
 						<>
-							<div className="profile-button-info name" hidden={!user}>
+							<div
+								className="profile-button-info name"
+								hidden={!user}
+							>
 								User: {user.firstName + " " + user.lastName}
 							</div>
-							<div className="profile-button-info email" hidden={!user}>
+							<div
+								className="profile-button-info email"
+								hidden={!user}
+							>
 								E-mail: {user.email}
 							</div>
 							<NavLink
@@ -144,9 +150,12 @@ function ProfileButton({ user }) {
 								My Rooms
 							</NavLink>
 
-							<li className="profile-button-options logout">
-								<div onClick={logout}>Log Out</div>
-							</li>
+							<div
+								className="profile-button-options logout"
+								onClick={logout}
+							>
+								<div>Log Out</div>
+							</div>
 						</>
 					)}
 				</ul>

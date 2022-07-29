@@ -53,10 +53,13 @@ svg {
 
 	overflow: hidden;
 }
-
+.profile-button-options {
+	cursor: pointer;
+}
 .profile-button-options.logout {
 	box-sizing: border-box;
 	border-top: solid 1px rgb(221, 221, 221);
+	cursor: pointer;
 }
 
 .profile-button-info.trips {

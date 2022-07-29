@@ -12,7 +12,7 @@ function SingleRoom({ room }) {
 	const { roomId } = useParams();
 
 	useEffect(() => {
-		dispatch(getMyRoomsData());
+		// dispatch(getMyRoomsData());
 		if (roomId) {
 			dispatch(getRoomReviews(roomId));
 		}
@@ -47,7 +47,9 @@ function SingleRoom({ room }) {
 				)}
 				{/* <div className="room-detail availability">{"availability"}</div> */}
 				<div className="room-detail price">
-					<b style={{ color: "rgb(34, 34, 34)" }}>${room.price}</b>
+					<span style={{ fontWeight: "600", paddingRight: "2px" }}>
+						${room.price}{" "}
+					</span>
 					night
 				</div>
 			</div>

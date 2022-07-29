@@ -5,13 +5,12 @@ import { useParams, useHistory, NavLink } from "react-router-dom";
 import { getRoomImages } from "../../../store/roomImages";
 import { getRoomReviews } from "../../../store/reviews";
 import { getRoomInfo } from "../../../store/CurrentRoom";
-import { deleteRoom, getRooms } from "../../../store/rooms";
+import { deleteRoom } from "../../../store/rooms";
 import { getARoomsBookings } from "../../../store/bookings";
 import { deleteARoom } from "../../../store/myRooms";
 import Reviews from "./Reviews";
 
 import "../CSS/SingleRoomInfo.css";
-import { getMyRoomsData } from "../../../store/myRooms";
 
 const SingleRoomInfo = () => {
 	const dispatch = useDispatch();
