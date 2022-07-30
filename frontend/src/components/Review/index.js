@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useHistory, Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { create, getRoomReviews, deleteAReview } from "../../store/reviews";
+import { create, getRoomReviews } from "../../store/reviews";
+import { getAUsersReviews, deleteAReview } from "../../store/myReviews";
 import Reviews from "../Rooms/JS/Reviews";
 import EditReviewModal from "./JS/EditReviewModal";
 import "./CSS/Review.css";
@@ -19,8 +20,13 @@ function CreateReview() {
 
 	//Get reviews for the room to check if user has already made one
 	useEffect(() => {
-		dispatch(getRoomReviews(roomId));
+		dispatch(getAUsersReviews(roomId));
 	}, [dispatch, roomId]);
+
+	useEffect(() => {
+		dispatch(getAUsersReviews());
+	}, [dispatch]);
+	const myReviews = Object.values(useSelector((state) => state.myReviews));
 
 	//Form validation
 	useEffect(() => {
@@ -37,13 +43,12 @@ function CreateReview() {
 	}, [stars, review, dispatch]);
 
 	const sessionuser = useSelector((state) => state.session.user);
-	const reviewsArray = Object.values(useSelector((state) => state.reviews));
 
 	if (!sessionuser) return <Redirect to="/" />;
 
 	//Check reviews for one made by the user
-	let usersReview = reviewsArray.find(
-		(review) => Number(review.userId) === Number(sessionuser.id)
+	let usersReview = myReviews.find(
+		(review) => Number(roomId) === Number(review.roomId)
 	);
 
 	//On submit if errors are present, setErrors and they will be rendered to user
@@ -63,9 +68,9 @@ function CreateReview() {
 
 	const deleteReview = (e) => {
 		e.preventDefault();
-		const data = [usersReview.id, roomId];
-		dispatch(deleteAReview(data));
-		dispatch(getRoomReviews(roomId));
+
+		dispatch(deleteAReview(usersReview.id));
+		dispatch(getAUsersReviews());
 	};
 
 	return (

@@ -1,5 +1,17 @@
 import { NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getAUsersReviews } from "../../../store/myReviews";
+
 const Booking = ({ booking, reviewDisabled }) => {
+	const dispatch = useDispatch();
+	useEffect(() => {
+		dispatch(getAUsersReviews());
+	}, [dispatch]);
+	const myReviews = useSelector((state) => state.myReviews);
+	
+
+
 	const [startYear, startMonth, startDay] = booking.startDate.split("-");
 	const [endYear, endMonth, endDay] = booking.endDate.split("-");
 	const months = [

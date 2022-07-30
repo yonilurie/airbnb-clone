@@ -133,8 +133,8 @@ const reviewsReducer = (state = initialState, action) => {
 		case DELETE_REVIEW: {
 			newState = { ...state };
 			for (const key in newState) {
-				if (Number(newState[key].id) === Number(action.id)) {
-					delete newState[key].id;
+				if (Number(newState[key].roomId) === Number(action.roomId)) {
+					delete newState[key];
 					return newState;
 				}
 			}

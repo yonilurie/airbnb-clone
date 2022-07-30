@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Redirect, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getAUsersBookings } from "../../store/myBookings";
-
+import { getAUsersReviews } from "../../store/myReviews";
 import Booking from "./JS/Booking";
 import "./CSS/Bookings.css";
 
@@ -14,7 +14,10 @@ const Bookings = () => {
 	useEffect(() => {
 		dispatch(getAUsersBookings());
 	}, [dispatch]);
-
+	useEffect(() => {
+		dispatch(getAUsersReviews());
+	}, [dispatch]);
+	const myReviews = useSelector(state => state.myReviews)
 	// useEffect(() => {
 	// 	const timeout = setTimeout(() => {
 	// 		setIsDisplayed(true);
