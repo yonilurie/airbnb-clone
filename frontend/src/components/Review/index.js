@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useHistory, Redirect, NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { create, getRoomReviews } from "../../store/reviews";
-import { getAUsersReviews, deleteAReview } from "../../store/myReviews";
+import { createRoomReview } from "../../store/CurrentRoom";
+import { deleteRoomReview, getRoomInfo } from "../../store/CurrentRoom";
+import { getAUsersReviews } from "../../store/session";
 import Reviews from "../Rooms/JS/Reviews";
 import EditReviewModal from "./JS/EditReviewModal";
 import "./CSS/Review.css";
@@ -20,13 +21,15 @@ function CreateReview() {
 
 	//Get reviews for the room to check if user has already made one
 	useEffect(() => {
-		dispatch(getAUsersReviews(roomId));
-	}, [dispatch, roomId]);
-
-	useEffect(() => {
 		dispatch(getAUsersReviews());
 	}, [dispatch]);
-	const myReviews = Object.values(useSelector((state) => state.myReviews));
+	useEffect(() => {
+		dispatch(getRoomInfo(roomId));
+	}, [dispatch]);
+
+	const myReviews = Object.values(
+		useSelector((state) => state.session.reviews)
+	);
 
 	//Form validation
 	useEffect(() => {
@@ -43,7 +46,6 @@ function CreateReview() {
 	}, [stars, review, dispatch]);
 
 	const sessionuser = useSelector((state) => state.session.user);
-
 	if (!sessionuser) return <Redirect to="/" />;
 
 	//Check reviews for one made by the user
@@ -58,9 +60,11 @@ function CreateReview() {
 		const reviewData = { review, stars };
 
 		if (!validationErrors.length) {
-			await dispatch(create([roomId, JSON.stringify(reviewData)]));
+			await dispatch(
+				createRoomReview([roomId, JSON.stringify(reviewData)])
+			);
 			dispatch(getAUsersReviews());
-			// history.push(`/rooms/${roomId}`);
+			history.push(`/rooms/${roomId}`);
 		}
 
 		setIsSubmitted(true);
@@ -69,17 +73,15 @@ function CreateReview() {
 	const deleteReview = (e) => {
 		e.preventDefault();
 
-		dispatch(deleteAReview(usersReview.id));
+		dispatch(deleteRoomReview(usersReview.id));
+
+		dispatch(getRoomInfo(roomId));
 		dispatch(getAUsersReviews());
+		history.push(`/trips`);
 	};
 
 	return (
 		<>
-			<EditReviewModal
-				review={usersReview}
-				showModal={showModal}
-				setShowModal={setShowModal}
-			></EditReviewModal>
 			{usersReview === undefined && (
 				<form onSubmit={handleSubmit}>
 					<h1>Review</h1>
@@ -112,6 +114,11 @@ function CreateReview() {
 			)}
 			{usersReview !== undefined && (
 				<div>
+					<EditReviewModal
+						review={usersReview}
+						showModal={showModal}
+						setShowModal={setShowModal}
+					></EditReviewModal>
 					<h1>Review already created</h1>
 					<Reviews review={usersReview}></Reviews>
 					<div className="button-container">
@@ -124,7 +131,6 @@ function CreateReview() {
 						<button onClick={deleteReview} className="delete-btn">
 							Delete Review
 						</button>
-						
 					</div>
 				</div>
 			)}

@@ -88,14 +88,14 @@ export const editAReview = (reviewData) => async (dispatch) => {
 export const deleteAReview = (review) => async (dispatch) => {
 	const [reviewId, roomId] = review;
 	const response = await csrfFetch(
-		`/api/rooms/${roomId}/reviews/${reviewId}`,
+		`/api/reviews/${reviewId}`,
 		{
 			method: "DELETE",
 		}
 	);
 
 	const data = await response.json();
-	dispatch(getReviews(roomId));
+	dispatch(deleteReview(roomId));
 
 	return data;
 };

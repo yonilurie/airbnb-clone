@@ -4,7 +4,7 @@ import thunk from "redux-thunk";
 import sessionReducer from "./session";
 import roomReducer from "./rooms";
 import imagesReducer from "./roomImages";
-import reviewsReducer from "./reviews";
+// import reviewsReducer from "./reviews";
 import singleRoomReducer from "./CurrentRoom";
 import myRoomReducer from "./myRooms";
 import bookingsReducer from "./bookings";
@@ -15,7 +15,7 @@ const rootReducer = combineReducers({
 	session: sessionReducer,
 	rooms: roomReducer,
 	roomImages: imagesReducer,
-	reviews: reviewsReducer,
+	// reviews: reviewsReducer,
 	currentRoom: singleRoomReducer,
 	myRooms: myRoomReducer,
 	bookings: bookingsReducer,

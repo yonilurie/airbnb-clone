@@ -152,17 +152,17 @@ router.put(
 
 		//Check if a room with that ID exists
 		let room = await Room.findByPk(roomId);
-		console.log(room);
+
 		//Check if room exists
 		if (!room) return res.json(noRoomError());
 		//Find review that needs editing
 		let reviewToEdit = await Review.findByPk(reviewId, {
-				include: [
-					{
-						model: User,
-						attributes: ["id", "firstName", "lastName"],
-					},
-				],
+			include: [
+				{
+					model: User,
+					attributes: ["id", "firstName", "lastName"],
+				},
+			],
 		});
 		//if it doesnt exist or belongs to the wrong room
 		if (!reviewToEdit || reviewToEdit.roomId !== Number(roomId)) {
@@ -176,7 +176,7 @@ router.put(
 		reviewToEdit.review = review;
 		reviewToEdit.stars = stars;
 		await reviewToEdit.save();
-		console.log(reviewToEdit)
+
 		res.status = 200;
 		return res.json(reviewToEdit);
 	}
@@ -427,6 +427,7 @@ router.post(
 	async (req, res) => {
 		const { roomId } = req.params;
 		const { review, stars } = req.body;
+
 		const { id } = req.user;
 
 		//Check if a room with that ID exists
@@ -466,9 +467,17 @@ router.post(
 			};
 			return res.json(err);
 		}
-		newReview.firstName = user.firstName;
+
+		let returnReview = await Review.findByPk(newReview.id, {
+			include: [
+				{
+					model: User,
+				},
+			],
+		});
+
 		res.status = 200;
-		return res.json(newReview);
+		return res.json(returnReview);
 	}
 );
 
@@ -576,6 +585,16 @@ router.get("/:roomId", validateRoomId, async (req, res) => {
 				as: "Owner",
 				attributes: ["id", "firstName", "lastName"],
 			},
+			{
+				model: Review,
+				as: "Reviews",
+				include: [
+					{
+						model: User,
+						attributes: ["id", "firstName", "lastName"],
+					},
+				],
+			},
 		],
 	});
 
@@ -682,7 +701,7 @@ router.post(
 //delete a spot
 router.delete("/:roomId", [restoreUser, requireAuth], async (req, res) => {
 	const { roomId } = req.params;
-	console.log(req.user);
+
 	const { id } = req.user;
 	let room = await Room.findOne({
 		where: {

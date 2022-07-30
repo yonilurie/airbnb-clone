@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import { getRoomReviews } from "../../../store/reviews";
 
 import "../CSS/SingleRoom.css";
 
@@ -9,12 +8,6 @@ function SingleRoom({ room }) {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const { roomId } = useParams();
-
-	useEffect(() => {
-		if (roomId) {
-			dispatch(getRoomReviews(roomId));
-		}
-	}, [dispatch, roomId]);
 
 	//Redirects user to room they click on
 	const showRoomDetails = (e) => {
@@ -25,10 +18,7 @@ function SingleRoom({ room }) {
 	return (
 		<div className="room" onClick={(e) => showRoomDetails(e)}>
 			{/* <div className="favorite">♥️</div> */}
-			<img
-				src={room.previewImage}
-				alt={`For room ${room.id}`}
-			></img>
+			<img src={room.previewImage} alt={`For room ${room.id}`}></img>
 			<div className="room-info" onClick={showRoomDetails}>
 				<div className="room-detail name">
 					{room.city}, {room.state}

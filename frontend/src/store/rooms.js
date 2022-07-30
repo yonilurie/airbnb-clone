@@ -5,6 +5,7 @@ const GET_ROOMS = "/api/rooms";
 const CREATE_ROOM = "/api/rooms/add";
 const DELETE_ROOM = "/api/rooms/:roomId/delete";
 const EDIT_ROOM = "/api/rooms/:roomId/edit";
+
 //Thunk actions
 //
 const getRoomsData = (rooms) => {
@@ -20,6 +21,7 @@ const createARoom = (room) => {
 		room,
 	};
 };
+
 
 const deleteARoom = (id) => {
 	return {
@@ -62,6 +64,8 @@ export const createRoom = (room) => async (dispatch) => {
 	dispatch(createARoom(data));
 };
 
+
+
 //delete a room
 export const deleteRoom = (roomId) => async (dispatch) => {
 	const response = await csrfFetch(`/api/rooms/${roomId}`, {
@@ -101,6 +105,8 @@ const roomReducer = (state = initialState, action) => {
 			newState = Object.assign(state, room);
 			return newState;
 		}
+
+	
 		case DELETE_ROOM: {
 			newState = { ...state };
 

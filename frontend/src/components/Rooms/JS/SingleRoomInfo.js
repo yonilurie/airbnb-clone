@@ -3,11 +3,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 
 import { getRoomImages } from "../../../store/roomImages";
-import { getRoomReviews } from "../../../store/reviews";
+
 import { getRoomInfo } from "../../../store/CurrentRoom";
 import { deleteRoom } from "../../../store/rooms";
 import { getARoomsBookings } from "../../../store/bookings";
-import { deleteARoom } from "../../../store/myRooms";
+import { deleteARoom, getMyRoomsData } from "../../../store/myRooms";
 import Reviews from "./Reviews";
 
 import "../CSS/SingleRoomInfo.css";
@@ -27,11 +27,11 @@ const SingleRoomInfo = () => {
 	//Assign room, images, and reviews to variables for easier access
 	let currentRoom = useSelector((state) => state.currentRoom);
 
+	// let currentRoomReviews = Object.values(
+	// 	useSelector((state) => state.currentRoom.Reviews)
+	// );
 	const currentRoomImages = Object.values(
 		useSelector((state) => state.roomImages)
-	);
-	const currentRoomReviews = Object.values(
-		useSelector((state) => state.reviews)
 	);
 
 	useEffect(() => {
@@ -41,10 +41,6 @@ const SingleRoomInfo = () => {
 
 		return () => clearTimeout(timeout);
 	}, []);
-
-	// const currentRoomBookings = Object.values(
-	// 	useSelector((state) => state.bookings)
-	// );
 
 	//Get room info, images, and reviews
 	useEffect(() => {
@@ -56,26 +52,15 @@ const SingleRoomInfo = () => {
 	}, [dispatch, roomId]);
 
 	useEffect(() => {
-		dispatch(getRoomReviews(Number(roomId)));
-	}, [dispatch, roomId]);
-
-	useEffect(() => {
 		dispatch(getARoomsBookings(Number(roomId)));
 	}, [dispatch, roomId]);
 
-	// useEffect(() => {
-	// 	if (currentRoom.Owner) {
-	// 		const roomName = currentRoom.name;
-	// 		document.title = `${roomName}`;
-	// 	}
-	// }, [currentRoom]);
-
 	//Will delete a room an redirect user to home screen
 	const deletedRoom = () => {
-		dispatch(deleteARoom(roomId));
+		// dispatch(deleteARoom(roomId));
 		dispatch(deleteRoom(roomId));
 
-		// dispatch(getMyRoomsData());
+		dispatch(getMyRoomsData());
 		history.push("/my-rooms");
 	};
 
@@ -178,7 +163,7 @@ const SingleRoomInfo = () => {
 							</div>
 						)}
 
-						{currentRoomReviews.length > 0 && (
+						{Object.values(currentRoom.Reviews).length > 0 && (
 							<div className="reviews-container">
 								{currentRoom.avgStarRating >= 1 && (
 									<h2 className="reviews-overview">
@@ -197,17 +182,21 @@ const SingleRoomInfo = () => {
 									</h2>
 								)}
 								<div className="reviews">
-									{currentRoomReviews.length > 0 &&
-										typeof currentRoomReviews[0] ===
-											"object" &&
-										currentRoomReviews.map((review) => {
-											return (
-												<Reviews
-													review={review}
-													key={review.id}
-												></Reviews>
-											);
-										})}
+									{Object.values(currentRoom.Reviews).length >
+										0 &&
+										typeof Object.values(
+											currentRoom.Reviews
+										)[0] === "object" &&
+										Object.values(currentRoom.Reviews).map(
+											(review) => {
+												return (
+													<Reviews
+														review={review}
+														key={review.id}
+													></Reviews>
+												);
+											}
+										)}
 								</div>
 							</div>
 						)}

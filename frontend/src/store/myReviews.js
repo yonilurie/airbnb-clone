@@ -76,7 +76,7 @@ const myReviewsReducer = (state = initialState, action) => {
 		}
 		case EDIT_REVIEW: {
 			newState = { ...state };
-			
+
 			for (const key in newState) {
 				if (Number(newState[key].id) === Number(action.review.id)) {
 					newState[key] = action.review;
@@ -88,7 +88,6 @@ const myReviewsReducer = (state = initialState, action) => {
 		case DELETE_REVIEW: {
 			newState = { ...state };
 			for (const key in newState) {
-				
 				if (Number(newState[key].id) === Number(action.id)) {
 					delete newState[key];
 					return newState;

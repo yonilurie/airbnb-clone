@@ -26,7 +26,7 @@ const validateReview = [
 
 router.delete("/:reviewId", [restoreUser, requireAuth], async (req, res) => {
 	const { reviewId } = req.params;
-	console.log("USER", req.user);
+	
 	const { id } = req.user;
 
 	//Check if review exists

@@ -1,15 +1,18 @@
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getAUsersReviews } from "../../../store/myReviews";
+import { getAUsersReviews } from "../../../store/session";
 
 const Booking = ({ booking, reviewDisabled }) => {
 
 	const dispatch = useDispatch();
+
 	useEffect(() => {
 		dispatch(getAUsersReviews());
 	}, [dispatch]);
-	const myReviews = Object.values(useSelector((state) => state.myReviews));
+
+
+	const myReviews = Object.values(useSelector((state) => state.session.reviews));
 	
 	let hasReview = myReviews.find(review => Number(review.roomId) === Number(booking.roomId))
 
