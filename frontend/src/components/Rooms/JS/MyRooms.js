@@ -33,18 +33,13 @@ const MyRooms = () => {
 	return (
 		<>
 			<h1>Your rooms</h1>
-			{isDisplayed && (
+			{isDisplayed && rooms && rooms.length > 0 && (
 				<div className="rooms-container">
-					{rooms &&
-						rooms.length > 0 &&
-						rooms.map((room) => {
-							return (
-								<SingleRoom
-									room={room}
-									key={room.id}
-								></SingleRoom>
-							);
-						})}
+					{rooms.map((room) => {
+						return (
+							<SingleRoom room={room} key={room.id}></SingleRoom>
+						);
+					})}
 				</div>
 			)}
 		</>

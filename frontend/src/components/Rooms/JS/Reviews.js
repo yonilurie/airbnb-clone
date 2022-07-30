@@ -1,11 +1,5 @@
 import "../CSS/Review.css";
-
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-
 const Reviews = ({ review }) => {
-	const dispatch = useDispatch();
-	const { roomId } = useParams();
 	const [year, month] = review.createdAt.split("-");
 
 	const months = [

@@ -34,7 +34,7 @@ function ReviewForm({ setShowModal }) {
 
 		if (!validationErrors.length) {
 			dispatch(createRoomReview([roomId, JSON.stringify(reviewData)]));
-			// dispatch(getRoomReviews(roomId));
+			
 			
 			history.push(`/rooms/${roomId}`);
 		}

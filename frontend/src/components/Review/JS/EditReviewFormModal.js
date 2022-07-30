@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import { getRoomInfo } from "../../../store/CurrentRoom";
+// import { getRoomInfo } from "../../../store/CurrentRoom";
 import { editAUsersReview } from "../../../store/session";
 
 const EditReviewFormModal = ({ showModal, setShowModal, review }) => {
@@ -36,9 +36,9 @@ const EditReviewFormModal = ({ showModal, setShowModal, review }) => {
 
 		if (validationErrors.length === 0) {
 			dispatch(editAUsersReview([review.id, newReview]));
-			dispatch(getRoomInfo(roomId));
-			setShowModal(false);
+			// dispatch(getRoomInfo(roomId));
 
+			setShowModal(false);
 			history.push(`/rooms/${roomId}`);
 			return;
 		}

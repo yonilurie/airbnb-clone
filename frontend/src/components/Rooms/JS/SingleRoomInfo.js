@@ -14,24 +14,17 @@ const SingleRoomInfo = () => {
 	const sessionuser = useSelector((state) => state.session.user);
 	const { roomId } = useParams();
 	let currentRoom = useSelector((state) => state.currentRoom);
-	const [isDisplayed, setIsDisplayed] = useState(currentRoom);
+	const [
+		isDisplayed,
+		//setIsDisplayed
+	] = useState(true);
 
 	if (isNaN(Number(roomId))) history.push("/");
-
-	//Assign room to variable
-
-
-	// useEffect(() => {
-	// 	const timeout = setTimeout(() => {
-	// 		setIsDisplayed(true);
-	// 	}, 500);
-
-	// 	return () => clearTimeout(timeout);
-	// }, [roomId]);
 
 	//Get room info, images, and reviews
 	useEffect(() => {
 		dispatch(getRoomInfo(Number(roomId)));
+		// setIsDisplayed(true);
 	}, [dispatch, roomId]);
 
 	useEffect(() => {
