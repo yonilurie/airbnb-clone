@@ -4,12 +4,21 @@ import { useEffect } from "react";
 import { getAUsersReviews } from "../../../store/myReviews";
 
 const Booking = ({ booking, reviewDisabled }) => {
+
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(getAUsersReviews());
 	}, [dispatch]);
-	const myReviews = useSelector((state) => state.myReviews);
+	const myReviews = Object.values(useSelector((state) => state.myReviews));
 	
+	let hasReview = myReviews.find(review => Number(review.roomId) === Number(booking.roomId))
+
+	let buttonMsg;
+	if (hasReview) {
+		buttonMsg = 'Edit review'
+	} else {
+		buttonMsg = 'Add review'
+	}
 
 
 	const [startYear, startMonth, startDay] = booking.startDate.split("-");
@@ -69,7 +78,7 @@ const Booking = ({ booking, reviewDisabled }) => {
 			</NavLink>
 			{!reviewDisabled && (
 				<NavLink to={`/add-review/${booking.Room.id}`}>
-					<button className="review-btn">Review</button>
+					<button className="review-btn">{buttonMsg}</button>
 				</NavLink>
 			)}
 		</div>

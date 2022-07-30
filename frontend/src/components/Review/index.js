@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useHistory, Redirect } from "react-router-dom";
+import { useParams, useHistory, Redirect, NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { create, getRoomReviews } from "../../store/reviews";
 import { getAUsersReviews, deleteAReview } from "../../store/myReviews";
@@ -124,9 +124,11 @@ function CreateReview() {
 						<button onClick={deleteReview} className="delete-btn">
 							Delete Review
 						</button>
+						
 					</div>
 				</div>
 			)}
+			<NavLink to={`/rooms/${roomId}`}>Visit Room</NavLink>
 		</>
 	);
 }
