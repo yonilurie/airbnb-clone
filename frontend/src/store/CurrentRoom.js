@@ -2,6 +2,7 @@ import { csrfFetch } from "./csrf";
 
 //String literals for thunk action
 const GET_SPECIFIC_ROOM = "/api/rooms/:roomId";
+const GET_CURRENT_ROOM_BOOKINGS = "/api/rooms/:roomId/bookings";
 const CREATE_ROOM_REVIEW = "/reviews/create";
 const EDIT_ROOM_REVIEW = "/reviews/edit";
 const DELETE_ROOM_REVIEW = "/api/rooms/reviews/delete";
@@ -11,6 +12,13 @@ const getSpecificRoomData = (room) => {
 	return {
 		type: GET_SPECIFIC_ROOM,
 		room,
+	};
+};
+
+const getRoomBookings = (bookings) => {
+	return {
+		type: GET_CURRENT_ROOM_BOOKINGS,
+		bookings,
 	};
 };
 
@@ -45,6 +53,15 @@ export const getRoomInfo = (id) => async (dispatch) => {
 
 	dispatch(getSpecificRoomData(data));
 
+	return data;
+};
+//get all bookings for a room by its id
+export const getARoomsBookings = (id) => async (dispatch) => {
+	const response = await fetch(`/api/rooms/${id}/bookings`);
+
+	const data = await response.json();
+
+	dispatch(getRoomBookings(data));
 	return data;
 };
 
@@ -111,6 +128,21 @@ const singleRoomReducer = (state = initialState, action) => {
 
 			return newState;
 		}
+
+		case GET_CURRENT_ROOM_BOOKINGS: {
+			newState = { ...state };
+
+			const bookings = {};
+			action.bookings.forEach((booking) => {
+				console.log(booking);
+				bookings[booking.id] = booking;
+			});
+
+			newState.bookings = bookings;
+
+			return newState;
+		}
+
 		case CREATE_ROOM_REVIEW: {
 			newState = {
 				...state,

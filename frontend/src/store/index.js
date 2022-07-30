@@ -14,13 +14,14 @@ import myReviewsReducer from "./myReviews";
 const rootReducer = combineReducers({
 	session: sessionReducer,
 	rooms: roomReducer,
-	roomImages: imagesReducer,
-	// reviews: reviewsReducer,
 	currentRoom: singleRoomReducer,
 	myRooms: myRoomReducer,
-	bookings: bookingsReducer,
+	
 	myBookings: myBookingsReducer,
-	myReviews: myReviewsReducer,
+	// bookings: bookingsReducer,
+	// roomImages: imagesReducer,
+	// reviews: reviewsReducer,
+	// myReviews: myReviewsReducer,
 });
 
 let enhancer;

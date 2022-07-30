@@ -2,11 +2,9 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 
-import { getRoomImages } from "../../../store/roomImages";
-
-import { getRoomInfo } from "../../../store/CurrentRoom";
+import { getRoomInfo, getARoomsBookings } from "../../../store/CurrentRoom";
 import { deleteRoom } from "../../../store/rooms";
-import { getARoomsBookings } from "../../../store/bookings";
+
 import { deleteARoom, getMyRoomsData } from "../../../store/myRooms";
 import Reviews from "./Reviews";
 
@@ -30,9 +28,6 @@ const SingleRoomInfo = () => {
 	// let currentRoomReviews = Object.values(
 	// 	useSelector((state) => state.currentRoom.Reviews)
 	// );
-	const currentRoomImages = Object.values(
-		useSelector((state) => state.roomImages)
-	);
 
 	useEffect(() => {
 		const timeout = setTimeout(() => {
@@ -45,10 +40,6 @@ const SingleRoomInfo = () => {
 	//Get room info, images, and reviews
 	useEffect(() => {
 		dispatch(getRoomInfo(Number(roomId)));
-	}, [dispatch, roomId]);
-
-	useEffect(() => {
-		dispatch(getRoomImages(Number(roomId)));
 	}, [dispatch, roomId]);
 
 	useEffect(() => {
@@ -130,14 +121,7 @@ const SingleRoomInfo = () => {
 							</div>
 
 							<div className="room-images">
-								{currentRoomImages.length > 0 && (
-									<img
-										src={`${currentRoomImages[0].imageUrl}`}
-										alt="first"
-										className="main-image"
-									></img>
-								)}
-								{currentRoomImages.length <= 0 && (
+								{currentRoom.images.length <= 0 && (
 									<img
 										src={currentRoom.previewImage}
 										alt="preview"
