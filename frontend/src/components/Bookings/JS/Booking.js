@@ -4,25 +4,27 @@ import { useEffect } from "react";
 import { getAUsersReviews } from "../../../store/session";
 
 const Booking = ({ booking, reviewDisabled }) => {
-
 	const dispatch = useDispatch();
 
 	useEffect(() => {
 		dispatch(getAUsersReviews());
 	}, [dispatch]);
 
+	const session = Object.values(useSelector((state) => state.session));
 
-	const myReviews = Object.values(useSelector((state) => state.session.reviews));
-	
-	let hasReview = myReviews.find(review => Number(review.roomId) === Number(booking.roomId))
+	let hasReview;
+	if (session.reviews) {
+		hasReview = session.reviews.find(
+			(review) => Number(review.roomId) === Number(booking.roomId)
+		);
+	}
 
 	let buttonMsg;
 	if (hasReview) {
-		buttonMsg = 'Edit review'
+		buttonMsg = "Edit review";
 	} else {
-		buttonMsg = 'Add review'
+		buttonMsg = "Add review";
 	}
-
 
 	const [startYear, startMonth, startDay] = booking.startDate.split("-");
 	const [endYear, endMonth, endDay] = booking.endDate.split("-");
