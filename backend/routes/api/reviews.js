@@ -1,19 +1,38 @@
 const express = require("express");
 const { requireAuth, restoreUser } = require("../../utils/auth");
+const { handleValidationErrors } = require("../../utils/validation");
 const { Room, User, Review, UserReviewImage } = require("../../db/models");
+const { check } = require("express-validator");
 const router = express.Router();
+
+//Validate review params
+const validateReview = [
+	check("review")
+		.exists()
+		.withMessage("Must include review message")
+		.notEmpty()
+		.withMessage("Review can not be empty"),
+
+	check("stars")
+		.exists()
+		.withMessage("Must include stars rating")
+		.notEmpty()
+		.withMessage("Rating cannot be empty")
+		.isInt({ min: 1, max: 5 })
+		.withMessage("Must be between 1 and 5 stars"),
+
+	handleValidationErrors,
+];
 
 router.delete("/:reviewId", [restoreUser, requireAuth], async (req, res) => {
 	const { reviewId } = req.params;
+	console.log("USER", req.user);
 	const { id } = req.user;
 
 	//Check if review exists
 	let review = await Review.findByPk(reviewId);
 	//If not return 404 code
-	if (
-		!review ||
-		review.userId !== Number(id) 
-	) {
+	if (!review || review.userId !== Number(id)) {
 		return res.json(noReviewError());
 	}
 
@@ -24,6 +43,36 @@ router.delete("/:reviewId", [restoreUser, requireAuth], async (req, res) => {
 		statusCode: 200,
 	});
 });
+
+//Edit an existing review
+router.put(
+	"/:reviewId",
+	[validateReview, restoreUser, requireAuth],
+	async (req, res) => {
+		const { reviewId } = req.params;
+		const { id } = req.user;
+		const { review, stars } = req.body;
+
+		let reviewToEdit = await Review.findByPk(reviewId, {
+			include: [
+				{
+					model: User,
+					attributes: ["id", "firstName", "lastName"],
+				},
+			],
+		});
+
+		if (reviewToEdit.userId !== Number(id)) {
+			return res.json(noReviewError());
+		}
+
+		reviewToEdit.review = review;
+		reviewToEdit.stars = stars;
+		await reviewToEdit.save();
+		res.status = 200;
+		return res.json(reviewToEdit);
+	}
+);
 
 //Delete review image
 router.delete(

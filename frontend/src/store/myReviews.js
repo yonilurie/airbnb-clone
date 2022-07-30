@@ -3,11 +3,19 @@ import { csrfFetch } from "./csrf";
 //String literals for thunk action
 const GET_USER_REVIEWS = "/api/reviews";
 const DELETE_REVIEW = "/api/reviews/DELETE";
+const EDIT_REVIEW = "/api/reviews/EDIT";
 //Thunk actions
 const getUserReviews = (reviews) => {
 	return {
 		type: GET_USER_REVIEWS,
 		reviews,
+	};
+};
+
+const editUserReview = (review) => {
+	return {
+		type: EDIT_REVIEW,
+		review,
 	};
 };
 
@@ -36,9 +44,24 @@ export const deleteAReview = (reviewId) => async (dispatch) => {
 	});
 
 	const data = await response.json();
-	console.log(data)
+
 	dispatch(deleteReview(reviewId));
 	return data;
+};
+
+export const editAUsersReview = (reviewInfo) => async (dispatch) => {
+	const [id, review] = reviewInfo;
+	const response = await csrfFetch(`/api/reviews/${id}`, {
+		method: "PUT",
+		headers: {
+			contentType: "application/json",
+		},
+		body: JSON.stringify(review),
+	});
+
+	const data = await response.json();
+
+	dispatch(editUserReview(data));
 };
 
 const initialState = {};
@@ -51,10 +74,21 @@ const myReviewsReducer = (state = initialState, action) => {
 			newState = Object.assign({}, action.reviews);
 			return newState;
 		}
+		case EDIT_REVIEW: {
+			newState = { ...state };
+			
+			for (const key in newState) {
+				if (Number(newState[key].id) === Number(action.review.id)) {
+					newState[key] = action.review;
+					return newState;
+				}
+			}
+			return newState;
+		}
 		case DELETE_REVIEW: {
 			newState = { ...state };
 			for (const key in newState) {
-				console.log(Number(newState[key].id) === Number(action.id))
+				
 				if (Number(newState[key].id) === Number(action.id)) {
 					delete newState[key];
 					return newState;

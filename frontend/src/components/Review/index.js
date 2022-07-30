@@ -59,8 +59,8 @@ function CreateReview() {
 
 		if (!validationErrors.length) {
 			await dispatch(create([roomId, JSON.stringify(reviewData)]));
-			dispatch(getRoomReviews(roomId));
-			history.push(`/rooms/${roomId}`);
+			dispatch(getAUsersReviews());
+			// history.push(`/rooms/${roomId}`);
 		}
 
 		setIsSubmitted(true);

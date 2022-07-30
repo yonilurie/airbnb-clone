@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams, useHistory} from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 import { getRoomImages } from "../../../store/roomImages";
 import { getRoomReviews } from "../../../store/reviews";
@@ -137,8 +137,8 @@ const SingleRoomInfo = () => {
 								)}
 								{currentRoom.avgStarRating < 1 && (
 									<div className="room-reviews-and-location">
-										No Reviews Yet {currentRoom.city}, {' '}
-										{currentRoom.state}, {' '}
+										No Reviews Yet {currentRoom.city},{" "}
+										{currentRoom.state},{" "}
 										{currentRoom.country}
 									</div>
 								)}

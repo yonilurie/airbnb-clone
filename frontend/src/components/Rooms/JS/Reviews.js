@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getRoomReviews } from "../../../store/reviews";
 const Reviews = ({ review }) => {
-	console.log(review);
+	
 	const dispatch = useDispatch();
 	const { roomId } = useParams();
 

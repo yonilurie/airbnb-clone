@@ -25,7 +25,7 @@ export const getMyRoomsData = () => async (dispatch) => {
 	const response = await csrfFetch(`/api/rooms/my-rooms`);
 
 	const data = await response.json();
-	console.log(data);
+
 	dispatch(getMyRooms(data));
 	return data;
 };
@@ -52,7 +52,6 @@ const myRoomReducer = (state = initialState, action) => {
 			newState = { ...state };
 
 			for (const key in newState) {
-				console.log(Number(newState[key].id) === Number(action.id));
 				if (Number(newState[key].id) === Number(action.id)) {
 					delete newState[key].id;
 					return newState;
