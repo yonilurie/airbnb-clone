@@ -3,6 +3,28 @@ const { requireAuth, restoreUser } = require("../../utils/auth");
 const { Room, User, Review, UserReviewImage } = require("../../db/models");
 const router = express.Router();
 
+router.delete("/:reviewId", [restoreUser, requireAuth], async (req, res) => {
+	const { reviewId } = req.params;
+	const { id } = req.user;
+
+	//Check if review exists
+	let review = await Review.findByPk(reviewId);
+	//If not return 404 code
+	if (
+		!review ||
+		review.userId !== Number(id) 
+	) {
+		return res.json(noReviewError());
+	}
+
+	await review.destroy();
+	res.status = 200;
+	return res.json({
+		message: "Successfully deleted",
+		statusCode: 200,
+	});
+});
+
 //Delete review image
 router.delete(
 	"/images/:imageId",
@@ -75,4 +97,13 @@ router.get("/", [restoreUser, requireAuth], async (req, res) => {
 	return res.json(reviews);
 });
 
+function noRoomError() {
+	const err = {};
+	(err.message = "Room couldn't be found"), (err.status = 404);
+	err.errors = {
+		error: "Room couldn't be found",
+		statusCode: 404,
+	};
+	return err;
+}
 module.exports = router;
