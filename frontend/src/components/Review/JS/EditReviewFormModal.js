@@ -14,7 +14,16 @@ const EditReviewFormModal = ({ showModal, setShowModal, review }) => {
 	const [validationErrors, setValidationErrors] = useState([]);
 	const [isSubmitted, setIsSubmitted] = useState(false);
 
-
+	useEffect(() => {
+		const errors = [];
+		if (stars < 1 || stars > 5) {
+			errors.push("Star rating must be between 1 and 5");
+		}
+		if (reviewMessage.length < 10 || reviewMessage.length > 500) {
+			errors.push("Review must be between 10 and 500 characters");
+		}
+		setValidationErrors(errors);
+	}, [stars, reviewMessage]);
 
 	//On submit if errors are present, setErrors and they will be rendered to user
 	const handleSubmit = async (e) => {
@@ -25,13 +34,16 @@ const EditReviewFormModal = ({ showModal, setShowModal, review }) => {
 			review: reviewMessage,
 		};
 
-		// dispatch(editAReview([newReview, review.id, review.roomId]));
-		dispatch(editAUsersReview([review.id, newReview]));
-		dispatch(getRoomInfo(roomId));
-		setShowModal(false);
+		if (validationErrors.length === 0) {
+			dispatch(editAUsersReview([review.id, newReview]));
+			dispatch(getRoomInfo(roomId));
+			setShowModal(false);
 
-		history.push(`/rooms/${roomId}`);
-		return;
+			history.push(`/rooms/${roomId}`);
+			return;
+		}
+
+		setIsSubmitted(true);
 	};
 
 	return (
@@ -48,7 +60,7 @@ const EditReviewFormModal = ({ showModal, setShowModal, review }) => {
 
 			<form onSubmit={handleSubmit}>
 				<h3 className="modal-welcome">Welcome to Airbnb</h3>
-				{validationErrors.length > 0 && (
+				{isSubmitted && validationErrors.length > 0 && (
 					<ul className="errors">
 						{validationErrors.map((error, idx) => (
 							<li key={idx}>{error}</li>
