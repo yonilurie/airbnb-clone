@@ -1,4 +1,4 @@
-import { csrfFetch } from "./csrf";
+import { csrfFetch } from "../csrf";
 
 //String literals for thunk action
 const GET_REVIEWS = "reviews/get";

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getMyRoomsData } from "../../../store/myRooms";
+import { getMyRoomsData } from "../../../store/session";
 
 import SingleRoom from "./SingleRoom";
 
@@ -12,7 +12,7 @@ const MyRooms = () => {
 	const [isDisplayed, setIsDisplayed] = useState(true);
 	const sessionuser = useSelector((state) => state.session.user);
 
-	const rooms = Object.values(useSelector((state) => state.myRooms));
+	const rooms = Object.values(useSelector((state) => state.session.rooms));
 
 	useEffect(() => {
 		dispatch(getMyRoomsData());

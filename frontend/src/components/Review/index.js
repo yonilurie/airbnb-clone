@@ -23,9 +23,6 @@ function CreateReview() {
 	useEffect(() => {
 		dispatch(getAUsersReviews());
 	}, [dispatch]);
-	useEffect(() => {
-		dispatch(getRoomInfo(roomId));
-	}, [dispatch]);
 
 	const myReviews = Object.values(
 		useSelector((state) => state.session.reviews)
@@ -60,10 +57,8 @@ function CreateReview() {
 		const reviewData = { review, stars };
 
 		if (!validationErrors.length) {
-			await dispatch(
-				createRoomReview([roomId, JSON.stringify(reviewData)])
-			);
-			dispatch(getAUsersReviews());
+			dispatch(createRoomReview([roomId, reviewData]));
+
 			history.push(`/rooms/${roomId}`);
 		}
 
@@ -74,9 +69,6 @@ function CreateReview() {
 		e.preventDefault();
 
 		dispatch(deleteRoomReview(usersReview.id));
-
-		dispatch(getRoomInfo(roomId));
-		dispatch(getAUsersReviews());
 		history.push(`/trips`);
 	};
 

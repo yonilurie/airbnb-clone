@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
+import { getRoomInfo } from "../../../store/CurrentRoom";
 import { editAUsersReview } from "../../../store/session";
-import { editAReview } from "../../../store/CurrentRoom";
 
 const EditReviewFormModal = ({ showModal, setShowModal, review }) => {
 	const dispatch = useDispatch();
@@ -11,7 +11,10 @@ const EditReviewFormModal = ({ showModal, setShowModal, review }) => {
 	//State
 	const [stars, setStars] = useState(review.stars);
 	const [reviewMessage, setReviewMessage] = useState(review.review);
-	const [errors, setErrors] = useState([]);
+	const [validationErrors, setValidationErrors] = useState([]);
+	const [isSubmitted, setIsSubmitted] = useState(false);
+
+
 
 	//On submit if errors are present, setErrors and they will be rendered to user
 	const handleSubmit = async (e) => {
@@ -22,12 +25,12 @@ const EditReviewFormModal = ({ showModal, setShowModal, review }) => {
 			review: reviewMessage,
 		};
 
-		dispatch(editAReview([newReview, review.id, review.roomId]));
-		dispatch(editAUsersReview([review.id, newReview]))
-
+		// dispatch(editAReview([newReview, review.id, review.roomId]));
+		dispatch(editAUsersReview([review.id, newReview]));
+		dispatch(getRoomInfo(roomId));
 		setShowModal(false);
 
-		history.push(`/rooms/${roomId}`)
+		history.push(`/rooms/${roomId}`);
 		return;
 	};
 
@@ -45,9 +48,9 @@ const EditReviewFormModal = ({ showModal, setShowModal, review }) => {
 
 			<form onSubmit={handleSubmit}>
 				<h3 className="modal-welcome">Welcome to Airbnb</h3>
-				{errors.length > 0 && (
+				{validationErrors.length > 0 && (
 					<ul className="errors">
-						{errors.map((error, idx) => (
+						{validationErrors.map((error, idx) => (
 							<li key={idx}>{error}</li>
 						))}
 					</ul>

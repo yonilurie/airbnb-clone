@@ -4,8 +4,11 @@ import { csrfFetch } from "./csrf";
 //
 const SET_USER = "session/setUser";
 const REMOVE_USER = "session/removeUser";
-const EDIT_REVIEW = "/api/reviews/EDIT";
+const GET_MY_ROOMS = "/api/my-rooms";
+const DELETE_MY_ROOM = "/api/my-rooms/delete";
+const GET_USER_BOOKINGS = "/api/bookings";
 const GET_USER_REVIEWS = "/api/reviews";
+const EDIT_REVIEW = "/api/reviews/EDIT";
 const DELETE_REVIEW = "/api/reviews/DELETE";
 //Thunk actions
 //
@@ -19,6 +22,27 @@ const setUser = (user) => {
 const removeUser = () => {
 	return {
 		type: REMOVE_USER,
+	};
+};
+
+const getMyRooms = (rooms) => {
+	return {
+		type: GET_MY_ROOMS,
+		rooms,
+	};
+};
+
+const deleteMyRoom = (id) => {
+	return {
+		type: DELETE_MY_ROOM,
+		id,
+	};
+};
+
+const getUserBookings = (bookings) => {
+	return {
+		type: GET_USER_BOOKINGS,
+		bookings,
 	};
 };
 
@@ -65,6 +89,24 @@ export const restoreUser = () => async (dispatch) => {
 	const result = await csrfFetch("/api/session");
 	const data = await result.json();
 	dispatch(setUser(data.user));
+};
+
+export const getMyRoomsData = () => async (dispatch) => {
+	const response = await csrfFetch(`/api/rooms/my-rooms`);
+
+	const data = await response.json();
+
+	dispatch(getMyRooms(data));
+	return data;
+};
+
+export const deleteARoom = (id) => async (dispatch) => {
+	const response = await csrfFetch(`/api/rooms/${id}`, {
+		method: "DELETE",
+	});
+	const data = await response.json();
+	dispatch(deleteMyRoom(id));
+	return id;
 };
 
 // Register a user
@@ -129,8 +171,18 @@ export const logout = () => async (dispatch) => {
 	return result;
 };
 
+//get all of a signed in users bookings
+export const getAUsersBookings = () => async (dispatch) => {
+	const response = await csrfFetch("/api/bookings");
+
+	const data = await response.json();
+
+	dispatch(getUserBookings(data));
+	return data;
+};
+
 //Initial state for session
-const initialState = { user: null, reviews: {} };
+const initialState = { user: null, reviews: {}, bookings: {}, rooms: {} };
 
 // Reducer
 //
@@ -144,43 +196,70 @@ const sessionReducer = (state = initialState, action) => {
 			return newState;
 
 		case GET_USER_REVIEWS: {
+			const reviews = {};
+			action.reviews.forEach((review) => {
+				reviews[review.id] = review;
+			});
 			newState = {
 				...state,
-				reviews: { ...action.reviews },
+				reviews,
 			};
-			// newState.reviews = { ...action.payload };
+
 			return newState;
 		}
-		case EDIT_REVIEW: {
+
+		case GET_USER_BOOKINGS: {
+			const bookings = {};
+			action.bookings.forEach((booking) => {
+				bookings[booking.id] = booking;
+			});
+
+			newState = { ...state, bookings };
+
+			return newState;
+		}
+
+		case GET_MY_ROOMS: {
+			const rooms = {};
+			action.rooms.forEach((room) => {
+				rooms[room.id] = room;
+			});
+			newState = { ...state, rooms };
+
+			return newState;
+		}
+		case DELETE_MY_ROOM: {
 			newState = { ...state };
 
-			for (const key in newState.reviews) {
-				if (
-					Number(newState.reviews[key].id) ===
-					Number(action.review.id)
-				) {
-					newState.reviews[key] = action.review;
-					return newState;
-				}
+			if (newState.rooms[action.id]) {
+				delete newState.rooms[action.id];
 			}
+
+			return newState;
+		}
+
+		case EDIT_REVIEW: {
+			newState = { ...state };
+			console.log(action.review)
+			if (newState.reviews[action.review.id]) {
+				newState.reviews[action.review.id] = action.review;
+				return newState;
+			}
+
 			return newState;
 		}
 
 		case DELETE_REVIEW: {
 			newState = { ...state };
-			for (const key in newState.reviews) {
-				if (Number(newState.reviews[key].id) === Number(action.id)) {
-					delete newState.reviews[key];
-					return newState;
-				}
+			if (newState.reviews[action.id]) {
+				delete newState.reviews[action.id];
 			}
 			return newState;
 		}
 
 		case REMOVE_USER:
-			newState = { ...state };
-			newState.user = null;
-			newState.reviews = null;
+			newState = { ...initialState };
+
 			return newState;
 		default:
 			return state;

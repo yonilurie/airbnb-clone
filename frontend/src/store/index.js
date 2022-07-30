@@ -3,25 +3,13 @@ import thunk from "redux-thunk";
 
 import sessionReducer from "./session";
 import roomReducer from "./rooms";
-import imagesReducer from "./roomImages";
-// import reviewsReducer from "./reviews";
+
 import singleRoomReducer from "./CurrentRoom";
-import myRoomReducer from "./myRooms";
-import bookingsReducer from "./bookings";
-import myBookingsReducer from "./myBookings";
-import myReviewsReducer from "./myReviews";
 
 const rootReducer = combineReducers({
 	session: sessionReducer,
 	rooms: roomReducer,
 	currentRoom: singleRoomReducer,
-	myRooms: myRoomReducer,
-	
-	myBookings: myBookingsReducer,
-	// bookings: bookingsReducer,
-	// roomImages: imagesReducer,
-	// reviews: reviewsReducer,
-	// myReviews: myReviewsReducer,
 });
 
 let enhancer;

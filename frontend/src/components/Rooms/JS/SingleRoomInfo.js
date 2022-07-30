@@ -3,9 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 
 import { getRoomInfo, getARoomsBookings } from "../../../store/CurrentRoom";
-import { deleteRoom } from "../../../store/rooms";
-
-import { deleteARoom, getMyRoomsData } from "../../../store/myRooms";
+import { deleteARoom, getMyRoomsData } from "../../../store/session";
 import Reviews from "./Reviews";
 
 import "../CSS/SingleRoomInfo.css";
@@ -15,27 +13,21 @@ const SingleRoomInfo = () => {
 	const history = useHistory();
 	const sessionuser = useSelector((state) => state.session.user);
 	const { roomId } = useParams();
-
-	const [isDisplayed, setIsDisplayed] = useState(true);
-
-	if (isNaN(Number(roomId))) {
-		history.push("/");
-	}
-
-	//Assign room, images, and reviews to variables for easier access
 	let currentRoom = useSelector((state) => state.currentRoom);
+	const [isDisplayed, setIsDisplayed] = useState(currentRoom);
 
-	// let currentRoomReviews = Object.values(
-	// 	useSelector((state) => state.currentRoom.Reviews)
-	// );
+	if (isNaN(Number(roomId))) history.push("/");
 
-	useEffect(() => {
-		const timeout = setTimeout(() => {
-			setIsDisplayed(true);
-		}, 300);
+	//Assign room to variable
 
-		return () => clearTimeout(timeout);
-	}, []);
+
+	// useEffect(() => {
+	// 	const timeout = setTimeout(() => {
+	// 		setIsDisplayed(true);
+	// 	}, 500);
+
+	// 	return () => clearTimeout(timeout);
+	// }, [roomId]);
 
 	//Get room info, images, and reviews
 	useEffect(() => {
@@ -46,18 +38,16 @@ const SingleRoomInfo = () => {
 		dispatch(getARoomsBookings(Number(roomId)));
 	}, [dispatch, roomId]);
 
-	//Will delete a room an redirect user to home screen
+	//Will delete a room an redirect user to /my-rooms page
 	const deletedRoom = () => {
-		// dispatch(deleteARoom(roomId));
-		dispatch(deleteRoom(roomId));
-
+		dispatch(deleteARoom(roomId));
 		dispatch(getMyRoomsData());
 		history.push("/my-rooms");
 	};
 
 	return (
 		<div className="content-container">
-			{!isDisplayed && !currentRoom && (
+			{!isDisplayed && (
 				<div className="placeholder-container">
 					<div className="placeholder-loading-section-1">
 						<div className="loading-strip-1"></div>

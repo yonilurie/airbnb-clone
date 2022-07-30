@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Redirect, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getAUsersBookings } from "../../store/myBookings";
+import { getAUsersBookings } from "../../store/session";
 import { getAUsersReviews } from "../../store/session";
 import Booking from "./JS/Booking";
 import "./CSS/Bookings.css";
@@ -9,7 +9,7 @@ import "./CSS/Bookings.css";
 const Bookings = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
-	const [isDisplayed, setIsDisplayed] = useState(true);
+
 
 	useEffect(() => {
 		dispatch(getAUsersBookings());
@@ -17,16 +17,10 @@ const Bookings = () => {
 	useEffect(() => {
 		dispatch(getAUsersReviews());
 	}, [dispatch]);
-	const myReviews = useSelector(state => state.session.reviews)
-	// useEffect(() => {
-	// 	const timeout = setTimeout(() => {
-	// 		setIsDisplayed(true);
-	// 	}, 300);
 
-	// 	return () => clearTimeout(timeout);
-	// }, [dispatch]);
-
-	const bookings = Object.values(useSelector((state) => state.myBookings));
+	const bookings = Object.values(
+		useSelector((state) => state.session.bookings)
+	);
 
 	const sessionuser = useSelector((state) => state.session.user);
 	if (!sessionuser) return <Redirect to="/" />;
@@ -54,7 +48,7 @@ const Bookings = () => {
 	return (
 		<>
 			<h1>Trips</h1>
-			{isDisplayed && bookings.length > 1 && (
+			{bookings.length > 1 && (
 				<div>
 					{futureBookings.length < 1 && (
 						<div className="empty-bookings-placeholder">

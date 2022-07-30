@@ -74,7 +74,7 @@ export const createRoomReview = (reviewData) => async (dispatch) => {
 		headers: {
 			contentType: "application/json",
 		},
-		body: review,
+		body: JSON.stringify(review),
 	});
 
 	const data = await response.json();
@@ -121,9 +121,12 @@ const singleRoomReducer = (state = initialState, action) => {
 		case GET_SPECIFIC_ROOM: {
 			newState = { ...action.room };
 			const reviews = {};
-			newState.Reviews.forEach((review) => {
-				reviews[review.id] = review;
-			});
+			if (newState.Reviews) {
+				newState.Reviews.forEach((review) => {
+					reviews[review.id] = review;
+				});
+			}
+
 			newState.Reviews = reviews;
 
 			return newState;
@@ -133,11 +136,11 @@ const singleRoomReducer = (state = initialState, action) => {
 			newState = { ...state };
 
 			const bookings = {};
-			action.bookings.forEach((booking) => {
-				console.log(booking);
-				bookings[booking.id] = booking;
-			});
-
+			if (action.bookings.length) {
+				action.bookings.forEach((booking) => {
+					bookings[booking.id] = booking;
+				});
+			}
 			newState.bookings = bookings;
 
 			return newState;
