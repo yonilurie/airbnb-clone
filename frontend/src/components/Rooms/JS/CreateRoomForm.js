@@ -2,12 +2,14 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 
-import { createRoom, getRooms } from "../../../store/rooms";
+import { createRoom } from "../../../store/session";
+import { getRooms } from "../../../store/rooms";
 import "../CSS/RoomForm.css";
 
 const CreateRoomForm = () => {
 	const history = useHistory();
 	const sessionuser = useSelector((state) => state.session.user);
+	const rooms = useSelector((state) => state.rooms);
 	const dispatch = useDispatch();
 
 	// State
@@ -61,7 +63,7 @@ const CreateRoomForm = () => {
 	if (!sessionuser) return <Redirect to="/" />;
 
 	//When for/ is submitted
-	const onSubmit = (e) => {
+	const onSubmit = async (e) => {
 		e.preventDefault();
 
 		const room = {
@@ -77,9 +79,21 @@ const CreateRoomForm = () => {
 			previewImage,
 		};
 
+		// dispatch(getRooms());
+
 		if (!validationErrors.length) {
+			const checkIfLocationTaken = await fetch(
+				`/api/rooms/search?minLat=${latitude}&maxLat=${latitude}&minLng=${longitude}&maxLng=${longitude}`
+			);
+			const checkIfLocationTakenData = await checkIfLocationTaken.json();
+			if (checkIfLocationTakenData.rooms.length > 0) {
+				setValidationErrors(["This location is already taken"]);
+				setIsLoaded(true);
+				return;
+			}
+
 			dispatch(createRoom(JSON.stringify(room)));
-			dispatch(getRooms());
+
 			setName("");
 			setAddress("");
 			setCity("");
@@ -99,12 +113,12 @@ const CreateRoomForm = () => {
 
 	return (
 		<div className="form-container">
+			<h1 className="form-description">Host your home</h1>
 			{isLoaded &&
 				validationErrors.length > 0 &&
 				validationErrors.map((error) => {
 					return <div key={error}>{error}</div>;
 				})}
-			<h1 className="form-description">Host your home</h1>
 			<form className="create-room-form" onSubmit={onSubmit}>
 				<div className="input-container-flex">
 					<div className="input-container">

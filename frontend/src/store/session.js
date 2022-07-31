@@ -5,6 +5,7 @@ import { csrfFetch } from "./csrf";
 const SET_USER = "session/setUser";
 const REMOVE_USER = "session/removeUser";
 const GET_MY_ROOMS = "/api/my-rooms";
+const CREATE_ROOM = "/api/rooms/add";
 const DELETE_MY_ROOM = "/api/my-rooms/delete";
 const GET_USER_BOOKINGS = "/api/bookings";
 const GET_USER_REVIEWS = "/api/reviews";
@@ -12,6 +13,13 @@ const EDIT_REVIEW = "/api/reviews/EDIT";
 const DELETE_REVIEW = "/api/reviews/DELETE";
 //Thunk actions
 //
+
+const createARoom = (room) => {
+	return {
+		type: CREATE_ROOM,
+		room,
+	};
+};
 const setUser = (user) => {
 	return {
 		type: SET_USER,
@@ -181,6 +189,21 @@ export const getAUsersBookings = () => async (dispatch) => {
 	return data;
 };
 
+//Create a room
+export const createRoom = (room) => async (dispatch) => {
+	const response = await csrfFetch("/api/rooms/add", {
+		method: "POST",
+		headers: {
+			contentType: "application/json",
+		},
+		body: room,
+	});
+
+	const data = await response.json();
+	dispatch(createARoom(data));
+};
+
+
 //Initial state for session
 const initialState = { user: null, reviews: {}, bookings: {}, rooms: {} };
 
@@ -229,6 +252,14 @@ const sessionReducer = (state = initialState, action) => {
 
 			return newState;
 		}
+
+		case CREATE_ROOM: {
+			const room = action.room;
+			newState = { ...state };
+			newState.rooms[room.id] = room
+			return newState;
+		}
+
 		case DELETE_MY_ROOM: {
 			newState = { ...state };
 

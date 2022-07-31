@@ -106,7 +106,7 @@ const EditRoomForm = () => {
 	}
 
 	//When form is submitted
-	const onSubmit = (e) => {
+	const onSubmit = async (e) => {
 		e.preventDefault();
 		const { id } = currentRoom;
 		const room = {
@@ -124,6 +124,16 @@ const EditRoomForm = () => {
 		};
 
 		if (!validationErrors.length) {
+			const checkIfLocationTaken = await fetch(
+				`/api/rooms/search?minLat=${latitude}&maxLat=${latitude}&minLng=${longitude}&maxLng=${longitude}`
+			);
+			const checkIfLocationTakenData = await checkIfLocationTaken.json();
+			if (checkIfLocationTakenData.rooms.length > 0) {
+				setValidationErrors(["This location is already taken, Check latitude and longitude"]);
+				setIsLoaded(true);
+				return;
+			}
+
 			dispatch(editRoom(JSON.stringify(room)));
 
 			setName("");
