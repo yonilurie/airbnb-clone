@@ -105,15 +105,15 @@ const SingleRoomInfo = () => {
 								</h1>
 								{currentRoom.avgStarRating >= 1 && (
 									<div className="room-reviews-and-location">
-										<span
-											id="reviews-modal-link"
-											onClick={() => setShowModal(true)}
-										>
-											★
+										★
 											{Number(
 												currentRoom.avgStarRating
 											).toFixed(2)}
-											{" · "}
+											{" · "}<span
+											id="reviews-modal-link"
+											onClick={() => setShowModal(true)}
+										>
+											
 											{Number(
 												Object.values(
 													currentRoom.Reviews

@@ -19,4 +19,23 @@
 	padding: 1rem 1rem;
 }
 
+/* #modal {
 
+	overflow: hidden;
+} */
+
+#modal {
+	animation: .75s slide-up;
+	margin-top: 3rem;
+}
+
+@keyframes slide-up {
+	from {
+		margin-top: 120%;
+		/* height: 200%; */
+	}
+	to {
+		margin-top: 3rem;
+		/* height: 100%; */
+	}
+}
