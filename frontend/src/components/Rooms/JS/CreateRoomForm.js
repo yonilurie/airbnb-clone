@@ -41,8 +41,8 @@ const CreateRoomForm = () => {
 		if (name.length > 50 || name.length < 4) {
 			errors.push("Name must be between 4 and 50 characters");
 		}
-		if (description.length > 500) {
-			errors.push("Description must be less that 500 characters");
+		if (description.length > 500 || description.length < 10) {
+			errors.push("Description must be lbetween 10 and 500 characters");
 		}
 
 		setValidationErrors(errors);
