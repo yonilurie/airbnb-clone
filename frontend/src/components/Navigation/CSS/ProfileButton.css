@@ -5,7 +5,7 @@ a {
 }
 
 svg {
-	padding: 5px;
+	padding: 0.3125rem;
 }
 
 .filter-grey {
@@ -27,8 +27,8 @@ svg {
 	z-index: 2;
 	cursor: pointer;
 	background-color: #ffffff;
-	width: 77px;
-	height: 42px;
+	width: 4.812rem;
+	height: 2.625rem;
 }
 
 .profile-button-info {
@@ -43,13 +43,13 @@ svg {
 
 .profile-button-options,
 .profile-button-info {
-	font-size: 14px;
-	line-height: 18px;
+	font-size: 0.875rem;
+	line-height: 1.125rem;
 	font-weight: 400;
 	box-sizing: border-box;
 	width: 100%;
 	text-align: left;
-	padding: 12px 16px;
+	padding: 0.75rem 1rem;
 
 	overflow: hidden;
 }
@@ -86,10 +86,10 @@ svg {
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18);
 	position: fixed;
 	padding: 8px 0px;
-	margin: 10px;
+	margin: 0.625rem;
 	width: 240px;
 	height: fit-content;
-	right: 80px;
+	right: 5rem;
 	border: 1px solid #ebebeb;
 	border-radius: 12px;
 	background-color: #ffffff;

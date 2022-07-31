@@ -18,7 +18,8 @@ function SingleRoom({ room }) {
 	return (
 		<div className="room" onClick={(e) => showRoomDetails(e)}>
 			{/* <div className="favorite">♥️</div> */}
-			<img src={room.previewImage} alt={`For room ${room.id}`}></img>
+			<div className="preview-image-container"><img src={room.previewImage} alt={`For room ${room.id}`}></img></div>
+			
 			<div className="room-info" onClick={showRoomDetails}>
 				<div className="room-detail name">
 					{room.city}, {room.state}

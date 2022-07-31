@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 
 import { createRoom, getRooms } from "../../../store/rooms";
-import "../CSS/CreateRoom.css";
+import "../CSS/RoomForm.css";
 
 const CreateRoomForm = () => {
 	const history = useHistory();
@@ -11,18 +11,16 @@ const CreateRoomForm = () => {
 	const dispatch = useDispatch();
 
 	// State
-	const [name, setName] = useState(`test${Math.random()}`);
-	const [address, setAddress] = useState("test");
-	const [city, setCity] = useState("test");
+	const [name, setName] = useState("");
+	const [address, setAddress] = useState("");
+	const [city, setCity] = useState("");
 	const [state, setState] = useState("WA");
 	const [country, setCountry] = useState("United States");
-	const [latitude, setLatitude] = useState(`${10 * Math.random()}`);
-	const [longitude, setLongitude] = useState(`${10 * Math.random()}`);
-	const [description, setDescription] = useState("test");
+	const [latitude, setLatitude] = useState("");
+	const [longitude, setLongitude] = useState("");
+	const [description, setDescription] = useState("");
 	const [price, setPrice] = useState(100);
-	const [previewImage, setPreviewImage] = useState(
-		"http://www.photoeverywhere.co.uk/east/melbourne/rialto_tower_melbourne.jpg"
-	);
+	const [previewImage, setPreviewImage] = useState("");
 	const [validationErrors, setValidationErrors] = useState([]);
 	const [isLoaded, setIsLoaded] = useState(false);
 
@@ -105,7 +103,9 @@ const CreateRoomForm = () => {
 			<form className="create-room-form" onSubmit={onSubmit}>
 				<div className="input-container-flex">
 					<div className="input-container">
-						<label htmlFor="name">Name</label>
+						<label htmlFor="name" className="form-label">
+							Name
+						</label>
 						<input
 							type="text"
 							className="form-input"
@@ -119,7 +119,9 @@ const CreateRoomForm = () => {
 						></input>
 					</div>
 					<div className="input-container">
-						<label htmlFor="address">Address</label>
+						<label htmlFor="address" className="form-label">
+							Address
+						</label>
 						<input
 							type="text"
 							className="form-input"
@@ -132,7 +134,9 @@ const CreateRoomForm = () => {
 					</div>
 					<div className="input-container">
 						{" "}
-						<label htmlFor="city">City</label>
+						<label htmlFor="city" className="form-label">
+							City
+						</label>
 						<input
 							type="text"
 							className="form-input"
@@ -144,7 +148,9 @@ const CreateRoomForm = () => {
 					</div>
 
 					<div className="input-container">
-						<label htmlFor="state">State</label>
+						<label htmlFor="state" className="form-label">
+							State
+						</label>
 
 						{country === "United States" && (
 							<>
@@ -212,7 +218,9 @@ const CreateRoomForm = () => {
 
 					<div className="input-container">
 						{" "}
-						<label htmlFor="country">Country</label>
+						<label htmlFor="country" className="form-label">
+							Country
+						</label>
 						<select
 							id="country"
 							className="form-input"
@@ -224,43 +232,90 @@ const CreateRoomForm = () => {
 						</select>
 					</div>
 
-					<div className="input-container">
-						{" "}
-						<label htmlFor="latitude">Latitude</label>
+					<div className="lat-lng-container input-container">
+						<div className="input-container">
+							{" "}
+							<label htmlFor="latitude" className="form-label">
+								Latitude
+							</label>
+							<input
+								type="number"
+								className="form-input"
+								min="-90"
+								max="90"
+								step="0.01"
+								id="latitude"
+								placeholder="Latitude -90 to 90"
+								value={latitude}
+								onChange={(e) => setLatitude(e.target.value)}
+								required
+							></input>
+						</div>
+
+						<div className="input-container">
+							{" "}
+							<label htmlFor="longitude" className="form-label">
+								Longitude
+							</label>
+							<input
+								type="number"
+								className="form-input"
+								min="-180"
+								max="180"
+								step="0.01"
+								maxLength="9"
+								onInput={(e) => {
+									if (
+										e.target.value.length >
+										e.target.maxLength
+									) {
+										e.target.value = e.target.value.slice(
+											0,
+											e.target.maxLength
+										);
+									}
+								}}
+								id="longitude"
+								placeholder="Longitude -180 to 180"
+								value={longitude}
+								onChange={(e) => setLongitude(e.target.value)}
+								required
+							></input>
+						</div>
+					</div>
+					<div className="input-container price">
+						<label htmlFor="price" className="form-label">
+							Price per Night
+						</label>
+
 						<input
 							type="number"
 							className="form-input"
-							min="-90"
-							max="90"
-							step="any"
-							id="latitude"
-							placeholder="Latitude (Between -90 to 90)"
-							value={latitude}
-							onChange={(e) => setLatitude(e.target.value)}
+							min="1"
+							max="1000"
+							step="1"
+							value={price}
+							maxLength="4"
+							onInput={(e) => {
+								if (
+									e.target.value.length > e.target.maxLength
+								) {
+									e.target.value = e.target.value.slice(
+										0,
+										e.target.maxLength
+									);
+								}
+							}}
+							id="price"
+							onChange={(e) => setPrice(e.target.value)}
 							required
 						></input>
 					</div>
-
 					<div className="input-container">
 						{" "}
-						<label htmlFor="longitude">Longitude</label>
-						<input
-							type="number"
-							className="form-input"
-							min="-180"
-							max="180"
-							step="any"
-							id="longitude"
-							placeholder="Longitude (Between -180 to 180)"
-							value={longitude}
-							onChange={(e) => setLongitude(e.target.value)}
-							required
-						></input>
-					</div>
-
-					<div className="input-container">
-						{" "}
-						<label htmlFor="description">Description</label>
+						<label htmlFor="description" className="form-label">
+							Description
+						</label>
 						<textarea
 							type="textArea"
 							className="form-input"
@@ -272,22 +327,8 @@ const CreateRoomForm = () => {
 					</div>
 
 					<div className="input-container">
-						<label htmlFor="price">Price per Night ${price}</label>
-						<input
-							type="range"
-							className="form-input"
-							min="0"
-							max="1000"
-							value={price}
-							id="price"
-							onChange={(e) => setPrice(e.target.value)}
-							required
-						></input>
-					</div>
-
-					<div className="input-container">
 						{" "}
-						<label htmlFor="previewImage">
+						<label htmlFor="previewImage" className="form-label">
 							Add a preview Image
 						</label>
 						<input

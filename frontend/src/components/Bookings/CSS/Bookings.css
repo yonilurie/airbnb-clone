@@ -3,35 +3,35 @@ a {
 }
 
 .city {
-	font-size: 16px;
+	font-size: 1rem;
 	font-weight: 600;
-	line-height: 20px;
+	line-height: 1.25rem;
 }
 
 .owner,
 .duration {
-	font-size: 14px;
+	font-size: 0.875rem;
 	color: rgb(113, 113, 113);
 	font-weight: 400;
-	line-height: 20px;
+	line-height: 1.25rem;
 	white-space: normal;
 }
 
 .preview-image {
 	border-radius: 8px;
 	box-sizing: border-box;
-	width: 72px;
-	height: 72px;
+	width: 4.5rem;
+	height: 4.5rem;
 }
 
 .current-bookings-empty-text {
 	box-sizing: border-box;
-	padding: 20px;
+	padding: 1.25rem;
 }
 
 .empty-bookings-placeholder {
 	display: flex;
-	margin-top: 20px;
+	margin-top: 1.25rem;
 	justify-content: center;
 	width: fit-content;
 	align-items: center;
@@ -44,13 +44,15 @@ a {
 	border-top-left-radius: 0px;
 	border-bottom-left-radius: 0px;
 	margin-left: -10px;
+	/* margin-left:0.625rem; */
 }
 
 .booking {
 	display: flex;
-	width: 200px;
-	height: 96px;
-	padding: 12px 0px;
+
+	width: 12.5rem;
+	height: 6rem;
+	padding: 0.75rem 0rem;
 	justify-content: space-between;
 	flex-direction: row;
 }
@@ -60,7 +62,7 @@ a {
 	flex-wrap: wrap;
 	align-items: center;
 	justify-content: center;
-	gap: 0px 200px;
+	gap: 0rem 12.5rem;
 }
 
 .search-btn {
@@ -78,19 +80,17 @@ a {
 	background-size: 200% 200%;
 	border: none;
 	border-radius: 12px;
-	font-size: 16px;
+	font-size: 1rem;
 	color: rgb(255, 255, 255);
-	width: 200px;
-	height: 48px;
-	margin-top: 20px;
+	width: 12.5rem;
+	height: 3rem;
+	margin-top: 1.25rem;
 	cursor: pointer;
 }
 
 .search-btn:active {
 	transform: scale(0.96);
 }
-
-
 
 .review-btn {
 	box-sizing: border-box;
@@ -107,10 +107,10 @@ a {
 	background-size: 200% 200%;
 	border: none;
 	border-radius: 12px;
-	font-size: 16px;
-	padding: 5px;
+	font-size: 1rem;
+	padding: 0.3rem;
 	color: rgb(255, 255, 255);
-	width: 72px;
+	width: 4.5rem;
 	height: fit-content;
 	cursor: pointer;
 }

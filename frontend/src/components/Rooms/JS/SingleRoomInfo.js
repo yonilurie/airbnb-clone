@@ -19,8 +19,6 @@ const SingleRoomInfo = () => {
 		//setIsDisplayed
 	] = useState(true);
 
-	if (isNaN(Number(roomId))) history.push("/");
-
 	//Get room info, images, and reviews
 	useEffect(() => {
 		dispatch(getRoomInfo(Number(roomId)));
@@ -31,6 +29,11 @@ const SingleRoomInfo = () => {
 		dispatch(getARoomsBookings(Number(roomId)));
 	}, [dispatch, roomId]);
 
+	if (isNaN(Number(roomId))) history.push("/");
+
+	if (currentRoom.errors) {
+		history.push("/");
+	}
 	//Will delete a room an redirect user to /my-rooms page
 	const deletedRoom = () => {
 		dispatch(deleteARoom(roomId));

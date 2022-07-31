@@ -1,9 +1,9 @@
-form {
+/* form {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	padding: 24px;
+	padding: 1.5rem;
 }
 
 ul {
@@ -13,18 +13,17 @@ ul {
 
 .modal-body {
 	box-sizing: border-box;
-	width: 568px;
-	height: 682px;
+	width: 35.5rem;
+	height: 42.625rem;
 	display: flex;
 	align-items: center;
 	flex-direction: column;
 }
 .modal-welcome {
-	font-size: 90px;
+	font-size: 1.375rem;
 	font-weight: 600;
 	align-self: flex-start;
-	padding-left: 20px;
-
+	padding-left: 1.5625rem;
 }
 
 .modal-input {
@@ -37,6 +36,7 @@ ul {
 	width: 520px;
 	height: 52px;
 	outline: none;
+
 }
 
 .modal-input:focus-within {
@@ -50,7 +50,6 @@ ul {
 	padding: 5px;
 	margin-top: 5px;
 	margin-left: 5px;
-	
 }
 
 .modal-header {
@@ -118,4 +117,4 @@ ul {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-}
+} */

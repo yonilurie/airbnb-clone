@@ -4,7 +4,6 @@ import { Redirect, useHistory, useParams } from "react-router-dom";
 
 import { getRoomInfo } from "../../../store/CurrentRoom";
 import { editRoom } from "../../../store/rooms";
-import "../CSS/EditRoomForm.css";
 
 const EditRoomForm = () => {
 	const history = useHistory();
@@ -81,8 +80,8 @@ const EditRoomForm = () => {
 		if (name.length > 50 || name.length < 4) {
 			errors.push("Name must be between 4 and 50 characters");
 		}
-		if (description.length > 500) {
-			errors.push("Description must be less that 500 characters");
+		if (description.length > 500 || description.length < 10) {
+			errors.push("Description must be between 10 and 500 characters");
 		}
 
 		setValidationErrors(errors);
@@ -147,21 +146,23 @@ const EditRoomForm = () => {
 
 	return (
 		<div className="form-container">
+			<h1 className="form-description">Edit home information</h1>
 			{isLoaded &&
 				validationErrors.length > 0 &&
 				validationErrors.map((error) => {
 					return <div key={error}>{error}</div>;
 				})}
-			<h1 className="form-description">Edit home information</h1>
 			<form className="create-room-form" onSubmit={onSubmit}>
 				<div className="input-container-flex">
 					<div className="input-container">
-						<label htmlFor="name">Name</label>
+						<label htmlFor="name" className="form-label">
+							Name
+						</label>
 						<input
 							type="text"
-							id="name"
 							className="form-input"
-							placeholder="Name of your home"
+							id="name"
+							placeholder="Name of your Home"
 							value={name}
 							onChange={(e) => {
 								setName(e.target.value);
@@ -170,105 +171,112 @@ const EditRoomForm = () => {
 						></input>
 					</div>
 					<div className="input-container">
-						{" "}
-						<label htmlFor="address">Address</label>
+						<label htmlFor="address" className="form-label">
+							Address
+						</label>
 						<input
 							type="text"
-							id="address"
 							className="form-input"
+							id="address"
 							placeholder="Address"
 							value={address}
 							onChange={(e) => setAddress(e.target.value)}
 							required
 						></input>
 					</div>
-
 					<div className="input-container">
 						{" "}
-						<label htmlFor="city">City</label>
+						<label htmlFor="city" className="form-label">
+							City
+						</label>
 						<input
 							type="text"
-							id="city"
 							className="form-input"
+							id="city"
 							placeholder="City"
 							value={city}
 							onChange={(e) => setCity(e.target.value)}
 						></input>
 					</div>
 
-					{country === "United States" && (
-						<div className="input-container">
-							<label htmlFor="state">State</label>
+					<div className="input-container">
+						<label htmlFor="state" className="form-label">
+							State
+						</label>
 
-							<select
-								name="state"
-								id="state"
-								className="form-input"
-								value={state}
-								onChange={(e) => setState(e.target.value)}
-							>
-								<option value="AL">Alabama</option>
-								<option value="AK">Alaska</option>
-								<option value="AZ">Arizona</option>
-								<option value="AR">Arkansas</option>
-								<option value="CA">California</option>
-								<option value="CO">Colorado</option>
-								<option value="CT">Connecticut</option>
-								<option value="DE">Delaware</option>
-								<option value="FL">Florida</option>
-								<option value="GA">Georgia</option>
-								<option value="HI">Hawaii</option>
-								<option value="ID">Idaho</option>
-								<option value="IL">Illinois</option>
-								<option value="IN">Indiana</option>
-								<option value="IA">Iowa</option>
-								<option value="KS">Kansas</option>
-								<option value="KY">Kentucky</option>
-								<option value="LA">Louisiana</option>
-								<option value="ME">Maine</option>
-								<option value="MD">Maryland</option>
-								<option value="MA">Massachusetts</option>
-								<option value="MI">Michigan</option>
-								<option value="MN">Minnesota</option>
-								<option value="MS">Mississippi</option>
-								<option value="MO">Missouri</option>
-								<option value="MT">Montana</option>
-								<option value="NE">Nebraska</option>
-								<option value="NV">Nevada</option>
-								<option value="NH">New Hampshire</option>
-								<option value="NJ">New Jersey</option>
-								<option value="NM">New Mexico</option>
-								<option value="NY">New York</option>
-								<option value="NC">North Carolina</option>
-								<option value="ND">North Dakota</option>
-								<option value="OH">Ohio</option>
-								<option value="OK">Oklahoma</option>
-								<option value="OR">Oregon</option>
-								<option value="PA">Pennsylvania</option>
-								<option value="RI">Rhode Island</option>
-								<option value="SC">South Carolina</option>
-								<option value="SD">South Dakota</option>
-								<option value="TN">Tennessee</option>
-								<option value="TX">Texas</option>
-								<option value="UT">Utah</option>
-								<option value="VT">Vermont</option>
-								<option value="VA">Virginia</option>
-								<option value="WA">Washington</option>
-								<option value="WV">West Virginia</option>
-								<option value="WI">Wisconsin</option>
-								<option value="WY">Wyoming</option>
-							</select>
-						</div>
-					)}
+						{country === "United States" && (
+							<>
+								<select
+									name="state"
+									className="form-input"
+									id="state"
+									value={state}
+									onChange={(e) => setState(e.target.value)}
+								>
+									<option value="AL">Alabama</option>
+									<option value="AK">Alaska</option>
+									<option value="AZ">Arizona</option>
+									<option value="AR">Arkansas</option>
+									<option value="CA">California</option>
+									<option value="CO">Colorado</option>
+									<option value="CT">Connecticut</option>
+									<option value="DE">Delaware</option>
+									<option value="FL">Florida</option>
+									<option value="GA">Georgia</option>
+									<option value="HI">Hawaii</option>
+									<option value="ID">Idaho</option>
+									<option value="IL">Illinois</option>
+									<option value="IN">Indiana</option>
+									<option value="IA">Iowa</option>
+									<option value="KS">Kansas</option>
+									<option value="KY">Kentucky</option>
+									<option value="LA">Louisiana</option>
+									<option value="ME">Maine</option>
+									<option value="MD">Maryland</option>
+									<option value="MA">Massachusetts</option>
+									<option value="MI">Michigan</option>
+									<option value="MN">Minnesota</option>
+									<option value="MS">Mississippi</option>
+									<option value="MO">Missouri</option>
+									<option value="MT">Montana</option>
+									<option value="NE">Nebraska</option>
+									<option value="NV">Nevada</option>
+									<option value="NH">New Hampshire</option>
+									<option value="NJ">New Jersey</option>
+									<option value="NM">New Mexico</option>
+									<option value="NY">New York</option>
+									<option value="NC">North Carolina</option>
+									<option value="ND">North Dakota</option>
+									<option value="OH">Ohio</option>
+									<option value="OK">Oklahoma</option>
+									<option value="OR">Oregon</option>
+									<option value="PA">Pennsylvania</option>
+									<option value="RI">Rhode Island</option>
+									<option value="SC">South Carolina</option>
+									<option value="SD">South Dakota</option>
+									<option value="TN">Tennessee</option>
+									<option value="TX">Texas</option>
+									<option value="UT">Utah</option>
+									<option value="VT">Vermont</option>
+									<option value="VA">Virginia</option>
+									<option value="WA">Washington</option>
+									<option value="WV">West Virginia</option>
+									<option value="WI">Wisconsin</option>
+									<option value="WY">Wyoming</option>
+								</select>
+							</>
+						)}
+					</div>
 
 					<div className="input-container">
 						{" "}
-						<label htmlFor="country">Country</label>
+						<label htmlFor="country" className="form-label">
+							Country
+						</label>
 						<select
 							id="country"
 							className="form-input"
 							name="country"
-							placeholder="Country"
 							value={country}
 							onChange={(e) => setCountry(e.target.value)}
 						>
@@ -276,43 +284,90 @@ const EditRoomForm = () => {
 						</select>
 					</div>
 
-					<div className="input-container">
-						{" "}
-						<label htmlFor="latitude">Latitude</label>
+					<div className="lat-lng-container input-container">
+						<div className="input-container">
+							{" "}
+							<label htmlFor="latitude" className="form-label">
+								Latitude
+							</label>
+							<input
+								type="number"
+								className="form-input"
+								min="-90"
+								max="90"
+								step="0.01"
+								id="latitude"
+								placeholder="Latitude -90 to 90"
+								value={latitude}
+								onChange={(e) => setLatitude(e.target.value)}
+								required
+							></input>
+						</div>
+
+						<div className="input-container">
+							{" "}
+							<label htmlFor="longitude" className="form-label">
+								Longitude
+							</label>
+							<input
+								type="number"
+								className="form-input"
+								min="-180"
+								max="180"
+								step="0.01"
+								maxLength="9"
+								onInput={(e) => {
+									if (
+										e.target.value.length >
+										e.target.maxLength
+									) {
+										e.target.value = e.target.value.slice(
+											0,
+											e.target.maxLength
+										);
+									}
+								}}
+								id="longitude"
+								placeholder="Longitude -180 to 180"
+								value={longitude}
+								onChange={(e) => setLongitude(e.target.value)}
+								required
+							></input>
+						</div>
+					</div>
+					<div className="input-container price">
+						<label htmlFor="price" className="form-label">
+							Price per Night
+						</label>
+
 						<input
 							type="number"
 							className="form-input"
-							min="-90"
-							max="90"
-							step="any"
-							id="latitude"
-							placeholder="Latitude (Between -90 to 90)"
-							value={latitude}
-							onChange={(e) => setLatitude(e.target.value)}
+							min="1"
+							max="1000"
+							step="1"
+							value={price}
+							maxLength="4"
+							onInput={(e) => {
+								if (
+									e.target.value.length > e.target.maxLength
+								) {
+									e.target.value = e.target.value.slice(
+										0,
+										e.target.maxLength
+									);
+								}
+							}}
+							id="price"
+							onChange={(e) => setPrice(e.target.value)}
 							required
 						></input>
 					</div>
-
 					<div className="input-container">
 						{" "}
-						<label htmlFor="longitude">Longitude</label>
-						<input
-							type="number"
-							className="form-input"
-							min="-180"
-							max="180"
-							step="any"
-							id="longitude"
-							placeholder="Longitude (Between -180 to 180)"
-							value={longitude}
-							onChange={(e) => setLongitude(e.target.value)}
-							required
-						></input>
-					</div>
-
-					<div className="input-container">
-						{" "}
-						<label htmlFor="description">Description</label>
+						<label htmlFor="description" className="form-label">
+							Description
+						</label>
 						<textarea
 							type="textArea"
 							className="form-input"
@@ -325,22 +380,7 @@ const EditRoomForm = () => {
 
 					<div className="input-container">
 						{" "}
-						<label htmlFor="price">Price Per Night ${price}</label>
-						<input
-							type="range"
-							className="form-input"
-							min="0"
-							max="1000"
-							value={price}
-							id="price"
-							onChange={(e) => setPrice(e.target.value)}
-							required
-						></input>
-					</div>
-
-					<div className="input-container">
-						{" "}
-						<label htmlFor="previewImage">
+						<label htmlFor="previewImage" className="form-label">
 							Add a preview Image
 						</label>
 						<input
@@ -348,7 +388,6 @@ const EditRoomForm = () => {
 							className="form-input"
 							id="previewImage"
 							value={previewImage}
-							placeholder="Preview image URL"
 							onChange={(e) => setPreviewImage(e.target.value)}
 							required
 						></input>

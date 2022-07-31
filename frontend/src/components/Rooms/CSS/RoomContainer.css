@@ -1,22 +1,17 @@
 .rooms-container {
-	width: 100%;
-	max-width: 2346px;
-	display: flex;
+	width: 90%;
+	max-width: 1600px;
+	display: grid;
 	flex-wrap: wrap;
-	align-items: stretch;
-	box-sizing: border-box;
-	justify-content: center;
-	line-break: strict;
-	line-height: 20px;
-	row-gap: 40px;
-	column-gap: 24px;
-	margin-top: 8px;
-	margin-bottom: 32px;
 	padding-left: 80px;
 	padding-right: 80px;
-	margin-block-end: 32px;
-	margin-block-start: 8px;
+	box-sizing: border-box;
+	row-gap: 32px;
+	column-gap: 8px;
 
+	margin: 2.5rem 0rem;
+	justify-content: center;
+	align-items: center;
 }
 
 .content-container {
