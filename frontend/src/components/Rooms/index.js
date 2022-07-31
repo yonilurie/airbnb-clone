@@ -14,10 +14,11 @@ function Rooms() {
 		dispatch(getRooms());
 	}, [dispatch]);
 
-	// useEffect(() => {
-	// 	document.title = "Airbnb Clone";
-	// }, []);
-	//Fetch all rooms from DB
+	useEffect(() => {
+		if (document.title !== 'Airbnb Clone')
+		document.title = "Airbnb Clone";
+	}, []);
+	
 
 	useEffect(() => {
 		const timeout = setTimeout(() => {

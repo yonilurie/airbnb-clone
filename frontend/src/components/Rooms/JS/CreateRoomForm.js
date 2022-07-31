@@ -29,6 +29,11 @@ const CreateRoomForm = () => {
 		setIsLoaded(false);
 	}, []);
 
+	useEffect(() => {
+		if (document.title !== "Host your Home")
+			document.title = "Host your Home";
+	}, []);
+
 	//Validate user form input and render errors if they are present
 	useEffect(() => {
 		const errors = [];

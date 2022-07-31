@@ -17,6 +17,10 @@ const Bookings = () => {
 		dispatch(getAUsersReviews());
 	}, [dispatch]);
 
+	useEffect(() => {
+		if (document.title !== "My Trips") document.title = "My Trips";
+	}, []);
+
 	const bookings = Object.values(
 		useSelector((state) => state.session.bookings)
 	);

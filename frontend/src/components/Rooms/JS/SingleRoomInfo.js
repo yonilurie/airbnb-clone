@@ -25,9 +25,9 @@ const SingleRoomInfo = () => {
 		// setIsDisplayed(true);
 	}, [dispatch, roomId]);
 
-	useEffect(() => {
-		dispatch(getARoomsBookings(Number(roomId)));
-	}, [dispatch, roomId]);
+	// useEffect(() => {
+	// 	dispatch(getARoomsBookings(Number(roomId)));
+	// }, [dispatch, roomId]);
 
 	if (isNaN(Number(roomId))) history.push("/");
 
@@ -40,6 +40,10 @@ const SingleRoomInfo = () => {
 		dispatch(getMyRoomsData());
 		history.push("/my-rooms");
 	};
+
+	if (currentRoom.name) {
+		document.title = `${currentRoom.name}`;
+	}
 
 	return (
 		<div className="content-container">
@@ -107,7 +111,7 @@ const SingleRoomInfo = () => {
 							</div>
 
 							<div className="room-images">
-								{currentRoom.images.length <= 0 && (
+								{currentRoom.previewImage && (
 									<img
 										src={currentRoom.previewImage}
 										alt="preview"
@@ -115,24 +119,49 @@ const SingleRoomInfo = () => {
 									></img>
 								)}
 							</div>
-							{currentRoom.Owner && (
+						</div>
+						<div className="room-details-container">
+							<div className="room-owner-and-description">
 								<>
 									<h2>
 										Entire home hosted by{" "}
 										{currentRoom.Owner.firstName}
 									</h2>
 								</>
-							)}
-						</div>
 
-						{currentRoom.description && (
-							<div className="description-container">
-								<div className="description">
-									{currentRoom.description}
+								<div className="description-container">
+									<div className="description">
+										{currentRoom.description}
+									</div>
 								</div>
 							</div>
-						)}
-
+							<div className="room-price-card-container">
+								<div className="room-price-card">
+									<div className="room-price-card-top-text">
+										<div className="room-price">
+											<span className="card-price">
+												${currentRoom.price}
+											</span>
+											<span>night</span>
+										</div>
+										<div
+											className="room-reviews-and-location in-price-card"
+											style={{ paddingBottom: "0rem" }}
+										>
+											★
+											{Number(
+												currentRoom.avgStarRating
+											).toFixed(2)}
+											{" · "}
+											{Number(
+												currentRoom.numReviews
+											)}{" "}
+											review(s)
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 						{Object.values(currentRoom.Reviews).length > 0 && (
 							<div className="reviews-container">
 								{currentRoom.avgStarRating >= 1 && (
@@ -146,11 +175,7 @@ const SingleRoomInfo = () => {
 										review(s)
 									</h2>
 								)}
-								{currentRoom.avgStarRating < 1 && (
-									<h2 className="reviews-overview">
-										No Reviews Yet
-									</h2>
-								)}
+
 								<div className="reviews">
 									{Object.values(currentRoom.Reviews).length >
 										0 &&
@@ -167,19 +192,21 @@ const SingleRoomInfo = () => {
 												);
 											}
 										)}
+
+									{!Object.values(currentRoom.Reviews)
+										.length && (
+										<div className="no-reviews-placeholder">
+											No Reviews
+										</div>
+									)}
 								</div>
 							</div>
 						)}
-
+						{currentRoom.avgStarRating < 1 && (
+							<h2 className="reviews-overview">No Reviews Yet</h2>
+						)}
 						{sessionuser && sessionuser.id === currentRoom.ownerId && (
 							<div className="button-container">
-								<button
-									onClick={deletedRoom}
-									className="delete-btn"
-								>
-									Delete room
-								</button>
-
 								<button
 									className="edit-btn"
 									onClick={() =>
@@ -187,6 +214,12 @@ const SingleRoomInfo = () => {
 									}
 								>
 									Edit room
+								</button>
+								<button
+									onClick={deletedRoom}
+									className="delete-btn"
+								>
+									Delete room
 								</button>
 							</div>
 						)}

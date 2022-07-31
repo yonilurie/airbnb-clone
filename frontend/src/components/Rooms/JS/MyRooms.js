@@ -26,6 +26,11 @@ const MyRooms = () => {
 		return () => clearTimeout(timeout);
 	}, []);
 
+	useEffect(() => {
+		if (document.title !== 'My Rooms')
+		document.title = "My Rooms";
+	}, []);
+
 	//If the user is not logged in, redirect the user to home page
 
 	if (!sessionuser) return <Redirect to="/" />;

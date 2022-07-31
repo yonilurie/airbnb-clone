@@ -1,20 +1,24 @@
+h2 {
+	margin-top: 0rem;
+}
+
 .button-container {
 	display: flex;
 	justify-content: space-between;
-	width: 450px;
+	width: 20.625rem;
 }
 
 .room-name {
-	font-size: 26px;
+	font-size: 1.625rem;
 	font-weight: 600;
-	line-height: 26px;
+	line-height: 1.625rem;
 }
 
 .reviews {
 	display: flex;
 	flex-wrap: wrap;
-	padding-top: 10px;
-	padding-bottom: 10px;
+	padding-top: 0.625rem;
+	padding-bottom: 0.625rem;
 }
 
 .description-container {
@@ -22,20 +26,19 @@
 	justify-content: flex-start;
 	border-top: solid 1px rgb(221, 221, 221);
 	border-bottom: solid 1px rgb(221, 221, 221);
-	width: 60%;
-	padding: 20px;
+	padding: 1.25rem;
 	align-self: flex-start;
 }
 
 .description {
-	font-size: 16px;
+	font-size: 1rem;
 	font-weight: 400;
 	color: #484848;
 }
 
 .room-content {
-	padding-left: 80px;
-	padding-right: 80px;
+	padding-left: 5rem;
+	padding-right: 5rem;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -43,15 +46,16 @@
 }
 
 .room-images {
-	height: 584px;
+	max-height: 36.5rem;
 	max-width: 1320px;
+	/* width: 100%; */
 }
 
 .main-image {
 	object-fit: cover;
 	height: 560px;
 
-	width: auto;
+	width: 100%;
 	max-width: 560px;
 }
 
@@ -165,7 +169,7 @@
 	height: 225px;
 	width: 225px;
 	box-sizing: border-box;
-	padding: 10px;
+	padding: 0.625rem;
 	background-color: rgb(224, 224, 224);
 }
 
@@ -176,4 +180,51 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+}
+
+.room-details-container {
+	display: flex;
+	margin: 2rem 0rem;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.room-price-card {
+	padding: 1.5rem;
+	border: solid 1px rgb(175, 175, 175);
+	border-radius: 12px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18);
+	width: fit-content;
+}
+
+.room-price-card-top-text {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.card-price {
+	font-size: 1.25rem;
+	font-weight: 600;
+	margin-right: 0.25rem;
+}
+
+.room-price {
+	margin-right: 2.5rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.room-reviews-and-location.in-price-card {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	width: 10rem;
+}
+
+.room-owner-and-description {
+	margin-right: 10rem;
+	width: 100%;
 }
