@@ -9,7 +9,6 @@ import "../CSS/RoomForm.css";
 const CreateRoomForm = () => {
 	const history = useHistory();
 	const sessionuser = useSelector((state) => state.session.user);
-	const rooms = useSelector((state) => state.rooms);
 	const dispatch = useDispatch();
 
 	// State

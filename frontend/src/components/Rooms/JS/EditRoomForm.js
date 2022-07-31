@@ -32,7 +32,10 @@ const EditRoomForm = () => {
 	useEffect(() => {
 		setIsLoaded(false);
 	}, []);
-
+	useEffect(() => {
+		if (document.title !== "Edit your Room")
+			document.title = "Edit your Room";
+	}, []);
 	//Get the info of the current room
 	useEffect(() => {
 		dispatch(getRoomInfo(roomId));
@@ -42,7 +45,7 @@ const EditRoomForm = () => {
 
 	//Once room is loaded update state with the rooms information
 	//This information will now show up in the form inputs
-	//so the user does not have tot ype them in again
+	//so the user does not have to type them in again
 	useEffect(() => {
 		//If the currentRoom is loaded and and has an Id
 		//Destructure it
@@ -129,7 +132,9 @@ const EditRoomForm = () => {
 			);
 			const checkIfLocationTakenData = await checkIfLocationTaken.json();
 			if (checkIfLocationTakenData.rooms.length > 0) {
-				setValidationErrors(["This location is already taken, Check latitude and longitude"]);
+				setValidationErrors([
+					"This location is already taken, Check latitude and longitude",
+				]);
 				setIsLoaded(true);
 				return;
 			}
