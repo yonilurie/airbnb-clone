@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 import * as sessionActions from "../../../store/session";
@@ -13,13 +13,27 @@ function SignupForm({ setShowModal }) {
 	const [firstName, setFirstName] = useState("");
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
-	const [errors, setErrors] = useState([]);
+	const [validationErrors, setValidationErrors] = useState([]);
+	const [isLoaded, setIsLoaded] = useState(false);
 
 	//On submit if errors are present, setErrors and they will be rendered to user
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		if (password === confirmPassword) {
-			setErrors([]);
+			console.log(email.split(".").at(-1));
+		if (
+			email &&
+			email.length &&
+			email.indexOf(".") &&
+			email.split(".").at(-1).length === 1
+		) {
+			const errors = []
+			errors.push("Please enter a valid email");
+			setValidationErrors(errors)
+			setIsLoaded(true);
+			return;
+		}
+
+		if (password === confirmPassword && !validationErrors.length > 0) {
 			const trySignup = await dispatch(
 				sessionActions.signup({
 					email,
@@ -29,7 +43,13 @@ function SignupForm({ setShowModal }) {
 					lastName,
 				})
 			).then((data) => {
-				if (data && data.errors) return setErrors(data.errors);
+				console.log(data);
+				if (data && data.errors) {
+					const errors = [];
+					errors.push(data.errors.email);
+					setValidationErrors(errors);
+					setIsLoaded(true);
+				}
 				return data;
 			});
 
@@ -37,11 +57,31 @@ function SignupForm({ setShowModal }) {
 			if (trySignup.user) setShowModal(false);
 			return trySignup;
 		}
-
-		return setErrors([
-			"Confirm Password field must be the same as the Password field",
-		]);
+		setIsLoaded(true);
 	};
+	//On initial render set isLoaded to false
+	useEffect(() => {
+		setIsLoaded(false);
+	}, []);
+
+	useEffect(() => {
+		const errors = [];
+
+		if (password.length < 6) {
+			errors.push("Password must be at least 6 characters");
+		}
+		if (confirmPassword !== password) {
+			errors.push(
+				"Confirm Password field must be the same as the Password field"
+			);
+		}
+
+		if (errors.length === 0) {
+			setIsLoaded(false);
+		}
+		setValidationErrors(errors);
+		console.log(validationErrors);
+	}, [email, username, password, confirmPassword]);
 
 	return (
 		<div className="modal-body">
@@ -56,9 +96,9 @@ function SignupForm({ setShowModal }) {
 			</div>
 			<form onSubmit={handleSubmit}>
 				<h3 className="modal-welcome">Welcome to Airbnb</h3>
-				{errors.length > 0 && (
+				{isLoaded && validationErrors.length > 0 && (
 					<ul className="errors">
-						{errors.map((error, idx) => (
+						{validationErrors.map((error, idx) => (
 							<li key={idx}>{error}</li>
 						))}
 					</ul>
@@ -71,7 +111,7 @@ function SignupForm({ setShowModal }) {
 
 					<input
 						className="modal-input"
-						type="text"
+						type="email"
 						placeholder="Email"
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
@@ -150,7 +190,13 @@ function SignupForm({ setShowModal }) {
 					/>
 				</div>
 
-				<button type="submit" className="login-register-submit">
+				<button
+					type="submit"
+					className={`login-register-submit ${
+						isLoaded ? "disabled" : ""
+					}`}
+					disabled={isLoaded}
+				>
 					Sign Up
 				</button>
 			</form>

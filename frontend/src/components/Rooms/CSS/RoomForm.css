@@ -104,7 +104,7 @@ input {
 		rgb(189, 30, 89) 100%
 	);
 	background-size: 200% 200%;
-	background-color: rgba(255, 56, 92, .5);
+
 	border: none;
 	border-radius: 12px;
 	font-size: 1rem;
@@ -118,7 +118,12 @@ input {
 .submit-form-btn:active {
 	transform: scale(0.96);
 	background-image: none;
-	background-color: rgb(255, 56, 92);
+
+	background-image: radial-gradient(
+		circle at center,
+		rgb(255, 56, 92) 100%,
+		rgb(103, 102, 102) 0%
+	);
 }
 .lat-lng-container {
 	display: flex;

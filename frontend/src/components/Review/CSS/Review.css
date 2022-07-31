@@ -30,6 +30,11 @@
 .edit-btn:active,
 .delete-btn:active {
 	transform: scale(0.96);
+		background-image: radial-gradient(
+		circle at center,
+		rgb(255, 56, 92) 100%,
+		rgb(103, 102, 102) 0%
+	);
 }
 
 .modal-input-label {

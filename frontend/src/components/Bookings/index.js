@@ -10,7 +10,6 @@ const Bookings = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 
-
 	useEffect(() => {
 		dispatch(getAUsersBookings());
 	}, [dispatch]);
@@ -48,30 +47,29 @@ const Bookings = () => {
 	return (
 		<>
 			<h1>Trips</h1>
+			{futureBookings.length < 1 && (
+				<div className="empty-bookings-placeholder">
+					<div className="current-bookings-empty-text">
+						<h3>No trips booked...yet!</h3>
+						<div>
+							Time to dust off your bags and start planning your
+							next adventure
+						</div>
+						<button onClick={home} className="search-btn">
+							Start searching
+						</button>
+					</div>
+					<div className="empty-bookings-img-container">
+						<img
+							src="https://a0.muscache.com/im/pictures/d727f355-3f10-44b5-9750-d1efca2438fc.jpg?im_w=720"
+							className="empty-bookings-img"
+							alt="no future bookings"
+						></img>
+					</div>
+				</div>
+			)}
 			{bookings.length > 1 && (
 				<div>
-					{futureBookings.length < 1 && (
-						<div className="empty-bookings-placeholder">
-							<div className="current-bookings-empty-text">
-								<h3>No trips booked...yet!</h3>
-								<div>
-									Time to dust off your bags and start
-									planning your next adventure
-								</div>
-								<button onClick={home} className="search-btn">
-									Start searching
-								</button>
-							</div>
-							<div>
-								<img
-									src="https://a0.muscache.com/im/pictures/d727f355-3f10-44b5-9750-d1efca2438fc.jpg?im_w=720"
-									className="empty-bookings-img"
-									alt="no future bookings"
-								></img>
-							</div>
-						</div>
-					)}
-
 					{futureBookings.length >= 1 && (
 						<div>
 							<h3>Where you're headed</h3>

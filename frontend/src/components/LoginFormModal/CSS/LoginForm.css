@@ -9,6 +9,8 @@ form {
 ul {
 	display: flex;
 	flex-direction: column;
+	list-style: none;
+	padding-left: 0rem;
 }
 
 .modal-body {
@@ -102,6 +104,7 @@ ul {
 		rgb(189, 30, 89) 75%,
 		rgb(189, 30, 89) 100%
 	);
+	/* background-color: rgba(255, 56, 92, 0.5); */
 	background-size: 200% 200%;
 	border: none;
 	border-radius: 12px;
@@ -114,8 +117,26 @@ ul {
 
 .login-register-submit:active {
 	transform: scale(0.96);
+	background-image: radial-gradient(
+		circle at center,
+		rgb(255, 56, 92) 100%,
+		rgb(103, 102, 102) 0%
+	);
 }
 
+.login-register-submit.disabled {
+	background-image: radial-gradient(
+		circle at center center,
+		rgb(162, 161, 162) 0%,
+		rgb(107, 103, 104) 27.5%
+	);
+	color: black;
+	border: solid 1px black;
+}
+
+.login-register-submit.disabled:active {
+	transform: none;
+}
 .errors {
 	display: flex;
 	justify-content: center;

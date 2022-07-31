@@ -10,17 +10,16 @@ function LoginForm({ setShowModal }) {
 	//State
 	const [credential, setCredential] = useState("");
 	const [password, setPassword] = useState("");
-	const [errors, setErrors] = useState([]);
 
+	const [validationErrors, setValidationErrors] = useState([]);
 	//On submit if errors are present, setErrors and they will be rendered to user
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		setErrors([]);
 
 		const tryLogin = await dispatch(
 			sessionActions.login({ credential, password })
 		).then((data) => {
-			if (data && data.errors) setErrors(data.errors);
+			if (data && data.errors) setValidationErrors(data.errors);
 			return data;
 		});
 		//If no errors are present close the modal
@@ -42,9 +41,9 @@ function LoginForm({ setShowModal }) {
 
 			<form onSubmit={handleSubmit}>
 				<h3 className="modal-welcome">Welcome to Airbnb</h3>
-				{errors.length > 0 && (
+				{validationErrors.length > 0 && (
 					<ul className="errors">
-						{errors.map((error, idx) => (
+						{validationErrors.map((error, idx) => (
 							<li key={idx}>{error}</li>
 						))}
 					</ul>

@@ -210,10 +210,11 @@ const sessionReducer = (state = initialState, action) => {
 
 		case GET_USER_BOOKINGS: {
 			const bookings = {};
-			action.bookings.forEach((booking) => {
-				bookings[booking.id] = booking;
-			});
-
+			if (action.bookings.length) {
+				action.bookings.forEach((booking) => {
+					bookings[booking.id] = booking;
+				});
+			}
 			newState = { ...state, bookings };
 
 			return newState;
@@ -240,7 +241,7 @@ const sessionReducer = (state = initialState, action) => {
 
 		case EDIT_REVIEW: {
 			newState = { ...state };
-			console.log(action.review)
+			console.log(action.review);
 			if (newState.reviews[action.review.id]) {
 				newState.reviews[action.review.id] = action.review;
 				return newState;
