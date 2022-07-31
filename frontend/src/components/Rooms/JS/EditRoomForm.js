@@ -131,7 +131,15 @@ const EditRoomForm = () => {
 				`/api/rooms/search?minLat=${latitude}&maxLat=${latitude}&minLng=${longitude}&maxLng=${longitude}`
 			);
 			const checkIfLocationTakenData = await checkIfLocationTaken.json();
-			if (checkIfLocationTakenData.rooms.length > 0) {
+			
+			if (
+				checkIfLocationTakenData.rooms.length > 0 &&
+				Number(checkIfLocationTakenData.rooms[0].lat) !==
+					Number(currentRoom.lat) &&
+				Number(checkIfLocationTakenData.rooms[0].lng) !==
+					Number(currentRoom.lng)
+			) {
+				console.log(checkIfLocationTakenData)
 				setValidationErrors([
 					"This location is already taken, Check latitude and longitude",
 				]);
