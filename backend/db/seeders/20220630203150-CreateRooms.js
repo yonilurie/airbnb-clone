@@ -41,7 +41,7 @@ module.exports = {
 					country: "United States of America",
 					lat: 47.619915,
 					lng: -122.34792,
-					name: "App Academy Two",
+					name: "App Academy Three",
 					description: "Place where web developers are created again",
 					price: 50.0,
 					previewImage:
