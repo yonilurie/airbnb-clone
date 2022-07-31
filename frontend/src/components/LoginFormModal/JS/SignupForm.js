@@ -80,7 +80,7 @@ function SignupForm({ setShowModal }) {
 			setIsLoaded(false);
 		}
 		setValidationErrors(errors);
-		console.log(validationErrors);
+		
 	}, [email, username, password, confirmPassword]);
 
 	return (

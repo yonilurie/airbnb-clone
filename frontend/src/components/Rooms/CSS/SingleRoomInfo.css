@@ -230,3 +230,9 @@ h2 {
 	margin-right: 10rem;
 	width: 100%;
 }
+
+
+#reviews-modal-link{
+	text-decoration: underline;
+	cursor: pointer;
+}

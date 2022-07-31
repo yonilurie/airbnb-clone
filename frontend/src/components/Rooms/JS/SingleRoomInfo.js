@@ -7,10 +7,12 @@ import { deleteARoom, getMyRoomsData } from "../../../store/session";
 import Reviews from "./Reviews";
 
 import "../CSS/SingleRoomInfo.css";
+import ReviewsModal from "./ReviewsModal";
 
 const SingleRoomInfo = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
+	const [showModal, setShowModal] = useState(false);
 	const sessionuser = useSelector((state) => state.session.user);
 	const { roomId } = useParams();
 	let currentRoom = useSelector((state) => state.currentRoom);
@@ -24,6 +26,13 @@ const SingleRoomInfo = () => {
 		dispatch(getRoomInfo(Number(roomId)));
 		// setIsDisplayed(true);
 	}, [dispatch, roomId]);
+	useEffect(() => {
+		if (showModal) {
+			document.body.style.overflow = "hidden";
+		} else {
+			document.body.style.overflow = "unset";
+		}
+	}, [showModal]);
 
 	useEffect(() => {});
 	// useEffect(() => {
@@ -48,6 +57,12 @@ const SingleRoomInfo = () => {
 
 	return (
 		<div className="content-container">
+			<ReviewsModal
+				showModal={showModal}
+				setShowModal={setShowModal}
+				currentRoom={currentRoom}
+			></ReviewsModal>
+
 			{!isDisplayed && (
 				<div className="placeholder-container">
 					<div className="placeholder-loading-section-1">
@@ -90,16 +105,22 @@ const SingleRoomInfo = () => {
 								</h1>
 								{currentRoom.avgStarRating >= 1 && (
 									<div className="room-reviews-and-location">
-										★
-										{Number(
-											currentRoom.avgStarRating
-										).toFixed(2)}
-										{" · "}
-										{Number(
-											Object.values(currentRoom.Reviews)
-												.length
-										)}{" "}
-										review(s)
+										<span
+											id="reviews-modal-link"
+											onClick={() => setShowModal(true)}
+										>
+											★
+											{Number(
+												currentRoom.avgStarRating
+											).toFixed(2)}
+											{" · "}
+											{Number(
+												Object.values(
+													currentRoom.Reviews
+												).length
+											)}{" "}
+											review(s)
+										</span>
 										{" · "}
 										{currentRoom.city}, {currentRoom.state},{" "}
 										{currentRoom.country}
@@ -157,10 +178,19 @@ const SingleRoomInfo = () => {
 												currentRoom.avgStarRating
 											).toFixed(2)}
 											{" · "}
-											{Number(
-												currentRoom.numReviews
-											)}{" "}
-											review(s)
+											<span
+												id="reviews-modal-link"
+												onClick={() =>
+													setShowModal(true)
+												}
+											>
+												{Number(
+													Object.values(
+														currentRoom.Reviews
+													).length
+												)}{" "}
+												review(s)
+											</span>
 										</div>
 									</div>
 								</div>
