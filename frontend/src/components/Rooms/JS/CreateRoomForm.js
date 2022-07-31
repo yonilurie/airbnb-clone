@@ -42,7 +42,7 @@ const CreateRoomForm = () => {
 			errors.push("Name must be between 4 and 50 characters");
 		}
 		if (description.length > 500 || description.length < 10) {
-			errors.push("Description must be lbetween 10 and 500 characters");
+			errors.push("Description must be between 10 and 500 characters");
 		}
 
 		setValidationErrors(errors);
@@ -262,6 +262,18 @@ const CreateRoomForm = () => {
 								min="-90"
 								max="90"
 								step="0.01"
+								maxLength="9"
+								onInput={(e) => {
+									if (
+										e.target.value.length >
+										e.target.maxLength
+									) {
+										e.target.value = e.target.value.slice(
+											0,
+											e.target.maxLength
+										);
+									}
+								}}
 								id="latitude"
 								placeholder="Latitude -90 to 90"
 								value={latitude}

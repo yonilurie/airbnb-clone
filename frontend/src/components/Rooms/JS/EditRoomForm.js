@@ -311,6 +311,18 @@ const EditRoomForm = () => {
 								min="-90"
 								max="90"
 								step="0.01"
+								maxLength="9"
+								onInput={(e) => {
+									if (
+										e.target.value.length >
+										e.target.maxLength
+									) {
+										e.target.value = e.target.value.slice(
+											0,
+											e.target.maxLength
+										);
+									}
+								}}
 								id="latitude"
 								placeholder="Latitude -90 to 90"
 								value={latitude}
