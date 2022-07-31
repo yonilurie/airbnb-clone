@@ -147,6 +147,7 @@ const singleRoomReducer = (state = initialState, action) => {
 		}
 
 		case CREATE_ROOM_REVIEW: {
+			console.log(action.reviewInfo)
 			newState = {
 				...state,
 				Reviews: {
@@ -154,7 +155,7 @@ const singleRoomReducer = (state = initialState, action) => {
 					[action.reviewInfo.id]: { ...action.reviewInfo },
 				},
 			};
-
+			console.log(newState)
 			return newState;
 		}
 		case EDIT_ROOM_REVIEW: {

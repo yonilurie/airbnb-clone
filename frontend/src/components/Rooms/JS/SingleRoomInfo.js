@@ -25,6 +25,7 @@ const SingleRoomInfo = () => {
 		// setIsDisplayed(true);
 	}, [dispatch, roomId]);
 
+	useEffect(() => {});
 	// useEffect(() => {
 	// 	dispatch(getARoomsBookings(Number(roomId)));
 	// }, [dispatch, roomId]);
@@ -94,7 +95,10 @@ const SingleRoomInfo = () => {
 											currentRoom.avgStarRating
 										).toFixed(2)}
 										{" · "}
-										{Number(currentRoom.numReviews)}{" "}
+										{Number(
+											Object.values(currentRoom.Reviews)
+												.length
+										)}{" "}
 										review(s)
 										{" · "}
 										{currentRoom.city}, {currentRoom.state},{" "}
@@ -171,7 +175,10 @@ const SingleRoomInfo = () => {
 											currentRoom.avgStarRating
 										).toFixed(2)}
 										{" · "}
-										{Number(currentRoom.numReviews)}{" "}
+										{Number(
+											Object.values(currentRoom.Reviews)
+												.length
+										)}{" "}
 										review(s)
 									</h2>
 								)}
@@ -184,7 +191,7 @@ const SingleRoomInfo = () => {
 										)[0] === "object" &&
 										Object.values(currentRoom.Reviews).map(
 											(review) => {
-												console.log(review)
+												console.log(review);
 												return (
 													<Reviews
 														review={review}

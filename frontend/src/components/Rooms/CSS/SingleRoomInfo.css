@@ -63,6 +63,7 @@ h2 {
 .content-container {
 	display: flex;
 	justify-content: center;
+	margin-bottom: 5rem;
 }
 
 .delete-btn,
