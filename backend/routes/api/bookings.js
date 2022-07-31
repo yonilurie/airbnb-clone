@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { requireAuth, restoreUser } = require("../../utils/auth");
 const { handleValidationErrors } = require("../../utils/validation");
-const { Booking, Room } = require("../../db/models");
+const { Booking, Room , User} = require("../../db/models");
 const { check } = require("express-validator");
 const { param } = require("express-validator");
 const { Op } = require("sequelize");
@@ -57,7 +57,7 @@ router.put(
 			now.getMonth(),
 			now.getDate()
 		);
-	
+
 		//Check if booking the user want to edit has already passed
 		if (
 			currentTime >= existingBooking.startDate ||
@@ -128,22 +128,31 @@ router.get("/", [restoreUser, requireAuth], async (req, res) => {
 	//Find all bookings belonging to the user, as well as room details
 	let bookings = await Booking.findAll({
 		where: { userId: id },
-		include: {
-			model: Room,
-			attributes: [
-				"id",
-				"ownerId",
-				"address",
-				"city",
-				"state",
-				"country",
-				"lat",
-				"lng",
-				"name",
-				"price",
-				"previewImage",
-			],
-		},
+		include: [
+			{
+				model: Room,
+				attributes: [
+					"id",
+					"ownerId",
+					"address",
+					"city",
+					"state",
+					"country",
+					"lat",
+					"lng",
+					"name",
+					"price",
+					"previewImage",
+				],
+				include: [
+					{
+						model: User,
+						as: "Owner",
+						attributes: ["id", "firstName", "lastName"],
+					},
+				],
+			},
+		],
 	});
 	//If there are no bookings return 200 code and message
 	if (!bookings.length) {

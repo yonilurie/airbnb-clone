@@ -26,7 +26,7 @@ const validateReview = [
 
 router.delete("/:reviewId", [restoreUser, requireAuth], async (req, res) => {
 	const { reviewId } = req.params;
-	
+
 	const { id } = req.user;
 
 	//Check if review exists
@@ -134,7 +134,9 @@ router.get("/", [restoreUser, requireAuth], async (req, res) => {
 					"name",
 					"price",
 				],
+				
 			},
+
 			{
 				model: UserReviewImage,
 				as: "images",

@@ -203,7 +203,6 @@ export const createRoom = (room) => async (dispatch) => {
 	dispatch(createARoom(data));
 };
 
-
 //Initial state for session
 const initialState = { user: null, reviews: {}, bookings: {}, rooms: {} };
 
@@ -220,13 +219,17 @@ const sessionReducer = (state = initialState, action) => {
 
 		case GET_USER_REVIEWS: {
 			const reviews = {};
-			action.reviews.forEach((review) => {
-				reviews[review.id] = review;
-			});
+			console.log(action.reviews)
+			if (action.reviews.length) {
+				action.reviews.forEach((review) => {
+					reviews[review.id] = review;
+				});
+			}
 			newState = {
 				...state,
-				reviews,
+				
 			};
+			newState.reviews = reviews
 
 			return newState;
 		}
@@ -256,7 +259,7 @@ const sessionReducer = (state = initialState, action) => {
 		case CREATE_ROOM: {
 			const room = action.room;
 			newState = { ...state };
-			newState.rooms[room.id] = room
+			newState.rooms[room.id] = room;
 			return newState;
 		}
 

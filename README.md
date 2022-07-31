@@ -10,8 +10,8 @@ This project is a clone of Airbnb.
 After logging in, a user can create a room for others to book.
 A user may also book someone elses room, or write a review for it.
 
-
 ## API Documentation
+
 [Link to API Docs README.md](./backend/README.md)
 
 ## Database Schema Design:
@@ -22,32 +22,38 @@ A user may also book someone elses room, or write a review for it.
 
 ```js
 store = {
-    session: {},
+    currentRoom {
+        Owner: { id, firstName, lastName},
+        Reviews: {
+            [reviewId]: {
+                User: { id, firstName, lastName},
+                ...Review info
+            }
+         images: [...Room images]
+        ...Room info
+        }
+    }
     rooms: {
-        roomId: {
-            roomData,
-            reviews:{
-                reviewId: {
-                        reviewData,
-                        user: {userData for who reviewed}
-                    }
-            },
-        },
-    }
-    bookings: {
-        bookingId: {
-            bookingData,
-            user: {userData of user that booked}.
-            room: {spotData for the booking}
-        },
-    }
-    roomImages: {
-        room: {images of a room}
-    }
+        ...All rooms indexed by roomId
 
-    reviewImages: {
-        review: {images from a review}
+       [roomId]: {
+           ...Room Info
+       }
     }
+    session: {
+        bookings: {
+            [bookingId]: {...Users bookings info}
+        },
+        reviews: {
+            [reviewId]: {...Users reviews info}
+        },
+        rooms: {
+            ...Users owned rooms info
+        }
+        user: {
+            id, firstName, lastName, email, username
+        }
+    },
 }
 ```
 
@@ -55,5 +61,5 @@ store = {
 
 1. Rooms
 2. Reviews
-<!-- 3. Bookings
-4. Favorites -->
+ <!-- 3. Bookings
+3. Favorites -->

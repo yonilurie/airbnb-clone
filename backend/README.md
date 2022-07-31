@@ -265,7 +265,7 @@ Returns all the rooms owned (created) by the current user.
 -   Request
 
     -   Method: GET
-    -   URL: /api/rooms/my-rooms
+    -   URL: /api/my-rooms
     -   Body: none
 
 -   Successful Response
@@ -765,7 +765,7 @@ Update and return an existing review.
 -   Request
 
     -   Method: PUT
-    -   URL: /api/rooms/:roomId/reviews/:reviewId
+    -   URL: /api/reviews/:reviewId
     -   Headers:
         -   Content-Type: application/json
     -   Body:
@@ -837,7 +837,7 @@ Delete an existing review.
 -   Request
 
     -   Method: DELETE
-    -   URL: /api/rooms/:roomId/reviews/:reviewId
+    -   URL: /api/reviews/:reviewId
     -   Body: none
 
 -   Successful Response

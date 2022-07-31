@@ -14,7 +14,13 @@ a {
 	color: rgb(113, 113, 113);
 	font-weight: 400;
 	line-height: 1.25rem;
-	white-space: normal;
+	width: fit-content;
+	
+	white-space: nowrap;
+}
+
+.booking-info {
+	padding-left: 1rem;
 }
 
 .preview-image {

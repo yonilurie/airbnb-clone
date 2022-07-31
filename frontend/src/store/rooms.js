@@ -22,7 +22,6 @@ const createARoom = (room) => {
 	};
 };
 
-
 const deleteARoom = (id) => {
 	return {
 		type: DELETE_ROOM,
@@ -64,8 +63,6 @@ export const createRoom = (room) => async (dispatch) => {
 	dispatch(createARoom(data));
 };
 
-
-
 //delete a room
 export const deleteRoom = (roomId) => async (dispatch) => {
 	const response = await csrfFetch(`/api/rooms/${roomId}`, {
@@ -97,7 +94,12 @@ const roomReducer = (state = initialState, action) => {
 	let newState;
 	switch (action.type) {
 		case GET_ROOMS:
-			newState = { ...action.rooms };
+			const rooms = {};
+			const fetchedRooms = { ...action.rooms };
+			for (const key in fetchedRooms) {
+				rooms[fetchedRooms[key].id] = fetchedRooms[key];
+			}
+			newState = { ...rooms };
 			return newState;
 
 		case CREATE_ROOM: {
@@ -106,7 +108,6 @@ const roomReducer = (state = initialState, action) => {
 			return newState;
 		}
 
-	
 		case DELETE_ROOM: {
 			newState = { ...state };
 

@@ -68,7 +68,7 @@ const Booking = ({ booking, reviewDisabled }) => {
 				<div className="booking-info">
 					<div className="city">{booking.Room.city}</div>
 					<div className="owner">
-						Hosted by user {booking.Room.ownerId}
+						Hosted by {booking.Room.Owner.firstName}
 					</div>
 					<div className="duration">{bookingDuration.join(" ")}</div>
 				</div>
