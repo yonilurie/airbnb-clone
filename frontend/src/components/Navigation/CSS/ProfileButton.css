@@ -6,10 +6,7 @@ a {
 
 svg {
 	padding: 0.3125rem;
-
 }
-
-
 
 .filter-grey {
 	filter: invert(49%) sepia(1%) saturate(0%) hue-rotate(175deg)
@@ -85,14 +82,16 @@ svg {
 	transition: 0.2s;
 }
 
+.profile-container {
+	position: relative;
+}
 .profile-dropdown {
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18);
-	position: fixed;
+	position: absolute;
 	padding: 8px 0px;
-	margin: 0.625rem;
+	margin: 0.7rem;
 	width: 240px;
 	height: fit-content;
-	right: 5rem;
 	border: 1px solid #ebebeb;
 	border-radius: 12px;
 	background-color: #ffffff;
@@ -100,7 +99,9 @@ svg {
 	flex-direction: column;
 	align-items: flex-start;
 	justify-content: flex-start;
-	z-index: 1;
+	z-index: 3;
+	top: 2.5rem;
+	right: -1rem;
 }
 
 .session-links {

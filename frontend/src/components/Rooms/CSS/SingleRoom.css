@@ -1,13 +1,22 @@
+.single-room-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	max-width: 400px;
+}
+
 .room {
 	font-size: 1rem;
-	box-sizing: border-box;
 	display: flex;
 	cursor: pointer;
 	flex-direction: column;
 	justify-content: space-between;
 	width: fit-content;
-	max-height: 20rem;
-	max-width: 20rem;
+	height: 100%;
+
+	max-width: 100%;
 }
 
 .star {
@@ -58,15 +67,14 @@
 .preview-image-container {
 	max-width: 100%;
 	max-height: 100%;
-
-	width: 20rem;
-	height: 20rem;
+	height: 100%;
+	width: 100%;
+	/* width: 20rem; */
 }
-
 img {
 	width: 100%;
 	height: 100%;
-	object-fit: fill;
+	object-fit: cover;
 	overflow: hidden;
 	border-radius: 12px;
 }

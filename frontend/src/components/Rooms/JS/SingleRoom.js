@@ -16,30 +16,39 @@ function SingleRoom({ room }) {
 	};
 
 	return (
-		<div className="room" onClick={(e) => showRoomDetails(e)}>
-			{/* <div className="favorite">♥️</div> */}
-			<div className="preview-image-container"><img src={room.previewImage} alt={`For room ${room.id}`}></img></div>
-			
-			<div className="room-info" onClick={showRoomDetails}>
-				<div className="room-detail name">
-					{room.city}, {room.state}
-				</div>
-				{room.avgStarRating && (
-					<div className="room-detail star">
-						<span className="star">★</span>
-						{Number(room.avgStarRating).toFixed(2)}
-					</div>
-				)}
+		<div className="single-room-container">
+			<div className="room" onClick={(e) => showRoomDetails(e)}>
+				{/* <div className="favorite">♥️</div> */}
+				
+					<img
+						src={room.previewImage}
+						alt={`For room ${room.id}`}
+					></img>
+				
 
-				{!room.avgStarRating && (
-					<div className="room-detail star">No Reviews</div>
-				)}
-				{/* <div className="room-detail availability">{"availability"}</div> */}
-				<div className="room-detail price">
-					<span style={{ fontWeight: "600", paddingRight: "2px" }}>
-						${room.price}{" "}
-					</span>
-					night
+				<div className="room-info" onClick={showRoomDetails}>
+					<div className="room-detail name">
+						{room.city}, {room.state}
+					</div>
+					{room.avgStarRating && (
+						<div className="room-detail star">
+							<span className="star">★</span>
+							{Number(room.avgStarRating).toFixed(2)}
+						</div>
+					)}
+
+					{!room.avgStarRating && (
+						<div className="room-detail star">No Reviews</div>
+					)}
+					{/* <div className="room-detail availability">{"availability"}</div> */}
+					<div className="room-detail price">
+						<span
+							style={{ fontWeight: "600", paddingRight: "2px" }}
+						>
+							${room.price}{" "}
+						</span>
+						night
+					</div>
 				</div>
 			</div>
 		</div>
