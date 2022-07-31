@@ -106,14 +106,14 @@ const SingleRoomInfo = () => {
 								{currentRoom.avgStarRating >= 1 && (
 									<div className="room-reviews-and-location">
 										★
-											{Number(
-												currentRoom.avgStarRating
-											).toFixed(2)}
-											{" · "}<span
+										{Number(
+											currentRoom.avgStarRating
+										).toFixed(2)}
+										{" · "}
+										<span
 											id="reviews-modal-link"
 											onClick={() => setShowModal(true)}
 										>
-											
 											{Number(
 												Object.values(
 													currentRoom.Reviews
@@ -178,19 +178,33 @@ const SingleRoomInfo = () => {
 												currentRoom.avgStarRating
 											).toFixed(2)}
 											{" · "}
-											<span
-												id="reviews-modal-link"
-												onClick={() =>
-													setShowModal(true)
-												}
-											>
-												{Number(
-													Object.values(
-														currentRoom.Reviews
-													).length
-												)}{" "}
-												review(s)
-											</span>
+											{Object.values(currentRoom.Reviews)
+												.length > 0 && (
+												<span
+													id="reviews-modal-link"
+													onClick={() =>
+														setShowModal(true)
+													}
+												>
+													{Number(
+														Object.values(
+															currentRoom.Reviews
+														).length
+													)}{" "}
+													review(s)
+												</span>
+											)}
+											{Object.values(currentRoom.Reviews)
+												.length < 1 && (
+												<span id="reviews-modal-link-inactive">
+													{Number(
+														Object.values(
+															currentRoom.Reviews
+														).length
+													)}{" "}
+													review(s)
+												</span>
+											)}
 										</div>
 									</div>
 								</div>

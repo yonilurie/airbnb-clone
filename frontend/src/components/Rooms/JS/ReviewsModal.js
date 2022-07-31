@@ -3,7 +3,7 @@ import { Modal } from "../../../context/Modal";
 import ShowReviewsModal from "./ShowReviewsModal";
 function ReviewsModal({ showModal, setShowModal, currentRoom }) {
 	return (
-		<>
+		< >
 			{showModal && (
 				<Modal onClose={() => setShowModal(false)}>
 					<ShowReviewsModal
