@@ -22,7 +22,8 @@ function SingleRoom({ room }) {
 				
 					<img
 						src={room.previewImage}
-						alt={`For room ${room.id}`}
+					alt={`For room ${room.id}`}
+					className="preview-image-main"
 					></img>
 				
 
