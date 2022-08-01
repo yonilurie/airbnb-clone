@@ -18,8 +18,11 @@ body {
 
 textarea {
 	font-family: "Inter var", sans-serif;
+	resize: vertical;
+	overflow-y: scroll;
+	max-height: 15rem;
+	min-height: 5rem;
 }
-
 
 button {
 	cursor: pointer;

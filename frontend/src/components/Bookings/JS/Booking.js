@@ -1,8 +1,14 @@
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { getAUsersReviews } from "../../../store/session";
 
 const Booking = ({ booking, reviewDisabled }) => {
 	const session = useSelector((state) => state.session);
+	const dispatch = useDispatch();
+	useEffect(() => {
+		dispatch(getAUsersReviews);
+	}, []);
 
 	let hasReview;
 	if (session.reviews) {
@@ -14,7 +20,7 @@ const Booking = ({ booking, reviewDisabled }) => {
 	let buttonMsg;
 	if (hasReview) {
 		buttonMsg = "Edit review";
-	} else {
+	} else if (!hasReview) {
 		buttonMsg = "Add review";
 	}
 
@@ -74,7 +80,7 @@ const Booking = ({ booking, reviewDisabled }) => {
 				</div>
 			</NavLink>
 			{!reviewDisabled && (
-				<NavLink to={`/add-review/${booking.Room.id}`}>
+				<NavLink to={`/review-room/${booking.Room.id}`}>
 					<button className="review-btn">{buttonMsg}</button>
 				</NavLink>
 			)}

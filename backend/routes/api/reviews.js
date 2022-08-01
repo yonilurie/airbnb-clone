@@ -3,6 +3,7 @@ const { requireAuth, restoreUser } = require("../../utils/auth");
 const { handleValidationErrors } = require("../../utils/validation");
 const { Room, User, Review, UserReviewImage } = require("../../db/models");
 const { check } = require("express-validator");
+const Sequelize = require("sequelize");
 const router = express.Router();
 
 //Validate review params
@@ -65,7 +66,6 @@ router.put(
 		if (reviewToEdit.userId !== Number(id)) {
 			return res.json(noReviewError());
 		}
-
 		reviewToEdit.review = review;
 		reviewToEdit.stars = stars;
 		await reviewToEdit.save();
@@ -134,7 +134,6 @@ router.get("/", [restoreUser, requireAuth], async (req, res) => {
 					"name",
 					"price",
 				],
-				
 			},
 
 			{

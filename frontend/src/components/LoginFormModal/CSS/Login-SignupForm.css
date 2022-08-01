@@ -21,6 +21,11 @@ ul {
 	align-items: center;
 	flex-direction: column;
 }
+
+.modal-body.login {
+	height: 500px;
+}
+
 .modal-welcome {
 	font-size: 1.375rem;
 	font-weight: 600;
@@ -142,3 +147,5 @@ ul {
 	justify-content: center;
 	align-items: center;
 }
+
+

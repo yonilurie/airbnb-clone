@@ -28,7 +28,7 @@ function LoginForm({ setShowModal }) {
 	};
 
 	return (
-		<div className="modal-body">
+		<div className="modal-body login">
 			<button
 				className="modal-exit-btn"
 				onClick={() => setShowModal(false)}

@@ -19,16 +19,16 @@ function SignupForm({ setShowModal }) {
 	//On submit if errors are present, setErrors and they will be rendered to user
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-			console.log(email.split(".").at(-1));
+		// console.log(email.split(".").at(-1));
 		if (
-			email &&
-			email.length &&
-			email.indexOf(".") &&
-			email.split(".").at(-1).length === 1
+			email.indexOf(".") === -1 ||
+			(email.length &&
+				email.indexOf(".") &&
+				email.split(".").at(-1).length === 1)
 		) {
-			const errors = []
+			const errors = [];
 			errors.push("Please enter a valid email");
-			setValidationErrors(errors)
+			setValidationErrors(errors);
 			setIsLoaded(true);
 			return;
 		}
@@ -76,15 +76,18 @@ function SignupForm({ setShowModal }) {
 			);
 		}
 
+		if (username.length < 4 || username.length > 30) {
+			errors.push("Username must be between 4 and 30 characters");
+		}
+
 		if (errors.length === 0) {
 			setIsLoaded(false);
 		}
 		setValidationErrors(errors);
-		
 	}, [email, username, password, confirmPassword]);
 
 	return (
-		<div className="modal-body">
+		<div className="modal-body signup">
 			<button
 				className="modal-exit-btn"
 				onClick={() => setShowModal(false)}
@@ -192,9 +195,7 @@ function SignupForm({ setShowModal }) {
 
 				<button
 					type="submit"
-					className={`login-register-submit ${
-						isLoaded ? "disabled" : ""
-					}`}
+					className={`login-register-submit `}
 					disabled={isLoaded}
 				>
 					Sign Up

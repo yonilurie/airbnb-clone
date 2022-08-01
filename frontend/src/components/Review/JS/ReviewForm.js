@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { createRoomReview } from "../../../store/CurrentRoom";
+import { createRoomReview, getRoomInfo } from "../../../store/CurrentRoom";
 
 function ReviewForm({ setShowModal }) {
 	const history = useHistory();
@@ -34,7 +34,7 @@ function ReviewForm({ setShowModal }) {
 
 		if (!validationErrors.length) {
 			dispatch(createRoomReview([roomId, JSON.stringify(reviewData)]));
-			
+			dispatch(getRoomInfo(roomId))
 			
 			history.push(`/rooms/${roomId}`);
 		}

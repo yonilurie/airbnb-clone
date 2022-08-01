@@ -76,7 +76,7 @@ const Bookings = () => {
 				<div>
 					{futureBookings.length >= 1 && (
 						<div>
-							<h3>Where you're headed</h3>
+							<h2>Where you're headed</h2>
 							<Booking
 								booking={futureBookings[0]}
 								reviewDisabled={true}

@@ -298,7 +298,7 @@ router.get(
 		//If not the owner
 		let bookings = await Booking.findAll({
 			where: { roomId: roomId },
-			attributes: ["id","roomId", "startDate", "endDate"],
+			attributes: ["id", "roomId", "startDate", "endDate"],
 		});
 		//if no bookings are found
 		if (!bookings.length) {

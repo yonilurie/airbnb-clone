@@ -5,7 +5,7 @@ h2 {
 .button-container {
 	display: flex;
 	justify-content: space-between;
-	width: 20.625rem;
+	/* width: 20.625rem; */
 }
 
 .room-name {

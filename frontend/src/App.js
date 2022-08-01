@@ -43,7 +43,7 @@ function App() {
 					<Route path="/trips">
 						<Bookings></Bookings>
 					</Route>
-					<Route path="/add-review/:roomId">
+					<Route path="/review-room/:roomId">
 						<CreateReview></CreateReview>
 					</Route>
 					<Route>
