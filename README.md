@@ -20,3 +20,23 @@ In the future, the ability to create bookings and upload images for reviews and 
 ## [Redux State Shape](https://github.com/yonilurie/backend-project-airbnb/wiki/Redux-State-Shape)
 
 ## [Database Schema](https://github.com/yonilurie/backend-project-airbnb/wiki/Database-Schema)
+
+# Created with
+
+## JavaScript
+
+## CSS
+
+## HTML
+
+## Node.JS
+
+## React
+
+## Redux
+
+## Express
+
+## SQLITE
+
+## Heroku
