@@ -19,13 +19,12 @@ function SingleRoom({ room }) {
 		<div className="single-room-container">
 			<div className="room" onClick={(e) => showRoomDetails(e)}>
 				{/* <div className="favorite">♥️</div> */}
-				
-					<img
-						src={room.previewImage}
+
+				<img
+					src={room.previewImage}
 					alt={`For room ${room.id}`}
 					className="preview-image-main"
-					></img>
-				
+				></img>
 
 				<div className="room-info" onClick={showRoomDetails}>
 					<div className="room-detail name">
@@ -44,11 +43,19 @@ function SingleRoom({ room }) {
 					{/* <div className="room-detail availability">{"availability"}</div> */}
 					<div className="room-detail price">
 						<span
-							style={{ fontWeight: "600", paddingRight: "2px" }}
+							style={{
+								fontWeight: "600",
+								paddingRight: "2px",
+							}}
 						>
 							${room.price}{" "}
 						</span>
-						night
+						<span
+							style={{ fontSize: ".875rem", alignSelf: "center" }}
+						>
+							{" "}
+							night
+						</span>
 					</div>
 				</div>
 			</div>
