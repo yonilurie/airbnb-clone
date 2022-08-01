@@ -269,6 +269,7 @@ const SingleRoomInfo = () => {
 							<div className="button-container">
 								<button
 									className="edit-btn"
+									style={{ marginRight: ".5rem" }}
 									onClick={() =>
 										history.push(`/rooms/${roomId}/edit`)
 									}
