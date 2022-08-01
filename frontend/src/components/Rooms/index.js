@@ -15,15 +15,13 @@ function Rooms() {
 	}, [dispatch]);
 
 	useEffect(() => {
-		if (document.title !== 'Airbnb Clone')
-		document.title = "Airbnb Clone";
+		if (document.title !== "Airbnb Clone") document.title = "Airbnb Clone";
 	}, []);
-	
 
 	useEffect(() => {
 		const timeout = setTimeout(() => {
 			setIsDisplayed(true);
-		}, 100);
+		}, 250);
 
 		return () => clearTimeout(timeout);
 	}, []);

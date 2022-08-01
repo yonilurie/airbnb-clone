@@ -9,7 +9,7 @@ import "./CSS/Bookings.css";
 const Bookings = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
-
+	const [isDisplayed, setIsDisplayed] = useState(false);
 	useEffect(() => {
 		dispatch(getAUsersBookings());
 	}, [dispatch]);
@@ -19,6 +19,14 @@ const Bookings = () => {
 
 	useEffect(() => {
 		if (document.title !== "My Trips") document.title = "My Trips";
+	}, []);
+
+	useEffect(() => {
+		const timeout = setTimeout(() => {
+			setIsDisplayed(true);
+		}, 300);
+
+		return () => clearTimeout(timeout);
 	}, []);
 
 	const bookings = Object.values(
@@ -72,7 +80,7 @@ const Bookings = () => {
 					</div>
 				</div>
 			)}
-			{bookings.length >= 1 && (
+			{bookings.length >= 1 && isDisplayed && (
 				<div>
 					{futureBookings.length >= 1 && (
 						<div>

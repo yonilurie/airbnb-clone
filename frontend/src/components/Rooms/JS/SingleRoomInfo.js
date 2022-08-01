@@ -13,18 +13,15 @@ const SingleRoomInfo = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const [showModal, setShowModal] = useState(false);
+
 	const sessionuser = useSelector((state) => state.session.user);
 	const { roomId } = useParams();
 	let currentRoom = useSelector((state) => state.currentRoom);
-	const [
-		isDisplayed,
-		//setIsDisplayed
-	] = useState(true);
+	const [isDisplayed, setIsDisplayed] = useState(false);
 
 	//Get room info, images, and reviews
 	useEffect(() => {
 		dispatch(getRoomInfo(Number(roomId)));
-		// setIsDisplayed(true);
 	}, [dispatch, roomId]);
 
 	useEffect(() => {
@@ -34,6 +31,14 @@ const SingleRoomInfo = () => {
 			document.body.style.overflow = "unset";
 		}
 	}, [showModal]);
+
+	useEffect(() => {
+		const timeout = setTimeout(() => {
+			setIsDisplayed(true);
+		}, 300);
+
+		return () => clearTimeout(timeout);
+	}, []);
 
 	if (isNaN(Number(roomId))) history.push("/");
 

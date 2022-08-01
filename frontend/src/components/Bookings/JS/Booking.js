@@ -5,7 +5,7 @@ import { getAUsersReviews } from "../../../store/session";
 
 const Booking = ({ booking, reviewDisabled }) => {
 	const session = useSelector((state) => state.session);
-	const dispatch = useDispatch();
+	// const dispatch = useDispatch();
 	// useEffect(() => {
 	// 	dispatch(getAUsersReviews());
 	// }, []);
