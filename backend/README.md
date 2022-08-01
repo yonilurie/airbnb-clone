@@ -1,4 +1,4 @@
-# Aribnb clone backend
+# Airbnb clone backend
 
 ## API Documentation
 
