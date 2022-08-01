@@ -79,6 +79,7 @@ function ReviewForm({ setShowModal }) {
 					className="modal-input"
 					value={review}
 					onChange={(e) => setReview(e.target.value)}
+
 					required
 				></textarea>
 

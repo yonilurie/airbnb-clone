@@ -36,6 +36,7 @@ h2 {
 	font-weight: 400;
 	color: #484848;
 	min-width: 300px;
+	max-width: 45rem;
 }
 
 .room-content {

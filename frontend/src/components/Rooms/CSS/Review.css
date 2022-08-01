@@ -19,7 +19,8 @@
 	max-width: 90%;
 }
 .review-content {
-	max-width: fit-content;
+	max-width: 25rem;
+	word-wrap: break-word;
 	max-height: fit-content;
 	white-space: normal;
 }
