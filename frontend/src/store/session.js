@@ -219,7 +219,7 @@ const sessionReducer = (state = initialState, action) => {
 
 		case GET_USER_REVIEWS: {
 			const reviews = {};
-			console.log(action.reviews)
+			
 			if (action.reviews.length) {
 				action.reviews.forEach((review) => {
 					reviews[review.id] = review;
@@ -275,7 +275,7 @@ const sessionReducer = (state = initialState, action) => {
 
 		case EDIT_REVIEW: {
 			newState = { ...state };
-			console.log(action.review);
+			
 			if (newState.reviews[action.review.id]) {
 				newState.reviews[action.review.id] = action.review;
 				return newState;

@@ -243,7 +243,7 @@ const SingleRoomInfo = () => {
 										)[0] === "object" &&
 										Object.values(currentRoom.Reviews).map(
 											(review) => {
-												console.log(review);
+												
 												return (
 													<Reviews
 														review={review}

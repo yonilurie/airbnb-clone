@@ -139,7 +139,7 @@ const EditRoomForm = () => {
 				Number(checkIfLocationTakenData.rooms[0].lng) !==
 					Number(currentRoom.lng)
 			) {
-				console.log(checkIfLocationTakenData)
+				
 				setValidationErrors([
 					"This location is already taken, Check latitude and longitude",
 				]);

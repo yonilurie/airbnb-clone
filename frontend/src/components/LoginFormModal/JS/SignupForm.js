@@ -19,7 +19,7 @@ function SignupForm({ setShowModal }) {
 	//On submit if errors are present, setErrors and they will be rendered to user
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		// console.log(email.split(".").at(-1));
+
 		if (
 			email.indexOf(".") === -1 ||
 			(email.length &&
@@ -43,7 +43,7 @@ function SignupForm({ setShowModal }) {
 					lastName,
 				})
 			).then((data) => {
-				console.log(data);
+	
 				if (data && data.errors) {
 					const errors = [];
 					errors.push(data.errors.email);
