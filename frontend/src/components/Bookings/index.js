@@ -72,7 +72,7 @@ const Bookings = () => {
 					</div>
 				</div>
 			)}
-			{bookings.length > 1 && (
+			{bookings.length >= 1 && (
 				<div>
 					{futureBookings.length >= 1 && (
 						<div>
@@ -85,7 +85,7 @@ const Bookings = () => {
 					)}
 
 					<div className="past-bookings-container">
-						<h2>Where you've been</h2>
+						<h2 style={{ marginTop: "2rem" }}>Where you've been</h2>
 						<div className="past-bookings">
 							{bookings &&
 								bookings[0] !== "No bookings yet" &&
