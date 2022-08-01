@@ -301,10 +301,9 @@ const sessionReducer = (state = initialState, action) => {
 				...state,
 				reviews: {
 					...state.reviews,
-					[action.reviewInfo.id]: { ...action.reviewInfo },
 				},
 			};
-
+			newState.reviews[action.reviewInfo.id] = { ...action.reviewInfo };
 			return newState;
 		}
 
@@ -321,9 +320,7 @@ const sessionReducer = (state = initialState, action) => {
 
 		case DELETE_REVIEW: {
 			newState = { ...state };
-						console.log('here')
 			if (newState.reviews[action.reviewId]) {
-	
 				delete newState.reviews[action.reviewId];
 			}
 			return newState;
