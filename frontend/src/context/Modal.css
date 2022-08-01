@@ -7,6 +7,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	max-width: 100%;
 }
 
 #modal-background {
@@ -15,13 +16,14 @@
 	right: 0;
 	left: 0;
 	bottom: 0;
-	background-color: rgba(0, 0, 0, 0.52)
+	background-color: rgba(0, 0, 0, 0.52);
 }
 
 #modal-content {
 	position: absolute;
 	background-color: white;
-  box-sizing: border-box;
+	box-sizing: border-box;
 	border-radius: 12px;
-  box-shadow: rgba(0, 0, 0, 0.12) 0px 2px 16px 0px;
+	box-shadow: rgba(0, 0, 0, 0.12) 0px 2px 16px 0px;
+	max-width: 100%;
 }

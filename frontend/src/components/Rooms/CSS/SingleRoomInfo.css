@@ -28,12 +28,14 @@ h2 {
 	border-bottom: solid 1px rgb(221, 221, 221);
 	padding: 1.25rem;
 	align-self: flex-start;
+	min-width: 300px;
 }
 
 .description {
 	font-size: 1rem;
 	font-weight: 400;
 	color: #484848;
+	min-width: 300px;
 }
 
 .room-content {
@@ -232,6 +234,7 @@ h2 {
 .room-owner-and-description {
 	margin-right: 10rem;
 	width: 100%;
+	min-width: 300px;
 }
 
 #reviews-modal-link {
@@ -242,4 +245,16 @@ h2 {
 #reviews-modal-link-inactive {
 	text-decoration: none;
 	cursor: default;
+}
+
+@media screen and (max-width: 1000px) {
+	.room-details-container {
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.room-owner-and-description {
+		margin: 0rem;
+	}
 }

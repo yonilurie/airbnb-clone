@@ -25,7 +25,7 @@ const Reviews = ({ review }) => {
 		<>
 			{review && (
 				<div className="review">
-					<div key={review.id} className="review-content">
+					<div key={review.id} className="review-content-container">
 						<div className="user-info">
 							<h3 className="review-user-name">
 								{review.User.firstName}

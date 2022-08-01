@@ -86,10 +86,11 @@ const EditReviewFormModal = ({ showModal, setShowModal, review }) => {
 				<div className="input-container">
 					{" "}
 					<div className="modal-input-label" hidden={!stars}>
-						Review
+						
 					</div>
 					<textarea
 						className="modal-input"
+						placeholder="Review"
 						value={reviewMessage}
 						onChange={(e) => setReviewMessage(e.target.value)}
 						required
