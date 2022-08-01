@@ -26,6 +26,7 @@ const SingleRoomInfo = () => {
 		dispatch(getRoomInfo(Number(roomId)));
 		// setIsDisplayed(true);
 	}, [dispatch, roomId]);
+
 	useEffect(() => {
 		if (showModal) {
 			document.body.style.overflow = "hidden";
@@ -33,11 +34,6 @@ const SingleRoomInfo = () => {
 			document.body.style.overflow = "unset";
 		}
 	}, [showModal]);
-
-	useEffect(() => {});
-	// useEffect(() => {
-	// 	dispatch(getARoomsBookings(Number(roomId)));
-	// }, [dispatch, roomId]);
 
 	if (isNaN(Number(roomId))) history.push("/");
 
@@ -243,7 +239,6 @@ const SingleRoomInfo = () => {
 										)[0] === "object" &&
 										Object.values(currentRoom.Reviews).map(
 											(review) => {
-												
 												return (
 													<Reviews
 														review={review}
