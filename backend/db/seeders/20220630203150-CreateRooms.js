@@ -103,7 +103,7 @@ module.exports = {
 					country: "United States",
 					lat: 22.0,
 					lng: 30.0,
-					name: "Jeff's house",
+					name: "Marvelous house",
 					description:
 						"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id augue sed neque euismod posuere. Nulla facilisi. Sed purus ligula, molestie vel condimentum et, rutrum et mi. Sed pretium id neque vel tempus. Suspendisse id dolor eu dolor rhoncus luctus eu eget nisl. Duis eget felis dapibus, convallis tellus sed, dictum quam. Proin quis urna sapien. Aenean posuere semper massa sit amet varius. Nullam faucibus auctor urna vel porttitor. Aenean ante lectus, elementum pharetra turpis eget, aliquam sodales libero. Quisque in nisl lobortis, faucibus elit a, hendrerit magna. Integer mollis, leo auctor rutrum sodales, nunc lacus auctor justo, et congue quam mauris at nisi. Integer laoreet nisl tellus, vitae vestibulum justo pretium ac. Vestibulum laoreet mauris et interdum dapibus. Nullam pellentesque mollis nulla, ut fermentum nisi ornare ut. Nunc vitae lectus ultrices, hendrerit mi fermentum, dapibus purus.",
 					price: 600.0,
