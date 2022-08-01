@@ -7,7 +7,7 @@ const Booking = ({ booking, reviewDisabled }) => {
 	const session = useSelector((state) => state.session);
 	const dispatch = useDispatch();
 	useEffect(() => {
-		dispatch(getAUsersReviews);
+		dispatch(getAUsersReviews());
 	}, []);
 
 	let hasReview;
