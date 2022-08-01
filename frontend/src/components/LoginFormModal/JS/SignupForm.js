@@ -147,6 +147,7 @@ function SignupForm({ setShowModal }) {
 						placeholder="First Name"
 						value={firstName}
 						onChange={(e) => setFirstName(e.target.value)}
+						required
 					/>
 				</div>
 
@@ -160,6 +161,7 @@ function SignupForm({ setShowModal }) {
 						placeholder="Last Name"
 						value={lastName}
 						onChange={(e) => setLastName(e.target.value)}
+						required
 					/>
 				</div>
 

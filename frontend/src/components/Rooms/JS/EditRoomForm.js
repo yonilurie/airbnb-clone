@@ -131,7 +131,7 @@ const EditRoomForm = () => {
 				`/api/rooms/search?minLat=${latitude}&maxLat=${latitude}&minLng=${longitude}&maxLng=${longitude}`
 			);
 			const checkIfLocationTakenData = await checkIfLocationTaken.json();
-			
+
 			if (
 				checkIfLocationTakenData.rooms.length > 0 &&
 				Number(checkIfLocationTakenData.rooms[0].lat) !==
@@ -139,7 +139,6 @@ const EditRoomForm = () => {
 				Number(checkIfLocationTakenData.rooms[0].lng) !==
 					Number(currentRoom.lng)
 			) {
-				
 				setValidationErrors([
 					"This location is already taken, Check latitude and longitude",
 				]);
@@ -219,6 +218,7 @@ const EditRoomForm = () => {
 							placeholder="City"
 							value={city}
 							onChange={(e) => setCity(e.target.value)}
+							required
 						></input>
 					</div>
 
@@ -234,6 +234,7 @@ const EditRoomForm = () => {
 									className="form-input"
 									id="state"
 									value={state}
+											required
 									onChange={(e) => setState(e.target.value)}
 								>
 									<option value="AL">Alabama</option>
@@ -302,6 +303,7 @@ const EditRoomForm = () => {
 							name="country"
 							value={country}
 							onChange={(e) => setCountry(e.target.value)}
+									required
 						>
 							<option value="United States">United States</option>
 						</select>

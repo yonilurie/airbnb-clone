@@ -162,6 +162,7 @@ const CreateRoomForm = () => {
 							placeholder="City"
 							value={city}
 							onChange={(e) => setCity(e.target.value)}
+							required
 						></input>
 					</div>
 
@@ -245,6 +246,7 @@ const CreateRoomForm = () => {
 							name="country"
 							value={country}
 							onChange={(e) => setCountry(e.target.value)}
+							required
 						>
 							<option value="United States">United States</option>
 						</select>
