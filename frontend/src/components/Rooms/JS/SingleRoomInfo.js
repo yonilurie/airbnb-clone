@@ -181,6 +181,9 @@ const SingleRoomInfo = () => {
 											{Object.values(currentRoom.Reviews)
 												.length > 0 && (
 												<span
+													style={{
+														marginLeft: ".25rem",
+													}}
 													id="reviews-modal-link"
 													onClick={() =>
 														setShowModal(true)
@@ -196,7 +199,12 @@ const SingleRoomInfo = () => {
 											)}
 											{Object.values(currentRoom.Reviews)
 												.length < 1 && (
-												<span id="reviews-modal-link-inactive">
+												<span
+													id="reviews-modal-link-inactive"
+													style={{
+														marginLeft: ".25rem",
+													}}
+												>
 													{Number(
 														Object.values(
 															currentRoom.Reviews

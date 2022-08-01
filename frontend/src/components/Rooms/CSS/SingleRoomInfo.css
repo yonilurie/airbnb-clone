@@ -217,13 +217,16 @@ h2 {
 	justify-content: center;
 	align-items: center;
 }
-
+.room-reviews-and-location {
+	margin-bottom: 1rem;
+}
 .room-reviews-and-location.in-price-card {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
 	width: 10rem;
+	margin-bottom: 0rem;
 }
 
 .room-owner-and-description {
@@ -234,4 +237,9 @@ h2 {
 #reviews-modal-link {
 	text-decoration: underline;
 	cursor: pointer;
+}
+
+#reviews-modal-link-inactive {
+	text-decoration: none;
+	cursor: default;
 }
