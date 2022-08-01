@@ -1,4 +1,4 @@
-# backend-project-airbnb
+# Airbnb clone backend
 
 ## API Documentation
 
