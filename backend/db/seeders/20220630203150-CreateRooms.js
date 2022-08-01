@@ -15,7 +15,7 @@ module.exports = {
 					lng: 122.47,
 					name: "App Academy",
 					description:
-						"Place where web developers are created, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id augue sed neque euismod posuere. Nulla facilisi. Sed purus ligula, molestie vel condimentum et, rutrum et mi. Sed pretium id neque vel tempus. Suspendisse id dolor eu dolor rhoncus luctus eu eget nisl. Duis eget felis dapibus, convallis tellus sed, dictum quam. Proin quis urna sapien. Aenean posuere semper massa sit amet varius. Nullam faucibus auctor urna vel porttitor. Aenean ante lectus, elementum pharetra turpis eget, aliquam sodales libero. Quisque in nisl lobortis, faucibus elit a, hendrerit magna. Integer mollis, leo auctor rutrum sodales, nunc lacus auctor justo, et congue quam mauris at nisi. Integer laoreet nisl tellus, vitae vestibulum justo pretium ac. Vestibulum laoreet mauris et interdum dapibus. Nullam pellentesque mollis nulla, ut fermentum nisi ornare ut. Nunc vitae lectus ultrices, hendrerit mi fermentum, dapibus purus.",
+						"Place where web developers are created, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id augue sed neque euismod posuere. Nulla facilisi. Sed purus ligula, molestie vel condimentum et, rutrum et mi. Sed pretium id neque vel tempus. Suspendisse id dolor eu dolor rhoncus luctus eu eget nisl. Duis eget felis dapibus, convallis tellus sed, dictum quam. Proin quis urna sapien. Aenean posuere semper massa sit amet varius. Nullam faucibus ",
 					price: 200.0,
 					previewImage:
 						"https://rew-online.com/wp-content/uploads/2019/05/90-fifth-avenue-ny-ny.jpg",
@@ -30,7 +30,7 @@ module.exports = {
 					lng: 102.47,
 					name: "App Academy Two",
 					description:
-						"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id augue sed neque euismod posuere. Nulla facilisi. Sed purus ligula, molestie vel condimentum et, rutrum et mi. Sed pretium id neque vel tempus. Suspendisse id dolor eu dolor rhoncus luctus eu eget nisl. Duis eget felis dapibus, convallis tellus sed, dictum quam. Proin quis urna sapien. Aenean posuere semper massa sit amet varius. Nullam faucibus auctor urna vel porttitor. Aenean ante lectus, elementum pharetra turpis eget, aliquam sodales libero. Quisque in nisl lobortis, faucibus elit a, hendrerit magna. Integer mollis, leo auctor rutrum sodales, nunc lacus auctor justo, et congue quam mauris at nisi. Integer laoreet nisl tellus, vitae vestibulum justo pretium ac. Vestibulum laoreet mauris et interdum dapibus. Nullam pellentesque mollis nulla, ut fermentum nisi ornare ut. Nunc vitae lectus ultrices, hendrerit mi fermentum, dapibus purus.",
+						"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id augue sed neque euismod posuere. Nulla facilisi. Sed purus ligula, molestie vel condimentum et, rutrum et mi. Sed pretium id neque vel tempus. Suspendisse id dolor eu dolor rhoncus luctus eu eget nisl. Duis eget felis dapibus, convallis tellus sed, dictum quam. Proin quis urna sapien. Aenean posuere semper massa sit amet varius. Nullam faucibus auctor urna vel porttitor. Aenean ante lectus, ",
 					price: 200.0,
 					previewImage:
 						"https://images.squarespace-cdn.com/content/53d8c957e4b0ba978ec957bc/1408893792999-OGR3EVJLW951EFYC9QA9/?format=1000w&content-type=image%2Fjpeg",
@@ -45,7 +45,7 @@ module.exports = {
 					lng: -122.34,
 					name: "Beautiful summer home",
 					description:
-						"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id augue sed neque euismod posuere. Nulla facilisi. Sed purus ligula, molestie vel condimentum et, rutrum et mi. Sed pretium id neque vel tempus. Suspendisse id dolor eu dolor rhoncus luctus eu eget nisl. Duis eget felis dapibus, convallis tellus sed, dictum quam. Proin quis urna sapien. Aenean posuere semper massa sit amet varius. Nullam faucibus auctor urna vel porttitor. Aenean ante lectus, elementum pharetra turpis eget, aliquam sodales libero. Quisque in nisl lobortis, faucibus elit a, hendrerit magna. Integer mollis, leo auctor rutrum sodales, nunc lacus auctor justo, et congue quam mauris at nisi. Integer laoreet nisl tellus, vitae vestibulum justo pretium ac. Vestibulum laoreet mauris et interdum dapibus. Nullam pellentesque mollis nulla, ut fermentum nisi ornare ut. Nunc vitae lectus ultrices, hendrerit mi fermentum, dapibus purus.",
+						"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id augue sed neque euismod posuere. Nulla facilisi. Sed purus ligula, molestie vel condimentum et, rutrum et mi. Sed pretium id neque vel tempus. Suspendisse id dolor eu dolor rhoncus luctus eu eget nisl. Duis eget felis dapibus, convallis tellus sed, dictum quam. Proin quis urna sapien. Aenean posuere semper massa sit amet varius. Nullam faucibus auctor urna vel porttitor. Aenean ante lectus, ",
 					price: 500.0,
 					previewImage:
 						"https://upload.wikimedia.org/wikipedia/commons/7/75/Rufus_Rand_Summer_House.jpg",
@@ -60,7 +60,7 @@ module.exports = {
 					lng: 20,
 					name: "Large home near on the outskirts of the city",
 					description:
-						"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id augue sed neque euismod posuere. Nulla facilisi. Sed purus ligula, molestie vel condimentum et, rutrum et mi. Sed pretium id neque vel tempus. Suspendisse id dolor eu dolor rhoncus luctus eu eget nisl. Duis eget felis dapibus, convallis tellus sed, dictum quam. Proin quis urna sapien. Aenean posuere semper massa sit amet varius. Nullam faucibus auctor urna vel porttitor. Aenean ante lectus, elementum pharetra turpis eget, aliquam sodales libero. Quisque in nisl lobortis, faucibus elit a, hendrerit magna. Integer mollis, leo auctor rutrum sodales, nunc lacus auctor justo, et congue quam mauris at nisi. Integer laoreet nisl tellus, vitae vestibulum justo pretium ac. Vestibulum laoreet mauris et interdum dapibus. Nullam pellentesque mollis nulla, ut fermentum nisi ornare ut. Nunc vitae lectus ultrices, hendrerit mi fermentum, dapibus purus.",
+						"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id augue sed neque euismod posuere. Nulla facilisi. Sed purus ligula, molestie vel condimentum et, rutrum et mi. Sed pretium id neque vel tempus. Suspendisse id dolor eu dolor rhoncus luctus eu eget nisl. Duis eget felis dapibus, convallis tellus sed, dictum quam. Proin quis urna sapien. Aenean posuere semper massa sit amet varius. Nullam faucibus auctor urna vel porttitor. Aenean ante lectus, ",
 					price: 500,
 					previewImage:
 						"https://californiahome.me/wp-content/uploads/2017/08/20170609_pm_5366_ca_0248-e1502129247173.jpg",
@@ -75,7 +75,7 @@ module.exports = {
 					lng: 14.0,
 					name: "Cozy Home near the city",
 					description:
-						"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id augue sed neque euismod posuere. Nulla facilisi. Sed purus ligula, molestie vel condimentum et, rutrum et mi. Sed pretium id neque vel tempus. Suspendisse id dolor eu dolor rhoncus luctus eu eget nisl. Duis eget felis dapibus, convallis tellus sed, dictum quam. Proin quis urna sapien. Aenean posuere semper massa sit amet varius. Nullam faucibus auctor urna vel porttitor. Aenean ante lectus, elementum pharetra turpis eget, aliquam sodales libero. Quisque in nisl lobortis, faucibus elit a, hendrerit magna. Integer mollis, leo auctor rutrum sodales, nunc lacus auctor justo, et congue quam mauris at nisi. Integer laoreet nisl tellus, vitae vestibulum justo pretium ac. Vestibulum laoreet mauris et interdum dapibus. Nullam pellentesque mollis nulla, ut fermentum nisi ornare ut. Nunc vitae lectus ultrices, hendrerit mi fermentum, dapibus purus.",
+						"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id augue sed neque euismod posuere. Nulla facilisi. Sed purus ligula, molestie vel condimentum et, rutrum et mi. Sed pretium id neque vel tempus. Suspendisse id dolor eu dolor rhoncus luctus eu eget nisl. Duis eget felis dapibus, convallis tellus sed, dictum quam. Proin quis urna sapien. Aenean posuere semper massa sit amet varius. Nullam faucibus auctor urna vel porttitor. Aenean ante lectus, ",
 					price: 190.0,
 					previewImage:
 						"https://seattlebusinessmag.com/sites/default/files/field/image/1--47954_25_1NEW.jpg",
@@ -90,7 +90,7 @@ module.exports = {
 					lng: 170,
 					name: "Seattle Mansion",
 					description:
-						"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id augue sed neque euismod posuere. Nulla facilisi. Sed purus ligula, molestie vel condimentum et, rutrum et mi. Sed pretium id neque vel tempus. Suspendisse id dolor eu dolor rhoncus luctus eu eget nisl. Duis eget felis dapibus, convallis tellus sed, dictum quam. Proin quis urna sapien. Aenean posuere semper massa sit amet varius. Nullam faucibus auctor urna vel porttitor. Aenean ante lectus, elementum pharetra turpis eget, aliquam sodales libero. Quisque in nisl lobortis, faucibus elit a, hendrerit magna. Integer mollis, leo auctor rutrum sodales, nunc lacus auctor justo, et congue quam mauris at nisi. Integer laoreet nisl tellus, vitae vestibulum justo pretium ac. Vestibulum laoreet mauris et interdum dapibus. Nullam pellentesque mollis nulla, ut fermentum nisi ornare ut. Nunc vitae lectus ultrices, hendrerit mi fermentum, dapibus purus.",
+						"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id augue sed neque euismod posuere. Nulla facilisi. Sed purus ligula, molestie vel condimentum et, rutrum et mi. Sed pretium id neque vel tempus. Suspendisse id dolor eu dolor rhoncus luctus eu eget nisl. Duis eget felis dapibus, convallis tellus sed, dictum quam. Proin quis urna sapien. Aenean posuere semper massa ",
 					price: 350.0,
 					previewImage:
 						"https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Seattle_-_Cotterill_House_04.jpg/800px-Seattle_-_Cotterill_House_04.jpg",
@@ -105,7 +105,7 @@ module.exports = {
 					lng: 30.0,
 					name: "Marvelous house",
 					description:
-						"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id augue sed neque euismod posuere. Nulla facilisi. Sed purus ligula, molestie vel condimentum et, rutrum et mi. Sed pretium id neque vel tempus. Suspendisse id dolor eu dolor rhoncus luctus eu eget nisl. Duis eget felis dapibus, convallis tellus sed, dictum quam. Proin quis urna sapien. Aenean posuere semper massa sit amet varius. Nullam faucibus auctor urna vel porttitor. Aenean ante lectus, elementum pharetra turpis eget, aliquam sodales libero. Quisque in nisl lobortis, faucibus elit a, hendrerit magna. Integer mollis, leo auctor rutrum sodales, nunc lacus auctor justo, et congue quam mauris at nisi. Integer laoreet nisl tellus, vitae vestibulum justo pretium ac. Vestibulum laoreet mauris et interdum dapibus. Nullam pellentesque mollis nulla, ut fermentum nisi ornare ut. Nunc vitae lectus ultrices, hendrerit mi fermentum, dapibus purus.",
+						"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id augue sed neque euismod posuere. Nulla facilisi. Sed purus ligula, molestie vel condimentum et, rutrum et mi. Sed pretium id neque vel tempus. Suspendisse id dolor eu dolor rhoncus luctus eu eget nisl. Duis eget felis dapibus, convallis tellus sed, dictum quam. Proin quis urna sapien. Aenean posuere semper massa ",
 					price: 600.0,
 					previewImage:
 						"https://ssl.cdn-redfin.com/system_files/media/623734_JPG/genDesktopMapHomeCardUrl/item_6.jpg",
@@ -120,7 +120,7 @@ module.exports = {
 					lng: 101.0,
 					name: "Alabama Estate",
 					description:
-						"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id augue sed neque euismod posuere. Nulla facilisi. Sed purus ligula, molestie vel condimentum et, rutrum et mi. Sed pretium id neque vel tempus. Suspendisse id dolor eu dolor rhoncus luctus eu eget nisl. Duis eget felis dapibus, convallis tellus sed, dictum quam. Proin quis urna sapien. Aenean posuere semper massa sit amet varius. Nullam faucibus auctor urna vel porttitor. Aenean ante lectus, elementum pharetra turpis eget, aliquam sodales libero. Quisque in nisl lobortis, faucibus elit a, hendrerit magna. Integer mollis, leo auctor rutrum sodales, nunc lacus auctor justo, et congue quam mauris at nisi. Integer laoreet nisl tellus, vitae vestibulum justo pretium ac. Vestibulum laoreet mauris et interdum dapibus. Nullam pellentesque mollis nulla, ut fermentum nisi ornare ut. Nunc vitae lectus ultrices, hendrerit mi fermentum, dapibus purus.",
+						"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id augue sed neque euismod posuere. Nulla facilisi. Sed purus ligula, molestie vel condimentum et, rutrum et mi. Sed pretium id neque vel tempus. Suspendisse id dolor eu dolor rhoncus luctus eu eget nisl. Duis eget felis dapibus, convallis tellus sed, dictum quam. Proin quis urna sapien. Aenean posuere semper massa ",
 					price: 330.0,
 					previewImage:
 						"https://cdn.homes.com/cgi-bin/readimage/b48296c128c55682a4627db2eac59bed/8543-twin-gables-dr-montgomery-al-36116-0.jpg",
