@@ -9,6 +9,7 @@ const CREATE_ROOM = "/api/rooms/add";
 const DELETE_MY_ROOM = "/api/my-rooms/delete";
 const GET_USER_BOOKINGS = "/api/bookings";
 const GET_USER_REVIEWS = "/api/reviews";
+const CREATE_ROOM_REVIEW = "/reviews/create";
 const EDIT_REVIEW = "/api/reviews/EDIT";
 const DELETE_REVIEW = "/api/reviews/DELETE";
 //Thunk actions
@@ -68,13 +69,19 @@ const editUserReview = (review) => {
 	};
 };
 
-const deleteReview = (id) => {
+const deleteReview = (reviewId) => {
 	return {
 		type: DELETE_REVIEW,
-		id,
+		reviewId,
 	};
 };
 
+const createARoomReview = (reviewInfo) => {
+	return {
+		type: CREATE_ROOM_REVIEW,
+		reviewInfo,
+	};
+};
 //Thunk action creators
 //
 //Logs in the user
@@ -203,6 +210,23 @@ export const createRoom = (room) => async (dispatch) => {
 	dispatch(createARoom(data));
 };
 
+//Create a review of a room, requires reviews as a JSON.stringify string and roomId
+export const createRoomReview = (reviewData) => async (dispatch) => {
+	const [roomId, review] = reviewData;
+
+	const response = await csrfFetch(`/api/rooms/${Number(roomId)}/reviews`, {
+		method: "POST",
+		headers: {
+			contentType: "application/json",
+		},
+		body: JSON.stringify(review),
+	});
+
+	const data = await response.json();
+
+	dispatch(createARoomReview(data));
+};
+
 //Initial state for session
 const initialState = { user: null, reviews: {}, bookings: {}, rooms: {} };
 
@@ -219,7 +243,7 @@ const sessionReducer = (state = initialState, action) => {
 
 		case GET_USER_REVIEWS: {
 			const reviews = {};
-			
+
 			if (action.reviews.length) {
 				action.reviews.forEach((review) => {
 					reviews[review.id] = review;
@@ -227,9 +251,8 @@ const sessionReducer = (state = initialState, action) => {
 			}
 			newState = {
 				...state,
-				
 			};
-			newState.reviews = reviews
+			newState.reviews = reviews;
 
 			return newState;
 		}
@@ -273,9 +296,21 @@ const sessionReducer = (state = initialState, action) => {
 			return newState;
 		}
 
+		case CREATE_ROOM_REVIEW: {
+			newState = {
+				...state,
+				reviews: {
+					...state.reviews,
+					[action.reviewInfo.id]: { ...action.reviewInfo },
+				},
+			};
+
+			return newState;
+		}
+
 		case EDIT_REVIEW: {
 			newState = { ...state };
-			
+
 			if (newState.reviews[action.review.id]) {
 				newState.reviews[action.review.id] = action.review;
 				return newState;
@@ -286,8 +321,10 @@ const sessionReducer = (state = initialState, action) => {
 
 		case DELETE_REVIEW: {
 			newState = { ...state };
-			if (newState.reviews[action.id]) {
-				delete newState.reviews[action.id];
+						console.log('here')
+			if (newState.reviews[action.reviewId]) {
+	
+				delete newState.reviews[action.reviewId];
 			}
 			return newState;
 		}

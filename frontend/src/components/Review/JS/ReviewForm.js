@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { createRoomReview, getRoomInfo } from "../../../store/CurrentRoom";
+import { getRoomInfo } from "../../../store/CurrentRoom";
+import { createRoomReview } from "../../../store/session";
 
 function ReviewForm({ setShowModal }) {
 	const history = useHistory();
@@ -33,9 +34,11 @@ function ReviewForm({ setShowModal }) {
 		const reviewData = { review, stars };
 
 		if (!validationErrors.length) {
-			await dispatch(createRoomReview([roomId, JSON.stringify(reviewData)]));
-			dispatch(getRoomInfo(roomId))
-			
+			await dispatch(
+				createRoomReview([roomId, JSON.stringify(reviewData)])
+			);
+			dispatch(getRoomInfo(roomId));
+
 			history.push(`/rooms/${roomId}`);
 		}
 

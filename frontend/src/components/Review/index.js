@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useParams, useHistory, Redirect, NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createRoomReview } from "../../store/CurrentRoom";
-import { deleteRoomReview, getRoomInfo } from "../../store/CurrentRoom";
+import {  getRoomInfo } from "../../store/CurrentRoom";
+import { deleteAReview } from "../../store/session";
 import { getAUsersReviews } from "../../store/session";
 import Reviews from "../Rooms/JS/Reviews";
 import EditReviewModal from "./JS/EditReviewModal";
@@ -68,7 +69,7 @@ function CreateReview() {
 	const deleteReview = (e) => {
 		e.preventDefault();
 
-		dispatch(deleteRoomReview(usersReview.id));
+		dispatch(deleteAReview(usersReview.id));
 		history.push(`/trips`);
 	};
 
