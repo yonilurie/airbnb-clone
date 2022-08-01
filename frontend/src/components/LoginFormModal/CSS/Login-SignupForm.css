@@ -16,10 +16,11 @@ ul {
 .modal-body {
 	box-sizing: border-box;
 	width: 35.5rem;
-	height: 42.625rem;
+	height: 45.625rem;
 	display: flex;
 	align-items: center;
 	flex-direction: column;
+	/* max-height: fit-content; */
 }
 
 .modal-body.login {

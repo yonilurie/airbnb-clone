@@ -95,3 +95,4 @@ Under the users past bookings theire are buttons to leave or edit a review whcih
 Clicking on the <b>Add review</b> or <b>Edit review</b>button will take the user to /review-room/:roomId
 
 ![Submit review](./images/submit-review.png)
+

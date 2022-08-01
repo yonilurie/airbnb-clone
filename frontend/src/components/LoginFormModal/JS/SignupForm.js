@@ -20,19 +20,6 @@ function SignupForm({ setShowModal }) {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		if (
-			email.indexOf(".") === -1 ||
-			(email.length &&
-				email.indexOf(".") &&
-				email.split(".").at(-1).length === 1)
-		) {
-			const errors = [];
-			errors.push("Please enter a valid email");
-			setValidationErrors(errors);
-			setIsLoaded(true);
-			return;
-		}
-
 		if (password === confirmPassword && !validationErrors.length > 0) {
 			const trySignup = await dispatch(
 				sessionActions.signup({
@@ -43,7 +30,6 @@ function SignupForm({ setShowModal }) {
 					lastName,
 				})
 			).then((data) => {
-	
 				if (data && data.errors) {
 					const errors = [];
 					errors.push(data.errors.email);
@@ -76,6 +62,15 @@ function SignupForm({ setShowModal }) {
 			);
 		}
 
+		if (
+			email.indexOf(".") === -1 ||
+			(email.length &&
+				email.indexOf(".") &&
+				email.split(".").at(-1).length === 1)
+		) {
+			errors.push("Please enter a valid email");
+		}
+
 		if (username.length < 4 || username.length > 30) {
 			errors.push("Username must be between 4 and 30 characters");
 		}
@@ -83,8 +78,15 @@ function SignupForm({ setShowModal }) {
 		if (errors.length === 0) {
 			setIsLoaded(false);
 		}
+
+		if (firstName.length < 1) {
+			errors.push("Please enter a first name");
+		}
+		if (lastName.length < 1) {
+			errors.push("Please enter a last name");
+		}
 		setValidationErrors(errors);
-	}, [email, username, password, confirmPassword]);
+	}, [email, username, password, confirmPassword, firstName, lastName]);
 
 	return (
 		<div className="modal-body signup">
