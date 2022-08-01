@@ -88,6 +88,8 @@ const CreateRoomForm = () => {
 			if (checkIfLocationTakenData.rooms.length > 0) {
 				setValidationErrors(["This location is already taken"]);
 				setIsLoaded(true);
+				document.body.scrollTop = 0;
+				document.documentElement.scrollTop = 0;
 				return;
 			}
 
@@ -106,6 +108,8 @@ const CreateRoomForm = () => {
 			//Redirect user to home page
 			history.push("/my-rooms");
 		} else {
+			document.body.scrollTop = 0;
+			document.documentElement.scrollTop = 0;
 			setIsLoaded(true);
 		}
 	};

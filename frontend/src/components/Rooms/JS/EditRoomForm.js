@@ -143,6 +143,8 @@ const EditRoomForm = () => {
 					"This location is already taken, Check latitude and longitude",
 				]);
 				setIsLoaded(true);
+				document.body.scrollTop = 0;
+				document.documentElement.scrollTop = 0;
 				return;
 			}
 
@@ -162,6 +164,8 @@ const EditRoomForm = () => {
 			//Redirect user to home page
 			history.push(`/rooms/${roomId}`);
 		} else {
+			document.body.scrollTop = 0;
+			document.documentElement.scrollTop = 0;
 			setIsLoaded(true);
 		}
 	};
@@ -234,7 +238,7 @@ const EditRoomForm = () => {
 									className="form-input"
 									id="state"
 									value={state}
-											required
+									required
 									onChange={(e) => setState(e.target.value)}
 								>
 									<option value="AL">Alabama</option>
@@ -303,7 +307,7 @@ const EditRoomForm = () => {
 							name="country"
 							value={country}
 							onChange={(e) => setCountry(e.target.value)}
-									required
+							required
 						>
 							<option value="United States">United States</option>
 						</select>
