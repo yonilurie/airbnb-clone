@@ -75,15 +75,14 @@ function SignupForm({ setShowModal }) {
 			errors.push("Username must be between 4 and 30 characters");
 		}
 
-		if (errors.length === 0) {
-			setIsLoaded(false);
-		}
-
 		if (firstName.length < 1) {
 			errors.push("Please enter a first name");
 		}
 		if (lastName.length < 1) {
 			errors.push("Please enter a last name");
+		}
+		if (errors.length === 0) {
+			setIsLoaded(false);
 		}
 		setValidationErrors(errors);
 	}, [email, username, password, confirmPassword, firstName, lastName]);
