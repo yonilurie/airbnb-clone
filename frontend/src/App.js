@@ -20,7 +20,15 @@ function App() {
 	}, [dispatch]);
 
 	return (
-		< div className="content-container" style={{display:"flex", flexDirection:'column', justifyContent:"center", alignItems:"center"}}>
+		<div
+			className="content-container"
+			style={{
+				display: "flex",
+				flexDirection: "column",
+				justifyContent: "center",
+				alignItems: "center",
+			}}
+		>
 			<Navigation isLoaded={isLoaded} />
 			{isLoaded && (
 				<Switch>
@@ -47,11 +55,11 @@ function App() {
 						<CreateReview></CreateReview>
 					</Route>
 					<Route>
-						<div>404: PAGE NOT FOUND</div>
+						<Rooms></Rooms>
 					</Route>
 				</Switch>
 			)}
-		</ div>
+		</div>
 	);
 }
 
