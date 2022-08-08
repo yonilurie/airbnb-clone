@@ -24,7 +24,7 @@ const Reviews = ({ review }) => {
 					<div key={review.id} className="review-content-container">
 						<div className="user-info">
 							<h3 className="review-user-name">
-								{review.User.firstName}
+								{review.guest.firstName}
 							</h3>
 							<div className="Date">
 								{reviewMonth} {year}

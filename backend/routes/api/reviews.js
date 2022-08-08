@@ -118,16 +118,14 @@ router.get("/", [restoreUser, requireAuth], async (req, res) => {
 		include: [
 			{
 				model: User,
+				as: "guest",
 				attributes: ["id", "firstName", "lastName"],
 			},
 			{
 				model: Room,
-				attributes: [
-					"id",
-					"ownerId",
-				],
+				as:'room',
+				attributes: ["id", "ownerId"],
 			},
-
 			{
 				model: UserReviewImage,
 				as: "images",

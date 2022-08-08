@@ -472,6 +472,7 @@ router.post(
 			include: [
 				{
 					model: User,
+					as: 'guest'
 				},
 			],
 		});
@@ -591,6 +592,7 @@ router.get("/:roomId", validateRoomId, async (req, res) => {
 				include: [
 					{
 						model: User,
+						as: 'guest',
 						attributes: ["id", "firstName", "lastName"],
 					},
 				],
