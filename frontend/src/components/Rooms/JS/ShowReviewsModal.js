@@ -3,7 +3,7 @@ import Reviews from "./Reviews";
 import "../CSS/ReviewsModal.css";
 const ShowReviewsModal = ({ setShowModal, currentRoom }) => {
 	const reviews = Object.values(
-		useSelector((state) => state.currentRoom.Reviews)
+		useSelector((state) => state.currentRoom.reviews)
 	);
 	return (
 		<div className="modal-body reviews-container">
@@ -17,7 +17,7 @@ const ShowReviewsModal = ({ setShowModal, currentRoom }) => {
 				<div className="ratings-container">
 					★{Number(currentRoom.avgStarRating).toFixed(2)}
 					{" · "}
-					{Number(Object.values(currentRoom.Reviews).length)}{" "}
+					{Number(Object.values(currentRoom.reviews).length)}{" "}
 					review(s)
 				</div>
 				<div className="modal-reviews-list-container">

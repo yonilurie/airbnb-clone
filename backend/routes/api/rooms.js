@@ -587,7 +587,7 @@ router.get("/:roomId", validateRoomId, async (req, res) => {
 			},
 			{
 				model: Review,
-				as: "Reviews",
+				as: "reviews",
 				include: [
 					{
 						model: User,

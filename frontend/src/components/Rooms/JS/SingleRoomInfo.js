@@ -117,7 +117,7 @@ const SingleRoomInfo = () => {
 										>
 											{Number(
 												Object.values(
-													currentRoom.Reviews
+													currentRoom.reviews
 												).length
 											)}{" "}
 											review(s)
@@ -179,7 +179,7 @@ const SingleRoomInfo = () => {
 												currentRoom.avgStarRating
 											).toFixed(2)}
 											{" · "}
-											{Object.values(currentRoom.Reviews)
+											{Object.values(currentRoom.reviews)
 												.length > 0 && (
 												<span
 													style={{
@@ -192,13 +192,13 @@ const SingleRoomInfo = () => {
 												>
 													{Number(
 														Object.values(
-															currentRoom.Reviews
+															currentRoom.reviews
 														).length
 													)}{" "}
 													review(s)
 												</span>
 											)}
-											{Object.values(currentRoom.Reviews)
+											{Object.values(currentRoom.reviews)
 												.length < 1 && (
 												<span
 													id="reviews-modal-link-inactive"
@@ -208,7 +208,7 @@ const SingleRoomInfo = () => {
 												>
 													{Number(
 														Object.values(
-															currentRoom.Reviews
+															currentRoom.reviews
 														).length
 													)}{" "}
 													review(s)
@@ -219,7 +219,7 @@ const SingleRoomInfo = () => {
 								</div>
 							</div>
 						</div>
-						{Object.values(currentRoom.Reviews).length > 0 && (
+						{Object.values(currentRoom.reviews).length > 0 && (
 							<div className="reviews-container">
 								{currentRoom.avgStarRating >= 1 && (
 									<h2 className="reviews-overview">
@@ -229,7 +229,7 @@ const SingleRoomInfo = () => {
 										).toFixed(2)}
 										{" · "}
 										{Number(
-											Object.values(currentRoom.Reviews)
+											Object.values(currentRoom.reviews)
 												.length
 										)}{" "}
 										review(s)
@@ -237,12 +237,12 @@ const SingleRoomInfo = () => {
 								)}
 
 								<div className="reviews">
-									{Object.values(currentRoom.Reviews).length >
+									{Object.values(currentRoom.reviews).length >
 										0 &&
 										typeof Object.values(
-											currentRoom.Reviews
+											currentRoom.reviews
 										)[0] === "object" &&
-										Object.values(currentRoom.Reviews).map(
+										Object.values(currentRoom.reviews).map(
 											(review) => {
 												return (
 													<Reviews
@@ -253,7 +253,7 @@ const SingleRoomInfo = () => {
 											}
 										)}
 
-									{!Object.values(currentRoom.Reviews)
+									{!Object.values(currentRoom.reviews)
 										.length && (
 										<div className="no-reviews-placeholder">
 											No Reviews

@@ -121,13 +121,13 @@ const singleRoomReducer = (state = initialState, action) => {
 		case GET_SPECIFIC_ROOM: {
 			newState = { ...action.room };
 			const reviews = {};
-			if (newState.Reviews) {
-				newState.Reviews.forEach((review) => {
+			if (newState.reviews) {
+				newState.reviews.forEach((review) => {
 					reviews[review.id] = review;
 				});
 			}
 
-			newState.Reviews = reviews;
+			newState.reviews = reviews;
 
 			return newState;
 		}
