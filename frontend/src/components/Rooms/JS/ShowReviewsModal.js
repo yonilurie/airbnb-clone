@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Reviews from "./Reviews";
 import "../CSS/ReviewsModal.css";
-const ShowReviewsModal = ({ showModal, setShowModal, currentRoom }) => {
-    
+const ShowReviewsModal = ({ setShowModal, currentRoom }) => {
 	const reviews = Object.values(
 		useSelector((state) => state.currentRoom.Reviews)
 	);

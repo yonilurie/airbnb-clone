@@ -37,12 +37,10 @@ const EditReviewFormModal = ({ showModal, setShowModal, review }) => {
 		if (validationErrors.length === 0) {
 			dispatch(editAUsersReview([review.id, newReview]));
 			dispatch(getRoomInfo(roomId));
-
 			setShowModal(false);
 			history.push(`/rooms/${roomId}`);
 			return;
 		}
-
 		setIsSubmitted(true);
 	};
 

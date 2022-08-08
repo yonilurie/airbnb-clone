@@ -3,24 +3,16 @@ import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import LoginFormModal from "../../LoginFormModal";
-import SessionLinks from "./SessionLinks";
 
 import * as sessionActions from "../../../store/session";
 import "../CSS/ProfileButton.css";
 
 function ProfileButton({ user }) {
 	const dispatch = useDispatch();
-	// const sessionuser = useSelector((state) => state.session.user);
 	//State
 	const [showMenu, setShowMenu] = useState(false);
 	const [showModal, setShowModal] = useState(false);
 	const [interaction, setInteraction] = useState();
-
-	//Toggles for showing menu
-	const openMenu = () => {
-		if (showMenu) return;
-		setShowMenu(true);
-	};
 
 	useEffect(() => {
 		if (!showMenu) return;
@@ -29,12 +21,6 @@ function ProfileButton({ user }) {
 		return () => document.removeEventListener("click", closeMenu);
 	}, [showMenu]);
 
-	//Logout functionality
-	const logout = (e) => {
-		e.preventDefault();
-		dispatch(sessionActions.logout());
-	};
-
 	useEffect(() => {
 		if (showModal) {
 			document.body.style.overflow = "hidden";
@@ -42,6 +28,17 @@ function ProfileButton({ user }) {
 			document.body.style.overflow = "unset";
 		}
 	}, [showModal]);
+
+	//Logout functionality
+	const logout = (e) => {
+		e.preventDefault();
+		dispatch(sessionActions.logout());
+	};
+	//Toggles for showing menu
+	const openMenu = () => {
+		if (showMenu) return;
+		setShowMenu(true);
+	};
 
 	return (
 		<>
@@ -108,10 +105,20 @@ function ProfileButton({ user }) {
 								>
 									Log in
 								</div>
-								<SessionLinks
-									showModal={showModal}
-									setShowModal={setShowModal}
-								/>
+								<div
+									className="profile-button-options"
+									style={{ fontWeight: "600" }}
+									onClick={() =>
+										dispatch(
+											sessionActions.login({
+												credential: "Demo-lition",
+												password: "password",
+											})
+										)
+									}
+								>
+									Demo
+								</div>
 								<div
 									className="profile-button-options signup"
 									onClick={() => {

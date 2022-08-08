@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useHistory, Redirect, NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createRoomReview } from "../../store/CurrentRoom";
-import {  getRoomInfo } from "../../store/CurrentRoom";
+import { getRoomInfo } from "../../store/CurrentRoom";
 import { deleteAReview } from "../../store/session";
 import { getAUsersReviews } from "../../store/session";
 import Reviews from "../Rooms/JS/Reviews";
@@ -25,10 +25,6 @@ function CreateReview() {
 		dispatch(getAUsersReviews());
 	}, [dispatch]);
 
-	const myReviews = Object.values(
-		useSelector((state) => state.session.reviews)
-	);
-
 	//Form validation
 	useEffect(() => {
 		const errors = [];
@@ -43,6 +39,10 @@ function CreateReview() {
 		setValidationErrors(errors);
 	}, [stars, review, dispatch]);
 
+	const myReviews = Object.values(
+		useSelector((state) => state.session.reviews)
+	);
+
 	const sessionuser = useSelector((state) => state.session.user);
 	if (!sessionuser) return <Redirect to="/" />;
 
@@ -54,21 +54,17 @@ function CreateReview() {
 	//On submit if errors are present, setErrors and they will be rendered to user
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-
 		const reviewData = { review, stars };
 
 		if (!validationErrors.length) {
 			dispatch(createRoomReview([roomId, reviewData]));
-
 			history.push(`/rooms/${roomId}`);
 		}
-
 		setIsSubmitted(true);
 	};
 
 	const deleteReview = (e) => {
 		e.preventDefault();
-
 		dispatch(deleteAReview(usersReview.id));
 		history.push(`/trips`);
 	};

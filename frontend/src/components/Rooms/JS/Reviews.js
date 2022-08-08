@@ -1,10 +1,6 @@
-import { useSelector } from "react-redux";
 import "../CSS/Review.css";
 const Reviews = ({ review }) => {
-
-
 	const [year, month] = review.createdAt.split("-");
-
 	const months = [
 		"January",
 		"February",

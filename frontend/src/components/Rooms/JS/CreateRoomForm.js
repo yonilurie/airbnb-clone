@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 
 import { createRoom } from "../../../store/session";
-import { getRooms } from "../../../store/rooms";
 import "../CSS/RoomForm.css";
 
 const CreateRoomForm = () => {
@@ -77,8 +76,6 @@ const CreateRoomForm = () => {
 			price,
 			previewImage,
 		};
-
-		// dispatch(getRooms());
 
 		if (!validationErrors.length) {
 			const checkIfLocationTaken = await fetch(

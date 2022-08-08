@@ -5,9 +5,7 @@ import { useHistory, useParams } from "react-router-dom";
 import "../CSS/SingleRoom.css";
 
 function SingleRoom({ room }) {
-	const dispatch = useDispatch();
 	const history = useHistory();
-	const { roomId } = useParams();
 
 	//Redirects user to room they click on
 	const showRoomDetails = (e) => {

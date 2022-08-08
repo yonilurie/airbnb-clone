@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 
-import { getRoomInfo, getARoomsBookings } from "../../../store/CurrentRoom";
+import { getRoomInfo} from "../../../store/CurrentRoom";
 import { deleteARoom, getMyRoomsData } from "../../../store/session";
 import Reviews from "./Reviews";
 

@@ -32,16 +32,16 @@ const EditRoomForm = () => {
 	useEffect(() => {
 		setIsLoaded(false);
 	}, []);
+
 	useEffect(() => {
 		if (document.title !== "Edit your Room")
 			document.title = "Edit your Room";
 	}, []);
+
 	//Get the info of the current room
 	useEffect(() => {
 		dispatch(getRoomInfo(roomId));
 	}, [dispatch, roomId]);
-
-	//Assign current room to variable
 
 	//Once room is loaded update state with the rooms information
 	//This information will now show up in the form inputs

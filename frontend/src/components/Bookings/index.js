@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { Redirect, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+
 import { getAUsersBookings } from "../../store/session";
 import { getAUsersReviews } from "../../store/session";
+
 import Booking from "./JS/Booking";
 import "./CSS/Bookings.css";
 
@@ -10,9 +12,11 @@ const Bookings = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const [isDisplayed, setIsDisplayed] = useState(false);
+
 	useEffect(() => {
 		dispatch(getAUsersBookings());
 	}, [dispatch]);
+
 	useEffect(() => {
 		dispatch(getAUsersReviews());
 	}, [dispatch]);
