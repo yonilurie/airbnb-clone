@@ -149,8 +149,8 @@ const singleRoomReducer = (state = initialState, action) => {
 		case CREATE_ROOM_REVIEW: {
 			newState = {
 				...state,
-				Reviews: {
-					...state.Reviews,
+				reviews: {
+					...state.reviews,
 					[action.reviewInfo.id]: { ...action.reviewInfo },
 				},
 			};
@@ -160,18 +160,18 @@ const singleRoomReducer = (state = initialState, action) => {
 		case EDIT_ROOM_REVIEW: {
 			newState = { ...state };
 
-			newState.Reviews[action.review.id] = action.review;
+			newState.reviews[action.review.id] = action.review;
 
 			return newState;
 		}
 		case DELETE_ROOM_REVIEW: {
 			newState = { ...state };
 
-			for (const key in newState.Reviews) {
+			for (const key in newState.reviews) {
 				if (
-					Number(newState.Reviews[key].id) === Number(action.reviewId)
+					Number(newState.reviews[key].id) === Number(action.reviewId)
 				) {
-					delete newState.Reviews[key];
+					delete newState.reviews[key];
 					return newState;
 				}
 			}
