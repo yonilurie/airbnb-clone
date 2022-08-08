@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
 			// define association here
 			Room.belongsTo(models.User, {
 				foreignKey: "ownerId",
-				as: "Owner",
+				as: "owner",
 			});
 			Room.hasMany(models.Booking, { foreignKey: "roomId" });
 			Room.hasMany(models.Review, { foreignKey: "roomId" });

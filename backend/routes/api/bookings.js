@@ -139,7 +139,7 @@ router.get("/", [restoreUser, requireAuth], async (req, res) => {
 				include: [
 					{
 						model: User,
-						as: "Owner",
+						as: "owner",
 						attributes: ["firstName"],
 					},
 				],

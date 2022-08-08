@@ -151,7 +151,7 @@ const SingleRoomInfo = () => {
 								<>
 									<h2>
 										Entire home hosted by{" "}
-										{currentRoom.Owner.firstName}
+										{currentRoom.owner.firstName}
 									</h2>
 								</>
 

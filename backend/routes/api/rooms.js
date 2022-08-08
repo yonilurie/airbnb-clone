@@ -582,7 +582,7 @@ router.get("/:roomId", validateRoomId, async (req, res) => {
 			},
 			{
 				model: User,
-				as: "Owner",
+				as: "owner",
 				attributes: ["id", "firstName", "lastName"],
 			},
 			{

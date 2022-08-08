@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
 			User.hasMany(models.Room, {
 				foreignKey: "ownerId",
 				hooks: true,
-				as: "Owner",
+				as: "owner",
 			});
 			User.hasMany(models.Booking, { foreignKey: "userId" });
 			User.hasMany(models.Review, { foreignKey: "userId" });
