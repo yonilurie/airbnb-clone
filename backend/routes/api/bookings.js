@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { requireAuth, restoreUser } = require("../../utils/auth");
 const { handleValidationErrors } = require("../../utils/validation");
-const { Booking, Room , User} = require("../../db/models");
+const { Booking, Room, User } = require("../../db/models");
 const { check } = require("express-validator");
 const { param } = require("express-validator");
 const { Op } = require("sequelize");
@@ -131,11 +131,8 @@ router.get("/", [restoreUser, requireAuth], async (req, res) => {
 		include: [
 			{
 				model: Room,
-				attributes: [
-					"id",
-					"city",
-					"previewImage",
-				],
+				as: "room",
+				attributes: ["id", "city", "previewImage"],
 				include: [
 					{
 						model: User,

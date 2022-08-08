@@ -57,24 +57,24 @@ const Booking = ({ booking, reviewDisabled }) => {
 
 	return (
 		<div className="single-booking-container">
-			<NavLink to={`/rooms/${booking.Room.id}`} className="booking">
+			<NavLink to={`/rooms/${booking.room.id}`} className="booking">
 				<div className="booking-image">
 					<img
-						src={booking.Room.previewImage}
+						src={booking.room.previewImage}
 						alt="preview"
 						className="preview-image"
 					></img>
 				</div>
 				<div className="booking-info">
-					<div className="city">{booking.Room.city}</div>
+					<div className="city">{booking.room.city}</div>
 					<div className="owner">
-						Hosted by {booking.Room.owner.firstName}
+						Hosted by {booking.room.owner.firstName}
 					</div>
 					<div className="duration">{bookingDuration.join(" ")}</div>
 				</div>
 			</NavLink>
 			{!reviewDisabled && (
-				<NavLink to={`/review-room/${booking.Room.id}`}>
+				<NavLink to={`/review-room/${booking.room.id}`}>
 					<button className="review-btn">{buttonMsg}</button>
 				</NavLink>
 			)}
