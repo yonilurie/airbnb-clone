@@ -133,22 +133,14 @@ router.get("/", [restoreUser, requireAuth], async (req, res) => {
 				model: Room,
 				attributes: [
 					"id",
-					"ownerId",
-					"address",
 					"city",
-					"state",
-					"country",
-					"lat",
-					"lng",
-					"name",
-					"price",
 					"previewImage",
 				],
 				include: [
 					{
 						model: User,
 						as: "Owner",
-						attributes: ["id", "firstName", "lastName"],
+						attributes: ["firstName"],
 					},
 				],
 			},

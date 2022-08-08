@@ -619,7 +619,20 @@ router.get("/:roomId", validateRoomId, async (req, res) => {
 
 //Get all Rooms
 router.get("/", async (req, res) => {
-	const rooms = await Room.findAll({});
+	const rooms = await Room.findAll({
+		attributes: [
+			"id",
+			"city",
+			"state",
+			"country",
+			"lat",
+			"lng",
+			"name",
+			"description",
+			"price",
+			"previewImage",
+		],
+	});
 
 	for (let i = 0; i < rooms.length; i++) {
 		let reviewInfo = await Review.findAll({

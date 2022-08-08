@@ -125,14 +125,6 @@ router.get("/", [restoreUser, requireAuth], async (req, res) => {
 				attributes: [
 					"id",
 					"ownerId",
-					"address",
-					"city",
-					"state",
-					"country",
-					"lat",
-					"lng",
-					"name",
-					"price",
 				],
 			},
 
