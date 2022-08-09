@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 
-import { getRoomInfo} from "../../../store/CurrentRoom";
+import { getRoomInfo } from "../../../store/CurrentRoom";
 import { deleteARoom, getMyRoomsData } from "../../../store/session";
 import Reviews from "./Reviews";
 
@@ -33,11 +33,15 @@ const SingleRoomInfo = () => {
 	}, [showModal]);
 
 	useEffect(() => {
-		const timeout = setTimeout(() => {
+		console.log(currentRoom.id, roomId);
+		if (currentRoom.id !== Number(roomId)) {
+			const timeout = setTimeout(() => {
+				setIsDisplayed(true);
+			}, 300);
+			return () => clearTimeout(timeout);
+		} else {
 			setIsDisplayed(true);
-		}, 300);
-
-		return () => clearTimeout(timeout);
+		}
 	}, []);
 
 	if (isNaN(Number(roomId))) history.push("/");
