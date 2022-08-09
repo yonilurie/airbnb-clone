@@ -19,11 +19,15 @@ function Rooms() {
 	}, []);
 
 	useEffect(() => {
-		const timeout = setTimeout(() => {
-			setIsDisplayed(true);
-		}, 250);
+		if (!rooms.length) {
+			const timeout = setTimeout(() => {
+				setIsDisplayed(true);
+			}, 250);
 
-		return () => clearTimeout(timeout);
+			return () => clearTimeout(timeout);
+		} else {
+			setIsDisplayed(true);
+		}
 	}, []);
 
 	return (
