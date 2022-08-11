@@ -42,6 +42,27 @@
 	min-width: 300px;
 }
 
+.booking-info {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+.choose-dates-container {
+	display: flex;
+	justify-content: space-between;
+	border: solid 1px grey;
+	border-top-right-radius: 12px;
+	border-top-left-radius: 12px;
+}
+.check-in {
+	display: flex;
+	flex-direction: column;
+}
+.check-out {
+	display: flex;
+	flex-direction: column;
+}
+
 #reviews-modal-link {
 	text-decoration: underline;
 	cursor: pointer;

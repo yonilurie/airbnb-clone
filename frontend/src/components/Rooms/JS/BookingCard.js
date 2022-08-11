@@ -1,6 +1,10 @@
 import "../CSS/BookingCard.css";
 
 const BookingCard = ({ currentRoom, setShowModal }) => {
+	let startDate = new Date().toISOString().slice(0, 10);
+	let endDate = new Date();
+	endDate.setDate(Number(endDate.getDate()) + 5);
+	endDate = endDate.toISOString().slice(0, 10);
 	return (
 		<div className="room-price-card-container">
 			<div className="room-price-card">
@@ -43,6 +47,19 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 							</span>
 						)}
 					</div>
+				</div>
+				<div className="booking-info">
+					<div className="choose-dates-container">
+						<div className="check-in">
+							<label>Check in</label>
+							<input type="date" defaultValue={startDate}></input>
+						</div>
+						<div className="check-out">
+							<label>Checkout</label>
+							<input type="date" defaultValue={endDate}></input>
+						</div>
+					</div>
+					<div className="guests">guests</div>
 				</div>
 			</div>
 		</div>
