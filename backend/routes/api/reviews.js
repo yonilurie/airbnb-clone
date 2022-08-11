@@ -3,7 +3,6 @@ const { requireAuth, restoreUser } = require("../../utils/auth");
 const { handleValidationErrors } = require("../../utils/validation");
 const { Room, User, Review, UserReviewImage } = require("../../db/models");
 const { check } = require("express-validator");
-const Sequelize = require("sequelize");
 const router = express.Router();
 
 //Validate review params
@@ -58,6 +57,7 @@ router.put(
 			include: [
 				{
 					model: User,
+					as: "guest",
 					attributes: ["id", "firstName", "lastName"],
 				},
 			],
@@ -123,7 +123,7 @@ router.get("/", [restoreUser, requireAuth], async (req, res) => {
 			},
 			{
 				model: Room,
-				as:'room',
+				as: "room",
 				attributes: ["id", "ownerId"],
 			},
 			{

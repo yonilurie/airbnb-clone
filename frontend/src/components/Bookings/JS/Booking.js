@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 
 const Booking = ({ booking, reviewDisabled }) => {
 	const session = useSelector((state) => state.session);
@@ -7,41 +7,38 @@ const Booking = ({ booking, reviewDisabled }) => {
 	let hasReview;
 	if (session.reviews) {
 		hasReview = Object.values(session.reviews).find(
-			(review) => Number(review.roomId) === Number(booking.roomId)
+			(review) => review.roomId === booking.roomId
 		);
 	}
 
 	let buttonMsg;
-	if (hasReview) {
-		buttonMsg = "Edit review";
-	} else if (!hasReview) {
-		buttonMsg = "Add review";
-	}
+	if (hasReview) buttonMsg = "Edit review";
+	else if (!hasReview) buttonMsg = "Add review";
 
-	const [startYear, startMonth, startDay] = booking.startDate.split("-");
-	const [endYear, endMonth, endDay] = booking.endDate.split("-");
-	const months = [
-		"January",
-		"February",
-		"March",
-		"April",
-		"May",
-		"June",
-		"July",
-		"August",
-		"September",
-		"October",
-		"November",
-		"December",
-	];
+	const bookingStart = new Date(booking.startDate);
+	const [
+		startDay,
+		startMonth,
+		startDate,
+		startYear,
+		startTime,
+	] = bookingStart.toString().split(" ");
+	const bookingEnd = new Date(booking.endDate);
+	const [
+		endDay,
+		endMonth,
+		endDate,
+		endYear,
+		endTime,
+	] = bookingEnd.toString().split(" ");
 	let bookingDuration = ["month", "duration", "year"];
 
 	//Account for trip overlapping months
 	if (startMonth === endMonth) {
-		bookingDuration[0] = months[startMonth - 1].slice(0, 3);
+		bookingDuration[0] = startMonth;
 	} else {
-		const start = months[startMonth - 1].slice(0, 3);
-		const end = months[endMonth - 1].slice(0, 3);
+		const start = startMonth;
+		const end = endMonth;
 		bookingDuration[0] = `${start}-${end} `;
 	}
 	//Account for trip overlapping years
@@ -51,9 +48,7 @@ const Booking = ({ booking, reviewDisabled }) => {
 		bookingDuration[2] = `${startYear}-${endYear}`;
 	}
 	//Set the days of the booking
-	const durationStartDay = Number(startDay.slice(0, 2));
-	const durationEndDay = Number(endDay.slice(0, 2));
-	bookingDuration[1] = `${durationStartDay}-${durationEndDay},`;
+	bookingDuration[1] = `${startDate}-${endDate},`;
 
 	return (
 		<div className="single-booking-container">

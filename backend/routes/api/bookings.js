@@ -6,6 +6,7 @@ const { Booking, Room, User } = require("../../db/models");
 const { check } = require("express-validator");
 const { param } = require("express-validator");
 const { Op } = require("sequelize");
+const sequelize = require("sequelize");
 
 //Checks if booking has required infos
 const validateBooking = [
@@ -128,6 +129,16 @@ router.get("/", [restoreUser, requireAuth], async (req, res) => {
 	//Find all bookings belonging to the user, as well as room details
 	let bookings = await Booking.findAll({
 		where: { userId: id },
+
+		attributes: [
+			"createdAt",
+			"updatedAt",
+			"startDate",
+			"endDate",
+			"id",
+			"roomId",
+			"userId",
+		],
 		include: [
 			{
 				model: Room,

@@ -51,9 +51,7 @@ In the future, the ability to create bookings and upload images for reviews and 
 
 ## Users may login using the demo link in the profile button
 
-This will automatically log the user into a demo account and will allow them to use the sites features
 
-![Profile Button](./images/profile-button.png)
 
 ## Users may also login to an existing account
 
