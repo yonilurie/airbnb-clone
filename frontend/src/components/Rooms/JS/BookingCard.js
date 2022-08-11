@@ -9,6 +9,11 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 
 	const cleaningFeeCost = 22;
 	const serviceFeeCost = 35;
+	const maxGuests = 4;
+	const maxGuestsArr = [];
+	for (let i = 1; i <= maxGuests; i++) {
+		maxGuestsArr.push(i);
+	}
 
 	const [bookingStartDate, setBookingStartDate] = useState(startDate);
 	const [bookingEndDate, setBookingEndDate] = useState(endDate);
@@ -51,9 +56,10 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 		setBookingTotal(nightlyTotal + cleaningFee + serviceFee);
 	}, [nightlyTotal]);
 
+	console.log(guests);
+
 	return (
 		<div className="room-price-card-container">
-			<div>TEST {bookingDuration}</div>
 			<div className="room-price-card">
 				<div className="room-price-card-top-text">
 					<div className="room-price">
@@ -133,10 +139,24 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 						</div>
 						<div className="guests">
 							<div className="num-guests">GUEST</div>
-							<select id="guest" defaultValue={guests}>
-								<option value="test">2</option>
-								<option value="test">1</option>
-							</select>
+							<div className="custom-select-container">
+								<select
+                                    id="guest"
+                                    className="custome-select"
+									value={guests}
+									onChange={(e) =>
+										setGuests(Number(e.target.value))
+									}
+								>
+									{maxGuestsArr.map((num) => {
+										return (
+											<option value={num} key={num}>
+												{num}
+											</option>
+										);
+									})}
+								</select>
+							</div>
 						</div>
 					</div>
 					<button className="edit-btn">Reserve</button>

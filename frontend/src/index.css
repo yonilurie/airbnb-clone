@@ -27,3 +27,8 @@ textarea {
 button {
 	cursor: pointer;
 }
+
+select,
+input {
+	font-family: "Inter var", sans-serif;
+}
