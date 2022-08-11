@@ -14,26 +14,20 @@ const Booking = ({ booking, reviewDisabled }) => {
 	if (hasReview) buttonMsg = "Edit review";
 	else if (!hasReview) buttonMsg = "Add review";
 
-	const bookingStart = new Date(booking.startDate);
+	const bookingStart = new Date(booking.startDate).toString().split(" ");
+	const bookingEnd = new Date(booking.endDate).toString().split(" ");
 	const [
 		startDay,
 		startMonth,
 		startDate,
 		startYear,
 		startTime,
-	] = bookingStart.toString().split(" ");
-	const bookingEnd = new Date(booking.endDate);
-	const [
-		endDay,
-		endMonth,
-		endDate,
-		endYear,
-		endTime,
-	] = bookingEnd.toString().split(" ");
+	] = bookingStart;
+	const [endDay, endMonth, endDate, endYear, endTime] = bookingEnd;
 
-	let month = "";
-	let duration = "";
-	let year = "";
+	let month;
+	let duration;
+	let year;
 	//Account for trip overlapping months
 	if (startMonth === endMonth) month = startMonth;
 	else month = `${startMonth}-${endMonth} `;
@@ -58,7 +52,7 @@ const Booking = ({ booking, reviewDisabled }) => {
 					<div className="owner">
 						Hosted by {booking.room.owner.firstName}
 					</div>
-					<div className="duration">{bookingDuration.join(" ")}</div>
+					<div className="duration">{`${month} ${duration} ${year}`}</div>
 				</div>
 			</NavLink>
 			{!reviewDisabled && (
