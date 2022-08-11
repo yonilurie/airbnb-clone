@@ -1,10 +1,26 @@
 import "../CSS/BookingCard.css";
+import { useState } from "react";
 
 const BookingCard = ({ currentRoom, setShowModal }) => {
-	let startDate = new Date().toISOString().slice(0, 10);
+	//Create start and end dates for default values in input field
+	let startDate = new Date();
 	let endDate = new Date();
 	endDate.setDate(Number(endDate.getDate()) + 5);
-	endDate = endDate.toISOString().slice(0, 10);
+
+	const [bookingStartDate, setBookingStartDate] = useState(startDate);
+	const [bookingEndDate, setBookingEndDate] = useState(endDate);
+	const [bookingDuration, setBookingDuration] = useState();
+	const [guests, setGuests] = useState(1);
+
+	const checkBookingEnd = (e) => {
+		let newEndDate = new Date(e.target.value);
+		setBookingEndDate(newEndDate);
+	};
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+	};
+
 	return (
 		<div className="room-price-card-container">
 			<div className="room-price-card">
@@ -48,19 +64,46 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 						)}
 					</div>
 				</div>
-				<div className="booking-info">
+				<form
+					className="booking-info"
+					onSubmit={(e) => handleSubmit(e)}
+				>
 					<div className="choose-dates-container">
 						<div className="check-in">
-							<label>Check in</label>
-							<input type="date" defaultValue={startDate}></input>
+							<label htmlFor="check-in">Check in</label>
+							<input
+								id="check-in"
+								type="date"
+								defaultValue={bookingStartDate
+									.toISOString()
+									.slice(0, 10)}
+								min={startDate.toISOString().slice(0, 10)}
+							></input>
 						</div>
 						<div className="check-out">
-							<label>Checkout</label>
-							<input type="date" defaultValue={endDate}></input>
+							<label htmlFor="checkout">Checkout</label>
+							<input
+								id="checkout"
+								type="date"
+								defaultValue={bookingEndDate
+									.toISOString()
+									.slice(0, 10)}
+								onChange={(e) => checkBookingEnd(e)}
+								min={bookingStartDate
+									.toISOString()
+									.slice(0, 10)}
+							></input>
 						</div>
 					</div>
-					<div className="guests">guests</div>
-				</div>
+					<div className="guests">
+						<label htmlFor="guests">guests</label>
+						<select defaultValue={guests}>
+							<option value="test">2</option>
+							<option value="test">1</option>
+						</select>
+					</div>
+					<button className="edit-btn">Check availibility</button>
+				</form>
 			</div>
 		</div>
 	);
