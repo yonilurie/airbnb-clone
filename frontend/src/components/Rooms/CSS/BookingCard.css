@@ -66,7 +66,19 @@
 .guests {
 	display: flex;
 	flex-direction: column;
-    width: 100%;
+	width: 100%;
+}
+
+.price-items > div {
+	display: flex;
+	justify-content: space-between;
+}
+
+.price-total {
+	margin-top: 20px;
+	display: flex;
+	justify-content: space-between;
+	font-size: 1.25rem;
 }
 
 #reviews-modal-link {

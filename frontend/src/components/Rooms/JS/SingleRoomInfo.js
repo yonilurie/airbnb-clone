@@ -34,7 +34,6 @@ const SingleRoomInfo = () => {
 	}, [showModal]);
 
 	useEffect(() => {
-		console.log(currentRoom.id, roomId);
 		if (currentRoom.id !== Number(roomId)) {
 			const timeout = setTimeout(() => {
 				setIsDisplayed(true);
