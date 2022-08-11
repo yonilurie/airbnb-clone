@@ -10,7 +10,6 @@ const Booking = ({ booking, reviewDisabled }) => {
 			(review) => review.roomId === booking.roomId
 		);
 	}
-
 	let buttonMsg;
 	if (hasReview) buttonMsg = "Edit review";
 	else if (!hasReview) buttonMsg = "Add review";
@@ -31,24 +30,18 @@ const Booking = ({ booking, reviewDisabled }) => {
 		endYear,
 		endTime,
 	] = bookingEnd.toString().split(" ");
-	let bookingDuration = ["month", "duration", "year"];
 
+	let month = "";
+	let duration = "";
+	let year = "";
 	//Account for trip overlapping months
-	if (startMonth === endMonth) {
-		bookingDuration[0] = startMonth;
-	} else {
-		const start = startMonth;
-		const end = endMonth;
-		bookingDuration[0] = `${start}-${end} `;
-	}
+	if (startMonth === endMonth) month = startMonth;
+	else month = `${startMonth}-${endMonth} `;
 	//Account for trip overlapping years
-	if (startYear === endYear) {
-		bookingDuration[2] = startYear;
-	} else {
-		bookingDuration[2] = `${startYear}-${endYear}`;
-	}
+	if (startYear === endYear) year = startYear;
+	else year = `${startYear}-${endYear}`;
 	//Set the days of the booking
-	bookingDuration[1] = `${startDate}-${endDate},`;
+	duration = `${startDate}-${endDate},`;
 
 	return (
 		<div className="single-booking-container">
