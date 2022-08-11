@@ -194,59 +194,7 @@ h2 {
 	width: 100%;
 }
 
-.room-price-card {
-	padding: 1.5rem;
-	border: solid 1px rgb(175, 175, 175);
-	border-radius: 12px;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18);
-	width: fit-content;
-}
 
-.room-price-card-top-text {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
-
-.card-price {
-	font-size: 1.25rem;
-	font-weight: 600;
-	margin-right: 0.25rem;
-}
-
-.room-price {
-	margin-right: 2.5rem;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-.room-reviews-and-location {
-	margin-bottom: 1rem;
-}
-.room-reviews-and-location.in-price-card {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-	width: 10rem;
-	margin-bottom: 0rem;
-}
-
-.room-owner-and-description {
-	margin-right: 10rem;
-	width: 100%;
-	min-width: 300px;
-}
-
-#reviews-modal-link {
-	text-decoration: underline;
-	cursor: pointer;
-}
-
-#reviews-modal-link-inactive {
-	text-decoration: none;
-	cursor: default;
-}
 
 @media screen and (max-width: 1000px) {
 	.room-details-container {
