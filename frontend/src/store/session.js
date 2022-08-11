@@ -7,6 +7,7 @@ const REMOVE_USER = "session/removeUser";
 const GET_MY_ROOMS = "/api/my-rooms";
 const CREATE_ROOM = "/api/rooms/add";
 const DELETE_MY_ROOM = "/api/my-rooms/delete";
+const CREATE_USER_BOOKING = "/api/rooms/:roomId/";
 const GET_USER_BOOKINGS = "/api/bookings";
 const GET_USER_REVIEWS = "/api/reviews";
 const CREATE_ROOM_REVIEW = "/reviews/create";
@@ -80,6 +81,13 @@ const createARoomReview = (reviewInfo) => {
 	return {
 		type: CREATE_ROOM_REVIEW,
 		reviewInfo,
+	};
+};
+
+const createABooking = (bookingInfo) => {
+	return {
+		type: CREATE_USER_BOOKING,
+		bookingInfo,
 	};
 };
 //Thunk action creators
@@ -227,6 +235,24 @@ export const createRoomReview = (reviewData) => async (dispatch) => {
 	dispatch(createARoomReview(data));
 };
 
+export const createBooking = (booking) => async (dispatch) => {
+	const {startDate, endDate, roomId} = booking;
+
+	const response = await csrfFetch(`/api/rooms/${Number(roomId)}/bookings`, {
+		method: "POST",
+		headers: {
+			contentType: "application/json",
+		},
+		body: JSON.stringify({
+			startDate,
+			endDate,
+		}),
+	});
+	console.log(booking)
+	const data = await response.json();
+	dispatch(createABooking(data));
+};
+
 //Initial state for session
 const initialState = { user: null, reviews: {}, bookings: {}, rooms: {} };
 
@@ -266,6 +292,19 @@ const sessionReducer = (state = initialState, action) => {
 			}
 			newState = { ...state, bookings };
 
+			return newState;
+		}
+
+		case CREATE_USER_BOOKING: {
+			newState = {
+				...state,
+				bookings: {
+					...state.bookings,
+				},
+			};
+			newState.bookings[action.bookingInfo.id] = {
+				...action.bookingInfo,
+			};
 			return newState;
 		}
 

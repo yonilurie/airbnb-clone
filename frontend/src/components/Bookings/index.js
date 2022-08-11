@@ -89,10 +89,14 @@ const Bookings = () => {
 					{futureBookings.length >= 1 && (
 						<div>
 							<h2>Where you're headed</h2>
-							<Booking
-								booking={futureBookings[0]}
-								reviewDisabled={true}
-							></Booking>
+							{futureBookings.length > 0 &&
+								futureBookings.map((booking) => (
+									<Booking
+										booking={booking}
+										key={booking.id}
+										reviewDisabled={true}
+									/>
+								))}
 						</div>
 					)}
 

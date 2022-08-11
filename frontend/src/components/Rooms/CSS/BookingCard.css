@@ -150,5 +150,6 @@ select {
 	position: relative;
 }
 
-.booking-info {
+.edit-btn {
+	width: 100%;
 }

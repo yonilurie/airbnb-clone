@@ -1,7 +1,10 @@
 import "../CSS/BookingCard.css";
 import { useState, useEffect } from "react";
+import { createBooking } from "../../../store/session";
+import { useDispatch, useSelector } from "react-redux";
 
 const BookingCard = ({ currentRoom, setShowModal }) => {
+	const dispatch = useDispatch();
 	//Create start and end dates for default values in input field
 	let startDate = new Date();
 	let endDate = new Date();
@@ -28,6 +31,13 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		dispatch(
+			createBooking({
+				startDate: bookingStartDate.toISOString().slice(0, 10),
+				endDate: bookingEndDate.toISOString().slice(0, 10),
+				roomId: currentRoom.id,
+			})
+		);
 	};
 
 	const onStartDateChange = (e) => {
@@ -57,6 +67,9 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 	}, [nightlyTotal]);
 
 	console.log(guests);
+
+	const bookings = currentRoom.bookings;
+	console.log(bookings);
 
 	return (
 		<div className="room-price-card-container">
@@ -141,8 +154,8 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 							<div className="num-guests">GUEST</div>
 							<div className="custom-select-container">
 								<select
-                                    id="guest"
-                                    className="custome-select"
+									id="guest"
+									className="custome-select"
 									value={guests}
 									onChange={(e) =>
 										setGuests(Number(e.target.value))
