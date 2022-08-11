@@ -48,21 +48,38 @@
 	justify-content: center;
 	width: fit-content;
 }
+
+.booking-info-wrapper {
+	border: solid 1px grey;
+	border-radius: 12px;
+	padding: 10px;
+}
+
 .choose-dates-container {
 	display: flex;
 	justify-content: space-between;
-	border: solid 1px grey;
-	border-top-right-radius: 12px;
-	border-top-left-radius: 12px;
 }
+
 .check-in {
 	display: flex;
 	flex-direction: column;
 }
+
 .check-out {
 	display: flex;
 	flex-direction: column;
 }
+
+.check-in-text,
+.checkout-text,
+.num-guests {
+	font-weight: 400;
+	position: absolute;
+	font-size: 0.5rem;
+	margin-top: 0.75rem;
+	margin-left: 1rem;
+}
+
 .guests {
 	display: flex;
 	flex-direction: column;
@@ -78,7 +95,9 @@
 	margin-top: 20px;
 	display: flex;
 	justify-content: space-between;
-	font-size: 1.25rem;
+	font-size: 1.125rem;
+	border-top: solid 1px grey;
+	padding-top: 20px;
 }
 
 #reviews-modal-link {
@@ -89,4 +108,15 @@
 #reviews-modal-link-inactive {
 	text-decoration: none;
 	cursor: default;
+}
+
+#check-in,
+#checkout,
+#guest {
+	padding: 0.75rem;
+	padding-top: 1.5rem;
+}
+
+#guest {
+	height: 3.5rem;
 }

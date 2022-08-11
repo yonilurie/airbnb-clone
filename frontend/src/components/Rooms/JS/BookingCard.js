@@ -99,43 +99,47 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 					className="booking-info"
 					onSubmit={(e) => handleSubmit(e)}
 				>
-					<div className="choose-dates-container">
-						<div className="check-in">
-							<label htmlFor="check-in">Check in</label>
-							<input
-								id="check-in"
-								type="date"
-								defaultValue={bookingStartDate
-									.toISOString()
-									.slice(0, 10)}
-								onChange={(e) => onStartDateChange(e)}
-								min={startDate.toISOString().slice(0, 10)}
-								max={bookingEndDate.toISOString().slice(0, 10)}
-							></input>
+					<div className="booking-info-wrapper">
+						<div className="choose-dates-container">
+							<div className="check-in">
+								<div className="check-in-text">CHECK-IN</div>
+								<input
+									id="check-in"
+									type="date"
+									defaultValue={bookingStartDate
+										.toISOString()
+										.slice(0, 10)}
+									onChange={(e) => onStartDateChange(e)}
+									min={startDate.toISOString().slice(0, 10)}
+									max={bookingEndDate
+										.toISOString()
+										.slice(0, 10)}
+								></input>
+							</div>
+							<div className="check-out">
+								<div className="checkout-text">CHECKOUT</div>
+								<input
+									id="checkout"
+									type="date"
+									defaultValue={bookingEndDate
+										.toISOString()
+										.slice(0, 10)}
+									onChange={(e) => checkBookingEnd(e)}
+									min={bookingStartDate
+										.toISOString()
+										.slice(0, 10)}
+								></input>
+							</div>
 						</div>
-						<div className="check-out">
-							<label htmlFor="checkout">Checkout</label>
-							<input
-								id="checkout"
-								type="date"
-								defaultValue={bookingEndDate
-									.toISOString()
-									.slice(0, 10)}
-								onChange={(e) => checkBookingEnd(e)}
-								min={bookingStartDate
-									.toISOString()
-									.slice(0, 10)}
-							></input>
+						<div className="guests">
+							<div className="num-guests">GUEST</div>
+							<select id="guest" defaultValue={guests}>
+								<option value="test">2</option>
+								<option value="test">1</option>
+							</select>
 						</div>
 					</div>
-					<div className="guests">
-						<label htmlFor="guests">guests</label>
-						<select defaultValue={guests}>
-							<option value="test">2</option>
-							<option value="test">1</option>
-						</select>
-					</div>
-					<button className="edit-btn">Check availibility</button>
+					<button className="edit-btn">Reserve</button>
 				</form>
 				<div className="pricing-info">
 					<div className="price-items">
