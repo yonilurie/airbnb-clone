@@ -175,7 +175,11 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 					</div>
 					{validationErrors.length > 0 &&
 						validationErrors.map((err) => {
-							return <div key={err}>{err}</div>;
+							return (
+								<div key={err} style={{ color: "red" }}>
+									{err}
+								</div>
+							);
 						})}
 					<button className="edit-btn">Reserve</button>
 				</form>

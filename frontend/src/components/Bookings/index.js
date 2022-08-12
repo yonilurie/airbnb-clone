@@ -33,6 +33,7 @@ const Bookings = () => {
 		return () => clearTimeout(timeout);
 	}, []);
 
+	
 	const bookings = Object.values(
 		useSelector((state) => state.session.bookings)
 	);
@@ -89,14 +90,16 @@ const Bookings = () => {
 					{futureBookings.length >= 1 && (
 						<div>
 							<h2>Where you're headed</h2>
-							{futureBookings.length > 0 &&
-								futureBookings.map((booking) => (
-									<Booking
-										booking={booking}
-										key={booking.id}
-										reviewDisabled={true}
-									/>
-								))}
+							<div className="past-bookings">
+								{futureBookings.length > 0 &&
+									futureBookings.map((booking) => (
+										<Booking
+											booking={booking}
+											key={booking.id}
+											reviewDisabled={true}
+										/>
+									))}
+							</div>
 						</div>
 					)}
 

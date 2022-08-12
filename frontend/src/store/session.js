@@ -8,6 +8,7 @@ const GET_MY_ROOMS = "/api/my-rooms";
 const CREATE_ROOM = "/api/rooms/add";
 const DELETE_MY_ROOM = "/api/my-rooms/delete";
 const CREATE_USER_BOOKING = "/api/rooms/:roomId/";
+const DELETE_USER_BOOKING = "/api/bookings/:bookingId";
 const GET_USER_BOOKINGS = "/api/bookings";
 const GET_USER_REVIEWS = "/api/reviews";
 const CREATE_ROOM_REVIEW = "/reviews/create";
@@ -15,6 +16,13 @@ const EDIT_REVIEW = "/api/reviews/EDIT";
 const DELETE_REVIEW = "/api/reviews/DELETE";
 //Thunk actions
 //
+
+const deleteABooking = (bookingId) => {
+	return {
+		type: DELETE_USER_BOOKING,
+		bookingId,
+	};
+};
 
 const createARoom = (room) => {
 	return {
@@ -253,7 +261,18 @@ export const createBooking = (booking) => async (dispatch) => {
 	if (!data.errors) {
 		dispatch(createABooking(data));
 	}
-	return data
+	return data;
+};
+
+export const deleteBooking = (bookingId) => async (dispatch) => {
+	const response = await csrfFetch(`/api/bookings/${bookingId}`, {
+		method: "DELETE",
+	});
+	console.log(response);
+	const data = await response.json();
+	console.log(data);
+
+	dispatch(deleteABooking(Number(bookingId)));
 };
 
 //Initial state for session
@@ -293,8 +312,8 @@ const sessionReducer = (state = initialState, action) => {
 					bookings[booking.id] = booking;
 				});
 			}
-			newState = { ...state, bookings };
-
+			newState = { ...state };
+			newState.bookings = bookings
 			return newState;
 		}
 
@@ -308,6 +327,17 @@ const sessionReducer = (state = initialState, action) => {
 			newState.bookings[action.bookingInfo.id] = {
 				...action.bookingInfo,
 			};
+			return newState;
+		}
+
+		case DELETE_USER_BOOKING: {
+			newState = { ...state };
+			console.log("BOOKINGID", action.bookingId);
+			if (newState.bookings[action.bookingId]) {
+				console.log(newState.bookings[action.bookingId]);
+				delete newState.bookings[action.bookingId];
+			}
+
 			return newState;
 		}
 

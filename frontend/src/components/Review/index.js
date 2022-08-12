@@ -3,7 +3,7 @@ import { useParams, useHistory, Redirect, NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createRoomReview } from "../../store/CurrentRoom";
 import { getRoomInfo } from "../../store/CurrentRoom";
-import { deleteAReview } from "../../store/session";
+import { deleteAReview, getAUsersBookings } from "../../store/session";
 import { getAUsersReviews } from "../../store/session";
 import Reviews from "../Rooms/JS/Reviews";
 import EditReviewModal from "./JS/EditReviewModal";
@@ -22,7 +22,7 @@ function CreateReview() {
 
 	//Get reviews for the room to check if user has already made one
 	useEffect(() => {
-		dispatch(getAUsersReviews());
+		dispatch(getAUsersBookings());
 	}, [dispatch]);
 
 	//Form validation

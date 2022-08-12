@@ -1,7 +1,10 @@
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+
+import { deleteBooking } from "../../../store/session";
 
 const Booking = ({ booking, reviewDisabled }) => {
+	const dispatch = useDispatch();
 	const session = useSelector((state) => state.session);
 
 	let hasReview;
@@ -37,6 +40,11 @@ const Booking = ({ booking, reviewDisabled }) => {
 	//Set the days of the booking
 	duration = `${startDate}-${endDate},`;
 
+	const cancelBooking = () => {
+		dispatch(deleteBooking(booking.id));
+		
+	};
+
 	return (
 		<div className="single-booking-container">
 			<NavLink to={`/rooms/${booking.room.id}`} className="booking">
@@ -59,6 +67,11 @@ const Booking = ({ booking, reviewDisabled }) => {
 				<NavLink to={`/review-room/${booking.room.id}`}>
 					<button className="review-btn">{buttonMsg}</button>
 				</NavLink>
+			)}
+			{reviewDisabled && (
+				<button className="review-btn" onClick={() => cancelBooking()}>
+					Cancel Booking
+				</button>
 			)}
 		</div>
 	);
