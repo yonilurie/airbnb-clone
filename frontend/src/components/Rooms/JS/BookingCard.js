@@ -28,16 +28,22 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 	const [bookingTotal, setBookingTotal] = useState(
 		nightlyTotal + cleaningFee + serviceFee
 	);
+	const [validationErrors, setValidationErrors] = useState([]);
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
-		dispatch(
+		const data = await dispatch(
 			createBooking({
 				startDate: bookingStartDate.toISOString().slice(0, 10),
 				endDate: bookingEndDate.toISOString().slice(0, 10),
 				roomId: currentRoom.id,
 			})
 		);
+		if (data.errors) {
+			setValidationErrors([data.errors.error]);
+		} else {
+			setValidationErrors(["Successfully booked!"]);
+		}
 	};
 
 	const onStartDateChange = (e) => {
@@ -65,11 +71,6 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 	useEffect(() => {
 		setBookingTotal(nightlyTotal + cleaningFee + serviceFee);
 	}, [nightlyTotal]);
-
-	console.log(guests);
-
-	const bookings = currentRoom.bookings;
-	console.log(bookings);
 
 	return (
 		<div className="room-price-card-container">
@@ -172,6 +173,10 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 							</div>
 						</div>
 					</div>
+					{validationErrors.length > 0 &&
+						validationErrors.map((err) => {
+							return <div key={err}>{err}</div>;
+						})}
 					<button className="edit-btn">Reserve</button>
 				</form>
 				<div className="pricing-info">

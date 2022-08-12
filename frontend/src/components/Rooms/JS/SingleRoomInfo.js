@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 
-import { getRoomInfo } from "../../../store/CurrentRoom";
+import { getRoomInfo, getARoomsBookings } from "../../../store/CurrentRoom";
 import { deleteARoom, getMyRoomsData } from "../../../store/session";
 import Reviews from "./Reviews";
 
@@ -23,6 +23,7 @@ const SingleRoomInfo = () => {
 	//Get room info, images, and reviews
 	useEffect(() => {
 		dispatch(getRoomInfo(Number(roomId)));
+		dispatch(getARoomsBookings(Number(roomId)));
 	}, [dispatch, roomId]);
 
 	useEffect(() => {
@@ -165,10 +166,34 @@ const SingleRoomInfo = () => {
 									</div>
 								</div>
 							</div>
-							<BookingCard
-								currentRoom={currentRoom}
-								setShowModal={setShowModal}
-							/>
+							{sessionuser.id !== currentRoom.owner.id && (
+								<BookingCard
+									currentRoom={currentRoom}
+									setShowModal={setShowModal}
+								/>
+							)}
+							{sessionuser &&
+								sessionuser.id === currentRoom.ownerId && (
+									<div className="button-container">
+										<button
+											className="edit-btn"
+											style={{ marginRight: ".5rem" }}
+											onClick={() =>
+												history.push(
+													`/rooms/${roomId}/edit`
+												)
+											}
+										>
+											Edit room
+										</button>
+										<button
+											onClick={deletedRoom}
+											className="delete-btn"
+										>
+											Delete room
+										</button>
+									</div>
+								)}
 						</div>
 						{Object.values(currentRoom.reviews).length > 0 && (
 							<div className="reviews-container">
@@ -215,25 +240,6 @@ const SingleRoomInfo = () => {
 						)}
 						{currentRoom.avgStarRating < 1 && (
 							<h2 className="reviews-overview">No Reviews Yet</h2>
-						)}
-						{sessionuser && sessionuser.id === currentRoom.ownerId && (
-							<div className="button-container">
-								<button
-									className="edit-btn"
-									style={{ marginRight: ".5rem" }}
-									onClick={() =>
-										history.push(`/rooms/${roomId}/edit`)
-									}
-								>
-									Edit room
-								</button>
-								<button
-									onClick={deletedRoom}
-									className="delete-btn"
-								>
-									Delete room
-								</button>
-							</div>
 						)}
 					</div>
 				)}

@@ -236,7 +236,7 @@ export const createRoomReview = (reviewData) => async (dispatch) => {
 };
 
 export const createBooking = (booking) => async (dispatch) => {
-	const {startDate, endDate, roomId} = booking;
+	const { startDate, endDate, roomId } = booking;
 
 	const response = await csrfFetch(`/api/rooms/${Number(roomId)}/bookings`, {
 		method: "POST",
@@ -248,9 +248,12 @@ export const createBooking = (booking) => async (dispatch) => {
 			endDate,
 		}),
 	});
-	console.log(booking)
+
 	const data = await response.json();
-	dispatch(createABooking(data));
+	if (!data.errors) {
+		dispatch(createABooking(data));
+	}
+	return data
 };
 
 //Initial state for session
