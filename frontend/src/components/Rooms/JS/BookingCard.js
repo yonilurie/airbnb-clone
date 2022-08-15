@@ -8,23 +8,39 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 	//Create start and end dates for default values in input field
 	let startDate = new Date();
 	let endDate = new Date();
-	endDate.setDate(Number(endDate.getDate()) + 5);
-
 	const cleaningFeeCost = 22;
 	const serviceFeeCost = 35;
 	const maxGuests = 4;
 	const maxGuestsArr = [];
+	const nights = 5;
+	endDate.setDate(Number(endDate.getDate()) + nights);
+
 	for (let i = 1; i <= maxGuests; i++) {
 		maxGuestsArr.push(i);
 	}
+	function getNextDay(date = new Date()) {
+		const next = new Date(date.getTime());
+		next.setDate(date.getDate() + 1);
+
+		return next;
+	}
+	function getPreviousDay(date = new Date()) {
+		const previous = new Date(date.getTime());
+		previous.setDate(date.getDate() - 1);
+
+		return previous;
+	}
 
 	const [bookingStartDate, setBookingStartDate] = useState(startDate);
+
 	const [bookingEndDate, setBookingEndDate] = useState(endDate);
-	const [bookingDuration, setBookingDuration] = useState(5);
+	const [bookingDuration, setBookingDuration] = useState(nights);
 	const [guests, setGuests] = useState(1);
-	const [nightlyTotal, setNightlyTotal] = useState(currentRoom.price * 5);
-	const [cleaningFee, setCleaningFee] = useState(5 * cleaningFeeCost);
-	const [serviceFee, setServiceFee] = useState(5 * serviceFeeCost);
+	const [nightlyTotal, setNightlyTotal] = useState(
+		currentRoom.price * nights
+	);
+	const [cleaningFee, setCleaningFee] = useState(nights * cleaningFeeCost);
+	const [serviceFee, setServiceFee] = useState(nights * serviceFeeCost);
 	const [bookingTotal, setBookingTotal] = useState(
 		nightlyTotal + cleaningFee + serviceFee
 	);
@@ -47,19 +63,22 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 	};
 
 	const onStartDateChange = (e) => {
-		let newStartDate = new Date(e.target.value);
+		let newStartDate = new Date(e.target.value.replace("-", "/"));
 		setBookingStartDate(newStartDate);
 	};
 
 	const checkBookingEnd = (e) => {
-		let newEndDate = new Date(e.target.value);
+		let newEndDate = new Date(e.target.value.replace("-", "/"));
 		setBookingEndDate(newEndDate);
 	};
 
 	useEffect(() => {
 		let difference = bookingEndDate.getTime() - bookingStartDate.getTime();
-		let duration = Math.ceil(difference / (1000 * 3600 * 24));
-		setBookingDuration(duration - 1);
+		if (difference !== endDate.getTime() - startDate.getTime()) {
+			let duration = Math.ceil(difference / (1000 * 3600 * 24));
+
+			setBookingDuration(duration);
+		}
 	}, [bookingStartDate, bookingEndDate]);
 
 	useEffect(() => {
@@ -126,12 +145,12 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 								<input
 									id="check-in"
 									type="date"
-									defaultValue={bookingStartDate
+									value={bookingStartDate
 										.toISOString()
 										.slice(0, 10)}
 									onChange={(e) => onStartDateChange(e)}
 									min={startDate.toISOString().slice(0, 10)}
-									max={bookingEndDate
+									max={getPreviousDay(bookingEndDate)
 										.toISOString()
 										.slice(0, 10)}
 								></input>
@@ -141,11 +160,11 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 								<input
 									id="checkout"
 									type="date"
-									defaultValue={bookingEndDate
+									value={bookingEndDate
 										.toISOString()
 										.slice(0, 10)}
 									onChange={(e) => checkBookingEnd(e)}
-									min={bookingStartDate
+									min={getNextDay(bookingStartDate)
 										.toISOString()
 										.slice(0, 10)}
 								></input>
@@ -156,7 +175,7 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 							<div className="custom-select-container">
 								<select
 									id="guest"
-									className="custome-select"
+									className="custom-select"
 									value={guests}
 									onChange={(e) =>
 										setGuests(Number(e.target.value))

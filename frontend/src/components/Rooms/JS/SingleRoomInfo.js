@@ -166,7 +166,7 @@ const SingleRoomInfo = () => {
 									</div>
 								</div>
 							</div>
-							{sessionuser.id !== currentRoom.owner.id && (
+							{sessionuser && sessionuser.id !== currentRoom.owner.id && (
 								<BookingCard
 									currentRoom={currentRoom}
 									setShowModal={setShowModal}
