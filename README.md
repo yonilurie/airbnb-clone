@@ -1,8 +1,6 @@
 # Airbnb Clone
 
-## Deployed Application:
-
-### [Live Site on Heroku](https://backend-project-airbnb.herokuapp.com/)
+## Deployed Application: [Heroku](https://backend-project-airbnb.herokuapp.com/)
 
 ## Description
 
