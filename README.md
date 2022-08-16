@@ -2,7 +2,7 @@
 
 ## Deployed Application:
 
-Heroku: https://backend-project-airbnb.herokuapp.com/
+### [Live Site on Heroku](https://backend-project-airbnb.herokuapp.com/)
 
 ## Description
 
