@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { requireAuth, restoreUser } = require("../../utils/auth");
 const { handleValidationErrors } = require("../../utils/validation");
-const { Booking, Room, User } = require("../../db/models");
+const { Booking, Room, User, Review } = require("../../db/models");
 const { check } = require("express-validator");
 const { param } = require("express-validator");
 const { Op } = require("sequelize");
@@ -78,7 +78,6 @@ router.put(
 				endDate: { [Op.lte]: endDate },
 			},
 		});
-
 		//if room is not available return error with 403 code
 		if (checkAvailability) {
 			res.status = 403;
@@ -143,12 +142,20 @@ router.get("/", [restoreUser, requireAuth], async (req, res) => {
 			{
 				model: Room,
 				as: "room",
-				attributes: ["id", "city", "previewImage"],
+
 				include: [
 					{
 						model: User,
 						as: "owner",
 						attributes: ["firstName"],
+					},
+					{
+						model: Booking,
+						as: "bookings",
+					},
+					{
+						model: Review,
+						as: "reviews",
 					},
 				],
 			},

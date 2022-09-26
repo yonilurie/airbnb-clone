@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
+import {getAUsersBookings, getAUsersReviews, getMyRoomsData} from '../../store/session'
 import { getRooms } from "../../store/rooms";
 import SingleRoom from "./JS/SingleRoom";
 import "./CSS/RoomContainer.css";
@@ -12,6 +12,9 @@ function Rooms() {
 
 	useEffect(() => {
 		dispatch(getRooms());
+		// dispatch(getAUsersBookings())
+		// dispatch(getAUsersReviews())
+		// dispatch(getMyRoomsData())
 	}, [dispatch]);
 
 	useEffect(() => {
@@ -29,6 +32,13 @@ function Rooms() {
 			setIsDisplayed(true);
 		}
 	}, []);
+
+	// useEffect(() => {
+	// 	const timeout = setTimeout(() => {
+	// 			setLoaded(true);
+	// 	}, 250);
+	// 	return clearTimeout(timeout)
+	// })
 
 	return (
 		<div className="rooms-container">

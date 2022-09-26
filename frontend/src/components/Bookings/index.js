@@ -26,11 +26,11 @@ const Bookings = () => {
 	}, []);
 
 	useEffect(() => {
-		const timeout = setTimeout(() => {
+		// const timeout = setTimeout(() => {
 			setIsDisplayed(true);
-		}, 300);
+		// }, 300);
 
-		return () => clearTimeout(timeout);
+		// return () => clearTimeout(timeout);
 	}, []);
 
 	

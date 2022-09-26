@@ -112,6 +112,9 @@ export const login = (user) => async (dispatch) => {
 	});
 	const data = await response.json();
 	dispatch(setUser(data.user));
+	// dispatch(getAUsersBookings())
+	// dispatch(getAUsersReviews())
+	// dispatch(getMyRoomsData())
 	return data;
 };
 

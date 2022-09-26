@@ -319,13 +319,14 @@ router.post(
 		const { roomId } = req.params;
 		const { id } = req.user;
 		let { startDate, endDate } = req.body;
+		console.log(startDate, endDate);
 		//Convert dates to date objects
-		startDate = startDate.split("-");
-		startDate[1] -= 1;
-		startDate = new Date(startDate[0], startDate[1], startDate[2]);
-		endDate = endDate.split("-");
-		endDate[1] -= 1;
-		endDate = new Date(endDate[0], endDate[1], endDate[2]);
+		// startDate = startDate.split("-");
+		// startDate[1] -= 1;
+		// startDate = new Date(startDate[0], startDate[1], startDate[2]);
+		// endDate = endDate.split("-");
+		// endDate[1] -= 1;
+		// endDate = new Date(endDate[0], endDate[1], endDate[2]);
 		//check if dates are valid
 		if (startDate >= endDate) {
 			res.status = 403;
@@ -356,8 +357,13 @@ router.post(
 			},
 		});
 		//If they do return error message to user with 403 code
+
 		if (bookingCheck) {
 			const err = {};
+			// err.booking =  {
+			// 	startDate: checkAvailability.startDate,
+			// 	endDate: checkAvailability.endDate
+			// }
 			(err.message =
 				"Sorry, this room is already booked for the specified dates"),
 				(err.status = 403);
@@ -472,7 +478,7 @@ router.post(
 			include: [
 				{
 					model: User,
-					as: 'guest'
+					as: "guest",
 				},
 			],
 		});
@@ -592,7 +598,7 @@ router.get("/:roomId", validateRoomId, async (req, res) => {
 				include: [
 					{
 						model: User,
-						as: 'guest',
+						as: "guest",
 						attributes: ["id", "firstName", "lastName"],
 					},
 				],

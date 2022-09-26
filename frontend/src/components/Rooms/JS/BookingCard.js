@@ -1,10 +1,21 @@
 import "../CSS/BookingCard.css";
+import Calendar, { YearView } from "react-calendar";
+import "react-calendar/dist/Calendar.css";
+import { addDays } from "date-fns";
+import { DateRangePicker } from "react-date-range";
+import "react-date-range/dist/styles.css"; // main css file
+import "react-date-range/dist/theme/default.css"; // theme css file
+
 import { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { createBooking } from "../../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 
+import CalendarMenu from "./CalendarMenu";
+
 const BookingCard = ({ currentRoom, setShowModal }) => {
 	const dispatch = useDispatch();
+	const history = useHistory();
 	//Create start and end dates for default values in input field
 	let startDate = new Date();
 	let endDate = new Date();
@@ -46,6 +57,8 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 	);
 	const [validationErrors, setValidationErrors] = useState([]);
 
+	const [showMenu, setShowMenu] = useState(false);
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const data = await dispatch(
@@ -55,6 +68,7 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 				roomId: currentRoom.id,
 			})
 		);
+		console.log(data);
 		if (data.errors) {
 			setValidationErrors([data.errors.error]);
 		} else {
@@ -90,6 +104,39 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 	useEffect(() => {
 		setBookingTotal(nightlyTotal + cleaningFee + serviceFee);
 	}, [nightlyTotal]);
+
+	const [bookedDates, setBookedDates] = useState([]);
+	useEffect(() => {
+		if (
+			currentRoom &&
+			currentRoom.bookings &&
+			Object.values(currentRoom.bookings).length > 0
+		) {
+			let invalidDates = [];
+			Object.values(currentRoom.bookings).forEach((rsvp) => {
+				const booking = {};
+				booking["start"] = rsvp.startDate;
+				booking["end"] = rsvp.endDate;
+				invalidDates.push(booking);
+			});
+			setBookedDates(invalidDates);
+		}
+	}, [currentRoom]);
+
+	const checkInvalidTile = ({ activeStartDate, date, view }) => {
+		for (let booking of bookedDates) {
+			let currStart = new Date(booking.start).getTime();
+			let currEnd = new Date(booking.end).getTime();
+			let currTime = date.getTime();
+			if (currTime <= currEnd && currTime >= currStart) return true;
+		}
+		return false;
+	};
+
+	const calendarOnChange = (e) => {
+		setBookingStartDate(e[0]);
+		setBookingEndDate(e[1]);
+	};
 
 	return (
 		<div className="room-price-card-container">
@@ -140,7 +187,7 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 				>
 					<div className="booking-info-wrapper">
 						<div className="choose-dates-container">
-							<div className="check-in">
+							{/* <div className="check-in">
 								<div className="check-in-text">CHECK-IN</div>
 								<input
 									id="check-in"
@@ -150,17 +197,19 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 										.slice(0, 10)}
 									onChange={(e) => onStartDateChange(e)}
 									min={startDate.toISOString().slice(0, 10)}
-									max={getPreviousDay(bookingEndDate)
+									max={bookingEndDate
 										.toISOString()
 										.slice(0, 10)}
+									invalid={bookedDates}
 								></input>
-							</div>
-							<div className="check-out">
+							</div> */}
+
+							{/* <div className="check-out">
 								<div className="checkout-text">CHECKOUT</div>
 								<input
 									id="checkout"
 									type="date"
-									value={bookingEndDate
+									value={getPreviousDay(bookingEndDate)
 										.toISOString()
 										.slice(0, 10)}
 									onChange={(e) => checkBookingEnd(e)}
@@ -168,10 +217,21 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 										.toISOString()
 										.slice(0, 10)}
 								></input>
-							</div>
+							</div> */}
+
+							<CalendarMenu
+								minDate={startDate}
+								tileDisabled={checkInvalidTile}
+								onChange={calendarOnChange}
+								bookingStartDate={bookingStartDate}
+								bookingEndDate={bookingEndDate}
+								showMenu={showMenu}
+								setShowMenu={setShowMenu}
+								room={currentRoom}
+							></CalendarMenu>
 						</div>
 						<div className="guests">
-							<div className="num-guests">GUEST</div>
+							<div className="num-guests">GUESTS</div>
 							<div className="custom-select-container">
 								<select
 									id="guest"

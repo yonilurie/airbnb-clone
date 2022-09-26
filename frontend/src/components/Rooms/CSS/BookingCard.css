@@ -153,3 +153,34 @@ select {
 .edit-btn {
 	width: 100%;
 }
+
+.react-calendar {
+	width: 100% !important ;
+}
+
+.calendar-menu-main-container {
+	width: 100%;
+	padding: 15px;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 20px;
+}
+.booking-card-dates {
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+}
+
+
+.open-calendar-menu {
+	border-radius: 4px;
+	background-color: red;
+	padding: 5px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: fit-content;
+	cursor: pointer;
+}

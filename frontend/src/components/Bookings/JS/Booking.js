@@ -1,11 +1,18 @@
 import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 import { deleteBooking } from "../../../store/session";
 
+import BookingCard from "../../Rooms/JS/BookingCard";
+
+
 const Booking = ({ booking, reviewDisabled }) => {
 	const dispatch = useDispatch();
+	const history = useHistory()
 	const session = useSelector((state) => state.session);
+	const [showEditReservation, setShowEditReservation] = useState(false);
 
 	let hasReview;
 	if (session.reviews) {
@@ -42,9 +49,8 @@ const Booking = ({ booking, reviewDisabled }) => {
 
 	const cancelBooking = () => {
 		dispatch(deleteBooking(booking.id));
-		
 	};
-
+	console.log(booking);
 	return (
 		<div className="single-booking-container">
 			<NavLink to={`/rooms/${booking.room.id}`} className="booking">
@@ -69,9 +75,22 @@ const Booking = ({ booking, reviewDisabled }) => {
 				</NavLink>
 			)}
 			{reviewDisabled && (
-				<button className="review-btn" onClick={() => cancelBooking()}>
-					Cancel Booking
-				</button>
+				<div className="button-container">
+					<button
+						className="review-btn"
+						onClick={() => cancelBooking()}
+					>
+						Cancel Booking
+					</button>
+					<button
+						className="review-btn"
+						onClick={() => alert('hi')}
+					>
+						Edit Booking
+					</button>
+					
+					
+				</div>
 			)}
 		</div>
 	);

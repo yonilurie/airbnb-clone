@@ -35,7 +35,6 @@ function App() {
 					<Route exact path="/">
 						<Rooms></Rooms>
 					</Route>
-
 					<Route path="/host-your-home">
 						<CreateRoomForm></CreateRoomForm>
 					</Route>
