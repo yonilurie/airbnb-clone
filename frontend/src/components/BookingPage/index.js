@@ -1,5 +1,5 @@
 import { Link, useParams, useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector , useDispatch} from "react-redux";
 import { useEffect, useState } from "react";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 
@@ -7,8 +7,10 @@ import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 
 import "./index.css";
 import CancelBookingModal from "./CancelBookingModal";
+import { getAUsersBookings } from "../../store/session";
 
 const BookingPage = () => {
+	const dispatch = useDispatch()
 	const history = useHistory();
 	const { bookingId } = useParams();
 
@@ -32,6 +34,8 @@ const BookingPage = () => {
 				lat: userBookings[bookingId].room.lat,
 				lng: userBookings[bookingId].room.lng,
 			});
+		} else {
+			dispatch(getAUsersBookings())
 		}
 	}, [userBookings]);
 
