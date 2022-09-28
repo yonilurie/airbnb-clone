@@ -271,9 +271,7 @@ export const deleteBooking = (bookingId) => async (dispatch) => {
 	const response = await csrfFetch(`/api/bookings/${bookingId}`, {
 		method: "DELETE",
 	});
-	console.log(response);
 	const data = await response.json();
-	console.log(data);
 
 	dispatch(deleteABooking(Number(bookingId)));
 };
@@ -316,7 +314,7 @@ const sessionReducer = (state = initialState, action) => {
 				});
 			}
 			newState = { ...state };
-			newState.bookings = bookings
+			newState.bookings = bookings;
 			return newState;
 		}
 
@@ -335,9 +333,7 @@ const sessionReducer = (state = initialState, action) => {
 
 		case DELETE_USER_BOOKING: {
 			newState = { ...state };
-			console.log("BOOKINGID", action.bookingId);
 			if (newState.bookings[action.bookingId]) {
-				console.log(newState.bookings[action.bookingId]);
 				delete newState.bookings[action.bookingId];
 			}
 

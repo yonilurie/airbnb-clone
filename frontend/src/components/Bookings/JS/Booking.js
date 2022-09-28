@@ -50,7 +50,6 @@ const Booking = ({ booking, reviewDisabled }) => {
 		dispatch(deleteBooking(booking.id));
 	};
 
-	console.log(booking);
 	return (
 		<div className="single-booking-container">
 			<NavLink to={`/trips/${booking.id}`} className="booking">

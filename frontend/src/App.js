@@ -23,7 +23,7 @@ function App() {
 	return (
 		<>
 			<Navigation isLoaded={isLoaded} />
-			<div
+			{/* <div
 				className="content-container"
 				style={{
 					display: "flex",
@@ -34,7 +34,7 @@ function App() {
 					paddingRight: "20px",
 					
 				}}
-			>
+			> */}
 				{isLoaded && (
 					<Switch>
 						<Route exact path="/">
@@ -66,7 +66,7 @@ function App() {
 						</Route>
 					</Switch>
 				)}
-			</div>
+			{/* </div> */}
 		</>
 	);
 }

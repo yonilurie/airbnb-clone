@@ -68,7 +68,7 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 				roomId: currentRoom.id,
 			})
 		);
-		console.log(data);
+
 		if (data.errors) {
 			setValidationErrors([data.errors.error]);
 		} else {
