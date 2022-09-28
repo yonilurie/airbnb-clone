@@ -6,6 +6,8 @@ import { getRoomInfo, getARoomsBookings } from "../../../store/CurrentRoom";
 import { deleteARoom, getMyRoomsData } from "../../../store/session";
 import Reviews from "./Reviews";
 
+import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
+
 import "../CSS/SingleRoomInfo.css";
 import ReviewsModal from "./ReviewsModal";
 import BookingCard from "./BookingCard";
@@ -14,10 +16,13 @@ const SingleRoomInfo = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const [showModal, setShowModal] = useState(false);
+	const [center, setCenter] = useState({});
 
 	const sessionuser = useSelector((state) => state.session.user);
+	const currentRoom = useSelector((state) => state.currentRoom);
+
 	const { roomId } = useParams();
-	let currentRoom = useSelector((state) => state.currentRoom);
+
 	const [isDisplayed, setIsDisplayed] = useState(false);
 
 	//Get room info, images, and reviews
@@ -25,6 +30,13 @@ const SingleRoomInfo = () => {
 		dispatch(getRoomInfo(Number(roomId)));
 		dispatch(getARoomsBookings(Number(roomId)));
 	}, [dispatch, roomId]);
+
+	useEffect(() => {
+		setCenter({
+			lat: currentRoom.lat,
+			lng: currentRoom.lng,
+		});
+	}, [currentRoom]);
 
 	useEffect(() => {
 		if (showModal) {
@@ -60,6 +72,10 @@ const SingleRoomInfo = () => {
 	if (currentRoom.name) {
 		document.title = `${currentRoom.name}`;
 	}
+
+	const { isLoaded } = useLoadScript({
+		googleMapsApiKey: process.env.REACT_APP_NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
+	});
 
 	return (
 		<div className="content-container">
@@ -166,12 +182,13 @@ const SingleRoomInfo = () => {
 									</div>
 								</div>
 							</div>
-							{sessionuser && sessionuser.id !== currentRoom.owner.id && (
-								<BookingCard
-									currentRoom={currentRoom}
-									setShowModal={setShowModal}
-								/>
-							)}
+							{sessionuser &&
+								sessionuser.id !== currentRoom.owner.id && (
+									<BookingCard
+										currentRoom={currentRoom}
+										setShowModal={setShowModal}
+									/>
+								)}
 							{sessionuser &&
 								sessionuser.id === currentRoom.ownerId && (
 									<div className="button-container">
@@ -241,6 +258,20 @@ const SingleRoomInfo = () => {
 						{currentRoom.avgStarRating < 1 && (
 							<h2 className="reviews-overview">No Reviews Yet</h2>
 						)}
+						<div className="room-page-map">
+							<h3>Where you'll be</h3>
+							{isLoaded && (
+								<>
+									<GoogleMap
+										zoom={15}
+										center={center}
+										mapContainerClassName="map-small"
+									>
+										<Marker position={center}></Marker>
+									</GoogleMap>
+								</>
+							)}
+						</div>
 					</div>
 				)}
 		</div>

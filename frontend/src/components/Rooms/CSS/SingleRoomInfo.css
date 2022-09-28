@@ -194,7 +194,17 @@ h2 {
 	width: 100%;
 }
 
+/* Map */
 
+.room-page-map {
+	width: 100%;
+}
+
+.map-small {
+	height: 480px;
+	width: 100%;
+	border-radius: 4px;
+}
 
 @media screen and (max-width: 1000px) {
 	.room-details-container {
