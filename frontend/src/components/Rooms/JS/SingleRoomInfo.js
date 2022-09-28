@@ -34,8 +34,8 @@ const SingleRoomInfo = () => {
 	useEffect(() => {
 		if (currentRoom) {
 			setCenter({
-				lat: currentRoom.lat,
-				lng: currentRoom.lng,
+				lat: parseFloat(currentRoom.lat),
+				lng: parseFloat(currentRoom.lng),
 			});
 		}
 	}, [currentRoom]);

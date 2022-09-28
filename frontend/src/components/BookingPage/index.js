@@ -31,8 +31,8 @@ const BookingPage = () => {
 			setBooking(userBookings[bookingId]);
 			setRoom(userBookings[bookingId].room);
 			setCenter({
-				lat: userBookings[bookingId].room.lat,
-				lng: userBookings[bookingId].room.lng,
+				lat: parseFloat(userBookings[bookingId].room.lat),
+				lng: parseFloat(userBookings[bookingId].room.lng),
 			});
 		} else {
 			dispatch(getAUsersBookings())
