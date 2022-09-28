@@ -32,10 +32,12 @@ const SingleRoomInfo = () => {
 	}, [dispatch, roomId]);
 
 	useEffect(() => {
-		setCenter({
-			lat: currentRoom.lat,
-			lng: currentRoom.lng,
-		});
+		if (currentRoom) {
+			setCenter({
+				lat: currentRoom.lat,
+				lng: currentRoom.lng,
+			});
+		}
 	}, [currentRoom]);
 
 	useEffect(() => {
