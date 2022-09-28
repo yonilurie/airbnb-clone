@@ -12,6 +12,7 @@ const CancelBooking = ({ booking }) => {
 			history.push("/trips");
 		});
 	};
+	
 	return (
 		<div className="cancel-booking-modal">
 			<h3>Are you sure you want to cancel your reservation?</h3>

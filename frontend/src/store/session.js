@@ -9,6 +9,7 @@ const CREATE_ROOM = "/api/rooms/add";
 const DELETE_MY_ROOM = "/api/my-rooms/delete";
 const CREATE_USER_BOOKING = "/api/rooms/:roomId/";
 const DELETE_USER_BOOKING = "/api/bookings/:bookingId";
+const EDIT_USER_BOOKING = "api/bookings/edit";
 const GET_USER_BOOKINGS = "/api/bookings";
 const GET_USER_REVIEWS = "/api/reviews";
 const CREATE_ROOM_REVIEW = "/reviews/create";
@@ -98,6 +99,14 @@ const createABooking = (bookingInfo) => {
 		bookingInfo,
 	};
 };
+
+const editABooking = (booking) => {
+	return {
+		type: EDIT_USER_BOOKING,
+		booking,
+	};
+};
+
 //Thunk action creators
 //
 //Logs in the user
@@ -248,7 +257,7 @@ export const createRoomReview = (reviewData) => async (dispatch) => {
 
 export const createBooking = (booking) => async (dispatch) => {
 	const { startDate, endDate, roomId } = booking;
-
+console.log(booking)
 	const response = await csrfFetch(`/api/rooms/${Number(roomId)}/bookings`, {
 		method: "POST",
 		headers: {
@@ -263,6 +272,27 @@ export const createBooking = (booking) => async (dispatch) => {
 	const data = await response.json();
 	if (!data.errors) {
 		dispatch(createABooking(data));
+	}
+	return data;
+};
+
+export const editBooking = (booking) => async (dispatch) => {
+	const { startDate, endDate, bookingId } = booking;
+
+	const response = await csrfFetch(`/api/bookings/${bookingId}`, {
+		method: "PUT",
+		headers: {
+			contentType: "application/json",
+		},
+		body: JSON.stringify({
+			startDate,
+			endDate,
+		}),
+	});
+
+	const data = await response.json();
+	if (!data.errors) {
+		dispatch(editABooking(data));
 	}
 	return data;
 };
@@ -332,6 +362,15 @@ const sessionReducer = (state = initialState, action) => {
 			return newState;
 		}
 
+		case EDIT_USER_BOOKING: {
+			newState = { ...state };
+
+			if (newState.bookings[action.bookingId]) {
+				newState.bookings[action.bookingId] = action.booking;
+			}
+
+			return newState;
+		}
 		case DELETE_USER_BOOKING: {
 			newState = { ...state };
 			if (newState.bookings[action.bookingId]) {

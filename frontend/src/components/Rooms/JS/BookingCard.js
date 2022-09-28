@@ -1,21 +1,20 @@
 import "../CSS/BookingCard.css";
-import Calendar, { YearView } from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import { addDays } from "date-fns";
-import { DateRangePicker } from "react-date-range";
-import "react-date-range/dist/styles.css"; // main css file
-import "react-date-range/dist/theme/default.css"; // theme css file
+// import "react-date-range/dist/styles.css"; // main css file
+// import "react-date-range/dist/theme/default.css"; // theme css file
 
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
 import { createBooking, getAUsersBookings } from "../../../store/session";
-import { useDispatch, useSelector } from "react-redux";
 
 import CalendarMenu from "./CalendarMenu";
 
 const BookingCard = ({ currentRoom, setShowModal }) => {
 	const dispatch = useDispatch();
 	const history = useHistory();
+
 	//Create start and end dates for default values in input field
 	let startDate = new Date();
 	let endDate = new Date();
@@ -29,21 +28,14 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 	for (let i = 1; i <= maxGuests; i++) {
 		maxGuestsArr.push(i);
 	}
-	function getNextDay(date = new Date()) {
-		const next = new Date(date.getTime());
-		next.setDate(date.getDate() + 1);
 
-		return next;
-	}
 	function getPreviousDay(date = new Date()) {
 		const previous = new Date(date.getTime());
 		previous.setDate(date.getDate() - 1);
-
 		return previous;
 	}
 
 	const [bookingStartDate, setBookingStartDate] = useState(startDate);
-
 	const [bookingEndDate, setBookingEndDate] = useState(endDate);
 	const [bookingDuration, setBookingDuration] = useState(nights);
 	const [guests, setGuests] = useState(1);
@@ -55,21 +47,21 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 	const [bookingTotal, setBookingTotal] = useState(
 		nightlyTotal + cleaningFee + serviceFee
 	);
+	const [bookedDates, setBookedDates] = useState([]);
 	const [validationErrors, setValidationErrors] = useState([]);
-
 	const [showMenu, setShowMenu] = useState(false);
 
+	//Handle creating a booking
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const data = await dispatch(
 			createBooking({
-				startDate: bookingStartDate.toISOString().slice(0, 10),
-				endDate: bookingEndDate.toISOString().slice(0, 10),
+				startDate: bookingStartDate,
+				endDate: bookingEndDate,
 				roomId: currentRoom.id,
 				guests: guests,
 			})
 		);
-
 		if (data.errors) {
 			setValidationErrors([data.errors.error]);
 		} else {
@@ -80,14 +72,27 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 		}
 	};
 
-	const onStartDateChange = (e) => {
-		let newStartDate = new Date(e.target.value.replace("-", "/"));
-		setBookingStartDate(newStartDate);
+	const checkInvalidTile = ({ activeStartDate, date, view }) => {
+		for (let booking of bookedDates) {
+			let currStart = new Date(booking.start).getTime();
+			let currEnd = new Date(booking.end).getTime();
+			let currTime = date.getTime();
+			if (currTime <= currEnd && currTime >= currStart) return true;
+		}
+		return false;
 	};
 
-	const checkBookingEnd = (e) => {
-		let newEndDate = new Date(e.target.value.replace("-", "/"));
-		setBookingEndDate(newEndDate);
+	const calendarOnChange = (e) => {
+		if (
+			e[0].toLocaleString().slice(0, 10) ===
+			e[1].toLocaleString().slice(0, 10)
+		) {
+			return setValidationErrors(["Must book at least one night"]);
+		}
+		setBookingStartDate(e[0]);
+		setBookingEndDate(e[1]);
+		console.log(e[1].toISOString());
+		console.log(e[1].toLocaleString());
 	};
 
 	useEffect(() => {
@@ -108,7 +113,6 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 		setBookingTotal(nightlyTotal + cleaningFee + serviceFee);
 	}, [nightlyTotal]);
 
-	const [bookedDates, setBookedDates] = useState([]);
 	useEffect(() => {
 		if (
 			currentRoom &&
@@ -125,31 +129,6 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 			setBookedDates(invalidDates);
 		}
 	}, [currentRoom]);
-
-	const checkInvalidTile = ({ activeStartDate, date, view }) => {
-		for (let booking of bookedDates) {
-			let currStart = new Date(booking.start).getTime();
-			let currEnd = new Date(booking.end).getTime();
-			let currTime = date.getTime();
-			if (currTime <= currEnd && currTime >= currStart) return true;
-		}
-		return false;
-	};
-
-	const calendarOnChange = (e) => {
-		let start = new Date(e[0]);
-		let end = new Date(e[1]);
-
-		if (
-			start.toLocaleString().slice(0, 10) ===
-			end.toLocaleString().slice(0, 10)
-		) {
-			return setValidationErrors(["Must book at least one night"]);
-		}
-
-		setBookingStartDate(e[0]);
-		setBookingEndDate(e[1]);
-	};
 
 	return (
 		<div className="room-price-card-container">

@@ -1,16 +1,15 @@
 import { Link, useParams, useHistory } from "react-router-dom";
-import { useSelector , useDispatch} from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
-
-
 
 import "./index.css";
 import CancelBookingModal from "./CancelBookingModal";
 import { getAUsersBookings } from "../../store/session";
+import EditBookingModal from "./EditBookingModal";
 
 const BookingPage = () => {
-	const dispatch = useDispatch()
+	const dispatch = useDispatch();
 	const history = useHistory();
 	const { bookingId } = useParams();
 
@@ -18,6 +17,7 @@ const BookingPage = () => {
 	const [room, setRoom] = useState({});
 	const [center, setCenter] = useState({});
 	const [showModal, setShowModal] = useState(false);
+	const [showEditModal, setShowEditModal] = useState(false);
 
 	const userBookings = useSelector((state) => state.session.bookings);
 	const user = useSelector((state) => state.session.user);
@@ -25,6 +25,29 @@ const BookingPage = () => {
 	const { isLoaded } = useLoadScript({
 		googleMapsApiKey: process.env.REACT_APP_NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
 	});
+
+	const getDate = (date) => {
+		let newDate = new Date(date);
+		return newDate.toDateString();
+	};
+
+	const isPast = (date, date2) => {
+		const endDate = new Date(date).getTime();
+		const today = new Date().getTime();
+
+		// if (start.getTime() < now && end.getTime() > now) {
+		// 	return currentBookings.push(booking);
+		// }
+
+		return endDate < today;
+	};
+
+	const checkReview = (reviews) => {
+		for (let review of reviews) {
+			if (review.userId === user.id) return true;
+		}
+		return false;
+	};
 
 	useEffect(() => {
 		if (userBookings[bookingId]) {
@@ -35,27 +58,9 @@ const BookingPage = () => {
 				lng: parseFloat(userBookings[bookingId].room.lng),
 			});
 		} else {
-			dispatch(getAUsersBookings())
+			dispatch(getAUsersBookings());
 		}
 	}, [userBookings]);
-
-	const getDate = (date) => {
-		const newDate = new Date(date);
-		return newDate.toDateString().split(" ").slice(0, 4).join(" ");
-	};
-
-	const isPast = (date) => {
-		const endDate = new Date(date).getTime();
-		const today = new Date().getTime();
-		return endDate < today;
-	};
-
-	const checkReview = (reviews) => {
-		for (let review of reviews) {
-			if (review.userId === user.id) return true;
-		}
-		return false;
-	};
 
 	return (
 		<>
@@ -125,6 +130,11 @@ const BookingPage = () => {
 								setShowModal={setShowModal}
 								booking={booking}
 							></CancelBookingModal>
+							<EditBookingModal
+								showModal={showEditModal}
+								setShowModal={setShowEditModal}
+								booking={booking}
+							></EditBookingModal>
 							{!isPast(booking.startDate) ? (
 								<>
 									<div
@@ -133,7 +143,10 @@ const BookingPage = () => {
 									>
 										Cancel booking
 									</div>
-									<div className="booking-action-edit">
+									<div
+										className="booking-action-edit"
+										onClick={() => setShowEditModal(true)}
+									>
 										Edit booking
 									</div>
 								</>

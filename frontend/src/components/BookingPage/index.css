@@ -80,7 +80,7 @@
 }
 
 .booking-page-back {
-	z-index: 2;
+	z-index: 1;
 	position: absolute;
 	top: 20px;
 	left: 15px;
@@ -122,6 +122,17 @@
 	background-color: white;
 	padding: 15px;
 	box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.05);
+}
+
+.booking-action-cancel,
+.booking-action-edit {
+	padding: 10px;
+	cursor: pointer;
+}
+
+.booking-action-cancel:hover,
+.booking-action-edit:hover {
+	background-color: rgb(246, 246, 246);
 }
 
 /* Directions card */
@@ -179,9 +190,7 @@
 	height: 100%;
 }
 
-
 /* Cancel booking */
-
 
 .cancel-booking-modal {
 	width: 50vh;
@@ -191,6 +200,19 @@
 	justify-content: center;
 	align-items: center;
 }
+
+
+/* Edit Booking */
+
+.edit-booking-modal {
+	width: 50vw;
+	height: 50vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
 
 @media screen and (max-width: 1000px) {
 	.booking-page-right {

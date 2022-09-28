@@ -1,10 +1,18 @@
-const EditBookingModal = () => {
+import EditBooking from "./EditBooking";
+import { Modal } from "../../context/Modal";
+
+const EditBookingModal = ({ showModal, setShowModal, booking }) => {
 	return (
-		<div>
-			<div></div>
-			<div></div>
-			<div></div>
-		</div>
+		<>
+			{showModal && (
+				<Modal onClose={() => setShowModal(false)}>
+					<EditBooking
+						booking={booking}
+						setShowModal={setShowModal}
+					></EditBooking>
+				</Modal>
+			)}
+		</>
 	);
 };
 

@@ -345,11 +345,13 @@ router.post(
 			where: {
 				startDate: { [Op.gte]: startDate },
 				endDate: { [Op.lte]: endDate },
+				id: roomId
 			},
 		});
 		//If they do return error message to user with 403 code
 
 		if (bookingCheck) {
+			console.log(bookingCheck)
 			const err = {};
 			// err.booking =  {
 			// 	startDate: checkAvailability.startDate,

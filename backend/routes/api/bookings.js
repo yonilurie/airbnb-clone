@@ -30,7 +30,7 @@ router.put(
 	async (req, res) => {
 		const { bookingId } = req.params;
 		const { id } = req.user;
-		let { startDate, endDate } = req.body;
+		let { startDate, endDate, roomId } = req.body;
 		//Convert dates to date objects
 		startDate = startDate.split("-");
 		startDate[1] -= 1;
@@ -76,6 +76,12 @@ router.put(
 			where: {
 				startDate: { [Op.gte]: startDate },
 				endDate: { [Op.lte]: endDate },
+				roomId: {
+					[Op.eq]: roomId,
+				},
+				id: {
+					[Op.ne]: bookingId,
+				},
 			},
 		});
 		//if room is not available return error with 403 code

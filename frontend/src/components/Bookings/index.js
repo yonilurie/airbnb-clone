@@ -27,13 +27,12 @@ const Bookings = () => {
 
 	useEffect(() => {
 		// const timeout = setTimeout(() => {
-			setIsDisplayed(true);
+		setIsDisplayed(true);
 		// }, 300);
 
 		// return () => clearTimeout(timeout);
 	}, []);
 
-	
 	const bookings = Object.values(
 		useSelector((state) => state.session.bookings)
 	);
@@ -43,18 +42,25 @@ const Bookings = () => {
 
 	let pastBookings = [];
 	let futureBookings = [];
+	let currentBookings = [];
 
 	if (bookings.length && bookings[0] !== "No bookings yet") {
 		bookings.forEach((booking) => {
-			let now = new Date();
-			let time = new Date(booking.startDate);
-			if (time.getTime() < now) {
-				pastBookings.push(booking);
+			let now = new Date().getTime();
+			let start = new Date(booking.startDate);
+			let end = new Date(booking.endDate);
+
+			if (start.getTime() < now && end.getTime() > now) {
+				return currentBookings.push(booking);
 			}
-			if (time.getTime() > now) {
-				futureBookings.push(booking);
+			if (start.getTime() < now) {
+				return pastBookings.push(booking);
+			}
+			if (start.getTime() > now) {
+				return futureBookings.push(booking);
 			}
 		});
+		console.log(currentBookings);
 	}
 
 	const home = () => {
@@ -62,9 +68,10 @@ const Bookings = () => {
 	};
 
 	return (
-		<>
+		<div className="bookings-page-container">
 			<h1>Trips</h1>
-			{futureBookings.length < 1 && (
+
+			{futureBookings.length < 1 && currentBookings.length === 0 && (
 				<div className="empty-bookings-placeholder">
 					<div className="current-bookings-empty-text">
 						<h3>No trips booked...yet!</h3>
@@ -87,6 +94,19 @@ const Bookings = () => {
 			)}
 			{bookings.length >= 1 && isDisplayed && (
 				<div>
+					<h2>Current</h2>
+					<div className="past-bookings">
+						{currentBookings.length >= 1 &&
+							currentBookings.map((booking) => {
+								return (
+									<Booking
+										booking={booking}
+										key={booking.id}
+										reviewDisabled={true}
+									/>
+								);
+							})}
+					</div>
 					{futureBookings.length >= 1 && (
 						<div>
 							<h2>Where you're headed</h2>
@@ -125,7 +145,7 @@ const Bookings = () => {
 					</div>
 				</div>
 			)}
-		</>
+		</div>
 	);
 };
 
