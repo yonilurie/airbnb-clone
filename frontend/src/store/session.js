@@ -274,6 +274,7 @@ export const deleteBooking = (bookingId) => async (dispatch) => {
 	const data = await response.json();
 
 	dispatch(deleteABooking(Number(bookingId)));
+	return data;
 };
 
 //Initial state for session
@@ -321,9 +322,9 @@ const sessionReducer = (state = initialState, action) => {
 		case CREATE_USER_BOOKING: {
 			newState = {
 				...state,
-				bookings: {
-					...state.bookings,
-				},
+				// bookings: {
+				// 	...state.bookings,
+				// },
 			};
 			newState.bookings[action.bookingInfo.id] = {
 				...action.bookingInfo,

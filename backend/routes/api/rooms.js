@@ -319,15 +319,6 @@ router.post(
 		const { roomId } = req.params;
 		const { id } = req.user;
 		let { startDate, endDate } = req.body;
-		console.log(startDate, endDate);
-		//Convert dates to date objects
-		// startDate = startDate.split("-");
-		// startDate[1] -= 1;
-		// startDate = new Date(startDate[0], startDate[1], startDate[2]);
-		// endDate = endDate.split("-");
-		// endDate[1] -= 1;
-		// endDate = new Date(endDate[0], endDate[1], endDate[2]);
-		//check if dates are valid
 		if (startDate >= endDate) {
 			res.status = 403;
 			return res.json({

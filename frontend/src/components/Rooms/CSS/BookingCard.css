@@ -164,6 +164,7 @@ select {
 
 .react-calendar {
 	width: 100% !important ;
+	border-radius: 2px;
 }
 
 .calendar-menu-main-container {

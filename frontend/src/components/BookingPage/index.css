@@ -2,8 +2,8 @@
 	display: flex;
 	width: 100%;
 	height: 92vh;
-	gap: 10px;
-	padding: 15px;
+
+	/* padding: 15px; */
 	box-sizing: border-box;
 }
 
@@ -30,6 +30,7 @@
 
 .booking-page-image {
 	min-height: 400px;
+	max-height: 416px;
 	height: fit-content;
 	position: relative;
 	display: flex;
@@ -64,6 +65,8 @@
 	border-bottom-right-radius: 0px;
 	border-top-right-radius: 4px;
 	border-top-left-radius: 0px;
+
+	box-sizing: border-box;
 }
 
 .booking-page-title {
@@ -72,6 +75,8 @@
 	padding: 0px;
 	z-index: 1;
 	height: fit-content;
+	margin-left: 5%;
+	margin-top: 5%;
 }
 
 .booking-page-back {
@@ -114,7 +119,7 @@
 /* Actions */
 
 .booking-page-actions {
-		background-color: white;
+	background-color: white;
 	padding: 15px;
 	box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.05);
 }
@@ -172,6 +177,19 @@
 .map {
 	width: 100%;
 	height: 100%;
+}
+
+
+/* Cancel booking */
+
+
+.cancel-booking-modal {
+	width: 50vh;
+	height: 20vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
 @media screen and (max-width: 1000px) {

@@ -2,7 +2,11 @@ import { Link, useParams, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
+
+
+
 import "./index.css";
+import CancelBookingModal from "./CancelBookingModal";
 
 const BookingPage = () => {
 	const history = useHistory();
@@ -11,6 +15,7 @@ const BookingPage = () => {
 	const [booking, setBooking] = useState({});
 	const [room, setRoom] = useState({});
 	const [center, setCenter] = useState({});
+	const [showModal, setShowModal] = useState(false);
 
 	const userBookings = useSelector((state) => state.session.bookings);
 	const user = useSelector((state) => state.session.user);
@@ -89,6 +94,12 @@ const BookingPage = () => {
 									>
 										Get directions
 									</a>
+									<Link
+										to={`/rooms/${room.id}`}
+										className="direction-card"
+									>
+										Show listing
+									</Link>
 								</div>
 							</div>
 						</div>
@@ -105,31 +116,41 @@ const BookingPage = () => {
 						</div>
 						<div className="booking-page-actions">
 							<h3>Action</h3>
-							{isPast(booking.startDate) && (
+							<CancelBookingModal
+								showModal={showModal}
+								setShowModal={setShowModal}
+								booking={booking}
+							></CancelBookingModal>
+							{!isPast(booking.startDate) ? (
 								<>
-									<div className="booking-action-cancel">
+									<div
+										className="booking-action-cancel"
+										onClick={() => setShowModal(true)}
+									>
 										Cancel booking
 									</div>
 									<div className="booking-action-edit">
 										Edit booking
 									</div>
 								</>
-							)}
-							{!isPast(booking.startDate) &&
-							checkReview(room.reviews) ? (
-								<Link
-									to={`/review-room/${booking.room.id}`}
-									className="booking-action-review"
-								>
-									Edit review
-								</Link>
 							) : (
-								<Link
-									to={`/review-room/${booking.room.id}`}
-									className="booking-action-review"
-								>
-									Create review
-								</Link>
+								<>
+									{checkReview(room.reviews) ? (
+										<Link
+											to={`/review-room/${booking.room.id}`}
+											className="booking-action-review"
+										>
+											Edit review
+										</Link>
+									) : (
+										<Link
+											to={`/review-room/${booking.room.id}`}
+											className="booking-action-review"
+										>
+											Create review
+										</Link>
+									)}
+								</>
 							)}
 						</div>
 						<div className="booking-page-directions">
@@ -145,8 +166,8 @@ const BookingPage = () => {
 							<div className="directions-cards">
 								<div
 									className="direction-card"
-									onClick={() => {
-										navigator.clipboard.writeText(
+									onClick={async () => {
+										await navigator.clipboard.writeText(
 											`${room.address} ${room.city}, ${room.state}`
 										);
 										alert("Copied address to clipboard");

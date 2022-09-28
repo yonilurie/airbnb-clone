@@ -8,7 +8,7 @@ import "react-date-range/dist/theme/default.css"; // theme css file
 
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { createBooking } from "../../../store/session";
+import { createBooking, getAUsersBookings } from "../../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 
 import CalendarMenu from "./CalendarMenu";
@@ -66,6 +66,7 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 				startDate: bookingStartDate.toISOString().slice(0, 10),
 				endDate: bookingEndDate.toISOString().slice(0, 10),
 				roomId: currentRoom.id,
+				guests: guests,
 			})
 		);
 
@@ -73,6 +74,9 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 			setValidationErrors([data.errors.error]);
 		} else {
 			setValidationErrors(["Successfully booked!"]);
+			dispatch(getAUsersBookings()).then(() => {
+				history.push(`/trips/${data.id}`);
+			});
 		}
 	};
 
@@ -90,7 +94,6 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 		let difference = bookingEndDate.getTime() - bookingStartDate.getTime();
 		if (difference !== endDate.getTime() - startDate.getTime()) {
 			let duration = Math.ceil(difference / (1000 * 3600 * 24) - 1);
-
 			setBookingDuration(duration);
 		}
 	}, [bookingStartDate, bookingEndDate]);
