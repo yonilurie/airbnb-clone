@@ -140,6 +140,7 @@ router.get("/", [restoreUser, requireAuth], async (req, res) => {
 			"updatedAt",
 			"startDate",
 			"endDate",
+			"guests",
 			"id",
 			"roomId",
 			"userId",
