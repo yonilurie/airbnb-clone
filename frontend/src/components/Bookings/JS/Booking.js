@@ -7,10 +7,9 @@ import { deleteBooking } from "../../../store/session";
 
 import BookingCard from "../../Rooms/JS/BookingCard";
 
-
 const Booking = ({ booking, reviewDisabled }) => {
 	const dispatch = useDispatch();
-	const history = useHistory()
+	const history = useHistory();
 	const session = useSelector((state) => state.session);
 	const [showEditReservation, setShowEditReservation] = useState(false);
 
@@ -50,10 +49,11 @@ const Booking = ({ booking, reviewDisabled }) => {
 	const cancelBooking = () => {
 		dispatch(deleteBooking(booking.id));
 	};
+
 	console.log(booking);
 	return (
 		<div className="single-booking-container">
-			<NavLink to={`/rooms/${booking.room.id}`} className="booking">
+			<NavLink to={`/trips/${booking.id}`} className="booking">
 				<div className="booking-image">
 					<img
 						src={booking.room.previewImage}
@@ -69,12 +69,12 @@ const Booking = ({ booking, reviewDisabled }) => {
 					<div className="duration">{`${month} ${duration} ${year}`}</div>
 				</div>
 			</NavLink>
-			{!reviewDisabled && (
+			{/* {!reviewDisabled && (
 				<NavLink to={`/review-room/${booking.room.id}`}>
 					<button className="review-btn">{buttonMsg}</button>
 				</NavLink>
-			)}
-			{reviewDisabled && (
+			)} */}
+			{/* {reviewDisabled && (
 				<div className="button-container">
 					<button
 						className="review-btn"
@@ -91,7 +91,7 @@ const Booking = ({ booking, reviewDisabled }) => {
 					
 					
 				</div>
-			)}
+			)} */}
 		</div>
 	);
 };

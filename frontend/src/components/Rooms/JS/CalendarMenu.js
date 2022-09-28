@@ -8,18 +8,19 @@ const CalendarMenu = ({
 	onChange,
 	bookingEndDate,
 	bookingStartDate,
-	room
+	room,
 }) => {
 	return (
 		<div className="calendar-menu-main-container">
 			<div className="booking-card-dates">
 				<div>
-					Start: {bookingStartDate.toLocaleString().split(",")[0]}{" "}
+					Check in: {bookingStartDate.toLocaleString().split(",")[0]}{" "}
 				</div>
 
-				<div>End: {bookingEndDate.toLocaleString().split(",")[0]}</div>
+				<div>
+					Check out: {bookingEndDate.toLocaleString().split(",")[0]}
+				</div>
 			</div>
-
 			<Calendar
 				minDate={minDate}
 				value={[bookingStartDate, bookingEndDate]}

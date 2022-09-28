@@ -15,12 +15,14 @@ a {
 	font-weight: 400;
 	line-height: 1.25rem;
 	width: fit-content;
-	
+
 	white-space: nowrap;
 }
 
 .booking-info {
-	padding-left: 1rem;
+	/* padding-left: 1rem; */
+	max-width: 100%;
+	margin: 0px;
 }
 
 .preview-image {
@@ -63,19 +65,34 @@ a {
 .booking {
 	display: flex;
 
-	width: 12.5rem;
+	min-width: 33%;
+
+	width: 33%;
 	height: 6rem;
 	padding: 0.75rem 0rem;
+	gap: 5px;
 	justify-content: space-between;
 	flex-direction: row;
+}
+
+.past-bookings-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
 
 .past-bookings {
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
-	justify-content: center;
-	gap: 0rem 12.5rem;
+	justify-content: flex-start;
+	gap: 2rem 12.5rem;
+	max-width: 1340px;
+}
+
+.single-booking-container {
+	width: 20%;
+	min-width: 300px;
 }
 
 .search-btn {

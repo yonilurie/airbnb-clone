@@ -89,7 +89,7 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 	useEffect(() => {
 		let difference = bookingEndDate.getTime() - bookingStartDate.getTime();
 		if (difference !== endDate.getTime() - startDate.getTime()) {
-			let duration = Math.ceil(difference / (1000 * 3600 * 24));
+			let duration = Math.ceil(difference / (1000 * 3600 * 24) - 1);
 
 			setBookingDuration(duration);
 		}
@@ -134,6 +134,16 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 	};
 
 	const calendarOnChange = (e) => {
+		let start = new Date(e[0]);
+		let end = new Date(e[1]);
+
+		if (
+			start.toLocaleString().slice(0, 10) ===
+			end.toLocaleString().slice(0, 10)
+		) {
+			return setValidationErrors(["Must book at least one night"]);
+		}
+
 		setBookingStartDate(e[0]);
 		setBookingEndDate(e[1]);
 	};

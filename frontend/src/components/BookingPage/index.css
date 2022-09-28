@@ -1,0 +1,136 @@
+.booking-page-main-container {
+	display: flex;
+	width: 100%;
+	height: 92vh;
+}
+
+.booking-page-right {
+	width: 100%;
+	min-height: 100%;
+}
+
+.booking-page-left {
+	padding: 10px;
+	box-sizing: border-box;
+	width: 50%;
+	max-width: 596px;
+	min-width: 416px;
+	height: 100%;
+	background-color: rgb(251, 251, 251);
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	overflow-y: scroll;
+}
+
+.booking-page-image {
+	min-height: 400px;
+
+	height: fit-content;
+	position: relative;
+	display: flex;
+	padding-top: 15%;
+}
+
+
+/* Location details */
+.booking-page-location-details {
+	background-color: white;
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+	box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.05);
+}
+
+.booking-page-room-image {
+	max-width: 416px;
+	max-width: 596px;
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	top: 0px;
+	z-index: 0;
+	filter: brightness(50%);
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+}
+
+.booking-page-title {
+	color: white;
+	margin: 0px;
+	padding: 0px;
+	z-index: 1;
+	height: fit-content;
+}
+
+.booking-page-back {
+	z-index: 2;
+	position: absolute;
+	top: 20px;
+	left: 15px;
+}
+/* Reservation details card */
+.booking-page-dates {
+	display: flex;
+	justify-content: space-between;
+	padding: 15px;
+	box-sizing: border-box;
+}
+
+.booking-page-reservation-details {
+	background-color: white;
+	padding: 15px;
+	box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.05);
+}
+
+.reservation-details {
+	display: flex;
+	justify-content: space-between;
+}
+
+/* Directions card */
+.booking-page-directions {
+	background-color: white;
+	padding: 15px;
+	box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.05);
+}
+
+.directions-cards {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.direction-card {
+	border-top: solid 1px lightgray;
+}
+
+/* Rules  card*/
+
+.booking-page-rules {
+	background-color: white;
+	padding: 15px;
+	box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* Hosted by card */
+
+.booking-page-hosted {
+	background-color: white;
+	padding: 15px;
+	box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* Payment card */
+
+.booking-page-payment {
+	background-color: white;
+	padding: 15px;
+	box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* Map */
+
+.map {
+	width: 100%;
+	height: 100%;
+}

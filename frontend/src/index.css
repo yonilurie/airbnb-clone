@@ -13,9 +13,18 @@ html {
 html,
 body {
 	margin: 0;
+	overflow-y: scroll;
+	/* min-height: 100%; */
+	min-height: 100vh
+	/* overflow: auto; */
+}
+body {
+	height: 100vh; 
 	height: 100%;
 }
-
+html {
+	overflow-y: scroll;
+}
 textarea {
 	font-family: "Inter var", sans-serif;
 	resize: vertical;
