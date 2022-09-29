@@ -40,8 +40,8 @@ h2 {
 }
 
 .room-content {
-	padding-left: 5rem;
-	padding-right: 5rem;
+	/* padding-left: 5rem;
+	padding-right: 5rem; */
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -49,24 +49,75 @@ h2 {
 }
 
 .room-images {
-	max-height: 36.5rem;
 	max-width: 1320px;
+	max-height: 560px;
+	height: 100%;
+	width: 95%;
+	display: flex;
+	gap: 10px;
+}
 
-	/* width: 100%; */
+.room-images-side {
+	/* height: 312px; */
+	height: 100%;
+	max-height: 560px;
+	max-width: 560px;
+	display: flex;
+}
+
+.room-images-container {
+	display: flex;
+	flex-direction: column;
+	height: 560px;
+	flex-wrap: wrap;
+	width: 50%;
+	max-height: 560px;
+	gap: 10px;
+}
+
+.room-image-small {
+	object-fit: cover;
+	height: 100%;
+	max-height: 275px;
+	width: 100%;
+	max-width: 280px;
+	border-radius: 0px;
+}
+.room-image-small-placeholder {
+	max-width: 280px;
+	max-height: 272px;
+	height: 100%;
+	width: 100%;
+	width: 280px;
+	object-fit: cover;
+	border-radius: 0px;
+	background-color: rgb(222, 215, 215);
+}
+
+.top-right {
+	border-top-right-radius: 12px;
+}
+.bottom-right {
+	border-bottom-right-radius: 12px;
 }
 
 .main-image {
 	object-fit: cover;
 	height: 100%;
-	max-height: 392px;
+	max-width: 560px;
 	width: 100%;
-	max-width: 392px;
+	/* max-width: 560px; */
+	border-top-right-radius: 0px;
+	border-bottom-right-radius: 0px;
+
+	/* width: 560px; */
 }
 
 .content-container {
 	display: flex;
 	justify-content: center;
 	margin-bottom: 5rem;
+	width: 100%;
 }
 
 .delete-btn,
@@ -193,6 +244,9 @@ h2 {
 	justify-content: space-between;
 	width: 100%;
 }
+.room-details {
+	width: 87%;
+}
 
 /* Map */
 
@@ -206,6 +260,22 @@ h2 {
 	border-radius: 4px;
 }
 
+.gallery {
+	display: none;
+	width: 100%;
+	height: 100%;
+}
+
+.gallery-img {
+	/* width: 100%; */
+	/* height: 100%; */
+	/* width: 500px; */
+	height: 20vh;
+	/* background-color: grey; */
+
+	object-fit: contain;
+}
+
 @media screen and (max-width: 1000px) {
 	.room-details-container {
 		flex-direction: column;
@@ -215,5 +285,14 @@ h2 {
 
 	.room-owner-and-description {
 		margin: 0rem;
+	}
+}
+@media screen and (max-width: 744px) {
+	.room-images {
+		display: none;
+	}
+
+	.gallery {
+		display: flex;
 	}
 }

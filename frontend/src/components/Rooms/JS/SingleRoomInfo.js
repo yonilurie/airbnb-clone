@@ -120,40 +120,43 @@ const SingleRoomInfo = () => {
 
 			{currentRoom && Number(currentRoom.id) === Number(roomId) && (
 				<div className="room-content">
-					<div>
-						<div className="room-details">
-							<h1 className="room-name">{currentRoom.name}</h1>
-							{currentRoom.avgStarRating >= 1 && (
-								<div className="room-reviews-and-location">
-									★
-									{Number(currentRoom.avgStarRating).toFixed(
-										2
-									)}
-									{" · "}
-									<span
-										id="reviews-modal-link"
-										onClick={() => setShowModal(true)}
-									>
-										{Number(
-											Object.values(currentRoom.reviews)
-												.length
-										)}{" "}
-										review(s)
-									</span>
-									{" · "}
-									{currentRoom.city}, {currentRoom.state},{" "}
-									{currentRoom.country}
-								</div>
-							)}
-							{currentRoom.avgStarRating < 1 && (
-								<div className="room-reviews-and-location">
-									No Reviews Yet {currentRoom.city},{" "}
-									{currentRoom.state}, {currentRoom.country}
-								</div>
-							)}
-						</div>
+					{/* <div className="gallery">
+						<img
+							className="gallery-img"
+							src={currentRoom.previewImage}
+						></img>
+					</div> */}
+					<div className="room-details">
+						<h1 className="room-name">{currentRoom.name}</h1>
+						{currentRoom.avgStarRating >= 1 && (
+							<div className="room-reviews-and-location">
+								★{Number(currentRoom.avgStarRating).toFixed(2)}
+								{" · "}
+								<span
+									id="reviews-modal-link"
+									onClick={() => setShowModal(true)}
+								>
+									{Number(
+										Object.values(currentRoom.reviews)
+											.length
+									)}{" "}
+									review(s)
+								</span>
+								{" · "}
+								{currentRoom.city}, {currentRoom.state},{" "}
+								{currentRoom.country}
+							</div>
+						)}
+						{currentRoom.avgStarRating < 1 && (
+							<div className="room-reviews-and-location">
+								No Reviews Yet {currentRoom.city},{" "}
+								{currentRoom.state}, {currentRoom.country}
+							</div>
+						)}
+					</div>
 
-						<div className="room-images">
+					<div className="room-images">
+						<div className="room-images-left">
 							{currentRoom.previewImage && (
 								<img
 									src={currentRoom.previewImage}
@@ -162,7 +165,56 @@ const SingleRoomInfo = () => {
 								></img>
 							)}
 						</div>
+						<div className="room-images-side">
+							<div className="room-images-container">
+								{currentRoom.images[1] ? (
+									<img
+										src={currentRoom.images[0].imageUrl}
+										className="room-image-small"
+									></img>
+								) : (
+									<div className="room-image-small-placeholder"></div>
+								)}
+								{currentRoom.images[1] ? (
+									<img
+										src={currentRoom.images[1].imageUrl}
+										className="room-image-small"
+									></img>
+								) : (
+									<div className="room-image-small-placeholder"></div>
+								)}
+							</div>
+							<div
+								className="room-images-container"
+								style={{
+									paddingLeft: "10px",
+								}}
+							>
+								{currentRoom.images[2] ? (
+									<img
+										src={currentRoom.images[2].imageUrl}
+										className="room-image-small top-right"
+									></img>
+								) : (
+									<div className="room-image-small-placeholder top-right"></div>
+								)}
+								{currentRoom.images[3] ? (
+									<img
+										src={currentRoom.images[3].imageUrl}
+										className="room-image-small bottom-right"
+									></img>
+								) : (
+									<div
+										className="room-image-small-placeholder bottom-right"
+										// style={{
+										// 	marginTop: "16px",
+										// }}
+									></div>
+								)}
+							</div>
+						</div>
 					</div>
+					{/* </div> */}
 					<div className="room-details-container">
 						<div className="room-owner-and-description">
 							<>
