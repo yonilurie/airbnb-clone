@@ -7,7 +7,7 @@ const CreateUser = () => {
 	const [username, setUsername] = useState("testing");
 	const [email, setEmail] = useState("test@test.io");
 	const [password, setPassword] = useState("testing");
-	const [image, setImage] = useState(null);
+	const [images, setImages] = useState(null);
 	// for multuple file upload
 	//   const [images, setImages] = useState([]);
 	const [errors, setErrors] = useState([]);
@@ -25,7 +25,7 @@ const CreateUser = () => {
 				username,
 				email,
 				password,
-				image,
+				images,
 				lastName,
 				firstName,
 			})
@@ -34,7 +34,7 @@ const CreateUser = () => {
 				setUsername("");
 				setEmail("");
 				setPassword("");
-				setImage(null);
+				setImages(null);
 			})
 			.catch(async (res) => {
 				const data = await res.json();
@@ -46,8 +46,11 @@ const CreateUser = () => {
 	};
 
 	const updateFile = (e) => {
-		const file = e.target.files[0];
-		if (file) setImage(file);
+		const file = e.target.files;
+		if (file.length !== 5) return setErrors(['Must include five files'])
+		else setErrors([])
+		if (file) setImages(file);
+		console.log(file)
 	};
 
 	// for multiple file upload
@@ -90,7 +93,7 @@ const CreateUser = () => {
 					/>
 				</label>
 				<label>
-					<input type="file" onChange={updateFile} />
+					<input type="file" onChange={updateFile} multiple />
 				</label>
 				{/* <label>
             Multiple Upload

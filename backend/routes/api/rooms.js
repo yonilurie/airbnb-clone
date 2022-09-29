@@ -1,6 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const { singlePublicFileUpload, singleMulterUpload } = require("../../awsS3");
+const {
+	multiplePublicFileUpload,
+	multipleMulterUpload,
+} = require("../../awsS3");
 const asyncHandler = require("express-async-handler");
 const sequelize = require("sequelize");
 const { check } = require("express-validator");
@@ -682,7 +685,7 @@ router.delete(
 //Add a room if you are a user
 router.post(
 	"/add",
-	singleMulterUpload("image"),
+	multipleMulterUpload("images"),
 	[restoreUser, requireAuth, validateRoom],
 	asyncHandler(async (req, res) => {
 		const {
@@ -695,11 +698,10 @@ router.post(
 			name,
 			description,
 			price,
-			
-			// previewImage,
 		} = req.body;
-		
-		const previewImage = await singlePublicFileUpload(req.file);
+
+		const gallery = await multiplePublicFileUpload(req.files);
+		console.log(gallery);
 		let room = await Room.create({
 			ownerId: req.user.id,
 			address: address,
@@ -711,9 +713,17 @@ router.post(
 			name: name,
 			description: description,
 			price: price,
-			previewImage: previewImage,
-			rules: 'wow&'
+			previewImage: gallery[0],
+			rules: "No Smoking&",
 		});
+		for (let i = 1; i < gallery.length; i++) {
+			let roomImages = await UserRoomImage.create({
+				roomId: room.id,
+				userId: req.user.id,
+				imageUrl: gallery[i]
+			});
+			console.log(roomImages)
+		}
 
 		res.status = 201;
 		return res.json(room);

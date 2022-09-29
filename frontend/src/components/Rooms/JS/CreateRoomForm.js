@@ -20,7 +20,7 @@ const CreateRoomForm = () => {
 	const [longitude, setLongitude] = useState(2);
 	const [description, setDescription] = useState("ddddd");
 	const [price, setPrice] = useState(100);
-	const [previewImage, setPreviewImage] = useState("");
+	const [images, setImages] = useState(null);
 	const [image, setImage] = useState("");
 	const [validationErrors, setValidationErrors] = useState([]);
 	const [isLoaded, setIsLoaded] = useState(false);
@@ -61,10 +61,18 @@ const CreateRoomForm = () => {
 	//If the user is not logged in, redirect the user to home page
 	if (!sessionuser) return <Redirect to="/" />;
 
+	const updateFile = (e) => {
+		const file = e.target.files;
+		console.log(file)
+		if (file.length !== 5)
+			return setValidationErrors(["Must include five files"]);
+		else setValidationErrors([]);
+		if (file) setImages(file);
+	};
+
 	//When for/ is submitted
 	const onSubmit = async (e) => {
 		e.preventDefault();
-		
 
 		if (!validationErrors.length) {
 			const checkIfLocationTaken = await fetch(
@@ -80,7 +88,6 @@ const CreateRoomForm = () => {
 			}
 
 			dispatch(
-		
 				createRoom({
 					name,
 					address,
@@ -92,7 +99,7 @@ const CreateRoomForm = () => {
 					description,
 					price,
 					// previewImage,
-					image,
+					images,
 				})
 			);
 
@@ -381,23 +388,21 @@ const CreateRoomForm = () => {
 
 					<div className="input-container">
 						{" "}
-						<label htmlFor="previewImage" className="form-label">
+						{/* <label htmlFor="previewImage" className="form-label">
 							Add a preview Image
 						</label>
 						<input
 							type="url"
 							className="form-input"
 							id="previewImage"
-							value={previewImage}
-							onChange={(e) => setPreviewImage(e.target.value)}
+							value={images}
+							onChange={updateFile}
 							required
-						></input>
+						></input> */}
 						<input
 							type="file"
-							onChange={(e) => {
-								console.log(e.target.files[0]);
-								setImage(e.target.files[0]);
-							}}
+							onChange={updateFile}
+							multiple
 						></input>
 					</div>
 				</div>

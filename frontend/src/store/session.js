@@ -275,8 +275,7 @@ export const createRoom = (room) => async (dispatch) => {
 		lng,
 		description,
 		price,
-		// previewImage,
-		image,
+		images,
 	} = room;
 	const formData = new FormData();
 	formData.append("name", name);
@@ -289,8 +288,12 @@ export const createRoom = (room) => async (dispatch) => {
 	formData.append("description", description);
 	formData.append("price", price);
 	// formData.append("previewImage", previewImage);
-	formData.append("image", image);
-
+	if (images && images.length !== 0) {
+		for (var i = 0; i < images.length; i++) {
+			formData.append("images", images[i]);
+		}
+	}
+	console.log(images)
 	const response = await csrfFetch("/api/rooms/add", {
 		method: "POST",
 		headers: {
