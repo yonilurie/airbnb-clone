@@ -42,3 +42,8 @@ select,
 input {
 	font-family: "Inter var", sans-serif;
 }
+
+
+.error {
+	color: red;
+}

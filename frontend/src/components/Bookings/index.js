@@ -94,19 +94,23 @@ const Bookings = () => {
 			)}
 			{bookings.length >= 1 && isDisplayed && (
 				<div>
-					<h2>Current</h2>
-					<div className="past-bookings">
-						{currentBookings.length >= 1 &&
-							currentBookings.map((booking) => {
-								return (
-									<Booking
-										booking={booking}
-										key={booking.id}
-										reviewDisabled={true}
-									/>
-								);
-							})}
-					</div>
+					{currentBookings.length > 0 && (
+						<>
+							<h2>Current</h2>
+							<div className="past-bookings">
+								{currentBookings.length >= 1 &&
+									currentBookings.map((booking) => {
+										return (
+											<Booking
+												booking={booking}
+												key={booking.id}
+												reviewDisabled={true}
+											/>
+										);
+									})}
+							</div>{" "}
+						</>
+					)}
 					{futureBookings.length >= 1 && (
 						<div>
 							<h2>Where you're headed</h2>

@@ -27,8 +27,7 @@ const MyRooms = () => {
 	}, []);
 
 	useEffect(() => {
-		if (document.title !== 'My Rooms')
-		document.title = "My Rooms";
+		if (document.title !== "My Rooms") document.title = "My Rooms";
 	}, []);
 
 	//If the user is not logged in, redirect the user to home page
@@ -36,7 +35,7 @@ const MyRooms = () => {
 	if (!sessionuser) return <Redirect to="/" />;
 
 	return (
-		<>
+		<div className="rooms-main-container">
 			<h1>Your rooms</h1>
 			{isDisplayed && rooms && rooms.length > 0 && (
 				<div className="rooms-container">
@@ -47,7 +46,7 @@ const MyRooms = () => {
 					})}
 				</div>
 			)}
-		</>
+		</div>
 	);
 };
 

@@ -18,6 +18,7 @@ const BookingPage = () => {
 	const [center, setCenter] = useState({});
 	const [showModal, setShowModal] = useState(false);
 	const [showEditModal, setShowEditModal] = useState(false);
+	const [bookingDuration, setBookingDuration] = useState(0);
 
 	const userBookings = useSelector((state) => state.session.bookings);
 	const user = useSelector((state) => state.session.user);
@@ -35,11 +36,15 @@ const BookingPage = () => {
 		const endDate = new Date(date).getTime();
 		const today = new Date().getTime();
 
-		// if (start.getTime() < now && end.getTime() > now) {
-		// 	return currentBookings.push(booking);
-		// }
-
 		return endDate < today;
+	};
+
+	const isCurrent = (start, end) => {
+		start = new Date(start);
+		end = new Date(end);
+
+		const now = new Date().getTime();
+		return start.getTime() < now && end.getTime() > now;
 	};
 
 	const checkReview = (reviews) => {
@@ -61,6 +66,14 @@ const BookingPage = () => {
 			dispatch(getAUsersBookings());
 		}
 	}, [userBookings]);
+
+	useEffect(() => {
+		let difference =
+			new Date(booking.endDate).getTime() -
+			new Date(booking.startDate).getTime();
+		let duration = Math.ceil(difference / (1000 * 3600 * 24));
+		setBookingDuration(duration);
+	}, [booking]);
 
 	return (
 		<>
@@ -118,61 +131,70 @@ const BookingPage = () => {
 							<div className="reservation-details-container">
 								<div>Who's coming</div>
 								<div className="reservation-details">
-									<div> 1 Guest</div>
+									<div>
+										{" "}
+										{booking.guests === 1
+											? "1 guest"
+											: `${booking.guests} guests`}
+									</div>
 									<div>{user.firstName}</div>
 								</div>
 							</div>
 						</div>
-						<div className="booking-page-actions">
-							<h3>Action</h3>
-							<CancelBookingModal
-								showModal={showModal}
-								setShowModal={setShowModal}
-								booking={booking}
-							></CancelBookingModal>
-							<EditBookingModal
-								showModal={showEditModal}
-								setShowModal={setShowEditModal}
-								booking={booking}
-							></EditBookingModal>
-							{!isPast(booking.startDate) ? (
-								<>
-									<div
-										className="booking-action-cancel"
-										onClick={() => setShowModal(true)}
-									>
-										Cancel booking
-									</div>
-									<div
-										className="booking-action-edit"
-										onClick={() => setShowEditModal(true)}
-									>
-										Edit booking
-									</div>
-								</>
-							) : (
-								<>
-									{checkReview(room.reviews) ? (
-										<Link
-											to={`/review-room/${booking.room.id}`}
-											className="booking-action-review"
+						{!isCurrent(booking.startDate, booking.endDate) && (
+							<div className="booking-page-actions">
+								<h3>Action</h3>
+								<CancelBookingModal
+									showModal={showModal}
+									setShowModal={setShowModal}
+									booking={booking}
+								></CancelBookingModal>
+								<EditBookingModal
+									showModal={showEditModal}
+									setShowModal={setShowEditModal}
+									booking={booking}
+								></EditBookingModal>
+								{!isPast(booking.startDate) ? (
+									<>
+										<div
+											className="booking-action-cancel"
+											onClick={() => setShowModal(true)}
 										>
-											Edit review
-										</Link>
-									) : (
-										<Link
-											to={`/review-room/${booking.room.id}`}
-											className="booking-action-review"
+											Cancel booking
+										</div>
+										<div
+											className="booking-action-edit"
+											onClick={() =>
+												setShowEditModal(true)
+											}
 										>
-											Create review
-										</Link>
-									)}
-								</>
-							)}
-						</div>
+											Edit booking
+										</div>
+									</>
+								) : (
+									<>
+										{checkReview(room.reviews) ? (
+											<Link
+												to={`/review-room/${booking.room.id}`}
+												className="booking-action-review"
+											>
+												Edit review
+											</Link>
+										) : (
+											<Link
+												to={`/review-room/${booking.room.id}`}
+												className="booking-action-review"
+											>
+												Create review
+											</Link>
+										)}
+									</>
+								)}
+							</div>
+						)}
 						<div className="booking-page-directions">
-							<h3>Getting there</h3>
-							<div>
+							<h3 className="booking-page-directions-label">Getting there</h3>
+							<div className="booking-page-address">
 								<h4>Address</h4>
 								{room.address}
 								<br></br>
@@ -204,23 +226,30 @@ const BookingPage = () => {
 						<div className="booking-page-rules">
 							<h3>Where you're staying</h3>
 							<h4>House Rules</h4>
-							<div>No rules listed</div>
+							{room.rules && room.rules.length > 0 ? (
+								room.rules.split("&").map((rule) => {
+									return <div key={rule}>{rule}</div>;
+								})
+							) : (
+								<div>No rules listed</div>
+							)}
 						</div>
 						<div className="booking-page-hosted">
 							<h3>Hosted by {room.owner.firstName}</h3>
 							<div>
 								<h4>About your host</h4>
-								<div>
-									This is where the owners description will
-									show up
-								</div>
+								<p>{room.owner.description}</p>
 							</div>
 						</div>
 						<div className="booking-page-payment">
 							<h3>Payment info</h3>
 							<div>
 								<h4>Total cost</h4>
-								<div>$999.99 USD</div>
+								<div>
+									${booking.room.price * bookingDuration} for{" "}
+									{bookingDuration}{" "}
+									{bookingDuration === 1 ? "night" : "nights"}
+								</div>
 							</div>
 						</div>
 						<div className="booking-page-help"></div>

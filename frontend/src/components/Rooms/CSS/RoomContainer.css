@@ -22,3 +22,12 @@
 	justify-content: center;
 	align-items: center;
 }
+
+.rooms-main-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding-left: 20px;
+	padding-left: 20px;
+}

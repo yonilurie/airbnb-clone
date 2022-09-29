@@ -15,10 +15,15 @@ module.exports = (sequelize, DataTypes) => {
 			});
 			Room.belongsTo(models.Review, {
 				foreignKey: "id",
-			
-			})
-			Room.hasMany(models.Booking, { foreignKey: "roomId", as:'bookings' });
-			Room.hasMany(models.Review, { foreignKey: "roomId", as:'reviews'});
+			});
+			Room.hasMany(models.Booking, {
+				foreignKey: "roomId",
+				as: "bookings",
+			});
+			Room.hasMany(models.Review, {
+				foreignKey: "roomId",
+				as: "reviews",
+			});
 			Room.hasMany(models.UserRoomImage, {
 				foreignKey: "roomId",
 				as: "images",
@@ -71,6 +76,10 @@ module.exports = (sequelize, DataTypes) => {
 				},
 			},
 			description: {
+				type: DataTypes.STRING,
+				allowNull: true,
+			},
+			rules: {
 				type: DataTypes.STRING,
 				allowNull: false,
 			},

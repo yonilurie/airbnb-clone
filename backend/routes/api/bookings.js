@@ -154,7 +154,7 @@ router.get("/", [restoreUser, requireAuth], async (req, res) => {
 					{
 						model: User,
 						as: "owner",
-						attributes: ["firstName"],
+						attributes: ["firstName", "description"],
 					},
 					{
 						model: Booking,

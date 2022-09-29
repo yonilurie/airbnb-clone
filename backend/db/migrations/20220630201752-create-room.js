@@ -48,6 +48,10 @@ module.exports = {
 					type: Sequelize.STRING(1000),
 					allowNull: false,
 				},
+				rules: {
+					type: Sequelize.STRING,
+					allowNull: true,
+				},
 				price: {
 					type: Sequelize.DECIMAL,
 					allowNull: false,

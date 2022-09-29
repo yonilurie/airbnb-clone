@@ -41,13 +41,17 @@ function Rooms() {
 	// })
 
 	return (
+		<div className="rooms-main-container">
+
+	
 		<div className="rooms-container">
 			{rooms &&
 				isDisplayed &&
 				rooms.map((room) => {
 					return <SingleRoom room={room} key={room.id}></SingleRoom>;
 				})}
-		</div>
+			</div>
+				</div>
 	);
 }
 

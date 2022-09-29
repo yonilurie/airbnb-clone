@@ -573,6 +573,7 @@ router.get("/:roomId", validateRoomId, async (req, res) => {
 			"previewImage",
 			"createdAt",
 			"updatedAt",
+			"rules"
 		],
 		include: [
 			{

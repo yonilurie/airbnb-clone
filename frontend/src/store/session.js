@@ -256,8 +256,8 @@ export const createRoomReview = (reviewData) => async (dispatch) => {
 };
 
 export const createBooking = (booking) => async (dispatch) => {
-	const { startDate, endDate, roomId } = booking;
-console.log(booking)
+	const { startDate, endDate, roomId, guests } = booking;
+
 	const response = await csrfFetch(`/api/rooms/${Number(roomId)}/bookings`, {
 		method: "POST",
 		headers: {
@@ -266,6 +266,7 @@ console.log(booking)
 		body: JSON.stringify({
 			startDate,
 			endDate,
+			guests,
 		}),
 	});
 

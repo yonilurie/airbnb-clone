@@ -70,14 +70,14 @@ function CreateReview() {
 	};
 
 	return (
-		<>
+		<div className="review-container-main">
 			{usersReview === undefined && (
 				<form onSubmit={handleSubmit}>
 					<h1>Review</h1>
 					{isSubmitted && validationErrors.length > 0 && (
 						<ul className="errors">
 							{validationErrors.map((error, idx) => (
-								<li key={idx}>{error}</li>
+								<li key={idx} className='error'>{error}</li>
 							))}
 						</ul>
 					)}
@@ -91,6 +91,7 @@ function CreateReview() {
 					/>
 					<textarea
 						className="modal-input"
+						placeholder="Review - Minimum 10 Characters"
 						value={review}
 						onChange={(e) => setReview(e.target.value)}
 						required
@@ -124,7 +125,7 @@ function CreateReview() {
 				</div>
 			)}
 			<NavLink to={`/rooms/${roomId}`}>Visit Room</NavLink>
-		</>
+		</div>
 	);
 }
 

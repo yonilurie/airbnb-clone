@@ -1,3 +1,11 @@
+.review-container-main {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
 .button-container {
 	display: flex;
 	justify-content: space-around;
@@ -30,7 +38,7 @@
 .edit-btn:active,
 .delete-btn:active {
 	transform: scale(0.96);
-		background-image: radial-gradient(
+	background-image: radial-gradient(
 		circle at center,
 		rgb(255, 56, 92) 100%,
 		rgb(103, 102, 102) 0%
