@@ -51,12 +51,38 @@ export const getRooms = () => async (dispatch) => {
 
 //Create a room
 export const createRoom = (room) => async (dispatch) => {
+	const {
+		name,
+		address,
+		city,
+		state,
+		country,
+		lat,
+		lng,
+		description,
+		price,
+		// previewImage,
+		image,
+	} = room;
+	const formData = new FormData();
+	formData.append("name", name);
+	formData.append("address", address);
+	formData.append("city", city);
+	formData.append("state", state);
+	formData.append("country", country);
+	formData.append("lat", lat);
+	formData.append("lng", lng);
+	formData.append("description", description);
+	formData.append("price", price);
+	// formData.append("previewImage", previewImage);
+	formData.append("image", image);
+
 	const response = await csrfFetch("/api/rooms/add", {
 		method: "POST",
 		headers: {
-			contentType: "application/json",
+			"Content-Type": "multipart/form-data",
 		},
-		body: room,
+		body: formData,
 	});
 
 	const data = await response.json();

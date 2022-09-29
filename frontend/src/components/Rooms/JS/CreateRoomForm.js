@@ -11,16 +11,17 @@ const CreateRoomForm = () => {
 	const dispatch = useDispatch();
 
 	// State
-	const [name, setName] = useState("");
-	const [address, setAddress] = useState("");
-	const [city, setCity] = useState("");
+	const [name, setName] = useState("ddddd");
+	const [address, setAddress] = useState("ddddd");
+	const [city, setCity] = useState("ddddd");
 	const [state, setState] = useState("WA");
 	const [country, setCountry] = useState("United States");
-	const [latitude, setLatitude] = useState("");
-	const [longitude, setLongitude] = useState("");
-	const [description, setDescription] = useState("");
+	const [latitude, setLatitude] = useState(22);
+	const [longitude, setLongitude] = useState(2);
+	const [description, setDescription] = useState("ddddd");
 	const [price, setPrice] = useState(100);
 	const [previewImage, setPreviewImage] = useState("");
+	const [image, setImage] = useState("");
 	const [validationErrors, setValidationErrors] = useState([]);
 	const [isLoaded, setIsLoaded] = useState(false);
 
@@ -63,19 +64,7 @@ const CreateRoomForm = () => {
 	//When for/ is submitted
 	const onSubmit = async (e) => {
 		e.preventDefault();
-
-		const room = {
-			name,
-			address,
-			city,
-			state,
-			country,
-			lat: Number(latitude),
-			lng: Number(longitude),
-			description,
-			price,
-			previewImage,
-		};
+		
 
 		if (!validationErrors.length) {
 			const checkIfLocationTaken = await fetch(
@@ -90,20 +79,35 @@ const CreateRoomForm = () => {
 				return;
 			}
 
-			dispatch(createRoom(JSON.stringify(room)));
+			dispatch(
+		
+				createRoom({
+					name,
+					address,
+					city,
+					state,
+					country,
+					lat: Number(latitude),
+					lng: Number(longitude),
+					description,
+					price,
+					// previewImage,
+					image,
+				})
+			);
 
-			setName("");
-			setAddress("");
-			setCity("");
-			setState("WA");
-			setCountry("United States");
-			setLatitude(0);
-			setLongitude(0);
-			setDescription("");
-			setPrice(100);
+			// setName("");
+			// setAddress("");
+			// setCity("");
+			// setState("WA");
+			// setCountry("United States");
+			// setLatitude(0);
+			// setLongitude(0);
+			// setDescription("");
+			// setPrice(100);
 
 			//Redirect user to home page
-			history.push("/my-rooms");
+			// history.push("/my-rooms");
 		} else {
 			document.body.scrollTop = 0;
 			document.documentElement.scrollTop = 0;
@@ -387,6 +391,13 @@ const CreateRoomForm = () => {
 							value={previewImage}
 							onChange={(e) => setPreviewImage(e.target.value)}
 							required
+						></input>
+						<input
+							type="file"
+							onChange={(e) => {
+								console.log(e.target.files[0]);
+								setImage(e.target.files[0]);
+							}}
 						></input>
 					</div>
 				</div>

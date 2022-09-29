@@ -12,6 +12,7 @@ import Bookings from "./components/Bookings";
 import BookingPage from "./components/BookingPage";
 import CreateReview from "./components/Review";
 import * as sessionActions from "./store/session";
+import CreateUser from "./components/CreateUser";
 
 function App() {
 	const dispatch = useDispatch();
@@ -39,7 +40,10 @@ function App() {
 					<Switch>
 						<Route exact path="/">
 							<Rooms></Rooms>
-						</Route>
+					</Route>
+					<Route path='/user'>
+						<CreateUser></CreateUser>
+					</Route>
 						<Route path="/host-your-home">
 							<CreateRoomForm></CreateRoomForm>
 						</Route>

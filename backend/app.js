@@ -30,6 +30,7 @@ app.use(morgan("dev"));
 
 //Use middleware for parsing cookies and for parsing JSON bodies of req
 app.use(cookieParser());
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 // Security Middleware

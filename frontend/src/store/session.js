@@ -1,5 +1,44 @@
 import { csrfFetch } from "./csrf";
+// user_actions.js
 
+export const createUser = (user) => async (dispatch) => {
+	const {
+		images,
+		image,
+		username,
+		email,
+		password,
+		lastName,
+		firstName,
+	} = user;
+	const formData = new FormData();
+	formData.append("username", username);
+	formData.append("email", email);
+	formData.append("password", password);
+	formData.append("firstName", firstName);
+	formData.append("lastName", lastName);
+
+	// for multiple files
+	if (images && images.length !== 0) {
+		for (var i = 0; i < images.length; i++) {
+			formData.append("images", images[i]);
+		}
+	}
+
+	// for single file
+	if (image) formData.append("image", image);
+
+	const res = await csrfFetch(`/api/users/`, {
+		method: "POST",
+		headers: {
+			"Content-Type": "multipart/form-data",
+		},
+		body: formData,
+	});
+
+	const data = await res.json();
+	dispatch(setUser(data.user));
+};
 // String literals for thunk actions
 //
 const SET_USER = "session/setUser";
@@ -226,12 +265,38 @@ export const getAUsersBookings = () => async (dispatch) => {
 
 //Create a room
 export const createRoom = (room) => async (dispatch) => {
+	const {
+		name,
+		address,
+		city,
+		state,
+		country,
+		lat,
+		lng,
+		description,
+		price,
+		// previewImage,
+		image,
+	} = room;
+	const formData = new FormData();
+	formData.append("name", name);
+	formData.append("address", address);
+	formData.append("city", city);
+	formData.append("state", state);
+	formData.append("country", country);
+	formData.append("lat", lat);
+	formData.append("lng", lng);
+	formData.append("description", description);
+	formData.append("price", price);
+	// formData.append("previewImage", previewImage);
+	formData.append("image", image);
+
 	const response = await csrfFetch("/api/rooms/add", {
 		method: "POST",
 		headers: {
-			contentType: "application/json",
+			"Content-Type": "multipart/form-data",
 		},
-		body: room,
+		body: formData,
 	});
 
 	const data = await response.json();
@@ -442,6 +507,8 @@ const sessionReducer = (state = initialState, action) => {
 			newState = { ...initialState };
 
 			return newState;
+		case SET_USER:
+			return { ...state, user: action.payload };
 		default:
 			return state;
 	}

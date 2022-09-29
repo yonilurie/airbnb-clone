@@ -1,5 +1,7 @@
 const express = require("express");
 const router = express.Router();
+const { singlePublicFileUpload, singleMulterUpload } = require("../../awsS3");
+const asyncHandler = require("express-async-handler");
 const sequelize = require("sequelize");
 const { check } = require("express-validator");
 const { query } = require("express-validator");
@@ -345,13 +347,13 @@ router.post(
 			where: {
 				startDate: { [Op.gte]: startDate },
 				endDate: { [Op.lte]: endDate },
-				id: roomId
+				id: roomId,
 			},
 		});
 		//If they do return error message to user with 403 code
 
 		if (bookingCheck) {
-			console.log(bookingCheck)
+			console.log(bookingCheck);
 			const err = {};
 			// err.booking =  {
 			// 	startDate: checkAvailability.startDate,
@@ -573,7 +575,7 @@ router.get("/:roomId", validateRoomId, async (req, res) => {
 			"previewImage",
 			"createdAt",
 			"updatedAt",
-			"rules"
+			"rules",
 		],
 		include: [
 			{
@@ -680,8 +682,9 @@ router.delete(
 //Add a room if you are a user
 router.post(
 	"/add",
+	singleMulterUpload("image"),
 	[restoreUser, requireAuth, validateRoom],
-	async (req, res) => {
+	asyncHandler(async (req, res) => {
 		const {
 			address,
 			city,
@@ -692,8 +695,11 @@ router.post(
 			name,
 			description,
 			price,
-			previewImage,
+			
+			// previewImage,
 		} = req.body;
+		
+		const previewImage = await singlePublicFileUpload(req.file);
 		let room = await Room.create({
 			ownerId: req.user.id,
 			address: address,
@@ -706,11 +712,12 @@ router.post(
 			description: description,
 			price: price,
 			previewImage: previewImage,
+			rules: 'wow&'
 		});
 
 		res.status = 201;
 		return res.json(room);
-	}
+	})
 );
 
 //delete a spot
