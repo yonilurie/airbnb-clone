@@ -11,8 +11,7 @@ module.exports = {
 					username: "Demo-lition",
 					firstName: "John",
 					lastName: "Smith",
-					description:
-						"Nunc vestibulum eros eget nisi euismod, vitae accumsan velit mattis. Curabitur eget faucibus magna, faucibus placerat orci. Suspendisse massa ipsum, ultricies vitae rutrum at, efficitur eu sem. Vivamus luctus eget tellus non auctor. Vivamus quis molestie ipsum, dignissim dignissim eros. Aliquam at metus vel nulla tempor congue. Vestibulum ac feugiat neque, eu imperdiet urna. Pellentesque id ultricies dolor, ac porta sapien. Cras posuere in neque ut lobortis. Cras sagittis, erat nec volutpat facilisis, ante sem efficitur lectus, at faucibus mi mi vitae sapien. Aenean ornare neque lacus, a laoreet leo varius vel. Aenean efficitur diam vitae efficitur feugiat.",
+					description: "hi",
 					hashedPassword: bcrypt.hashSync("password"),
 				},
 				{
@@ -20,8 +19,7 @@ module.exports = {
 					username: "FakeUser1",
 					firstName: "Steve",
 					lastName: "Goldberg",
-					description:
-						"Nunc vestibulum eros eget nisi euismod, vitae accumsan velit mattis. Curabitur eget faucibus magna, faucibus placerat orci. Suspendisse massa ipsum, ultricies vitae rutrum at, efficitur eu sem. Vivamus luctus eget tellus non auctor. Vivamus quis molestie ipsum, dignissim dignissim eros. Aliquam at metus vel nulla tempor congue. Vestibulum ac feugiat neque, eu imperdiet urna. Pellentesque id ultricies dolor, ac porta sapien. Cras posuere in neque ut lobortis. Cras sagittis, erat nec volutpat facilisis, ante sem efficitur lectus, at faucibus mi mi vitae sapien. Aenean ornare neque lacus, a laoreet leo varius vel. Aenean efficitur diam vitae efficitur feugiat.",
+					description: "hi",
 
 					hashedPassword: bcrypt.hashSync("password2"),
 				},
@@ -30,8 +28,8 @@ module.exports = {
 					username: "FakeUser2",
 					firstName: "Kelley",
 					lastName: "Kringle",
-					description:
-						"Nunc vestibulum eros eget nisi euismod, vitae accumsan velit mattis. Curabitur eget faucibus magna, faucibus placerat orci. Suspendisse massa ipsum, ultricies vitae rutrum at, efficitur eu sem. Vivamus luctus eget tellus non auctor. Vivamus quis molestie ipsum, dignissim dignissim eros. Aliquam at metus vel nulla tempor congue. Vestibulum ac feugiat neque, eu imperdiet urna. Pellentesque id ultricies dolor, ac porta sapien. Cras posuere in neque ut lobortis. Cras sagittis, erat nec volutpat facilisis, ante sem efficitur lectus, at faucibus mi mi vitae sapien. Aenean ornare neque lacus, a laoreet leo varius vel. Aenean efficitur diam vitae efficitur feugiat.",
+
+					description: "hi",
 
 					hashedPassword: bcrypt.hashSync("password3"),
 				},
@@ -40,8 +38,7 @@ module.exports = {
 					username: "FakeUser3",
 					firstName: "Mike",
 					lastName: "Washington",
-					description:
-						"Nunc vestibulum eros eget nisi euismod, vitae accumsan velit mattis. Curabitur eget faucibus magna, faucibus placerat orci. Suspendisse massa ipsum, ultricies vitae rutrum at, efficitur eu sem. Vivamus luctus eget tellus non auctor. Vivamus quis molestie ipsum, dignissim dignissim eros. Aliquam at metus vel nulla tempor congue. Vestibulum ac feugiat neque, eu imperdiet urna. Pellentesque id ultricies dolor, ac porta sapien. Cras posuere in neque ut lobortis. Cras sagittis, erat nec volutpat facilisis, ante sem efficitur lectus, at faucibus mi mi vitae sapien. Aenean ornare neque lacus, a laoreet leo varius vel. Aenean efficitur diam vitae efficitur feugiat.",
+					description: "hi",
 
 					hashedPassword: bcrypt.hashSync("password4"),
 				},
@@ -50,9 +47,7 @@ module.exports = {
 					username: "FakeUser4",
 					firstName: "Marco",
 					lastName: "Polo",
-					description:
-						"Nunc vestibulum eros eget nisi euismod, vitae accumsan velit mattis. Curabitur eget faucibus magna, faucibus placerat orci. Suspendisse massa ipsum, ultricies vitae rutrum at, efficitur eu sem. Vivamus luctus eget tellus non auctor. Vivamus quis molestie ipsum, dignissim dignissim eros. Aliquam at metus vel nulla tempor congue. Vestibulum ac feugiat neque, eu imperdiet urna. Pellentesque id ultricies dolor, ac porta sapien. Cras posuere in neque ut lobortis. Cras sagittis, erat nec volutpat facilisis, ante sem efficitur lectus, at faucibus mi mi vitae sapien. Aenean ornare neque lacus, a laoreet leo varius vel. Aenean efficitur diam vitae efficitur feugiat.",
-
+					description: "hi",
 					hashedPassword: bcrypt.hashSync("password5"),
 				},
 				{
@@ -60,8 +55,7 @@ module.exports = {
 					username: "FakeUser5",
 					firstName: "Victor",
 					lastName: "Stags",
-					description:
-						"Nunc vestibulum eros eget nisi euismod, vitae accumsan velit mattis. Curabitur eget faucibus magna, faucibus placerat orci. Suspendisse massa ipsum, ultricies vitae rutrum at, efficitur eu sem. Vivamus luctus eget tellus non auctor. Vivamus quis molestie ipsum, dignissim dignissim eros. Aliquam at metus vel nulla tempor congue. Vestibulum ac feugiat neque, eu imperdiet urna. Pellentesque id ultricies dolor, ac porta sapien. Cras posuere in neque ut lobortis. Cras sagittis, erat nec volutpat facilisis, ante sem efficitur lectus, at faucibus mi mi vitae sapien. Aenean ornare neque lacus, a laoreet leo varius vel. Aenean efficitur diam vitae efficitur feugiat.",
+					description: "hi",
 
 					hashedPassword: bcrypt.hashSync("password6"),
 				},
@@ -70,8 +64,7 @@ module.exports = {
 					username: "FakeUser6",
 					firstName: "Bob",
 					lastName: "Johnson",
-					description:
-						"Nunc vestibulum eros eget nisi euismod, vitae accumsan velit mattis. Curabitur eget faucibus magna, faucibus placerat orci. Suspendisse massa ipsum, ultricies vitae rutrum at, efficitur eu sem. Vivamus luctus eget tellus non auctor. Vivamus quis molestie ipsum, dignissim dignissim eros. Aliquam at metus vel nulla tempor congue. Vestibulum ac feugiat neque, eu imperdiet urna. Pellentesque id ultricies dolor, ac porta sapien. Cras posuere in neque ut lobortis. Cras sagittis, erat nec volutpat facilisis, ante sem efficitur lectus, at faucibus mi mi vitae sapien. Aenean ornare neque lacus, a laoreet leo varius vel. Aenean efficitur diam vitae efficitur feugiat.",
+					description: "hi",
 
 					hashedPassword: bcrypt.hashSync("password7"),
 				},
@@ -80,8 +73,7 @@ module.exports = {
 					username: "FakeUser7",
 					firstName: "Veronica",
 					lastName: "Daniels",
-					description:
-						"Nunc vestibulum eros eget nisi euismod, vitae accumsan velit mattis. Curabitur eget faucibus magna, faucibus placerat orci. Suspendisse massa ipsum, ultricies vitae rutrum at, efficitur eu sem. Vivamus luctus eget tellus non auctor. Vivamus quis molestie ipsum, dignissim dignissim eros. Aliquam at metus vel nulla tempor congue. Vestibulum ac feugiat neque, eu imperdiet urna. Pellentesque id ultricies dolor, ac porta sapien. Cras posuere in neque ut lobortis. Cras sagittis, erat nec volutpat facilisis, ante sem efficitur lectus, at faucibus mi mi vitae sapien. Aenean ornare neque lacus, a laoreet leo varius vel. Aenean efficitur diam vitae efficitur feugiat.",
+					description: "hi",
 
 					hashedPassword: bcrypt.hashSync("password8"),
 				},
