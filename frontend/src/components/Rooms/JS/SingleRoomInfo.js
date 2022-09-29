@@ -17,6 +17,8 @@ const SingleRoomInfo = () => {
 	const history = useHistory();
 	const [showModal, setShowModal] = useState(false);
 	const [center, setCenter] = useState({});
+	const [gallery, setGallery] = useState([]);
+	const [galleryImage, setGalleryImage] = useState(0);
 
 	const sessionuser = useSelector((state) => state.session.user);
 	const currentRoom = useSelector((state) => state.currentRoom);
@@ -37,6 +39,14 @@ const SingleRoomInfo = () => {
 				lat: parseFloat(currentRoom.lat),
 				lng: parseFloat(currentRoom.lng),
 			});
+		}
+
+		if (currentRoom.images) {
+			let tempGallery = [currentRoom.previewImage];
+			currentRoom.images.forEach((image) => {
+				tempGallery.push(image.imageUrl);
+			});
+			setGallery(tempGallery);
 		}
 	}, [currentRoom]);
 
@@ -79,6 +89,15 @@ const SingleRoomInfo = () => {
 		googleMapsApiKey: process.env.REACT_APP_NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
 	});
 
+	const setGalleryIndex = (dir) => {
+		if (dir === "left" && galleryImage !== 0) {
+			setGalleryImage((galleryImage) => galleryImage - 1);
+		}
+		if (dir === "right" && galleryImage !== gallery.length - 1) {
+			setGalleryImage((galleryImage) => galleryImage + 1);
+		}
+	};
+
 	return (
 		<div className="content-container">
 			<ReviewsModal
@@ -120,12 +139,28 @@ const SingleRoomInfo = () => {
 
 			{currentRoom && Number(currentRoom.id) === Number(roomId) && (
 				<div className="room-content">
-					{/* <div className="gallery">
+					<div className="gallery">
 						<img
 							className="gallery-img"
-							src={currentRoom.previewImage}
+							src={gallery[galleryImage]}
 						></img>
-					</div> */}
+						{gallery.length > 1 && (
+							<>
+								<div
+									className="gallery-nav left"
+									onClick={() => setGalleryIndex("left")}
+								>
+									left
+								</div>
+								<div
+									className="gallery-nav right"
+									onClick={() => setGalleryIndex("right")}
+								>
+									right
+								</div>
+							</>
+						)}
+					</div>
 					<div className="room-details">
 						<h1 className="room-name">{currentRoom.name}</h1>
 						{currentRoom.avgStarRating >= 1 && (
