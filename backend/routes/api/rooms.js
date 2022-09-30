@@ -269,37 +269,37 @@ router.post(
 //Get all of a rooms bookings
 router.get(
 	"/:roomId/bookings",
-	[validateRoomId, restoreUser, requireAuth],
+	// [validateRoomId, restoreUser, requireAuth],
 	async (req, res) => {
 		const { roomId } = req.params;
-		const { id } = req.user;
+		// const { id } = req.user;
 		//Find room
 		let room = await Room.findByPk(roomId);
 		//Check if room exists
 		if (!room) return res.json(noRoomError());
 
 		//If owner
-		if (id === room.ownerId) {
-			//If room exists and user is owner, find the bookings and booked users info
-			let bookings = await Booking.findAll({
-				where: { roomId: roomId },
-				// attributes: ["roomId", "startDate", "endDate"],
-				include: [
-					{
-						model: User,
-						attributes: ["id", "firstName", "lastName"],
-					},
-				],
-			});
-			//if no bookings are found
-			if (!bookings.length) {
-				res.status = 200;
-				return res.json({ Bookings: "No dates booked!" });
-			}
-			//Return lsit of bookings
-			res.status = 200;
-			return res.json(bookings);
-		}
+		// if (id === room.ownerId) {
+		// 	//If room exists and user is owner, find the bookings and booked users info
+		// 	let bookings = await Booking.findAll({
+		// 		where: { roomId: roomId },
+		// 		// attributes: ["roomId", "startDate", "endDate"],
+		// 		include: [
+		// 			{
+		// 				model: User,
+		// 				attributes: ["id", "firstName", "lastName"],
+		// 			},
+		// 		],
+		// 	});
+		// 	//if no bookings are found
+		// 	if (!bookings.length) {
+		// 		res.status = 200;
+		// 		return res.json({ Bookings: "No dates booked!" });
+		// 	}
+		// 	//Return lsit of bookings
+		// 	res.status = 200;
+		// 	return res.json(bookings);
+		// }
 		//If not the owner
 		let bookings = await Booking.findAll({
 			where: { roomId: roomId },

@@ -1,0 +1,10 @@
+.image-modal-container {
+	padding: 0px;
+	margin: 0px;
+}
+
+.modal-img {
+	height: 100%;
+display: block;
+	border-radius: 12px;
+}

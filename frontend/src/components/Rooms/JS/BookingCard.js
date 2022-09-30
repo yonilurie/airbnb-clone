@@ -5,7 +5,7 @@ import "react-calendar/dist/Calendar.css";
 
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { createBooking, getAUsersBookings } from "../../../store/session";
 
@@ -14,6 +14,8 @@ import CalendarMenu from "./CalendarMenu";
 const BookingCard = ({ currentRoom, setShowModal }) => {
 	const dispatch = useDispatch();
 	const history = useHistory();
+
+	const sessionuser = useSelector((state) => state.session.user);
 
 	//Create start and end dates for default values in input field
 	let startDate = new Date();
@@ -54,6 +56,10 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 	//Handle creating a booking
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+
+		if (!sessionuser) {
+			return
+		}
 		const data = await dispatch(
 			createBooking({
 				startDate: bookingStartDate,
@@ -175,7 +181,9 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 				</div>
 				<form
 					className="booking-info"
-					onSubmit={(e) => handleSubmit(e)}
+					onSubmit={(e) => {
+						handleSubmit(e);
+					}}
 				>
 					<div className="booking-info-wrapper">
 						<div className="choose-dates-container">

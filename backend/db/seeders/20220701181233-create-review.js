@@ -4,14 +4,14 @@ module.exports = {
 	async up(queryInterface, Sequelize) {
 		return queryInterface.bulkInsert("Reviews", [
 			{
-				roomId: 6,
+				roomId: 5,
 				userId: 1,
 				review:
 					"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, nesciunt? Nesciunt accusantium ab eaque fuga placeat similique iusto voluptas nam dolores, aspernatur magni, eos molestias id nisi quaerat? Ullam, id",
 				stars: 5,
 			},
 			{
-				roomId: 7,
+				roomId: 6,
 				userId: 1,
 				review:
 					"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, nesciunt? Nesciunt accusantium ab eaque fuga placeat similique iusto voluptas nam dolores, aspernatur magni, eos molestias id nisi quaerat? Ullam, id",
@@ -33,42 +33,42 @@ module.exports = {
 				stars: 2,
 			},
 			{
-				roomId: 3,
+				roomId: 2,
 				userId: 5,
 				review:
 					"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, nesciunt? Nesciunt accusantium ab eaque fuga placeat similique iusto voluptas nam dolores, aspernatur magni, eos molestias id nisi quaerat? Ullam, id",
 				stars: 5,
 			},
 			{
-				roomId: 5,
+				roomId: 4,
 				userId: 7,
 				review:
 					"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, nesciunt? Nesciunt accusantium ab eaque fuga placeat similique iusto voluptas nam dolores, aspernatur magni, eos molestias id nisi quaerat? Ullam, id",
 				stars: 5,
 			},
 			{
-				roomId: 6,
+				roomId: 5,
 				userId: 8,
 				review:
 					"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, nesciunt? Nesciunt accusantium ab eaque fuga placeat similique iusto voluptas nam dolores, aspernatur magni, eos molestias id nisi quaerat? Ullam, id",
 				stars: 4.2,
 			},
 			{
-				roomId: 8,
-				userId: 2,
-				review:
-					"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, nesciunt? Nesciunt accusantium ab eaque fuga placeat similique iusto voluptas nam dolores, aspernatur magni, eos molestias id nisi quaerat? Ullam, id",
-				stars: 4.2,
-			},
-			{
-				roomId: 4,
-				userId: 2,
-				review:
-					"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, nesciunt? Nesciunt accusantium ab eaque fuga placeat similique iusto voluptas nam dolores, aspernatur magni, eos molestias id nisi quaerat? Ullam, id",
-				stars: 4.2,
-			},
-			{
 				roomId: 7,
+				userId: 2,
+				review:
+					"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, nesciunt? Nesciunt accusantium ab eaque fuga placeat similique iusto voluptas nam dolores, aspernatur magni, eos molestias id nisi quaerat? Ullam, id",
+				stars: 4.2,
+			},
+			{
+				roomId: 3,
+				userId: 2,
+				review:
+					"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, nesciunt? Nesciunt accusantium ab eaque fuga placeat similique iusto voluptas nam dolores, aspernatur magni, eos molestias id nisi quaerat? Ullam, id",
+				stars: 4.2,
+			},
+			{
+				roomId: 6,
 				userId: 8,
 				review:
 					"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, nesciunt? Nesciunt accusantium ab eaque fuga placeat similique iusto voluptas nam dolores, aspernatur magni, eos molestias id nisi quaerat? Ullam, id",

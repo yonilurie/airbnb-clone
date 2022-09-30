@@ -95,6 +95,8 @@ module.exports = {
 						"FakeUser3",
 						"FakeUser4",
 						"FakeUser5",
+						"FakeUser6",
+						"FakeUser7",
 					],
 				},
 			},

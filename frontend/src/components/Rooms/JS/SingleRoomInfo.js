@@ -11,6 +11,7 @@ import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 import "../CSS/SingleRoomInfo.css";
 import ReviewsModal from "./ReviewsModal";
 import BookingCard from "./BookingCard";
+import ImageModal from "./ImageModal";
 
 const SingleRoomInfo = () => {
 	const dispatch = useDispatch();
@@ -19,6 +20,7 @@ const SingleRoomInfo = () => {
 	const [center, setCenter] = useState({});
 	const [gallery, setGallery] = useState([]);
 	const [galleryImage, setGalleryImage] = useState(0);
+	const [showImageModal, setShowImageModal] = useState(false);
 
 	const sessionuser = useSelector((state) => state.session.user);
 	const currentRoom = useSelector((state) => state.currentRoom);
@@ -143,20 +145,26 @@ const SingleRoomInfo = () => {
 						<img
 							className="gallery-img"
 							src={gallery[galleryImage]}
+							onClick={() => setShowImageModal(true)}
 						></img>
+						<ImageModal
+							showImageModal={showImageModal}
+							setShowImageModal={setShowImageModal}
+							image={gallery[galleryImage]}
+						></ImageModal>
 						{gallery.length > 1 && (
 							<>
 								<div
 									className="gallery-nav left"
 									onClick={() => setGalleryIndex("left")}
 								>
-									left
+									{"<"}
 								</div>
 								<div
 									className="gallery-nav right"
 									onClick={() => setGalleryIndex("right")}
 								>
-									right
+									{">"}
 								</div>
 							</>
 						)}
@@ -255,7 +263,10 @@ const SingleRoomInfo = () => {
 							<>
 								<h2>
 									Entire home hosted by{" "}
-									{currentRoom.owner.firstName}
+									{sessionuser &&
+									currentRoom.owner.id === sessionuser.id
+										? "You"
+										: currentRoom.owner.firstName}
 								</h2>
 							</>
 
@@ -265,13 +276,12 @@ const SingleRoomInfo = () => {
 								</div>
 							</div>
 						</div>
-						{sessionuser &&
-							sessionuser.id !== currentRoom.owner.id && (
-								<BookingCard
-									currentRoom={currentRoom}
-									setShowModal={setShowModal}
-								/>
-							)}
+
+						<BookingCard
+							currentRoom={currentRoom}
+							setShowModal={setShowModal}
+						/>
+
 						{sessionuser && sessionuser.id === currentRoom.ownerId && (
 							<div className="button-container">
 								<button
@@ -281,13 +291,13 @@ const SingleRoomInfo = () => {
 										history.push(`/rooms/${roomId}/edit`)
 									}
 								>
-									Edit room
+									Edit
 								</button>
 								<button
 									onClick={deletedRoom}
 									className="delete-btn"
 								>
-									Delete room
+									Delete
 								</button>
 							</div>
 						)}
