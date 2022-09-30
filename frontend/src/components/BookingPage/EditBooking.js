@@ -108,7 +108,10 @@ const EditBooking = ({ booking, setShowModal }) => {
 					tileDisabled={checkInvalidTile}
 					onChange={calendarOnChange}
 					selectRange={true}
-					// value={(new Date(), getNextDay(new Date()))}
+					value={[
+						new Date(bookingStartDate),
+						new Date(bookingEndDate),
+					]}
 				></Calendar>
 				{validationErrors.length > 0 &&
 					validationErrors.map((err) => {

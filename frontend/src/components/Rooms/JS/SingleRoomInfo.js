@@ -183,7 +183,12 @@ const SingleRoomInfo = () => {
 										Object.values(currentRoom.reviews)
 											.length
 									)}{" "}
-									review(s)
+									{Number(
+										Object.values(currentRoom.reviews)
+											.length
+									) === 1
+										? "review"
+										: "reviews"}
 								</span>
 								{" · "}
 								{currentRoom.city}, {currentRoom.state},{" "}
@@ -281,26 +286,6 @@ const SingleRoomInfo = () => {
 							currentRoom={currentRoom}
 							setShowModal={setShowModal}
 						/>
-
-						{sessionuser && sessionuser.id === currentRoom.ownerId && (
-							<div className="button-container">
-								<button
-									className="edit-btn"
-									style={{ marginRight: ".5rem" }}
-									onClick={() =>
-										history.push(`/rooms/${roomId}/edit`)
-									}
-								>
-									Edit
-								</button>
-								<button
-									onClick={deletedRoom}
-									className="delete-btn"
-								>
-									Delete
-								</button>
-							</div>
-						)}
 					</div>
 					{Object.values(currentRoom.reviews).length > 0 && (
 						<div className="reviews-container">
@@ -315,7 +300,12 @@ const SingleRoomInfo = () => {
 										Object.values(currentRoom.reviews)
 											.length
 									)}{" "}
-									review(s)
+									{Number(
+										Object.values(currentRoom.reviews)
+											.length
+									) === 1
+										? "review"
+										: "reviews"}
 								</h2>
 							)}
 

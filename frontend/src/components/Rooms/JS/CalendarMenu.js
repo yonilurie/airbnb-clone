@@ -9,21 +9,29 @@ const CalendarMenu = ({
 	bookingEndDate,
 	bookingStartDate,
 	room,
+	setDate,
 }) => {
 	return (
 		<div className="calendar-menu-main-container">
 			<div className="booking-card-dates">
-				<div>
-					Check in: {bookingStartDate.toLocaleString().split(",")[0]}{" "}
-				</div>
+				{setDate && (
+					<>
+						<div>
+							Check in:{" "}
+							{bookingStartDate.toLocaleString().split(",")[0]}{" "}
+						</div>
 
-				<div>
-					Check out: {bookingEndDate.toLocaleString().split(",")[0]}
-				</div>
+						<div>
+							Check out:{" "}
+							{bookingEndDate.toLocaleString().split(",")[0]}
+						</div>
+					</>
+				)}
 			</div>
 			<Calendar
 				minDate={minDate}
-				value={[bookingStartDate, bookingEndDate]}
+				// value={null}
+				value={setDate ? [bookingStartDate, bookingEndDate] : null}
 				tileDisabled={tileDisabled}
 				onChange={onChange}
 				selectRange={true}

@@ -193,7 +193,9 @@ const BookingPage = () => {
 							</div>
 						)}
 						<div className="booking-page-directions">
-							<h3 className="booking-page-directions-label">Getting there</h3>
+							<h3 className="booking-page-directions-label">
+								Getting there
+							</h3>
 							<div className="booking-page-address">
 								<h4>Address</h4>
 								{room.address}
@@ -252,7 +254,6 @@ const BookingPage = () => {
 								</div>
 							</div>
 						</div>
-						<div className="booking-page-help"></div>
 					</div>
 					<div className="booking-page-right">
 						{isLoaded && (

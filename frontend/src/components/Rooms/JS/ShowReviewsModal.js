@@ -18,12 +18,18 @@ const ShowReviewsModal = ({ setShowModal, currentRoom }) => {
 					★{Number(currentRoom.avgStarRating).toFixed(2)}
 					{" · "}
 					{Number(Object.values(currentRoom.reviews).length)}{" "}
-					review(s)
+					{Number(Object.values(currentRoom.reviews).length) === 1
+						? "review"
+						: "reviews"}
 				</div>
 				<div className="modal-reviews-list-container">
 					{reviews.map((review) => {
 						return (
-							<Reviews review={review} key={review.id}></Reviews>
+							<Reviews
+								review={review}
+								key={review.id}
+								style={{ margin: "0px" }}
+							></Reviews>
 						);
 					})}
 				</div>

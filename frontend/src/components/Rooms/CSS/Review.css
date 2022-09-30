@@ -6,7 +6,8 @@
 
 .review {
 	max-width: 450px;
-	min-width: 400px;
+	/* min-width: 400px; */
+	min-width: 50%;
 }
 
 .review-content-container {
@@ -16,7 +17,7 @@
 	color: rgb(34, 34, 34);
 	line-height: 24px;
 	font-size: 16px;
-	max-width: 90%;
+	max-width: 100%;
 }
 .review-content {
 	max-width: 25rem;

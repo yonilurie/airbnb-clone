@@ -52,13 +52,14 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 	const [bookedDates, setBookedDates] = useState([]);
 	const [validationErrors, setValidationErrors] = useState([]);
 	const [showMenu, setShowMenu] = useState(false);
+	const [setDate, setSetDate] = useState(false);
 
 	//Handle creating a booking
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
 		if (!sessionuser) {
-			return
+			return;
 		}
 		const data = await dispatch(
 			createBooking({
@@ -97,8 +98,7 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 		}
 		setBookingStartDate(e[0]);
 		setBookingEndDate(e[1]);
-		console.log(e[1].toISOString());
-		console.log(e[1].toLocaleString());
+		setSetDate(true);
 	};
 
 	useEffect(() => {
@@ -161,7 +161,11 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 								{Number(
 									Object.values(currentRoom.reviews).length
 								)}{" "}
-								review(s)
+								{Number(
+									Object.values(currentRoom.reviews).length
+								) === 1
+									? "review"
+									: "reviews"}
 							</span>
 						)}
 						{Object.values(currentRoom.reviews).length < 1 && (
@@ -174,7 +178,11 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 								{Number(
 									Object.values(currentRoom.reviews).length
 								)}{" "}
-								review(s)
+								{Number(
+									Object.values(currentRoom.reviews).length
+								) === 1
+									? "review"
+									: "reviews"}
 							</span>
 						)}
 					</div>
@@ -228,6 +236,7 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 								showMenu={showMenu}
 								setShowMenu={setShowMenu}
 								room={currentRoom}
+								setDate={setDate}
 							></CalendarMenu>
 						</div>
 						<div className="guests">

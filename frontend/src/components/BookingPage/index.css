@@ -227,13 +227,31 @@
 	.booking-page-left {
 		width: 100%;
 		max-width: none;
+		padding-top: 0px;
+		padding-bottom: 0px;
+		height: fit-content;
 	}
 	.booking-page-room-image {
 		max-width: 100%;
+	}
+
+	.edit-booking-modal {
+		height: 100%;
+	}
+	.calendar-menu-main-container {
+		height: fit-content;
 	}
 	.booking-page-main-container {
 		display: flex;
 		justify-content: center;
 		width: 100%;
+	}
+	.booking-card-dates {
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+	.edit-booking-modal {
+		width: 90vw;
 	}
 }
