@@ -60,7 +60,6 @@ const Bookings = () => {
 				return futureBookings.push(booking);
 			}
 		});
-		console.log(currentBookings);
 	}
 
 	const home = () => {

@@ -25,3 +25,10 @@
 	border-bottom: solid 1px #dedddd;
 	/* margin-bottom: 1rem; */
 }
+
+@media screen and (max-width: 780px) {
+	.nav-items {
+		padding-left: 15px;
+		padding-right: 15px;
+	}
+}

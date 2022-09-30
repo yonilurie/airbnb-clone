@@ -54,7 +54,6 @@ const EditBooking = ({ booking, setShowModal }) => {
 		}
 		setBookingStartDate(e[0]);
 		setBookingEndDate(e[1]);
-		console.log(e);
 	};
 
 	//Handle edit booking submission
@@ -76,7 +75,7 @@ const EditBooking = ({ booking, setShowModal }) => {
 				// guests: guests,
 			})
 		);
-		console.log(data);
+
 		if (data.errors) {
 			setValidationErrors([data.errors.error]);
 		} else {

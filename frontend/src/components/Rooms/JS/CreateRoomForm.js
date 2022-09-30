@@ -63,7 +63,7 @@ const CreateRoomForm = () => {
 
 	const updateFile = (e) => {
 		const file = e.target.files;
-		console.log(file)
+
 		if (file.length !== 5)
 			return setValidationErrors(["Must include five files"]);
 		else setValidationErrors([]);

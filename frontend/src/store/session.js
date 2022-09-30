@@ -293,7 +293,7 @@ export const createRoom = (room) => async (dispatch) => {
 			formData.append("images", images[i]);
 		}
 	}
-	console.log(images)
+
 	const response = await csrfFetch("/api/rooms/add", {
 		method: "POST",
 		headers: {

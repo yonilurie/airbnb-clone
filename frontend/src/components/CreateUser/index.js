@@ -47,10 +47,9 @@ const CreateUser = () => {
 
 	const updateFile = (e) => {
 		const file = e.target.files;
-		if (file.length !== 5) return setErrors(['Must include five files'])
-		else setErrors([])
+		if (file.length !== 5) return setErrors(["Must include five files"]);
+		else setErrors([]);
 		if (file) setImages(file);
-		console.log(file)
 	};
 
 	// for multiple file upload

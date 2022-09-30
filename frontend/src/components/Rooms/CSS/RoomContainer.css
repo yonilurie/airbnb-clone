@@ -27,6 +27,12 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	padding-left: 20px;
-	padding-left: 20px;
+	/* padding-left: 20px;
+	padding-left: 20px; */
+}
+
+@media screen and (max-width: 770px) {
+	.rooms-container {
+		width: 550px;
+	}
 }
