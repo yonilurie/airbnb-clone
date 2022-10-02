@@ -10,7 +10,6 @@
 	margin-bottom: 2.5rem;
 	justify-content: center;
 	align-items: center;
-	/* grid-template-rows: minmax(200px, 400px); */
 	grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
 	row-gap: 1.875rem;
 	column-gap: 1.25rem;
@@ -27,12 +26,19 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	/* padding-left: 20px;
-	padding-left: 20px; */
+}
+
+.single-room-container {
+	margin: auto;
 }
 
 @media screen and (max-width: 770px) {
 	.rooms-container {
 		width: 550px;
+		max-width: 100%;
+
+		padding-left: 15px;
+		padding-right: 15px;
+		box-sizing: border-box;
 	}
 }
