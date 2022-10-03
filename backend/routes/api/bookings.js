@@ -135,7 +135,6 @@ router.get("/", [restoreUser, requireAuth], async (req, res) => {
 	//Find all bookings belonging to the user, as well as room details
 	let bookings = await Booking.findAll({
 		where: { userId: id },
-
 		attributes: [
 			"createdAt",
 			"updatedAt",

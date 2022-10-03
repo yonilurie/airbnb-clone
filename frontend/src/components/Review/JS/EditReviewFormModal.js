@@ -45,7 +45,7 @@ const EditReviewFormModal = ({ showModal, setShowModal, review }) => {
 	};
 
 	return (
-		<div className="modal-body">
+		<div className="modal-body review">
 			<button
 				className="modal-exit-btn"
 				onClick={() => setShowModal(false)}
@@ -81,7 +81,7 @@ const EditReviewFormModal = ({ showModal, setShowModal, review }) => {
 						required
 					/>
 				</div>
-				<div className="input-container">
+				<div className="input-container review-textarea">
 					{" "}
 					<div className="modal-input-label" hidden={!stars}></div>
 					<textarea

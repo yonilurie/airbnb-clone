@@ -556,9 +556,13 @@ router.get("/my-rooms", [restoreUser, requireAuth], async (req, res) => {
 		const avg = reviewInfo[0].dataValues.avgStarRating;
 		rooms[i].dataValues.avgStarRating = avg;
 	}
+	const returnRooms = {};
+	rooms.forEach((room) => {
+		returnRooms[room.id] = room;
+	});
 
 	res.status = 200;
-	return res.json(rooms);
+	return res.json(returnRooms);
 });
 
 //Get details about a room with id

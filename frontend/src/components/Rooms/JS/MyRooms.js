@@ -3,28 +3,23 @@ import { Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getMyRoomsData } from "../../../store/session";
 
-import SingleRoom from "./SingleRoom";
+import MyRoom from "./MyRoom";
 
 import "../CSS/RoomContainer.css";
 
 const MyRooms = () => {
 	const dispatch = useDispatch();
-	const [isDisplayed, setIsDisplayed] = useState(false);
+	const [isDisplayed, setIsDisplayed] = useState(true);
 	const sessionuser = useSelector((state) => state.session.user);
 
-	const rooms = Object.values(useSelector((state) => state.session.rooms));
+	const rooms = useSelector((state) => state.session.rooms);
 
 	useEffect(() => {
-		dispatch(getMyRoomsData());
+		console.log(rooms)
+		if (!Object.values(rooms).length) {
+			dispatch(getMyRoomsData());
+		}
 	}, [dispatch]);
-
-	useEffect(() => {
-		const timeout = setTimeout(() => {
-			setIsDisplayed(true);
-		}, 300);
-
-		return () => clearTimeout(timeout);
-	}, []);
 
 	useEffect(() => {
 		if (document.title !== "My Rooms") document.title = "My Rooms";
@@ -37,12 +32,10 @@ const MyRooms = () => {
 	return (
 		<div className="rooms-main-container">
 			<h1>Your rooms</h1>
-			{isDisplayed && rooms && rooms.length > 0 && (
-				<div className="rooms-container">
-					{rooms.map((room) => {
-						return (
-							<SingleRoom room={room} key={room.id}></SingleRoom>
-						);
+			{isDisplayed && rooms && Object.values(rooms).length > 0 && (
+				<div className="my-rooms-container">
+					{Object.values(rooms).map((room) => {
+						return <MyRoom room={room} key={room.id}></MyRoom>;
 					})}
 				</div>
 			)}

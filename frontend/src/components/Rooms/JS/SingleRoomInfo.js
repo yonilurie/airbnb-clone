@@ -104,7 +104,6 @@ const SingleRoomInfo = () => {
 			setGalleryImage((galleryImage) => galleryImage + 1);
 		}
 	};
-	console.log(center);
 	return (
 		<div className="content-container">
 			<ReviewsModal

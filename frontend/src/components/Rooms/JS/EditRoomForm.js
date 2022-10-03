@@ -4,6 +4,7 @@ import { Redirect, useHistory, useParams } from "react-router-dom";
 
 import { getRoomInfo } from "../../../store/CurrentRoom";
 import { editRoom } from "../../../store/rooms";
+import { getMyRoomsData } from "../../../store/session";
 
 const EditRoomForm = () => {
 	const history = useHistory();
@@ -123,7 +124,6 @@ const EditRoomForm = () => {
 			lng: Number(longitude),
 			description,
 			price,
-			previewImage,
 		};
 
 		if (!validationErrors.length) {
@@ -162,6 +162,7 @@ const EditRoomForm = () => {
 
 			dispatch(getRoomInfo(roomId));
 			//Redirect user to home page
+			dispatch(getMyRoomsData());
 			history.push(`/rooms/${roomId}`);
 		} else {
 			document.body.scrollTop = 0;
@@ -417,21 +418,6 @@ const EditRoomForm = () => {
 							onChange={(e) => setDescription(e.target.value)}
 							required
 						></textarea>
-					</div>
-
-					<div className="input-container">
-						{" "}
-						<label htmlFor="previewImage" className="form-label">
-							Add a preview Image
-						</label>
-						<input
-							type="url"
-							className="form-input"
-							id="previewImage"
-							value={previewImage}
-							onChange={(e) => setPreviewImage(e.target.value)}
-							required
-						></input>
 					</div>
 				</div>
 				<button className="submit-form-btn">Submit</button>

@@ -21,7 +21,6 @@ const CreateRoomForm = () => {
 	const [description, setDescription] = useState("ddddd");
 	const [price, setPrice] = useState(100);
 	const [images, setImages] = useState(null);
-	const [image, setImage] = useState("");
 	const [validationErrors, setValidationErrors] = useState([]);
 	const [isLoaded, setIsLoaded] = useState(false);
 
@@ -44,6 +43,9 @@ const CreateRoomForm = () => {
 		if (description.length > 500 || description.length < 10) {
 			errors.push("Description must be between 10 and 500 characters");
 		}
+		if (images && images.length !== 5) {
+			errors.push("Must include five files");
+		}
 
 		setValidationErrors(errors);
 	}, [
@@ -56,18 +58,15 @@ const CreateRoomForm = () => {
 		longitude,
 		description,
 		price,
+		images,
 	]);
 
 	//If the user is not logged in, redirect the user to home page
 	if (!sessionuser) return <Redirect to="/" />;
 
 	const updateFile = (e) => {
-		const file = e.target.files;
-
-		if (file.length !== 5)
-			return setValidationErrors(["Must include five files"]);
-		else setValidationErrors([]);
-		if (file) setImages(file);
+		const files = e.target.files;
+		if (files) setImages(files);
 	};
 
 	//When for/ is submitted
@@ -98,7 +97,6 @@ const CreateRoomForm = () => {
 					lng: Number(longitude),
 					description,
 					price,
-					// previewImage,
 					images,
 				})
 			);
@@ -121,15 +119,21 @@ const CreateRoomForm = () => {
 			setIsLoaded(true);
 		}
 	};
-
 	return (
 		<div className="form-container">
 			<h1 className="form-description">Host your home</h1>
-			{isLoaded &&
-				validationErrors.length > 0 &&
-				validationErrors.map((error) => {
-					return <div key={error}>{error}</div>;
-				})}
+			<div className="errors">
+				{isLoaded &&
+					validationErrors.length > 0 &&
+					validationErrors.map((error) => {
+						return (
+							<div key={error} className="error">
+								{error}
+							</div>
+						);
+					})}
+			</div>
+
 			<form className="create-room-form" onSubmit={onSubmit}>
 				<div className="input-container-flex">
 					<div className="input-container">
@@ -387,20 +391,41 @@ const CreateRoomForm = () => {
 					</div>
 
 					<div className="input-container">
-						{" "}
-						{/* <label htmlFor="previewImage" className="form-label">
-							Add a preview Image
+						<label htmlFor="images" className="form-label">
+							Images - Select five - First image will be preview
 						</label>
-						<input
-							type="url"
-							className="form-input"
-							id="previewImage"
-							value={images}
-							onChange={updateFile}
-							required
-						></input> */}
+
+						<label htmlFor="images" className="image-input-select">
+							Choose Images
+						</label>
+
+						<div className="create-room-gallery">
+							{images &&
+								[0, 1, 2, 3, 4].map((num) => {
+									if (images[num]) {
+										return (
+											<a
+												href={URL.createObjectURL(
+													images[num]
+												)}
+												target="_blank"
+												rel="noreferrer"
+											>
+												<img
+													className="create-room-image"
+													src={URL.createObjectURL(
+														images[num]
+													)}
+													alt="preview"
+												></img>
+											</a>
+										);
+									}
+								})}
+						</div>
 						<input
 							type="file"
+							id="images"
 							onChange={updateFile}
 							multiple
 						></input>

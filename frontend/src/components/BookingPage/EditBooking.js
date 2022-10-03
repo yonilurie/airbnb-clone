@@ -77,7 +77,7 @@ const EditBooking = ({ booking, setShowModal }) => {
 				// guests: guests,
 			})
 		);
-			console.log(data)
+
 		if (data.errors) {
 			setValidationErrors([data.errors.error]);
 		} else {

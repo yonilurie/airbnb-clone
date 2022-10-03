@@ -39,7 +39,7 @@ function LoginForm({ setShowModal }) {
 				<div className="modal-title">Log in</div>
 			</div>
 
-			<form onSubmit={handleSubmit}>
+			<form onSubmit={handleSubmit} className='login-form'>
 				<h3 className="modal-welcome">Welcome to Airbnb</h3>
 				{validationErrors.length > 0 && (
 					<ul className="errors">
@@ -48,7 +48,7 @@ function LoginForm({ setShowModal }) {
 						))}
 					</ul>
 				)}
-				<div>
+				<div className="input-container">
 					<div className="modal-input-label" hidden={!credential}>
 						Email or Username
 					</div>
@@ -63,7 +63,7 @@ function LoginForm({ setShowModal }) {
 					/>
 				</div>
 
-				<div>
+				<div className="input-container"> 
 					<div className="modal-input-label" hidden={!password}>
 						Password
 					</div>

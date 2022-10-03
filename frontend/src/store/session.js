@@ -442,10 +442,8 @@ const sessionReducer = (state = initialState, action) => {
 		}
 
 		case GET_MY_ROOMS: {
-			const rooms = {};
-			action.rooms.forEach((room) => {
-				rooms[room.id] = room;
-			});
+			const rooms = action.rooms;
+		
 			newState = { ...state, rooms };
 
 			return newState;

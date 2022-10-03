@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useHistory, Redirect, NavLink } from "react-router-dom";
+import { useParams, useHistory, Redirect, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createRoomReview } from "../../store/CurrentRoom";
 import { getRoomInfo } from "../../store/CurrentRoom";
@@ -22,7 +22,7 @@ function CreateReview() {
 
 	//Get reviews for the room to check if user has already made one
 	useEffect(() => {
-		dispatch(getAUsersBookings());
+		dispatch(getAUsersReviews());
 	}, [dispatch]);
 
 	//Form validation
@@ -77,7 +77,9 @@ function CreateReview() {
 					{isSubmitted && validationErrors.length > 0 && (
 						<ul className="errors">
 							{validationErrors.map((error, idx) => (
-								<li key={idx} className='error'>{error}</li>
+								<li key={idx} className="error">
+									{error}
+								</li>
 							))}
 						</ul>
 					)}
@@ -124,7 +126,9 @@ function CreateReview() {
 					</div>
 				</div>
 			)}
-			<NavLink to={`/rooms/${roomId}`}>Visit Room</NavLink>
+			<div className="visit-room-link">
+				<Link to={`/rooms/${roomId}`}>Visit Room</Link>
+			</div>
 		</div>
 	);
 }

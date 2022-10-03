@@ -21,11 +21,9 @@ const Bookings = () => {
 	const sessionuser = useSelector((state) => state.session.user);
 
 	useEffect(() => {
-		dispatch(getAUsersBookings()).then(
-			dispatch(getAUsersReviews()).then(() => {
-				setIsDisplayed(true);
-			})
-		);
+		dispatch(getAUsersBookings()).then(() => {
+			setIsDisplayed(true);
+		});
 	}, [dispatch]);
 
 	// useEffect(() => {}, [dispatch]);

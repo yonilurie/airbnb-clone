@@ -5,7 +5,7 @@ import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 
 import "./index.css";
 import CancelBookingModal from "./CancelBookingModal";
-import { getAUsersBookings } from "../../store/session";
+import { getAUsersBookings, getAUsersReviews } from "../../store/session";
 import EditBookingModal from "./EditBookingModal";
 
 const BookingPage = () => {
@@ -53,6 +53,10 @@ const BookingPage = () => {
 		}
 		return false;
 	};
+
+	useEffect(() => {
+		dispatch(getAUsersReviews());
+	}, [dispatch]);
 
 	useEffect(() => {
 		let booking = null;
@@ -189,6 +193,10 @@ const BookingPage = () => {
 											<div className="booking-action-edit">
 												<Link
 													to={`/review-room/${booking.room.id}`}
+													style={{
+														width: "100%",
+														display: "inline-block",
+													}}
 												>
 													Edit review
 												</Link>
@@ -197,7 +205,10 @@ const BookingPage = () => {
 											<div className="booking-action-edit">
 												<Link
 													to={`/review-room/${booking.room.id}`}
-													className="booking-action-review"
+													style={{
+														width: "100%",
+														display: "inline-block",
+													}}
 												>
 													Create review
 												</Link>

@@ -15,7 +15,8 @@ ul {
 
 .modal-body {
 	box-sizing: border-box;
-	width: 35.5rem;
+	max-width: 35.5rem;
+	width: 90vw;
 	height: 45.625rem;
 	display: flex;
 	align-items: center;
@@ -23,8 +24,20 @@ ul {
 	/* max-height: fit-content; */
 }
 
-.modal-body.login {
-	height: 500px;
+.modal-body.login,
+.modal-body.signup {
+	height: fit-content;
+	width: 90vw;
+	max-width: 500px;
+	padding: 15px;
+	box-sizing: border-box;
+}
+
+.login-form,
+.signup-form {
+	box-sizing: border-box;
+	max-width: 100%;
+	padding: 0px;
 }
 
 .modal-welcome {
@@ -44,6 +57,7 @@ ul {
 	padding: 0.625rem;
 	margin-top: 0.3rem;
 	width: 32.5rem;
+	max-width: 100%;
 	height: 3.5rem;
 	outline: none;
 }
@@ -117,6 +131,7 @@ ul {
 	font-size: 1rem;
 	color: rgb(255, 255, 255);
 	width: 32.5rem;
+	max-width: 100%;
 	height: 3rem;
 	margin-top: 1.25rem;
 }
@@ -148,5 +163,3 @@ ul {
 	justify-content: center;
 	align-items: center;
 }
-
-

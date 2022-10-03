@@ -98,7 +98,7 @@ function SignupForm({ setShowModal }) {
 			<div className="modal-header">
 				<div className="modal-title">Sign Up</div>
 			</div>
-			<form onSubmit={handleSubmit}>
+			<form onSubmit={handleSubmit} className='signup-form'>
 				<h3 className="modal-welcome">Welcome to Airbnb</h3>
 				{isLoaded && validationErrors.length > 0 && (
 					<ul className="errors">
@@ -107,8 +107,8 @@ function SignupForm({ setShowModal }) {
 						))}
 					</ul>
 				)}
-
-				<div>
+			
+				<div className="input-container" >
 					<div className="modal-input-label" hidden={!email}>
 						Email
 					</div>
@@ -123,7 +123,7 @@ function SignupForm({ setShowModal }) {
 					/>
 				</div>
 
-				<div>
+				<div className="input-container">
 					<div className="modal-input-label" hidden={!username}>
 						Username
 					</div>
@@ -137,7 +137,7 @@ function SignupForm({ setShowModal }) {
 					/>
 				</div>
 
-				<div>
+				<div className="input-container">
 					<div className="modal-input-label" hidden={!firstName}>
 						First Name
 					</div>
@@ -151,7 +151,7 @@ function SignupForm({ setShowModal }) {
 					/>
 				</div>
 
-				<div>
+				<div className="input-container">
 					<div className="modal-input-label" hidden={!lastName}>
 						Last Name
 					</div>
@@ -165,7 +165,7 @@ function SignupForm({ setShowModal }) {
 					/>
 				</div>
 
-				<div>
+				<div className="input-container">
 					<div className="modal-input-label" hidden={!password}>
 						Password
 					</div>
@@ -179,7 +179,7 @@ function SignupForm({ setShowModal }) {
 					/>
 				</div>
 
-				<div>
+				<div className="input-container">
 					<div
 						className="modal-input-label"
 						hidden={!confirmPassword}

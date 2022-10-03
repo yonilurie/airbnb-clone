@@ -4,12 +4,27 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	padding: 15px;
+	box-sizing: border-box;
 }
 
 .button-container {
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
+	gap: 10px;
+}
+
+.visit-room-link {
+	box-sizing: border-box;
+	padding: 10px;
+	/* width: 50%; */
+	cursor: pointer;
+}
+
+.visit-room-link:hover {
+	background-color: rgb(246, 246, 246);
+	border-radius: 4px;
 }
 
 .edit-btn,
@@ -54,4 +69,16 @@
 	margin-left: 0.3125rem;
 
 	color: rgb(117, 117, 117);
+}
+
+.review-textarea {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+
+.modal-body.review {
+	max-width: 90vw;
+	max-height: 60vh;
 }
