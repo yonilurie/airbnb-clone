@@ -77,8 +77,11 @@
 	align-items: center;
 }
 
-
 .modal-body.review {
 	max-width: 90vw;
 	max-height: 60vh;
+}
+
+.modal-body.reviews-container {
+	max-width: 90vw;
 }

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import { deleteARoom } from "../../../store/session";
+import { deleteARoom, getMyRoomsData } from "../../../store/session";
 
 import "../CSS/MyRoom.css";
 
@@ -24,7 +24,7 @@ function MyRoom({ room }) {
 					className="preview-image-my-room"
 				></img>
 			</div>
-			<div className="my-room-right" >
+			<div className="my-room-right">
 				<div className="room-detail name">{room.name}</div>
 				<div className="room-detail name">
 					{room.city}, {room.state} {room.country}
@@ -33,13 +33,22 @@ function MyRoom({ room }) {
 				<div className="room-detail-actions">
 					<button
 						className="my-room-btn"
-						onClick={() => dispatch(deleteARoom(room.id))}
+						onClick={() =>
+							dispatch(deleteARoom(room.id)).then(() =>
+								dispatch(getMyRoomsData())
+							)
+						}
 					>
 						Delete
 					</button>
-					<button className="my-room-btn" onClick={() => {
-						history.push(`/rooms/${room.id}/edit`)
-					}}>Edit</button>
+					<button
+						className="my-room-btn"
+						onClick={() => {
+							history.push(`/rooms/${room.id}/edit`);
+						}}
+					>
+						Edit
+					</button>
 				</div>
 			</div>
 		</div>
