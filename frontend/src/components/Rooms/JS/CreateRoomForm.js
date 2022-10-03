@@ -67,8 +67,8 @@ const CreateRoomForm = () => {
 
 	const updateFile = (e) => {
 		const file = e.target.files[0];
+		if (!file) return;
 
-		let errors = [];
 		let testImage = new Image();
 		// If file size is too large show an error
 		testImage.onload = function () {
