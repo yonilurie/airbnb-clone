@@ -65,6 +65,7 @@ const EditBooking = ({ booking, setShowModal }) => {
 		) {
 			return setValidationErrors(["Must change dates"]);
 		}
+
 		const data = await dispatch(
 			editBooking({
 				startDate: bookingStartDate.toISOString().slice(0, 10),
@@ -72,10 +73,11 @@ const EditBooking = ({ booking, setShowModal }) => {
 					.toISOString()
 					.slice(0, 10),
 				bookingId: booking.id,
+				roomId: booking.room.id,
 				// guests: guests,
 			})
 		);
-
+			console.log(data)
 		if (data.errors) {
 			setValidationErrors([data.errors.error]);
 		} else {

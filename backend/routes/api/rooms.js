@@ -350,13 +350,14 @@ router.post(
 			where: {
 				startDate: { [Op.gte]: startDate },
 				endDate: { [Op.lte]: endDate },
-				id: roomId,
+				roomId: {
+					[Op.eq]: roomId,
+				},
 			},
 		});
 		//If they do return error message to user with 403 code
 
 		if (bookingCheck) {
-			console.log(bookingCheck);
 			const err = {};
 			// err.booking =  {
 			// 	startDate: checkAvailability.startDate,
@@ -701,7 +702,6 @@ router.post(
 		} = req.body;
 
 		const gallery = await multiplePublicFileUpload(req.files);
-		console.log(gallery);
 		let room = await Room.create({
 			ownerId: req.user.id,
 			address: address,
@@ -720,9 +720,8 @@ router.post(
 			let roomImages = await UserRoomImage.create({
 				roomId: room.id,
 				userId: req.user.id,
-				imageUrl: gallery[i]
+				imageUrl: gallery[i],
 			});
-			console.log(roomImages)
 		}
 
 		res.status = 201;

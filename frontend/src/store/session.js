@@ -160,9 +160,6 @@ export const login = (user) => async (dispatch) => {
 	});
 	const data = await response.json();
 	dispatch(setUser(data.user));
-	// dispatch(getAUsersBookings())
-	// dispatch(getAUsersReviews())
-	// dispatch(getMyRoomsData())
 	return data;
 };
 
@@ -212,10 +209,11 @@ export const signup = (user) => async (dispatch) => {
 export const getAUsersReviews = () => async (dispatch) => {
 	const response = await csrfFetch("/api/reviews");
 
-	const data = await response.json();
-
-	dispatch(getUserReviews(data));
-	return data;
+	if (response.ok) {
+		const data = await response.json();
+		dispatch(getUserReviews(data));
+		return data;
+	}
 };
 
 export const editAUsersReview = (reviewInfo) => async (dispatch) => {
@@ -228,20 +226,22 @@ export const editAUsersReview = (reviewInfo) => async (dispatch) => {
 		body: JSON.stringify(review),
 	});
 
-	const data = await response.json();
-
-	dispatch(editUserReview(data));
+	if (response.ok) {
+		const data = await response.json();
+		dispatch(editUserReview(data));
+		return data;
+	}
 };
 
 export const deleteAReview = (reviewId) => async (dispatch) => {
 	const response = await csrfFetch(`/api/reviews/${reviewId}`, {
 		method: "DELETE",
 	});
-
-	const data = await response.json();
-
-	dispatch(deleteReview(reviewId));
-	return data;
+	if (response.ok) {
+		const data = await response.json();
+		dispatch(deleteReview(reviewId));
+		return data;
+	}
 };
 
 // Logout a user
@@ -256,11 +256,11 @@ export const logout = () => async (dispatch) => {
 //get all of a signed in users bookings
 export const getAUsersBookings = () => async (dispatch) => {
 	const response = await csrfFetch("/api/bookings");
-
-	const data = await response.json();
-
-	dispatch(getUserBookings(data));
-	return data;
+	if (response.ok) {
+		const data = await response.json();
+		dispatch(getUserBookings(data));
+		return data;
+	}
 };
 
 //Create a room
@@ -346,7 +346,7 @@ export const createBooking = (booking) => async (dispatch) => {
 };
 
 export const editBooking = (booking) => async (dispatch) => {
-	const { startDate, endDate, bookingId } = booking;
+	const { startDate, endDate, bookingId, roomId } = booking;
 
 	const response = await csrfFetch(`/api/bookings/${bookingId}`, {
 		method: "PUT",
@@ -356,6 +356,7 @@ export const editBooking = (booking) => async (dispatch) => {
 		body: JSON.stringify({
 			startDate,
 			endDate,
+			roomId
 		}),
 	});
 
@@ -407,23 +408,14 @@ const sessionReducer = (state = initialState, action) => {
 		}
 
 		case GET_USER_BOOKINGS: {
-			const bookings = {};
-			if (action.bookings.length) {
-				action.bookings.forEach((booking) => {
-					bookings[booking.id] = booking;
-				});
-			}
 			newState = { ...state };
-			newState.bookings = bookings;
+			newState.bookings = action.bookings;
 			return newState;
 		}
 
 		case CREATE_USER_BOOKING: {
 			newState = {
 				...state,
-				// bookings: {
-				// 	...state.bookings,
-				// },
 			};
 			newState.bookings[action.bookingInfo.id] = {
 				...action.bookingInfo,

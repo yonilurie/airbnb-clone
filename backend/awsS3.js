@@ -32,7 +32,6 @@ const singlePublicFileUpload = async (file) => {
 };
 
 const multiplePublicFileUpload = async (files) => {
-	console.log(files)
 	return await Promise.all(
 		files.map((file) => {
 			return singlePublicFileUpload(file);

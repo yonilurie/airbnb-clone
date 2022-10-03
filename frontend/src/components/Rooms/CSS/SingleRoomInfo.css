@@ -355,6 +355,11 @@ h2 {
 	.gallery-nav {
 		position: absolute;
 		cursor: pointer;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 15px;
+		height: 15px;
 	}
 
 	.gallery-nav:hover {

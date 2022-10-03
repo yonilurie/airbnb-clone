@@ -71,7 +71,7 @@ router.put(
 			});
 		}
 
-		//Check if any booking occur in between the given start and end timess
+		//Check if any booking occur in between the given start and end times
 		let checkAvailability = await Booking.findOne({
 			where: {
 				startDate: { [Op.gte]: startDate },
@@ -84,6 +84,7 @@ router.put(
 				},
 			},
 		});
+
 		//if room is not available return error with 403 code
 		if (checkAvailability) {
 			res.status = 403;
@@ -92,8 +93,8 @@ router.put(
 					"Sorry, this room is already booked for the specified dates",
 				statusCode: 403,
 				errors: {
-					startDate: "Start date conflicts with an existing booking",
-					endDate: "End date conflicts with an existing booking",
+					error:
+						"Sorry, this room is already booked for the specified dates",
 				},
 			});
 		}
@@ -176,8 +177,34 @@ router.get("/", [restoreUser, requireAuth], async (req, res) => {
 		});
 	}
 
+	let pastBookings = {};
+	let futureBookings = {};
+	let currentBookings = {};
+
+	if (bookings.length && bookings[0] !== "No bookings yet") {
+		bookings.forEach((booking) => {
+			let now = new Date().getTime();
+			let start = new Date(booking.startDate);
+			let end = new Date(booking.endDate);
+
+			if (start.getTime() < now && end.getTime() > now) {
+				return (currentBookings[booking.id] = booking);
+			}
+			if (start.getTime() < now) {
+				return (pastBookings[booking.id] = booking);
+			}
+			if (start.getTime() > now) {
+				return (futureBookings[booking.id] = booking);
+			}
+		});
+	}
+
 	res.status = 200;
-	return res.json(bookings);
+	return res.json({
+		pastBookings,
+		currentBookings,
+		futureBookings,
+	});
 });
 
 //-------------- Functions

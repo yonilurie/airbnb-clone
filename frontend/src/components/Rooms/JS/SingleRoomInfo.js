@@ -17,7 +17,7 @@ const SingleRoomInfo = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const [showModal, setShowModal] = useState(false);
-	const [center, setCenter] = useState({});
+	const [center, setCenter] = useState({ lat: 0.0, lng: 0.0 });
 	const [gallery, setGallery] = useState([]);
 	const [galleryImage, setGalleryImage] = useState(0);
 	const [showImageModal, setShowImageModal] = useState(false);
@@ -37,10 +37,14 @@ const SingleRoomInfo = () => {
 
 	useEffect(() => {
 		if (currentRoom) {
-			setCenter({
-				lat: parseFloat(currentRoom.lat),
-				lng: parseFloat(currentRoom.lng),
-			});
+			let lat = parseFloat(currentRoom.lat);
+			let lng = parseFloat(currentRoom.lng);
+			if (!isNaN(lat) || !isNaN(lng)) {
+				setCenter({
+					lat,
+					lng,
+				});
+			}
 		}
 
 		if (currentRoom.images) {
@@ -76,6 +80,7 @@ const SingleRoomInfo = () => {
 	if (currentRoom.errors) {
 		history.push("/");
 	}
+
 	//Will delete a room an redirect user to /my-rooms page
 	const deletedRoom = () => {
 		dispatch(deleteARoom(roomId));
@@ -99,7 +104,7 @@ const SingleRoomInfo = () => {
 			setGalleryImage((galleryImage) => galleryImage + 1);
 		}
 	};
-
+	console.log(center);
 	return (
 		<div className="content-container">
 			<ReviewsModal

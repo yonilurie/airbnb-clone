@@ -55,12 +55,23 @@ const BookingPage = () => {
 	};
 
 	useEffect(() => {
-		if (userBookings[bookingId]) {
-			setBooking(userBookings[bookingId]);
-			setRoom(userBookings[bookingId].room);
+		let booking = null;
+		if (userBookings.pastBookings) {
+			if (userBookings.pastBookings[bookingId]) {
+				booking = userBookings.pastBookings[bookingId];
+			} else if (userBookings.currentBookings[bookingId]) {
+				booking = userBookings.currentBookings[bookingId];
+			} else if (userBookings.futureBookings[bookingId]) {
+				booking = userBookings.futureBookings[bookingId];
+			}
+		}
+
+		if (booking) {
+			setBooking(booking);
+			setRoom(booking.room);
 			setCenter({
-				lat: parseFloat(userBookings[bookingId].room.lat),
-				lng: parseFloat(userBookings[bookingId].room.lng),
+				lat: parseFloat(booking.room.lat),
+				lng: parseFloat(booking.room.lng),
 			});
 		} else {
 			dispatch(getAUsersBookings());
@@ -113,6 +124,7 @@ const BookingPage = () => {
 										href={`https://www.google.com/maps/search/?api=1&query=${room.lat}%2C${room.lng}`}
 										className="direction-card"
 										target="_blank"
+										rel="noreferrer"
 									>
 										Get directions
 									</a>
@@ -134,8 +146,8 @@ const BookingPage = () => {
 									<div>
 										{" "}
 										{booking.guests === 1
-											? "1 guest"
-											: `${booking.guests} guests`}
+											? "1 Guest"
+											: `${booking.guests} Guests`}
 									</div>
 									<div>{user.firstName}</div>
 								</div>
@@ -174,19 +186,22 @@ const BookingPage = () => {
 								) : (
 									<>
 										{checkReview(room.reviews) ? (
-											<Link
-												to={`/review-room/${booking.room.id}`}
-												className="booking-action-review"
-											>
-												Edit review
-											</Link>
+											<div className="booking-action-edit">
+												<Link
+													to={`/review-room/${booking.room.id}`}
+												>
+													Edit review
+												</Link>
+											</div>
 										) : (
-											<Link
-												to={`/review-room/${booking.room.id}`}
-												className="booking-action-review"
-											>
-												Create review
-											</Link>
+											<div className="booking-action-edit">
+												<Link
+													to={`/review-room/${booking.room.id}`}
+													className="booking-action-review"
+												>
+													Create review
+												</Link>
+											</div>
 										)}
 									</>
 								)}
@@ -220,12 +235,13 @@ const BookingPage = () => {
 									href={`https://www.google.com/maps/search/?api=1&query=${room.lat}%2C${room.lng}`}
 									className="direction-card"
 									target="_blank"
+									rel="noreferrer"
 								>
 									Get directions
 								</a>
 							</div>
 						</div>
-						<div className="booking-page-rules">
+						{/* <div className="booking-page-rules">
 							<h3>Where you're staying</h3>
 							<h4>House Rules</h4>
 							{room.rules && room.rules.length > 0 ? (
@@ -235,21 +251,24 @@ const BookingPage = () => {
 							) : (
 								<div>No rules listed</div>
 							)}
-						</div>
-						<div className="booking-page-hosted">
+						</div> */}
+						{/* <div className="booking-page-hosted">
 							<h3>Hosted by {room.owner.firstName}</h3>
 							<div>
 								<h4>About your host</h4>
 								<p>{room.owner.description}</p>
 							</div>
-						</div>
+						</div> */}
 						<div className="booking-page-payment">
 							<h3>Payment info</h3>
 							<div>
 								<h4>Total cost</h4>
+								{/* Adds price of room with arbitrary fees */}
 								<div>
-									${booking.room.price * bookingDuration} for{" "}
-									{bookingDuration}{" "}
+									$
+									{booking.room.price * bookingDuration +
+										57 * bookingDuration}{" "}
+									for {bookingDuration}{" "}
 									{bookingDuration === 1 ? "night" : "nights"}
 								</div>
 							</div>
