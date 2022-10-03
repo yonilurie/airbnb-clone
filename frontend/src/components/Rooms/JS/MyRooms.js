@@ -15,7 +15,6 @@ const MyRooms = () => {
 	const rooms = useSelector((state) => state.session.rooms);
 
 	useEffect(() => {
-		console.log(rooms)
 		if (!Object.values(rooms).length) {
 			dispatch(getMyRoomsData());
 		}

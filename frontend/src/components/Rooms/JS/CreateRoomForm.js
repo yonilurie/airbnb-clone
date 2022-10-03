@@ -11,14 +11,14 @@ const CreateRoomForm = () => {
 	const dispatch = useDispatch();
 
 	// State
-	const [name, setName] = useState("ddddd");
-	const [address, setAddress] = useState("ddddd");
-	const [city, setCity] = useState("ddddd");
+	const [name, setName] = useState("");
+	const [address, setAddress] = useState("");
+	const [city, setCity] = useState("");
 	const [state, setState] = useState("WA");
 	const [country, setCountry] = useState("United States");
 	const [latitude, setLatitude] = useState(22);
 	const [longitude, setLongitude] = useState(2);
-	const [description, setDescription] = useState("ddddd");
+	const [description, setDescription] = useState("");
 	const [price, setPrice] = useState(100);
 	const [images, setImages] = useState(null);
 	const [validationErrors, setValidationErrors] = useState([]);
