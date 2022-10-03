@@ -287,12 +287,10 @@ export const createRoom = (room) => async (dispatch) => {
 	formData.append("lng", lng);
 	formData.append("description", description);
 	formData.append("price", price);
-	// formData.append("previewImage", previewImage);
-	if (images && images.length !== 0) {
-		for (var i = 0; i < images.length; i++) {
-			formData.append("images", images[i]);
-		}
-	}
+	
+	images.forEach((image) => {
+		formData.append("images", image);
+	});
 
 	const response = await csrfFetch("/api/rooms/add", {
 		method: "POST",
@@ -356,7 +354,7 @@ export const editBooking = (booking) => async (dispatch) => {
 		body: JSON.stringify({
 			startDate,
 			endDate,
-			roomId
+			roomId,
 		}),
 	});
 
@@ -443,7 +441,7 @@ const sessionReducer = (state = initialState, action) => {
 
 		case GET_MY_ROOMS: {
 			const rooms = action.rooms;
-		
+
 			newState = { ...state, rooms };
 
 			return newState;

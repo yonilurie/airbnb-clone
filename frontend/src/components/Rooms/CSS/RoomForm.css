@@ -43,12 +43,15 @@ input[type="file"] {
 }
 
 .create-room-image {
-	/* width: 200px; */
+	object-fit: cover;
+	width: 100%;
+	height: 100%;
+	/* max-width: 150px; */
+	max-height: 150px;
 }
 
 .image-select-container {
 	width: 100%;
-
 	box-sizing: border-box;
 	cursor: pointer;
 	height: fit-content;
@@ -74,6 +77,34 @@ input[type="file"] {
 .create-room-gallery {
 	display: flex;
 	gap: 5px;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+}
+
+.gallery-image-container {
+	position: relative;
+}
+
+.delete-gallery-image {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	z-index: 4;
+	border-radius: 9999px;
+	padding: 5px;
+	width: 20px;
+	height: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	/* box-sizing: border-box; */
+	cursor: pointer;
+	background-color: white;
+}
+
+.delete-gallery-image:hover {
+	background-color: red;
 }
 
 .form-label {

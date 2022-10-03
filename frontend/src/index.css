@@ -46,4 +46,6 @@ input {
 
 .error {
 	color: red;
+	width: 100%;
+	text-align: start;
 }

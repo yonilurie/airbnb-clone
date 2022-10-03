@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Redirect, useHistory } from "react-router-dom";
+import { Link, Redirect, useHistory } from "react-router-dom";
 
 import { createRoom } from "../../../store/session";
 import "../CSS/RoomForm.css";
@@ -16,27 +16,28 @@ const CreateRoomForm = () => {
 	const [city, setCity] = useState("");
 	const [state, setState] = useState("WA");
 	const [country, setCountry] = useState("United States");
-	const [latitude, setLatitude] = useState(22);
-	const [longitude, setLongitude] = useState(2);
+	const [latitude, setLatitude] = useState(0);
+	const [longitude, setLongitude] = useState(0);
 	const [description, setDescription] = useState("");
 	const [price, setPrice] = useState(100);
-	const [images, setImages] = useState(null);
+	const [images, setImages] = useState([]);
 	const [validationErrors, setValidationErrors] = useState([]);
+	const [imageErrors, setImageErrors] = useState([]);
 	const [isLoaded, setIsLoaded] = useState(false);
 
 	//On initial render set isLoaded to false
-	useEffect(() => {
-		setIsLoaded(false);
-	}, []);
+	useEffect(() => setIsLoaded(false), []);
 
 	useEffect(() => {
-		if (document.title !== "Host your Home")
+		if (document.title !== "Host your Home") {
 			document.title = "Host your Home";
+		}
 	}, []);
 
 	//Validate user form input and render errors if they are present
 	useEffect(() => {
 		const errors = [];
+
 		if (name.length > 50 || name.length < 4) {
 			errors.push("Name must be between 4 and 50 characters");
 		}
@@ -47,7 +48,7 @@ const CreateRoomForm = () => {
 			errors.push("Must include five files");
 		}
 
-		setValidationErrors(errors);
+		// setValidationErrors(errors);
 	}, [
 		name,
 		address,
@@ -65,13 +66,32 @@ const CreateRoomForm = () => {
 	if (!sessionuser) return <Redirect to="/" />;
 
 	const updateFile = (e) => {
-		const files = e.target.files;
-		if (files) setImages(files);
+		const file = e.target.files[0];
+
+		let errors = [];
+		let testImage = new Image();
+		// If file size is too large show an error
+		testImage.onload = function () {
+			if (file.size > 5000000) {
+				return setImageErrors(["File size must be less than 5 MB"]);
+			}
+			setImageErrors([]);
+			setImages([...images, file]);
+		};
+		// If image does not load show an error
+		testImage.onerror = function () {
+			return setImageErrors(["Invalid Image, please try another one"]);
+		};
+		//Create image to run previous tests
+		testImage.src = URL.createObjectURL(file);
 	};
 
-	//When for/ is submitted
+	//When form is submitted
 	const onSubmit = async (e) => {
 		e.preventDefault();
+		if (images.length !== 5) {
+			return setImageErrors(["Please use five images"]);
+		}
 
 		if (!validationErrors.length) {
 			const checkIfLocationTaken = await fetch(
@@ -101,18 +121,18 @@ const CreateRoomForm = () => {
 				})
 			);
 
-			// setName("");
-			// setAddress("");
-			// setCity("");
-			// setState("WA");
-			// setCountry("United States");
-			// setLatitude(0);
-			// setLongitude(0);
-			// setDescription("");
-			// setPrice(100);
+			setName("");
+			setAddress("");
+			setCity("");
+			setState("WA");
+			setCountry("United States");
+			setLatitude(0);
+			setLongitude(0);
+			setDescription("");
+			setPrice(100);
 
-			//Redirect user to home page
-			// history.push("/my-rooms");
+			// Redirect user to rooms page
+			history.push("/my-rooms");
 		} else {
 			document.body.scrollTop = 0;
 			document.documentElement.scrollTop = 0;
@@ -123,9 +143,19 @@ const CreateRoomForm = () => {
 		<div className="form-container">
 			<h1 className="form-description">Host your home</h1>
 			<div className="errors">
-				{isLoaded &&
+				{
+					// isLoaded &&
 					validationErrors.length > 0 &&
-					validationErrors.map((error) => {
+						validationErrors.map((error) => {
+							return (
+								<div key={error} className="error">
+									{error}
+								</div>
+							);
+						})
+				}
+				{imageErrors.length > 0 &&
+					imageErrors.map((error) => {
 						return (
 							<div key={error} className="error">
 								{error}
@@ -395,39 +425,59 @@ const CreateRoomForm = () => {
 							Images - Select five - First image will be preview
 						</label>
 
-						<label htmlFor="images" className="image-input-select">
-							Choose Images
-						</label>
+						{images.length !== 5 && (
+							<label
+								htmlFor="images"
+								className="image-input-select"
+							>
+								Choose Images
+							</label>
+						)}
 
 						<div className="create-room-gallery">
 							{images &&
-								[0, 1, 2, 3, 4].map((num) => {
-									if (images[num]) {
-										return (
+								Array.from(images).map((img, idx) => {
+									return (
+										<div
+											id={idx}
+											className="gallery-image-container"
+										>
+											<div
+												className="delete-gallery-image"
+												onClick={() => {
+													let newArr = Array.from(
+														images
+													);
+													newArr.splice(idx, 1);
+
+													setImages(newArr);
+												}}
+											>
+												X
+											</div>
 											<a
-												href={URL.createObjectURL(
-													images[num]
-												)}
+												href={URL.createObjectURL(img)}
 												target="_blank"
 												rel="noreferrer"
 											>
 												<img
 													className="create-room-image"
 													src={URL.createObjectURL(
-														images[num]
+														img
 													)}
 													alt="preview"
 												></img>
 											</a>
-										);
-									}
+										</div>
+									);
 								})}
 						</div>
 						<input
 							type="file"
 							id="images"
+							accept="image/png, image/jpg, image/jpeg"
 							onChange={updateFile}
-							multiple
+							// multiple
 						></input>
 					</div>
 				</div>
