@@ -331,6 +331,8 @@ router.post(
 		const { roomId } = req.params;
 		const { id } = req.user;
 		let { startDate, endDate } = req.body;
+		console.log(startDate, endDate)
+
 		if (startDate >= endDate) {
 			res.status = 403;
 			return res.json({

@@ -48,7 +48,6 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		if (!sessionuser) return;
-
 		const data = await dispatch(
 			createBooking({
 				startDate: bookingStartDate,
@@ -87,6 +86,7 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 		setBookingStartDate(e[0]);
 		setBookingEndDate(e[1]);
 		setSetDate(true);
+		console.log(e);
 	};
 
 	useEffect(() => {

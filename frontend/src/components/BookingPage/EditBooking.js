@@ -57,10 +57,8 @@ const EditBooking = ({ booking, setShowModal }) => {
 
 		const data = await dispatch(
 			editBooking({
-				startDate: bookingStartDate.toISOString().slice(0, 10),
-				endDate: getPreviousDay(bookingEndDate)
-					.toISOString()
-					.slice(0, 10),
+				startDate: bookingStartDate,
+				endDate: bookingEndDate,
 				bookingId: booking.id,
 				roomId: booking.room.id,
 			})
@@ -83,13 +81,11 @@ const EditBooking = ({ booking, setShowModal }) => {
 			<div className="calendar-menu-main-container">
 				<div className="booking-card-dates">
 					<div>
-						Check in:{" "}
-						{bookingStartDate.toLocaleString().slice(0, 10)}
+						Check in: {new Date(bookingStartDate).toDateString()}
 					</div>
 
 					<div>
-						Check out:{" "}
-						{bookingEndDate.toLocaleString().slice(0, 10)}
+						Check out: {new Date(bookingEndDate).toDateString()}
 					</div>
 				</div>
 				<Calendar

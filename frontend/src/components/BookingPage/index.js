@@ -85,7 +85,7 @@ const BookingPage = () => {
 		let difference =
 			new Date(booking.endDate).getTime() -
 			new Date(booking.startDate).getTime();
-		let duration = Math.ceil(difference / (1000 * 3600 * 24));
+		let duration = Math.ceil(difference / (1000 * 3600 * 24)) - 1;
 		setBookingDuration(duration);
 	}, [booking]);
 
