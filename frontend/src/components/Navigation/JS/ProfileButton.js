@@ -22,12 +22,13 @@ function ProfileButton({ user }) {
 	}, [showMenu]);
 
 	useEffect(() => {
-		if (showModal) {
+		if (showModal || showMenu) {
 			document.body.style.overflow = "hidden";
+			document.body.style.height = "0px";
 		} else {
 			document.body.style.overflow = "unset";
 		}
-	}, [showModal]);
+	}, [showModal, showMenu]);
 
 	//Logout functionality
 	const logout = (e) => {

@@ -1,17 +1,17 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 import * as sessionActions from "../../../store/session";
 
 import "../CSS/Login-SignupForm.css";
 
-function LoginForm({ setShowModal }) {
+function LoginForm({ setShowModal, showModal }) {
 	const dispatch = useDispatch();
 
 	const [credential, setCredential] = useState("");
 	const [password, setPassword] = useState("");
 	const [validationErrors, setValidationErrors] = useState([]);
-	
+
 	//On submit if errors are present, setErrors and they will be rendered to user
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -38,12 +38,14 @@ function LoginForm({ setShowModal }) {
 				<div className="modal-title">Log in</div>
 			</div>
 
-			<form onSubmit={handleSubmit} className='login-form'>
+			<form onSubmit={handleSubmit} className="login-form">
 				<h3 className="modal-welcome">Welcome to Airbnb</h3>
 				{validationErrors.length > 0 && (
 					<ul className="errors">
 						{validationErrors.map((error, idx) => (
-							<li key={idx} className='error'>{error}</li>
+							<li key={idx} className="error">
+								{error}
+							</li>
 						))}
 					</ul>
 				)}
@@ -62,7 +64,7 @@ function LoginForm({ setShowModal }) {
 					/>
 				</div>
 
-				<div className="input-container"> 
+				<div className="input-container">
 					<div className="modal-input-label" hidden={!password}>
 						Password
 					</div>

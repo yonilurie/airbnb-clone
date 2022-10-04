@@ -34,6 +34,15 @@ const SingleRoomInfo = () => {
 	}, [dispatch, roomId]);
 
 	useEffect(() => {
+		if (showModal) {
+			document.body.style.overflow = "hidden";
+			document.body.style.height = "0px";
+		} else {
+			document.body.style.overflow = "unset";
+		}
+	}, [showModal]);
+
+	useEffect(() => {
 		if (currentRoom) {
 			let lat = parseFloat(currentRoom.lat);
 			let lng = parseFloat(currentRoom.lng);
@@ -57,6 +66,7 @@ const SingleRoomInfo = () => {
 	useEffect(() => {
 		if (showModal) {
 			document.body.style.overflow = "hidden";
+			document.body.style.height = "0px";
 		} else {
 			document.body.style.overflow = "unset";
 		}

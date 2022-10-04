@@ -89,6 +89,15 @@ const BookingPage = () => {
 		setBookingDuration(duration);
 	}, [booking]);
 
+	useEffect(() => {
+		if (showModal) {
+			document.body.style.overflow = "hidden";
+				document.body.style.height = "0px";
+		} else {
+			document.body.style.overflow = "unset";
+		}
+	}, [showModal]);
+	
 	return (
 		<>
 			{booking.room && (
@@ -109,7 +118,7 @@ const BookingPage = () => {
 								<img
 									src={room.previewImage}
 									className="booking-page-room-image"
-									alt='booking preview'
+									alt="booking preview"
 								></img>
 							</div>
 							<div className="booking-page-location-bottom">

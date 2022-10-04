@@ -1,4 +1,3 @@
-import React from "react";
 import { Modal } from "../../context/Modal";
 import LoginForm from "./JS/LoginForm";
 import SignupForm from "./JS/SignupForm";
