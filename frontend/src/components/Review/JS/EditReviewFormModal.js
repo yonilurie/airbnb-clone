@@ -61,7 +61,7 @@ const EditReviewFormModal = ({ setShowModal, review }) => {
 				{isSubmitted && validationErrors.length > 0 && (
 					<ul className="errors">
 						{validationErrors.map((error, idx) => (
-							<li key={idx}>{error}</li>
+							<li key={idx} className='error'>{error}</li>
 						))}
 					</ul>
 				)}

@@ -420,9 +420,7 @@ const EditRoomForm = () => {
 						></textarea>
 					</div>
 				</div>
-				<button className="submit-form-btn">
-					Submit Changes
-				</button>
+				<button className="submit-form-btn">Submit Changes</button>
 			</form>
 		</div>
 	);
