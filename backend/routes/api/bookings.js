@@ -31,7 +31,6 @@ router.put(
 		const { bookingId } = req.params;
 		const { id } = req.user;
 		let { startDate, endDate, roomId } = req.body;
-		console.log(endDate, startDate);
 
 		//check if dates are valid
 		if (startDate >= endDate) {

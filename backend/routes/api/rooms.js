@@ -278,28 +278,6 @@ router.get(
 		//Check if room exists
 		if (!room) return res.json(noRoomError());
 
-		//If owner
-		// if (id === room.ownerId) {
-		// 	//If room exists and user is owner, find the bookings and booked users info
-		// 	let bookings = await Booking.findAll({
-		// 		where: { roomId: roomId },
-		// 		// attributes: ["roomId", "startDate", "endDate"],
-		// 		include: [
-		// 			{
-		// 				model: User,
-		// 				attributes: ["id", "firstName", "lastName"],
-		// 			},
-		// 		],
-		// 	});
-		// 	//if no bookings are found
-		// 	if (!bookings.length) {
-		// 		res.status = 200;
-		// 		return res.json({ Bookings: "No dates booked!" });
-		// 	}
-		// 	//Return lsit of bookings
-		// 	res.status = 200;
-		// 	return res.json(bookings);
-		// }
 		//If not the owner
 		let bookings = await Booking.findAll({
 			where: { roomId: roomId },
@@ -311,8 +289,8 @@ router.get(
 			return res.json({ Bookings: "No dates booked!" });
 		}
 
+		// Normalize the data
 		let returnBookings = {};
-
 		bookings.forEach((booking) => {
 			returnBookings[booking.id] = booking;
 		});
@@ -331,7 +309,6 @@ router.post(
 		const { roomId } = req.params;
 		const { id } = req.user;
 		let { startDate, endDate } = req.body;
-		console.log(startDate, endDate)
 
 		if (startDate >= endDate) {
 			res.status = 403;
@@ -368,10 +345,6 @@ router.post(
 
 		if (bookingCheck) {
 			const err = {};
-			// err.booking =  {
-			// 	startDate: checkAvailability.startDate,
-			// 	endDate: checkAvailability.endDate
-			// }
 			(err.message =
 				"Sorry, this room is already booked for the specified dates"),
 				(err.status = 403);
@@ -381,10 +354,6 @@ router.post(
 				statusCode: 403,
 			};
 			return res.json(err);
-			// errors: {
-			// 	startDate: "Start date conflicts with an existing booking",
-			// 	endDate: "End date conflicts with an existing booking",
-			// }
 		}
 		//Create a new booking
 		let newBookingData = req.body;
@@ -565,6 +534,7 @@ router.get("/my-rooms", [restoreUser, requireAuth], async (req, res) => {
 		const avg = reviewInfo[0].dataValues.avgStarRating;
 		rooms[i].dataValues.avgStarRating = avg;
 	}
+	//Normalize the data
 	const returnRooms = {};
 	rooms.forEach((room) => {
 		returnRooms[room.id] = room;
@@ -670,8 +640,8 @@ router.get("/", async (req, res) => {
 		rooms[i].dataValues.numReviews = numReviews;
 	}
 
+	//Normalize the data
 	let returnRooms = {};
-
 	rooms.forEach((room) => {
 		returnRooms[room.id] = room;
 	});
@@ -736,6 +706,7 @@ router.post(
 			previewImage: gallery[0],
 			rules: "No Smoking&",
 		});
+		
 		for (let i = 1; i < gallery.length; i++) {
 			let roomImages = await UserRoomImage.create({
 				roomId: room.id,

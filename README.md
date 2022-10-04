@@ -86,23 +86,8 @@ Under the users past bookings theire are buttons to leave or edit a review whcih
 
 ![Home page](./images/airbnb-home-page.png)
 
+## Create a booking
 
-## Room page
+![Create a booking](./images/create-booking.gif)
 
-![Room page](./images/airbnb-room-page.png)
 
-## Make a Booking
-
-![Booking](./images/airbnb-calendar.png)
-
-## Map and Reviews
-
-![Map](./images/airbnb-map.png)
-
-## Existing Bookings
-
-![Existing Booking](./images/my-trips.png)
-
-## Single booking page
-
-![Existing Booking](./images/airbnb-booking.png)

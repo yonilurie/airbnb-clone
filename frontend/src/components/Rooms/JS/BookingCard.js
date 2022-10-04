@@ -86,7 +86,6 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 		setBookingStartDate(e[0]);
 		setBookingEndDate(e[1]);
 		setSetDate(true);
-		console.log(e);
 	};
 
 	useEffect(() => {

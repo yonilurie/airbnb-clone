@@ -396,7 +396,6 @@ const sessionReducer = (state = initialState, action) => {
 		}
 		case GET_USER_BOOKINGS: {
 			newState = { ...state };
-			console.log(action);
 			newState.bookings = action.bookings;
 			return newState;
 		}
