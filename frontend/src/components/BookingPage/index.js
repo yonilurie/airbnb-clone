@@ -89,15 +89,6 @@ const BookingPage = () => {
 		setBookingDuration(duration);
 	}, [booking]);
 
-	useEffect(() => {
-		if (showModal) {
-			document.body.style.overflow = "hidden";
-				document.body.style.height = "0px";
-		} else {
-			document.body.style.overflow = "unset";
-		}
-	}, [showModal]);
-	
 	return (
 		<>
 			{booking.room && (

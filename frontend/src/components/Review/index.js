@@ -39,15 +39,6 @@ function CreateReview() {
 		setValidationErrors(errors);
 	}, [stars, review, dispatch]);
 
-	useEffect(() => {
-		if (showModal) {
-			document.body.style.overflow = "hidden";
-			document.body.style.height = "0px";
-		} else {
-			document.body.style.overflow = "unset";
-		}
-	}, [showModal]);
-
 	const myReviews = Object.values(
 		useSelector((state) => state.session.reviews)
 	);

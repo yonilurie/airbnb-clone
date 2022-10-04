@@ -21,15 +21,6 @@ function ProfileButton({ user }) {
 		return () => document.removeEventListener("click", closeMenu);
 	}, [showMenu]);
 
-	useEffect(() => {
-		if (showModal || showMenu) {
-			document.body.style.overflow = "hidden";
-			document.body.style.height = "0px";
-		} else {
-			document.body.style.overflow = "unset";
-		}
-	}, [showModal, showMenu]);
-
 	//Logout functionality
 	const logout = (e) => {
 		e.preventDefault();
