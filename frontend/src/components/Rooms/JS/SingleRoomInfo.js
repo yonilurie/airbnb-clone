@@ -3,15 +3,15 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 
 import { getRoomInfo, getARoomsBookings } from "../../../store/CurrentRoom";
-import { deleteARoom, getMyRoomsData } from "../../../store/session";
-import Reviews from "./Reviews";
 
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 
-import "../CSS/SingleRoomInfo.css";
+import Reviews from "./Reviews";
 import ReviewsModal from "./ReviewsModal";
 import BookingCard from "./BookingCard";
 import ImageModal from "./ImageModal";
+
+import "../CSS/SingleRoomInfo.css";
 
 const SingleRoomInfo = () => {
 	const dispatch = useDispatch();
@@ -26,8 +26,6 @@ const SingleRoomInfo = () => {
 	const currentRoom = useSelector((state) => state.currentRoom);
 
 	const { roomId } = useParams();
-
-	const [isDisplayed, setIsDisplayed] = useState(false);
 
 	//Get room info, images, and reviews
 	useEffect(() => {
@@ -64,33 +62,9 @@ const SingleRoomInfo = () => {
 		}
 	}, [showModal]);
 
-	useEffect(() => {
-		if (currentRoom.id !== Number(roomId)) {
-			const timeout = setTimeout(() => {
-				setIsDisplayed(true);
-			}, 300);
-			return () => clearTimeout(timeout);
-		} else {
-			setIsDisplayed(true);
-		}
-	}, []);
-
 	if (isNaN(Number(roomId))) history.push("/");
-
-	if (currentRoom.errors) {
-		history.push("/");
-	}
-
-	//Will delete a room an redirect user to /my-rooms page
-	const deletedRoom = () => {
-		dispatch(deleteARoom(roomId));
-		dispatch(getMyRoomsData());
-		history.push("/my-rooms");
-	};
-
-	if (currentRoom.name) {
-		document.title = `${currentRoom.name}`;
-	}
+	if (currentRoom.errors) history.push("/");
+	if (currentRoom.name) document.title = `${currentRoom.name}`;
 
 	const { isLoaded } = useLoadScript({
 		googleMapsApiKey: process.env.REACT_APP_NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,

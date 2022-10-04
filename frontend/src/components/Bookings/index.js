@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Redirect, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import { getAUsersBookings } from "../../store/session";
-import { getAUsersReviews } from "../../store/session";
 
 import Booking from "./JS/Booking";
 import "./CSS/Bookings.css";
@@ -11,19 +10,12 @@ import "./CSS/Bookings.css";
 const Bookings = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
-	const [isDisplayed, setIsDisplayed] = useState(false);
-
-	// // const [pastBookings, setPastBookings] = useState([]);
-	// const [currentBookings, setCurrentBookings] = useState([]);
-	// const [futureBookings, setFutureBookings] = useState([]);
 
 	const bookings = useSelector((state) => state.session.bookings);
 	const sessionuser = useSelector((state) => state.session.user);
 
 	useEffect(() => {
-		dispatch(getAUsersBookings()).then(() => {
-			setIsDisplayed(true);
-		});
+		dispatch(getAUsersBookings());
 	}, [dispatch]);
 
 	useEffect(() => {
@@ -32,9 +24,7 @@ const Bookings = () => {
 
 	if (!sessionuser) return <Redirect to="/" />;
 
-	const home = () => {
-		history.push("/");
-	};
+	const home = () => history.push("/");
 
 	return (
 		<div className="bookings-page-container">

@@ -9,7 +9,7 @@ import "../CSS/ProfileButton.css";
 
 function ProfileButton({ user }) {
 	const dispatch = useDispatch();
-	//State
+
 	const [showMenu, setShowMenu] = useState(false);
 	const [showModal, setShowModal] = useState(false);
 	const [interaction, setInteraction] = useState();

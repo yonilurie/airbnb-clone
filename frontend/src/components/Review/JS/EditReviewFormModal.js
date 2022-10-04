@@ -4,11 +4,12 @@ import { useHistory, useParams } from "react-router-dom";
 import { getRoomInfo } from "../../../store/CurrentRoom";
 import { editAUsersReview } from "../../../store/session";
 
-const EditReviewFormModal = ({ showModal, setShowModal, review }) => {
+const EditReviewFormModal = ({ setShowModal, review }) => {
 	const dispatch = useDispatch();
 	const history = useHistory();
+
 	const { roomId } = useParams();
-	//State
+
 	const [stars, setStars] = useState(review.stars);
 	const [reviewMessage, setReviewMessage] = useState(review.review);
 	const [validationErrors, setValidationErrors] = useState([]);
@@ -28,7 +29,6 @@ const EditReviewFormModal = ({ showModal, setShowModal, review }) => {
 	//On submit if errors are present, setErrors and they will be rendered to user
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-
 		const newReview = {
 			stars,
 			review: reviewMessage,

@@ -6,7 +6,7 @@ import "../CSS/Login-SignupForm.css";
 
 function SignupForm({ setShowModal }) {
 	const dispatch = useDispatch();
-	//State
+
 	const [email, setEmail] = useState("");
 	const [username, setUsername] = useState("");
 	const [lastName, setLastName] = useState("");
@@ -98,7 +98,7 @@ function SignupForm({ setShowModal }) {
 			<div className="modal-header">
 				<div className="modal-title">Sign Up</div>
 			</div>
-			<form onSubmit={handleSubmit} className='signup-form'>
+			<form onSubmit={handleSubmit} className="signup-form">
 				<h3 className="modal-welcome">Welcome to Airbnb</h3>
 				{isLoaded && validationErrors.length > 0 && (
 					<ul className="errors">
@@ -107,8 +107,8 @@ function SignupForm({ setShowModal }) {
 						))}
 					</ul>
 				)}
-			
-				<div className="input-container" >
+
+				<div className="input-container">
 					<div className="modal-input-label" hidden={!email}>
 						Email
 					</div>

@@ -8,7 +8,7 @@ function ReviewForm({ setShowModal }) {
 	const history = useHistory();
 	const dispatch = useDispatch();
 	const { roomId } = useParams();
-	//State
+
 	const [stars, setStars] = useState("");
 	const [review, setReview] = useState("");
 	const [validationErrors, setValidationErrors] = useState([]);
@@ -19,18 +19,15 @@ function ReviewForm({ setShowModal }) {
 		if (stars < 1 || stars > 5) {
 			errors.push("Stars must be between 1 and 5");
 		}
-
 		if (review.length < 10 || review.length > 500) {
 			errors.push("Review must be between 10 and 500 characters");
 		}
-
 		setValidationErrors(errors);
 	}, [stars, review]);
 
 	//On submit if errors are present, setErrors and they will be rendered to user
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-
 		const reviewData = { review, stars };
 
 		if (!validationErrors.length) {
@@ -38,10 +35,8 @@ function ReviewForm({ setShowModal }) {
 				createRoomReview([roomId, JSON.stringify(reviewData)])
 			);
 			await dispatch(getRoomInfo(roomId));
-
 			history.push(`/rooms/${roomId}`);
 		}
-
 		setIsSubmitted(true);
 	};
 
@@ -79,7 +74,6 @@ function ReviewForm({ setShowModal }) {
 					className="modal-input"
 					value={review}
 					onChange={(e) => setReview(e.target.value)}
-
 					required
 				></textarea>
 

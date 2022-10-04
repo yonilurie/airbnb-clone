@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import Calendar from "react-calendar";
 import {
@@ -10,16 +10,10 @@ import {
 
 const EditBooking = ({ booking, setShowModal }) => {
 	const dispatch = useDispatch();
-	const history = useHistory();
+
 	const [bookingStartDate, setBookingStartDate] = useState(booking.startDate);
 	const [bookingEndDate, setBookingEndDate] = useState(booking.endDate);
 	const [validationErrors, setValidationErrors] = useState([]);
-
-	const cancelBooking = () => {
-		dispatch(deleteBooking(booking.id)).then(() => {
-			history.push("/trips");
-		});
-	};
 
 	const checkInvalidTile = ({ activeStartDate, date, view }) => {
 		for (let roomBooking of booking.room.bookings) {
@@ -74,7 +68,6 @@ const EditBooking = ({ booking, setShowModal }) => {
 					.slice(0, 10),
 				bookingId: booking.id,
 				roomId: booking.room.id,
-				// guests: guests,
 			})
 		);
 

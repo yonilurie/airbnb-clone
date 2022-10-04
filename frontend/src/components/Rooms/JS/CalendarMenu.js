@@ -1,6 +1,6 @@
-import Calendar, { YearView } from "react-calendar";
+import Calendar from "react-calendar";
+
 import "react-calendar/dist/Calendar.css";
-import { useState } from "react";
 import "../CSS/BookingCard.css";
 const CalendarMenu = ({
 	minDate,
@@ -8,7 +8,6 @@ const CalendarMenu = ({
 	onChange,
 	bookingEndDate,
 	bookingStartDate,
-	room,
 	setDate,
 }) => {
 	return (
@@ -30,7 +29,6 @@ const CalendarMenu = ({
 			</div>
 			<Calendar
 				minDate={minDate}
-				// value={null}
 				value={setDate ? [bookingStartDate, bookingEndDate] : null}
 				tileDisabled={tileDisabled}
 				onChange={onChange}

@@ -1,8 +1,10 @@
 import CalendarMenu from "../../Rooms/JS/CalendarMenu";
-const EditBookingModal = ({ room }) => {
-    return <div>
-        <CalendarMenu></CalendarMenu>
-    </div>;
+const EditBookingModal = () => {
+	return (
+		<div>
+			<CalendarMenu></CalendarMenu>
+		</div>
+	);
 };
 
 export default EditBookingModal;

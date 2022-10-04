@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory} from "react-router-dom";
 import { deleteARoom, getMyRoomsData } from "../../../store/session";
 
 import "../CSS/MyRoom.css";

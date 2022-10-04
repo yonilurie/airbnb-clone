@@ -1,10 +1,14 @@
 import { useSelector } from "react-redux";
+
 import Reviews from "./Reviews";
+
 import "../CSS/ReviewsModal.css";
+
 const ShowReviewsModal = ({ setShowModal, currentRoom }) => {
 	const reviews = Object.values(
 		useSelector((state) => state.currentRoom.reviews)
 	);
+	
 	return (
 		<div className="modal-body reviews-container">
 			<button

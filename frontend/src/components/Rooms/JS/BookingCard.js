@@ -1,8 +1,3 @@
-import "../CSS/BookingCard.css";
-import "react-calendar/dist/Calendar.css";
-// import "react-date-range/dist/styles.css"; // main css file
-// import "react-date-range/dist/theme/default.css"; // theme css file
-
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,6 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { createBooking, getAUsersBookings } from "../../../store/session";
 
 import CalendarMenu from "./CalendarMenu";
+
+import "../CSS/BookingCard.css";
+import "react-calendar/dist/Calendar.css";
 
 const BookingCard = ({ currentRoom, setShowModal }) => {
 	const dispatch = useDispatch();
@@ -27,15 +25,7 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 	const nights = 5;
 	endDate.setDate(Number(endDate.getDate()) + nights);
 
-	for (let i = 1; i <= maxGuests; i++) {
-		maxGuestsArr.push(i);
-	}
-
-	function getPreviousDay(date = new Date()) {
-		const previous = new Date(date.getTime());
-		previous.setDate(date.getDate() - 1);
-		return previous;
-	}
+	for (let i = 1; i <= maxGuests; i++) maxGuestsArr.push(i);
 
 	const [bookingStartDate, setBookingStartDate] = useState(startDate);
 	const [bookingEndDate, setBookingEndDate] = useState(endDate);
@@ -57,10 +47,8 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 	//Handle creating a booking
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		if (!sessionuser) return;
 
-		if (!sessionuser) {
-			return;
-		}
 		const data = await dispatch(
 			createBooking({
 				startDate: bookingStartDate,
@@ -113,11 +101,11 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 		setCleaningFee(bookingDuration * cleaningFeeCost);
 		setServiceFee(bookingDuration * serviceFeeCost);
 		setNightlyTotal(bookingDuration * currentRoom.price);
-	}, [bookingDuration]);
+	}, [bookingDuration, cleaningFeeCost, serviceFeeCost, currentRoom]);
 
 	useEffect(() => {
 		setBookingTotal(nightlyTotal + cleaningFee + serviceFee);
-	}, [nightlyTotal]);
+	}, [nightlyTotal, cleaningFee, serviceFee]);
 
 	useEffect(() => {
 		if (

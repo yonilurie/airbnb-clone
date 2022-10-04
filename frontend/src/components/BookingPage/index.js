@@ -3,10 +3,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 
-import "./index.css";
 import CancelBookingModal from "./CancelBookingModal";
-import { getAUsersBookings, getAUsersReviews } from "../../store/session";
 import EditBookingModal from "./EditBookingModal";
+
+import { getAUsersBookings, getAUsersReviews } from "../../store/session";
+
+import "./index.css";
 
 const BookingPage = () => {
 	const dispatch = useDispatch();
@@ -76,9 +78,7 @@ const BookingPage = () => {
 				lat: parseFloat(booking.room.lat),
 				lng: parseFloat(booking.room.lng),
 			});
-		} else {
-			dispatch(getAUsersBookings());
-		}
+		} else dispatch(getAUsersBookings());
 	}, [userBookings]);
 
 	useEffect(() => {

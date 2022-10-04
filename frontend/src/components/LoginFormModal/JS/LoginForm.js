@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+
 import * as sessionActions from "../../../store/session";
 
 import "../CSS/Login-SignupForm.css";
@@ -7,15 +8,13 @@ import "../CSS/Login-SignupForm.css";
 function LoginForm({ setShowModal }) {
 	const dispatch = useDispatch();
 
-	//State
 	const [credential, setCredential] = useState("");
 	const [password, setPassword] = useState("");
-
 	const [validationErrors, setValidationErrors] = useState([]);
+	
 	//On submit if errors are present, setErrors and they will be rendered to user
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-
 		const tryLogin = await dispatch(
 			sessionActions.login({ credential, password })
 		).then((data) => {

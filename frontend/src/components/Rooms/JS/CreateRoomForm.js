@@ -23,10 +23,6 @@ const CreateRoomForm = () => {
 	const [images, setImages] = useState([]);
 	const [validationErrors, setValidationErrors] = useState([]);
 	const [imageErrors, setImageErrors] = useState([]);
-	const [isLoaded, setIsLoaded] = useState(false);
-
-	//On initial render set isLoaded to false
-	useEffect(() => setIsLoaded(false), []);
 
 	useEffect(() => {
 		if (document.title !== "Host your Home") {
@@ -100,7 +96,6 @@ const CreateRoomForm = () => {
 			const checkIfLocationTakenData = await checkIfLocationTaken.json();
 			if (checkIfLocationTakenData.rooms.length > 0) {
 				setValidationErrors(["This location is already taken"]);
-				setIsLoaded(true);
 				document.body.scrollTop = 0;
 				document.documentElement.scrollTop = 0;
 				return;
@@ -136,24 +131,20 @@ const CreateRoomForm = () => {
 		} else {
 			document.body.scrollTop = 0;
 			document.documentElement.scrollTop = 0;
-			setIsLoaded(true);
 		}
 	};
 	return (
 		<div className="form-container">
 			<h1 className="form-description">Host your home</h1>
 			<div className="errors">
-				{
-					// isLoaded &&
-					validationErrors.length > 0 &&
-						validationErrors.map((error) => {
-							return (
-								<div key={error} className="error">
-									{error}
-								</div>
-							);
-						})
-				}
+				{validationErrors.length > 0 &&
+					validationErrors.map((error) => {
+						return (
+							<div key={error} className="error">
+								{error}
+							</div>
+						);
+					})}
 				{imageErrors.length > 0 &&
 					imageErrors.map((error) => {
 						return (

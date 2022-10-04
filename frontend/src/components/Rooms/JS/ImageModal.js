@@ -7,10 +7,6 @@ const ImageModal = ({ image, showImageModal, setShowImageModal }) => {
 		<>
 			{showImageModal && (
 				<Modal onClose={() => setShowImageModal(false)}>
-					{/* <div
-						className="image-modal-container"
-					
-					> */}
 					<div
 						className="modal-exit-btn"
 						onClick={() => setShowImageModal(false)}
@@ -18,7 +14,6 @@ const ImageModal = ({ image, showImageModal, setShowImageModal }) => {
 						x
 					</div>
 					<img src={image} className="modal-img"></img>
-					{/* </div> */}
 				</Modal>
 			)}
 		</>

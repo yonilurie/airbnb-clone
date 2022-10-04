@@ -11,8 +11,9 @@ import "./CSS/Review.css";
 function CreateReview() {
 	const history = useHistory();
 	const dispatch = useDispatch();
+
 	const { roomId } = useParams();
-	//State
+
 	const [stars, setStars] = useState("");
 	const [review, setReview] = useState("");
 	const [validationErrors, setValidationErrors] = useState([]);

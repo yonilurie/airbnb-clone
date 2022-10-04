@@ -12,7 +12,7 @@ import Bookings from "./components/Bookings";
 import BookingPage from "./components/BookingPage";
 import CreateReview from "./components/Review";
 import * as sessionActions from "./store/session";
-import CreateUser from "./components/CreateUser";
+
 
 function App() {
 	const dispatch = useDispatch();
@@ -24,52 +24,37 @@ function App() {
 	return (
 		<>
 			<Navigation isLoaded={isLoaded} />
-			{/* <div
-				className="content-container"
-				style={{
-					display: "flex",
-					flexDirection: "column",
-					justifyContent: "center",
-					alignItems: "center",
-					paddingLeft: "20px",
-					paddingRight: "20px",
-					
-				}}
-			> */}
-				{isLoaded && (
-					<Switch>
-						<Route exact path="/">
-							<Rooms></Rooms>
+			{isLoaded && (
+				<Switch>
+					<Route exact path="/">
+						<Rooms></Rooms>
 					</Route>
-					<Route path='/user'>
-						<CreateUser></CreateUser>
+					<Route path="/host-your-home">
+						<CreateRoomForm></CreateRoomForm>
 					</Route>
-						<Route path="/host-your-home">
-							<CreateRoomForm></CreateRoomForm>
-						</Route>
-						<Route path="/my-rooms">
-							<MyRooms></MyRooms>
-						</Route>
-						<Route exact path="/rooms/:roomId">
-							<SingleRoomInfo></SingleRoomInfo>
-						</Route>
-						<Route path="/rooms/:roomId/edit">
-							<EditRoomForm></EditRoomForm>
-						</Route>
-						<Route exact path="/trips">
-							<Bookings></Bookings>
-						</Route>
-						<Route path="/trips/:bookingId">
-							<BookingPage></BookingPage>
-						</Route>
-						<Route path="/review-room/:roomId">
-							<CreateReview></CreateReview>
-						</Route>
-						<Route>
-							<Rooms></Rooms>
-						</Route>
-					</Switch>
-				)}
+					<Route path="/my-rooms">
+						<MyRooms></MyRooms>
+					</Route>
+					<Route exact path="/rooms/:roomId">
+						<SingleRoomInfo></SingleRoomInfo>
+					</Route>
+					<Route path="/rooms/:roomId/edit">
+						<EditRoomForm></EditRoomForm>
+					</Route>
+					<Route exact path="/trips">
+						<Bookings></Bookings>
+					</Route>
+					<Route path="/trips/:bookingId">
+						<BookingPage></BookingPage>
+					</Route>
+					<Route path="/review-room/:roomId">
+						<CreateReview></CreateReview>
+					</Route>
+					<Route>
+						<Rooms></Rooms>
+					</Route>
+				</Switch>
+			)}
 			{/* </div> */}
 		</>
 	);
