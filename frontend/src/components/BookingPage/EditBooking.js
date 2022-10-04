@@ -1,12 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
 import Calendar from "react-calendar";
-import {
-	deleteBooking,
-	getAUsersBookings,
-	editBooking,
-} from "../../store/session";
+import { getAUsersBookings, editBooking } from "../../store/session";
 
 const EditBooking = ({ booking, setShowModal }) => {
 	const dispatch = useDispatch();

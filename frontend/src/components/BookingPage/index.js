@@ -79,7 +79,7 @@ const BookingPage = () => {
 				lng: parseFloat(booking.room.lng),
 			});
 		} else dispatch(getAUsersBookings());
-	}, [userBookings]);
+	}, [dispatch, userBookings, bookingId]);
 
 	useEffect(() => {
 		let difference =
@@ -109,6 +109,7 @@ const BookingPage = () => {
 								<img
 									src={room.previewImage}
 									className="booking-page-room-image"
+									alt='booking preview'
 								></img>
 							</div>
 							<div className="booking-page-location-bottom">
