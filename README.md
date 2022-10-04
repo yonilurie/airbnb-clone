@@ -1,6 +1,6 @@
 # Airbnb Clone
 
-## Deployed Application: [Heroku](https://backend-project-airbnb.herokuapp.com/)
+## Deployed Application: [Heroku](https://airbnb-clone-fullstack.herokuapp.com/)
 
 ## Description
 
@@ -26,6 +26,8 @@ In the future, the ability to create bookings and upload images for reviews and 
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB) ![Redux](https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white) ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
 
 ![SQLite](https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white) ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white) ![Heroku](https://img.shields.io/badge/heroku-%23430098.svg?style=for-the-badge&logo=heroku&logoColor=white)
+![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)
+
 
 
 
@@ -65,7 +67,7 @@ The user can now
 -   View their existing rooms through <b>My Rooms</b>
 -   And logout through <b>Log Out</b>
 
-## My Trips @ /trips
+## My Trips
 
 ![My trips](./images/my-trips.png)
 
@@ -76,9 +78,31 @@ Clicking on any of the bookings will take the user to the bookings information p
 
 Under the users past bookings theire are buttons to leave or edit a review whcih dynamically change based on whether or not a user has left a review
 
-## Submit review @ /review-room/:roomId
-
-Clicking on the <b>Add review</b> or <b>Edit review</b>button will take the user to /review-room/:roomId
+## Submit review 
 
 ![Submit review](./images/submit-review.png)
 
+## Home Page
+
+![Home page](./images/airbnb-home-page.png)
+
+
+## Room page
+
+![Room page](./images/airbnb-room-page.png)
+
+## Make a Booking
+
+![Booking](./images/airbnb-calendar.png)
+
+## Map and Reviews
+
+![Map](./images/airbnb-map.png)
+
+## Existing Bookings
+
+![Existing Booking](./images/my-trips.png)
+
+## Single booking page
+
+![Existing Booking](./images/airbnb-booking.png)

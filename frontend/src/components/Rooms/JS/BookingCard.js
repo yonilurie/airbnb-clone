@@ -22,7 +22,7 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 	const serviceFeeCost = 35;
 	const maxGuests = 4;
 	const maxGuestsArr = [];
-	const nights = 5;
+	const nights = 1;
 	endDate.setDate(Number(endDate.getDate()) + nights);
 
 	for (let i = 1; i <= maxGuests; i++) maxGuestsArr.push(i);
