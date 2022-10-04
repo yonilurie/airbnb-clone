@@ -24,6 +24,7 @@ const validateReview = [
 	handleValidationErrors,
 ];
 
+// Delete a review
 router.delete("/:reviewId", [restoreUser, requireAuth], async (req, res) => {
 	const { reviewId } = req.params;
 
@@ -133,8 +134,11 @@ router.get("/", [restoreUser, requireAuth], async (req, res) => {
 			},
 		],
 	});
-
-	return res.json(reviews);
+	const returnReviews = {};
+	reviews.forEach((review) => {
+		returnReviews[review.id] = review;
+	});
+	return res.json(returnReviews);
 });
 
 function noRoomError() {

@@ -310,9 +310,16 @@ router.get(
 			res.status = 200;
 			return res.json({ Bookings: "No dates booked!" });
 		}
+
+		let returnBookings = {};
+
+		bookings.forEach((booking) => {
+			returnBookings[booking.id] = booking;
+		});
+
 		//Return the bookings
 		res.status = 200;
-		return res.json(bookings);
+		return res.json(returnBookings);
 	}
 );
 
@@ -625,6 +632,7 @@ router.get("/:roomId", validateRoomId, async (req, res) => {
 	let numReviews = reviewInfo[0].dataValues.numReviews;
 	room.dataValues.avgStarRating = avg;
 	room.dataValues.numReviews = numReviews;
+
 	res.status = 200;
 	return res.json(room);
 });
@@ -660,8 +668,14 @@ router.get("/", async (req, res) => {
 		rooms[i].dataValues.numReviews = numReviews;
 	}
 
+	let returnRooms = {};
+
+	rooms.forEach((room) => {
+		returnRooms[room.id] = room;
+	});
+
 	res.status = 200;
-	return res.json(rooms);
+	return res.json(returnRooms);
 });
 
 //Delete room image

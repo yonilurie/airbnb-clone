@@ -49,26 +49,26 @@ const deleteARoomReview = (reviewId) => {
 export const getRoomInfo = (id) => async (dispatch) => {
 	const response = await fetch(`/api/rooms/${id}`);
 
-	const data = await response.json();
-
-	dispatch(getSpecificRoomData(data));
-
-	return data;
+	if (response.ok) {
+		const data = await response.json();
+		dispatch(getSpecificRoomData(data));
+		return data;
+	}
 };
 //get all bookings for a room by its id
 export const getARoomsBookings = (id) => async (dispatch) => {
 	const response = await fetch(`/api/rooms/${id}/bookings`);
 
-	const data = await response.json();
-
-	dispatch(getRoomBookings(data));
-	return data;
+	if (response.ok) {
+		const data = await response.json();
+		dispatch(getRoomBookings(data));
+		return data;
+	}
 };
 
 //Create a review of a room, requires reviews as a JSON.stringify string and roomId
 export const createRoomReview = (reviewData) => async (dispatch) => {
 	const [roomId, review] = reviewData;
-
 	const response = await csrfFetch(`/api/rooms/${Number(roomId)}/reviews`, {
 		method: "POST",
 		headers: {
@@ -76,15 +76,16 @@ export const createRoomReview = (reviewData) => async (dispatch) => {
 		},
 		body: JSON.stringify(review),
 	});
-
-	const data = await response.json();
-
-	dispatch(createARoomReview(data));
+	if (response.ok) {
+		const data = await response.json();
+		dispatch(createARoomReview(data));
+		return data;
+	}
 };
 
+//Edit a currently existing review
 export const editAReview = (reviewData) => async (dispatch) => {
 	const [review, reviewId, roomId] = reviewData;
-
 	const response = await csrfFetch(
 		`/api/rooms/${roomId}/reviews/${reviewId}`,
 		{
@@ -95,26 +96,27 @@ export const editAReview = (reviewData) => async (dispatch) => {
 			body: JSON.stringify(review),
 		}
 	);
-
-	const data = await response.json();
-
-	dispatch(editReview(data));
-	return data;
+	if (response.ok) {
+		const data = await response.json();
+		dispatch(editReview(data));
+		return data;
+	}
 };
 
+//Delete an existing review of a room
 export const deleteRoomReview = (reviewId) => async (dispatch) => {
 	const response = await csrfFetch(`/api/reviews/${reviewId}`, {
 		method: "DELETE",
 	});
-
-	const data = await response.json();
-
-	dispatch(deleteARoomReview(reviewId));
+	if (response.ok) {
+		const data = await response.json();
+		dispatch(deleteARoomReview(reviewId));
+		return data;
+	}
 };
 
-const initialState = {};
-
 //Reducer
+const initialState = {};
 const singleRoomReducer = (state = initialState, action) => {
 	let newState;
 	switch (action.type) {
@@ -126,58 +128,31 @@ const singleRoomReducer = (state = initialState, action) => {
 					reviews[review.id] = review;
 				});
 			}
-
 			newState.reviews = reviews;
-
 			return newState;
 		}
 
 		case GET_CURRENT_ROOM_BOOKINGS: {
 			newState = { ...state };
-
-			const bookings = {};
-			if (action.bookings.length) {
-				action.bookings.forEach((booking) => {
-					bookings[booking.id] = booking;
-				});
-			}
-			newState.bookings = bookings;
-
+			newState.bookings = action.bookings;
 			return newState;
 		}
 
 		case CREATE_ROOM_REVIEW: {
-			newState = {
-				...state,
-				reviews: {
-					...state.reviews,
-					[action.reviewInfo.id]: { ...action.reviewInfo },
-				},
-			};
-
+			newState = { ...state };
+			newState.reviews[action.reviewInfo.id] = action.reviewInfo;
 			return newState;
 		}
 		case EDIT_ROOM_REVIEW: {
 			newState = { ...state };
-
 			newState.reviews[action.review.id] = action.review;
-
 			return newState;
 		}
 		case DELETE_ROOM_REVIEW: {
 			newState = { ...state };
-
-			for (const key in newState.reviews) {
-				if (
-					Number(newState.reviews[key].id) === Number(action.reviewId)
-				) {
-					delete newState.reviews[key];
-					return newState;
-				}
-			}
+			delete newState.reviews[action.reviewId];
 			return newState;
 		}
-
 		default:
 			return state;
 	}

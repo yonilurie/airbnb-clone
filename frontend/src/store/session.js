@@ -1,32 +1,13 @@
 import { csrfFetch } from "./csrf";
-// user_actions.js
 
 export const createUser = (user) => async (dispatch) => {
-	const {
-		images,
-		image,
-		username,
-		email,
-		password,
-		lastName,
-		firstName,
-	} = user;
+	const { username, email, password, lastName, firstName } = user;
 	const formData = new FormData();
 	formData.append("username", username);
 	formData.append("email", email);
 	formData.append("password", password);
 	formData.append("firstName", firstName);
 	formData.append("lastName", lastName);
-
-	// for multiple files
-	if (images && images.length !== 0) {
-		for (var i = 0; i < images.length; i++) {
-			formData.append("images", images[i]);
-		}
-	}
-
-	// for single file
-	if (image) formData.append("image", image);
 
 	const res = await csrfFetch(`/api/users/`, {
 		method: "POST",
@@ -158,40 +139,49 @@ export const login = (user) => async (dispatch) => {
 			password,
 		}),
 	});
-	const data = await response.json();
-	dispatch(setUser(data.user));
-	return data;
+
+	if (response.ok) {
+		const data = await response.json();
+		dispatch(setUser(data.user));
+		return data;
+	}
 };
 
 //Restores the user if they are logged in
 export const restoreUser = () => async (dispatch) => {
-	const result = await csrfFetch("/api/session");
-	const data = await result.json();
-	dispatch(setUser(data.user));
+	const response = await csrfFetch("/api/session");
+
+	if (response.ok) {
+		const data = await response.json();
+		dispatch(setUser(data.user));
+	}
 };
 
 export const getMyRoomsData = () => async (dispatch) => {
 	const response = await csrfFetch(`/api/rooms/my-rooms`);
 
-	const data = await response.json();
-
-	dispatch(getMyRooms(data));
-	return data;
+	if (response.ok) {
+		const data = await response.json();
+		dispatch(getMyRooms(data));
+		return data;
+	}
 };
 
 export const deleteARoom = (id) => async (dispatch) => {
 	const response = await csrfFetch(`/api/rooms/${id}`, {
 		method: "DELETE",
 	});
-	const data = await response.json();
-	dispatch(deleteMyRoom(id));
-	return id;
+	if (response.ok) {
+		const data = await response.json();
+		dispatch(deleteMyRoom(id));
+		return id;
+	}
 };
 
 // Register a user
 export const signup = (user) => async (dispatch) => {
 	const { email, password, username, firstName, lastName } = user;
-	const result = await csrfFetch("/api/users/register", {
+	const response = await csrfFetch("/api/users/register", {
 		method: "POST",
 		body: JSON.stringify({
 			email,
@@ -201,9 +191,12 @@ export const signup = (user) => async (dispatch) => {
 			lastName,
 		}),
 	});
-	const data = await result.json();
-	dispatch(setUser(data.user));
-	return data;
+
+	if (response.ok) {
+		const data = await response.json();
+		dispatch(setUser(data.user));
+		return data;
+	}
 };
 
 export const getAUsersReviews = () => async (dispatch) => {
@@ -246,16 +239,21 @@ export const deleteAReview = (reviewId) => async (dispatch) => {
 
 // Logout a user
 export const logout = () => async (dispatch) => {
-	const result = await csrfFetch("/api/session", {
+	const response = await csrfFetch("/api/session", {
 		method: "DELETE",
 	});
-	dispatch(removeUser());
-	return result;
+
+	if (response.ok) {
+		const data = await response.json();
+		dispatch(removeUser());
+		return data;
+	}
 };
 
 //get all of a signed in users bookings
 export const getAUsersBookings = () => async (dispatch) => {
 	const response = await csrfFetch("/api/bookings");
+
 	if (response.ok) {
 		const data = await response.json();
 		dispatch(getUserBookings(data));
@@ -287,7 +285,7 @@ export const createRoom = (room) => async (dispatch) => {
 	formData.append("lng", lng);
 	formData.append("description", description);
 	formData.append("price", price);
-	
+
 	images.forEach((image) => {
 		formData.append("images", image);
 	});
@@ -300,14 +298,16 @@ export const createRoom = (room) => async (dispatch) => {
 		body: formData,
 	});
 
-	const data = await response.json();
-	dispatch(createARoom(data));
+	if (response.ok) {
+		const data = await response.json();
+		dispatch(createARoom(data));
+		return data;
+	}
 };
 
 //Create a review of a room, requires reviews as a JSON.stringify string and roomId
 export const createRoomReview = (reviewData) => async (dispatch) => {
 	const [roomId, review] = reviewData;
-
 	const response = await csrfFetch(`/api/rooms/${Number(roomId)}/reviews`, {
 		method: "POST",
 		headers: {
@@ -316,14 +316,15 @@ export const createRoomReview = (reviewData) => async (dispatch) => {
 		body: JSON.stringify(review),
 	});
 
-	const data = await response.json();
-
-	dispatch(createARoomReview(data));
+	if (response.ok) {
+		const data = await response.json();
+		dispatch(createARoomReview(data));
+		return data;
+	}
 };
 
 export const createBooking = (booking) => async (dispatch) => {
 	const { startDate, endDate, roomId, guests } = booking;
-
 	const response = await csrfFetch(`/api/rooms/${Number(roomId)}/bookings`, {
 		method: "POST",
 		headers: {
@@ -335,17 +336,15 @@ export const createBooking = (booking) => async (dispatch) => {
 			guests,
 		}),
 	});
-
-	const data = await response.json();
-	if (!data.errors) {
-		dispatch(createABooking(data));
+	if (response.ok) {
+		const data = await response.json();
+		if (!data.errors) dispatch(createABooking(data));
+		return data;
 	}
-	return data;
 };
 
 export const editBooking = (booking) => async (dispatch) => {
 	const { startDate, endDate, bookingId, roomId } = booking;
-
 	const response = await csrfFetch(`/api/bookings/${bookingId}`, {
 		method: "PUT",
 		headers: {
@@ -358,50 +357,42 @@ export const editBooking = (booking) => async (dispatch) => {
 		}),
 	});
 
-	const data = await response.json();
-	if (!data.errors) {
-		dispatch(editABooking(data));
+	if (response.ok) {
+		const data = await response.json();
+		if (!data.errors) dispatch(editABooking(data));
+		return data;
 	}
-	return data;
 };
 
 export const deleteBooking = (bookingId) => async (dispatch) => {
 	const response = await csrfFetch(`/api/bookings/${bookingId}`, {
 		method: "DELETE",
 	});
-	const data = await response.json();
 
-	dispatch(deleteABooking(Number(bookingId)));
-	return data;
+	if (response.ok) {
+		const data = await response.json();
+		dispatch(deleteABooking(Number(bookingId)));
+		return data;
+	}
 };
+
+// Reducer
+//
 
 //Initial state for session
 const initialState = { user: null, reviews: {}, bookings: {}, rooms: {} };
 
-// Reducer
-//
 const sessionReducer = (state = initialState, action) => {
 	let newState;
 	switch (action.type) {
 		case SET_USER:
 			newState = { ...state };
 			newState.user = action.payload;
-
 			return newState;
 
 		case GET_USER_REVIEWS: {
-			const reviews = {};
-
-			if (action.reviews.length) {
-				action.reviews.forEach((review) => {
-					reviews[review.id] = review;
-				});
-			}
-			newState = {
-				...state,
-			};
-			newState.reviews = reviews;
-
+			newState = { ...state };
+			newState.reviews = action.reviews;
 			return newState;
 		}
 
@@ -412,9 +403,7 @@ const sessionReducer = (state = initialState, action) => {
 		}
 
 		case CREATE_USER_BOOKING: {
-			newState = {
-				...state,
-			};
+			newState = { ...state };
 			newState.bookings[action.bookingInfo.id] = {
 				...action.bookingInfo,
 			};
@@ -423,80 +412,53 @@ const sessionReducer = (state = initialState, action) => {
 
 		case EDIT_USER_BOOKING: {
 			newState = { ...state };
-
-			if (newState.bookings[action.bookingId]) {
-				newState.bookings[action.bookingId] = action.booking;
-			}
-
+			newState.bookings[action.bookingId] = action.booking;
 			return newState;
 		}
 		case DELETE_USER_BOOKING: {
 			newState = { ...state };
-			if (newState.bookings[action.bookingId]) {
-				delete newState.bookings[action.bookingId];
-			}
-
+			delete newState.bookings[action.bookingId];
 			return newState;
 		}
 
 		case GET_MY_ROOMS: {
 			const rooms = action.rooms;
-
 			newState = { ...state, rooms };
-
 			return newState;
 		}
 
 		case CREATE_ROOM: {
-			const room = action.room;
 			newState = { ...state };
-			newState.rooms[room.id] = room;
+			newState.rooms[action.room.id] = action.room;
 			return newState;
 		}
 
 		case DELETE_MY_ROOM: {
 			newState = { ...state };
-
-			if (newState.rooms[action.id]) {
-				delete newState.rooms[action.id];
-			}
-
+			delete newState.rooms[action.id];
 			return newState;
 		}
 
 		case CREATE_ROOM_REVIEW: {
-			newState = {
-				...state,
-				reviews: {
-					...state.reviews,
-				},
-			};
+			newState = { ...state };
 			newState.reviews[action.reviewInfo.id] = { ...action.reviewInfo };
 			return newState;
 		}
 
 		case EDIT_REVIEW: {
 			newState = { ...state };
-
-			if (newState.reviews[action.review.id]) {
-				newState.reviews[action.review.id] = action.review;
-				return newState;
-			}
-
+			newState.reviews[action.review.id] = action.review;
 			return newState;
 		}
 
 		case DELETE_REVIEW: {
 			newState = { ...state };
-			if (newState.reviews[action.reviewId]) {
-				delete newState.reviews[action.reviewId];
-			}
+			delete newState.reviews[action.reviewId];
 			return newState;
 		}
 
 		case REMOVE_USER:
 			newState = { ...initialState };
-
 			return newState;
 		case SET_USER:
 			return { ...state, user: action.payload };

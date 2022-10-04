@@ -171,9 +171,7 @@ router.get("/", [restoreUser, requireAuth], async (req, res) => {
 	//If there are no bookings return 200 code and message
 	if (!bookings.length) {
 		res.status = 200;
-		return res.json({
-			message: "No bookings yet",
-		});
+		return res.json({});
 	}
 
 	let pastBookings = {};

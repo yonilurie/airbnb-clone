@@ -422,7 +422,7 @@ const CreateRoomForm = () => {
 
 					<div className="input-container">
 						<label htmlFor="images" className="form-label">
-							Images - Select five - First image will be preview
+							Images - First image will be preview
 						</label>
 
 						{images.length !== 5 && (

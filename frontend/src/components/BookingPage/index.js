@@ -35,14 +35,12 @@ const BookingPage = () => {
 	const isPast = (date, date2) => {
 		const endDate = new Date(date).getTime();
 		const today = new Date().getTime();
-
 		return endDate < today;
 	};
 
 	const isCurrent = (start, end) => {
 		start = new Date(start);
 		end = new Date(end);
-
 		const now = new Date().getTime();
 		return start.getTime() < now && end.getTime() > now;
 	};
@@ -56,6 +54,7 @@ const BookingPage = () => {
 
 	useEffect(() => {
 		dispatch(getAUsersReviews());
+		dispatch(getAUsersBookings());
 	}, [dispatch]);
 
 	useEffect(() => {

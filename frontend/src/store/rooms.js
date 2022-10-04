@@ -3,7 +3,7 @@ import { csrfFetch } from "./csrf";
 //String literals for thunk action
 const GET_ROOMS = "/api/rooms";
 const CREATE_ROOM = "/api/rooms/add";
-const DELETE_ROOM = "/api/rooms/:roomId/delete";
+
 const EDIT_ROOM = "/api/rooms/:roomId/edit";
 
 //Thunk actions
@@ -22,13 +22,6 @@ const createARoom = (room) => {
 	};
 };
 
-const deleteARoom = (id) => {
-	return {
-		type: DELETE_ROOM,
-		id,
-	};
-};
-
 const editARoom = (room) => {
 	return {
 		type: EDIT_ROOM,
@@ -43,10 +36,11 @@ export const getRooms = () => async (dispatch) => {
 	const response = await fetch("/api/rooms", {
 		method: "GET",
 	});
-
-	const data = await response.json();
-	dispatch(getRoomsData(data));
-	return data;
+	if (response.ok) {
+		const data = await response.json();
+		dispatch(getRoomsData(data));
+		return data;
+	}
 };
 
 //Create a room
@@ -61,7 +55,6 @@ export const createRoom = (room) => async (dispatch) => {
 		lng,
 		description,
 		price,
-		// previewImage,
 		image,
 	} = room;
 	const formData = new FormData();
@@ -74,7 +67,6 @@ export const createRoom = (room) => async (dispatch) => {
 	formData.append("lng", lng);
 	formData.append("description", description);
 	formData.append("price", price);
-	// formData.append("previewImage", previewImage);
 	formData.append("image", image);
 
 	const response = await csrfFetch("/api/rooms/add", {
@@ -84,21 +76,14 @@ export const createRoom = (room) => async (dispatch) => {
 		},
 		body: formData,
 	});
-
-	const data = await response.json();
-	dispatch(createARoom(data));
+	if (response.ok) {
+		const data = await response.json();
+		dispatch(createARoom(data));
+		return data;
+	}
 };
 
-//delete a room
-export const deleteRoom = (roomId) => async (dispatch) => {
-	const response = await csrfFetch(`/api/rooms/${roomId}`, {
-		method: "DELETE",
-	});
-	const res = await response.json();
-	dispatch(deleteARoom(roomId));
-};
-
-//edit a room
+//Edit a room
 export const editRoom = (roomEdits) => async (dispatch) => {
 	const response = await csrfFetch(`/api/rooms/${roomEdits.id}`, {
 		method: "PUT",
@@ -107,56 +92,33 @@ export const editRoom = (roomEdits) => async (dispatch) => {
 		},
 		body: roomEdits,
 	});
-
-	const data = await response.json();
-
-	dispatch(editARoom(data));
+	if (response.ok) {
+		const data = await response.json();
+		dispatch(editARoom(data));
+		return data;
+	}
 };
 
+//Reducer
 const initialState = {};
 
-//Reducer
 const roomReducer = (state = initialState, action) => {
 	let newState;
 	switch (action.type) {
 		case GET_ROOMS:
-			const rooms = {};
-			const fetchedRooms = { ...action.rooms };
-			for (const key in fetchedRooms) {
-				rooms[fetchedRooms[key].id] = fetchedRooms[key];
-			}
-			newState = { ...rooms };
+			newState = action.rooms;
 			return newState;
 
 		case CREATE_ROOM: {
-			const room = action.room;
-			newState = Object.assign(state, room);
-			return newState;
-		}
-
-		case DELETE_ROOM: {
 			newState = { ...state };
-
-			for (const key in newState) {
-				if (Number(newState[key].id) === Number(action.id)) {
-					delete newState[key].id;
-					return newState;
-				}
-			}
-
-			// delete newState[action.id];
+			newState[action.room.id] = action.room;
 			return newState;
 		}
 		case EDIT_ROOM: {
 			newState = { ...state };
-
-			for (const key in newState) {
-				if (Number(newState[key].roomId) === Number(action.room.id)) {
-					newState[key].roomId = action.room;
-					return newState;
-				}
+			if (newState[action.room.id]) {
+				newState[action.room.id] = action.room;
 			}
-
 			return newState;
 		}
 		default:
