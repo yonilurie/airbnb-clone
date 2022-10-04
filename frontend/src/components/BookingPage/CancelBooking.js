@@ -18,7 +18,7 @@ const CancelBooking = ({ booking }) => {
 			<h3>Are you sure you want to cancel your reservation?</h3>
 			<div>Confirming cancellation is not reversable</div>
 
-			<button className="delete-btn" onClick={() => cancelBooking()}>
+			<button className="cancel-btn" onClick={() => cancelBooking()}>
 				Confirm
 			</button>
 		</div>

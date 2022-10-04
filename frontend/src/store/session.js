@@ -389,19 +389,17 @@ const sessionReducer = (state = initialState, action) => {
 			newState = { ...state };
 			newState.user = action.payload;
 			return newState;
-
 		case GET_USER_REVIEWS: {
 			newState = { ...state };
 			newState.reviews = action.reviews;
 			return newState;
 		}
-
 		case GET_USER_BOOKINGS: {
 			newState = { ...state };
+			console.log(action);
 			newState.bookings = action.bookings;
 			return newState;
 		}
-
 		case CREATE_USER_BOOKING: {
 			newState = { ...state };
 			newState.bookings[action.bookingInfo.id] = {
@@ -409,7 +407,6 @@ const sessionReducer = (state = initialState, action) => {
 			};
 			return newState;
 		}
-
 		case EDIT_USER_BOOKING: {
 			newState = { ...state };
 			newState.bookings[action.bookingId] = action.booking;
@@ -420,48 +417,39 @@ const sessionReducer = (state = initialState, action) => {
 			delete newState.bookings[action.bookingId];
 			return newState;
 		}
-
 		case GET_MY_ROOMS: {
 			const rooms = action.rooms;
 			newState = { ...state, rooms };
 			return newState;
 		}
-
 		case CREATE_ROOM: {
 			newState = { ...state };
 			newState.rooms[action.room.id] = action.room;
 			return newState;
 		}
-
 		case DELETE_MY_ROOM: {
 			newState = { ...state };
 			delete newState.rooms[action.id];
 			return newState;
 		}
-
 		case CREATE_ROOM_REVIEW: {
 			newState = { ...state };
 			newState.reviews[action.reviewInfo.id] = { ...action.reviewInfo };
 			return newState;
 		}
-
 		case EDIT_REVIEW: {
 			newState = { ...state };
 			newState.reviews[action.review.id] = action.review;
 			return newState;
 		}
-
 		case DELETE_REVIEW: {
 			newState = { ...state };
 			delete newState.reviews[action.reviewId];
 			return newState;
 		}
-
 		case REMOVE_USER:
 			newState = { ...initialState };
 			return newState;
-		case SET_USER:
-			return { ...state, user: action.payload };
 		default:
 			return state;
 	}

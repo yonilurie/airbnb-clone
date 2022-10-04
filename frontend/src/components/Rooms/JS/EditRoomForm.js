@@ -20,7 +20,6 @@ const EditRoomForm = () => {
 	const [longitude, setLongitude] = useState(0);
 	const [description, setDescription] = useState("");
 	const [price, setPrice] = useState(100);
-	const [previewImage, setPreviewImage] = useState("");
 	const [validationErrors, setValidationErrors] = useState([]);
 	const [isLoaded, setIsLoaded] = useState(false);
 
@@ -61,7 +60,6 @@ const EditRoomForm = () => {
 				lng,
 				description,
 				price,
-				previewImage,
 			} = currentRoom;
 
 			//Set all the states with the rooms information
@@ -74,7 +72,6 @@ const EditRoomForm = () => {
 			setLongitude(lng);
 			setDescription(description);
 			setPrice(price);
-			setPreviewImage(previewImage);
 		}
 	}, [currentRoom]);
 
@@ -102,10 +99,7 @@ const EditRoomForm = () => {
 	]);
 
 	//If user is not logged in or is not the owner of the room, redirect them
-	if (
-		!sessionuser ||
-		(currentRoom.ownerId && currentRoom.ownerId !== sessionuser.id)
-	) {
+	if (currentRoom.ownerId && currentRoom.ownerId !== sessionuser.id) {
 		return <Redirect to="/"></Redirect>;
 	}
 

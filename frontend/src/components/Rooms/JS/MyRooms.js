@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { Redirect, useHistory } from "react-router-dom";
+import { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getMyRoomsData } from "../../../store/session";
 
@@ -10,22 +10,16 @@ import "../CSS/RoomContainer.css";
 const MyRooms = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
-	const sessionuser = useSelector((state) => state.session.user);
 
 	const rooms = useSelector((state) => state.session.rooms);
 
 	useEffect(() => {
-		if (!Object.values(rooms).length) {
-			dispatch(getMyRoomsData());
-		}
-	}, [dispatch]);
+		if (!rooms) dispatch(getMyRoomsData());
+	}, [dispatch, rooms]);
 
 	useEffect(() => {
 		if (document.title !== "My Rooms") document.title = "My Rooms";
 	}, []);
-
-	//If the user is not logged in, redirect the user to home page
-	if (!sessionuser) return <Redirect to="/" />;
 
 	return (
 		<div className="rooms-main-container">

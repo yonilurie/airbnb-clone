@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { Link, Redirect, useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 import { createRoom } from "../../../store/session";
 import "../CSS/RoomForm.css";
 
 const CreateRoomForm = () => {
 	const history = useHistory();
-	const sessionuser = useSelector((state) => state.session.user);
 	const dispatch = useDispatch();
 
 	// State
@@ -57,9 +56,6 @@ const CreateRoomForm = () => {
 		price,
 		images,
 	]);
-
-	//If the user is not logged in, redirect the user to home page
-	if (!sessionuser) return <Redirect to="/" />;
 
 	const updateFile = (e) => {
 		const file = e.target.files[0];

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useHistory, Redirect, Link } from "react-router-dom";
+import { useParams, useHistory, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createRoomReview } from "../../store/CurrentRoom";
 import { deleteAReview } from "../../store/session";
@@ -51,9 +51,6 @@ function CreateReview() {
 	const myReviews = Object.values(
 		useSelector((state) => state.session.reviews)
 	);
-
-	const sessionuser = useSelector((state) => state.session.user);
-	if (!sessionuser) return <Redirect to="/" />;
 
 	//Check reviews for one made by the user
 	let usersReview = myReviews.find(

@@ -131,13 +131,11 @@ const singleRoomReducer = (state = initialState, action) => {
 			newState.reviews = reviews;
 			return newState;
 		}
-
 		case GET_CURRENT_ROOM_BOOKINGS: {
 			newState = { ...state };
 			newState.bookings = action.bookings;
 			return newState;
 		}
-
 		case CREATE_ROOM_REVIEW: {
 			newState = { ...state };
 			newState.reviews[action.reviewInfo.id] = action.reviewInfo;

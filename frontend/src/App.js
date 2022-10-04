@@ -11,8 +11,8 @@ import MyRooms from "./components/Rooms/JS/MyRooms";
 import Bookings from "./components/Bookings";
 import BookingPage from "./components/BookingPage";
 import CreateReview from "./components/Review";
+import ProtectedRoute from "./ProtectedRoute";
 import * as sessionActions from "./store/session";
-
 
 function App() {
 	const dispatch = useDispatch();
@@ -29,33 +29,32 @@ function App() {
 					<Route exact path="/">
 						<Rooms></Rooms>
 					</Route>
-					<Route path="/host-your-home">
+					<ProtectedRoute exact path="/host-your-home">
 						<CreateRoomForm></CreateRoomForm>
-					</Route>
-					<Route path="/my-rooms">
+					</ProtectedRoute>
+					<ProtectedRoute exact path="/my-rooms">
 						<MyRooms></MyRooms>
-					</Route>
+					</ProtectedRoute>
 					<Route exact path="/rooms/:roomId">
 						<SingleRoomInfo></SingleRoomInfo>
 					</Route>
-					<Route path="/rooms/:roomId/edit">
+					<ProtectedRoute exact path="/rooms/:roomId/edit">
 						<EditRoomForm></EditRoomForm>
-					</Route>
-					<Route exact path="/trips">
+					</ProtectedRoute>
+					<ProtectedRoute exact path="/trips">
 						<Bookings></Bookings>
-					</Route>
-					<Route path="/trips/:bookingId">
+					</ProtectedRoute>
+					<ProtectedRoute exact path="/trips/:bookingId">
 						<BookingPage></BookingPage>
-					</Route>
-					<Route path="/review-room/:roomId">
+					</ProtectedRoute>
+					<ProtectedRoute exact path="/review-room/:roomId">
 						<CreateReview></CreateReview>
-					</Route>
+					</ProtectedRoute>
 					<Route>
 						<Rooms></Rooms>
 					</Route>
 				</Switch>
 			)}
-			{/* </div> */}
 		</>
 	);
 }

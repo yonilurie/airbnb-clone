@@ -216,7 +216,7 @@
 /* Cancel booking */
 
 .cancel-booking-modal {
-	width: 90vw;
+	width: 85vw;
 	max-width: 500px;
 	height: 20vh;
 	display: flex;
@@ -224,7 +224,38 @@
 	justify-content: center;
 	align-items: center;
 	padding: 15px;
+	gap: 10px;
+	/* box-sizing: border-box; */
+}
+
+.cancel-btn {
 	box-sizing: border-box;
+	transition-duration: 0.25s;
+	background-image: radial-gradient(
+		circle at center center,
+		rgb(255, 56, 92) 0%,
+		rgb(230, 30, 77) 27.5%,
+		rgb(227, 28, 95) 40%,
+		rgb(215, 4, 102) 57.5%,
+		rgb(189, 30, 89) 75%,
+		rgb(189, 30, 89) 100%
+	);
+	background-size: 200% 200%;
+	border: none;
+	border-radius: 12px;
+	font-size: 1rem;
+	color: rgb(255, 255, 255);
+	padding: 10px;
+	cursor: pointer;
+}
+
+.cancel-btn:active {
+	transform: scale(0.96);
+	background-image: radial-gradient(
+		circle at center,
+		rgb(255, 56, 92) 100%,
+		rgb(103, 102, 102) 0%
+	);
 }
 
 /* Edit Booking */

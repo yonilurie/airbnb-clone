@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Redirect, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import { getAUsersBookings } from "../../store/session";
@@ -12,7 +12,6 @@ const Bookings = () => {
 	const history = useHistory();
 
 	const bookings = useSelector((state) => state.session.bookings);
-	const sessionuser = useSelector((state) => state.session.user);
 
 	useEffect(() => {
 		dispatch(getAUsersBookings());
@@ -22,40 +21,41 @@ const Bookings = () => {
 		if (document.title !== "My Trips") document.title = "My Trips";
 	}, []);
 
-	if (!sessionuser) return <Redirect to="/" />;
-
 	const home = () => history.push("/");
-
 	return (
 		<div className="bookings-page-container">
 			<h1>Trips</h1>
-			{!bookings.futureBookings && (
-				<div className="empty-bookings-placeholder">
-					<div className="current-bookings-empty-text">
-						<h3>No trips booked...yet!</h3>
-						<div>
-							Time to dust off your bags and start planning your
-							next adventure
+			{bookings &&
+				bookings.currentBookings &&
+				bookings.futureBookings &&
+				Object.keys(bookings.futureBookings).length === 0 &&
+				Object.keys(bookings.currentBookings).length === 0 && (
+					<div className="empty-bookings-placeholder">
+						<div className="current-bookings-empty-text">
+							<h3>No trips booked...yet!</h3>
+							<div>
+								Time to dust off your bags and start planning
+								your next adventure
+							</div>
+							<button onClick={home} className="search-btn">
+								Start searching
+							</button>
 						</div>
-						<button onClick={home} className="search-btn">
-							Start searching
-						</button>
+						<div className="empty-bookings-img-container">
+							<img
+								src="https://a0.muscache.com/im/pictures/d727f355-3f10-44b5-9750-d1efca2438fc.jpg?im_w=720"
+								className="empty-bookings-img"
+								alt="no future bookings"
+							></img>
+						</div>
 					</div>
-					<div className="empty-bookings-img-container">
-						<img
-							src="https://a0.muscache.com/im/pictures/d727f355-3f10-44b5-9750-d1efca2438fc.jpg?im_w=720"
-							className="empty-bookings-img"
-							alt="no future bookings"
-						></img>
-					</div>
-				</div>
-			)}
+				)}
 			{bookings.futureBookings && (
 				<div>
 					{bookings.currentBookings &&
 						Object.values(bookings.currentBookings).length > 0 && (
 							<>
-								<h2>Current</h2>
+								<h2>Current trips</h2>
 								<div className="past-bookings">
 									{Object.values(bookings.pastBookings)
 										.length > 0 &&
@@ -108,10 +108,6 @@ const Bookings = () => {
 												reviewDisabled={false}
 											/>
 										))}
-
-									{/* {bookings[0] === "No bookings yet" && (
-										<div>No bookings yet</div>
-									)} */}
 								</div>
 							</div>
 						)}
