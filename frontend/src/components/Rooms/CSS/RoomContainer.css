@@ -32,6 +32,18 @@
 	margin: auto;
 }
 
+.no-rooms-container {
+	width: 100%;
+	height: 100%;
+	max-width: 400px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 20px;
+	box-sizing: border-box;
+	flex-direction: column;
+}
+
 @media screen and (max-width: 770px) {
 	.rooms-container {
 		width: 550px;

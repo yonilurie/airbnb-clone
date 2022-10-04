@@ -61,6 +61,7 @@ form {
 	color: rgb(255, 255, 255);
 	width: 520px;
 	height: 48px;
+	max-width: 100%;
 	margin-top: 30px;
 	cursor: pointer;
 }

@@ -9,7 +9,6 @@ import "../CSS/RoomContainer.css";
 
 const MyRooms = () => {
 	const dispatch = useDispatch();
-	const [isDisplayed, setIsDisplayed] = useState(true);
 	const sessionuser = useSelector((state) => state.session.user);
 
 	const rooms = useSelector((state) => state.session.rooms);
@@ -31,11 +30,17 @@ const MyRooms = () => {
 	return (
 		<div className="rooms-main-container">
 			<h1>Your rooms</h1>
-			{isDisplayed && rooms && Object.values(rooms).length > 0 && (
+			{rooms && Object.values(rooms).length > 0 && (
 				<div className="my-rooms-container">
 					{Object.values(rooms).map((room) => {
 						return <MyRoom room={room} key={room.id}></MyRoom>;
 					})}
+				</div>
+			)}
+			{rooms && Object.values(rooms).length === 0 && (
+				<div className="no-rooms-container">
+					<h2>You are not currently hosting</h2>
+					<button className="submit-form-btn">Start hosting</button>
 				</div>
 			)}
 		</div>
