@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getMyRoomsData } from "../../../store/session";
 
@@ -9,6 +9,7 @@ import "../CSS/RoomContainer.css";
 
 const MyRooms = () => {
 	const dispatch = useDispatch();
+	const history = useHistory();
 	const sessionuser = useSelector((state) => state.session.user);
 
 	const rooms = useSelector((state) => state.session.rooms);
@@ -24,7 +25,6 @@ const MyRooms = () => {
 	}, []);
 
 	//If the user is not logged in, redirect the user to home page
-
 	if (!sessionuser) return <Redirect to="/" />;
 
 	return (
@@ -40,7 +40,12 @@ const MyRooms = () => {
 			{rooms && Object.values(rooms).length === 0 && (
 				<div className="no-rooms-container">
 					<h2>You are not currently hosting</h2>
-					<button className="submit-form-btn">Start hosting</button>
+					<button
+						className="submit-form-btn"
+						onClick={() => history.push("/host-your-home")}
+					>
+						Start hosting
+					</button>
 				</div>
 			)}
 		</div>
