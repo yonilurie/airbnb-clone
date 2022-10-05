@@ -3,7 +3,6 @@ import { csrfFetch } from "./csrf";
 //String literals for thunk action
 const GET_ROOMS = "/api/rooms";
 const CREATE_ROOM = "/api/rooms/add";
-
 const EDIT_ROOM = "/api/rooms/:roomId/edit";
 
 //Thunk actions

@@ -6,7 +6,6 @@ const { Booking, Room, User, Review } = require("../../db/models");
 const { check } = require("express-validator");
 const { param } = require("express-validator");
 const { Op } = require("sequelize");
-const sequelize = require("sequelize");
 
 //Checks if booking has required infos
 const validateBooking = [
@@ -23,6 +22,79 @@ const validateBookingId = [
 	handleValidationErrors,
 ];
 
+//Validate room params
+const validateRoomId = [
+	param("roomId").isNumeric().withMessage("Room id must be an integer"),
+	handleValidationErrors,
+];
+
+//Create a booking with room id
+router.post(
+	"/:roomId",
+	[validateRoomId, restoreUser, requireAuth, validateBooking],
+	async (req, res) => {
+		const { roomId } = req.params;
+		const { id } = req.user;
+		let { startDate, endDate } = req.body;
+		//Make sure start date if after end date
+		if (startDate >= endDate) {
+			res.status = 403;
+			return res.json({
+				message: "Start date cant be after or on end date ",
+			});
+		}
+		//Find room
+		let room = await Room.findByPk(roomId);
+		//Check if room exists
+		if (!room) return res.json(noRoomError());
+		//Check if the user is the owner
+		if (id === room.ownerId) {
+			const err = {};
+			(err.message = "Cannot book your own room"), (err.status = 403);
+			err.errors = {
+				error: "Cannot book your own room",
+				statusCode: 403,
+			};
+			return res.json(err);
+		}
+		//Find if any bookings for the room exist within the given dates
+		let bookingCheck = await Booking.findOne({
+			where: {
+				startDate: { [Op.gte]: startDate },
+				endDate: { [Op.lte]: endDate },
+				roomId: {
+					[Op.eq]: roomId,
+				},
+			},
+		});
+		//If they do return error message to user with 403 code
+		if (bookingCheck) {
+			const err = {};
+			(err.message =
+				"Sorry, this room is already booked for the specified dates"),
+				(err.status = 403);
+			err.errors = {
+				error:
+					"Sorry, this room is already booked for the specified dates",
+				statusCode: 403,
+			};
+			return res.json(err);
+		}
+		//Create a new booking
+		let newBookingData = req.body;
+		newBookingData.userId = id;
+		newBookingData.roomId = roomId;
+		newBookingData.startDate = startDate;
+		newBookingData.endDate = endDate;
+		let newBooking = await Booking.create(newBookingData);
+		//Return new booking to user
+		res.status = 200;
+		return res.json(newBooking);
+	}
+);
+
+
+
 //Edit a booking
 router.put(
 	"/:bookingId",
@@ -31,7 +103,6 @@ router.put(
 		const { bookingId } = req.params;
 		const { id } = req.user;
 		let { startDate, endDate, roomId } = req.body;
-
 		//check if dates are valid
 		if (startDate >= endDate) {
 			res.status = 403;
@@ -44,7 +115,6 @@ router.put(
 		if (!existingBooking || existingBooking.userId !== id) {
 			return res.json(noBookingError());
 		}
-
 		//Create current time object
 		let now = new Date();
 		let currentTime = new Date(
@@ -52,7 +122,6 @@ router.put(
 			now.getMonth(),
 			now.getDate()
 		);
-
 		//Check if booking the user want to edit has already passed
 		if (
 			currentTime >= existingBooking.startDate ||
@@ -64,7 +133,6 @@ router.put(
 				statusCode: 400,
 			});
 		}
-
 		//Check if any booking occur in between the given start and end times
 		let checkAvailability = await Booking.findOne({
 			where: {
@@ -78,7 +146,6 @@ router.put(
 				},
 			},
 		});
-
 		//if room is not available return error with 403 code
 		if (checkAvailability) {
 			res.status = 403;
@@ -113,7 +180,6 @@ router.delete(
 		if (!booking || booking.userId !== id) {
 			return res.json(noBookingError());
 		}
-
 		//Delete booking and return success message
 		booking.destroy();
 		return res.json({
@@ -143,7 +209,6 @@ router.get("/", [restoreUser, requireAuth], async (req, res) => {
 			{
 				model: Room,
 				as: "room",
-
 				include: [
 					{
 						model: User,
@@ -171,11 +236,10 @@ router.get("/", [restoreUser, requireAuth], async (req, res) => {
 			futureBookings: {},
 		});
 	}
-
+	// Normalize booking data and seperate into past current and future
 	let pastBookings = {};
 	let futureBookings = {};
 	let currentBookings = {};
-
 	if (bookings.length && bookings[0] !== "No bookings yet") {
 		bookings.forEach((booking) => {
 			let now = new Date().getTime();

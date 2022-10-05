@@ -325,7 +325,7 @@ export const createRoomReview = (reviewData) => async (dispatch) => {
 
 export const createBooking = (booking) => async (dispatch) => {
 	const { startDate, endDate, roomId, guests } = booking;
-	const response = await csrfFetch(`/api/rooms/${Number(roomId)}/bookings`, {
+	const response = await csrfFetch(`/api/bookings/${Number(roomId)}`, {
 		method: "POST",
 		headers: {
 			contentType: "application/json",

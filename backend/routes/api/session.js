@@ -1,5 +1,4 @@
 const express = require("express");
-
 const { setTokenCookie, restoreUser } = require("../../utils/auth");
 const { User} = require("../../db/models");
 const { check } = require("express-validator");
@@ -21,7 +20,7 @@ const validateLogin = [
 // Log in
 router.post("/login", validateLogin, async (req, res, next) => {
 	const { credential, password } = req.body;
-
+	
 	const user = await User.login({ credential, password });
 
 	if (!user) {

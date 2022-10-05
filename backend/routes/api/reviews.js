@@ -12,7 +12,6 @@ const validateReview = [
 		.withMessage("Must include review message")
 		.notEmpty()
 		.withMessage("Review can not be empty"),
-
 	check("stars")
 		.exists()
 		.withMessage("Must include stars rating")
@@ -27,16 +26,13 @@ const validateReview = [
 // Delete a review
 router.delete("/:reviewId", [restoreUser, requireAuth], async (req, res) => {
 	const { reviewId } = req.params;
-
 	const { id } = req.user;
-
 	//Check if review exists
 	let review = await Review.findByPk(reviewId);
 	//If not return 404 code
 	if (!review || review.userId !== Number(id)) {
 		return res.json(noReviewError());
 	}
-
 	await review.destroy();
 	res.status = 200;
 	return res.json({
@@ -53,7 +49,7 @@ router.put(
 		const { reviewId } = req.params;
 		const { id } = req.user;
 		const { review, stars } = req.body;
-
+		//Find if review exists
 		let reviewToEdit = await Review.findByPk(reviewId, {
 			include: [
 				{
@@ -63,10 +59,11 @@ router.put(
 				},
 			],
 		});
-
+		//If the review doesnt belong to the user then return error
 		if (reviewToEdit.userId !== Number(id)) {
 			return res.json(noReviewError());
 		}
+		//Update the review text and stars rating
 		reviewToEdit.review = review;
 		reviewToEdit.stars = stars;
 		await reviewToEdit.save();
@@ -82,7 +79,7 @@ router.delete(
 	async (req, res) => {
 		const { imageId } = req.params;
 		const { id } = req.user;
-
+		//Find image to edit
 		let image = await UserReviewImage.findByPk(imageId);
 		//Check if image exists or is not the users
 		if (!image || image.userId !== id) {
@@ -92,7 +89,7 @@ router.delete(
 				statusCode: 404,
 			});
 		}
-
+		//Delete the image and return message
 		await image.destroy();
 		res.status = 200;
 		return res.json({
@@ -105,6 +102,7 @@ router.delete(
 //Get all of a current users posted reviews
 router.get("/", [restoreUser, requireAuth], async (req, res) => {
 	let { id } = req.user;
+	//Find all of a users reviews
 	let reviews = await Review.findAll({
 		where: { userId: id },
 		attributes: [
@@ -134,6 +132,7 @@ router.get("/", [restoreUser, requireAuth], async (req, res) => {
 			},
 		],
 	});
+	//Normalize reviews and return
 	const returnReviews = {};
 	reviews.forEach((review) => {
 		returnReviews[review.id] = review;
