@@ -4,10 +4,9 @@
 
 ## Description
 
-This project is a clone of Airbnb. Users can host their own rooms, as well as view other users hosted rooms.
-Users can also see the reviews other people have left on their possible vacation spots, and leave their own reviews on rooms they have previously stayed at.
+This project is a clone of Airbnb. Features include; user authentication, hosting a room, creating a booking, and leaving reviews for places you have stayed at. 
 
-In the future, the ability to create bookings and upload images for reviews and rooms will be implemented
+Images are hosted with Amazon Web Services and maps are from the Google Maps API.
 
 # Wiki Links
 
