@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { useHistory} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { deleteARoom, getMyRoomsData } from "../../../store/session";
 
 import "../CSS/MyRoom.css";
@@ -16,7 +16,7 @@ function MyRoom({ room }) {
 
 	return (
 		<div className="my-room">
-			<div className="my-room-left" onClick={(e) => showRoomDetails(e)}>
+			<div className="my-room-left" onClick={showRoomDetails}>
 				<img
 					src={room.previewImage}
 					alt={`For room ${room.id}`}

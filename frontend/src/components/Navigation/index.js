@@ -46,7 +46,6 @@ function Navigation({ isLoaded }) {
 						<img src={logo} alt="logo" id="logo"></img>
 					</NavLink>
 				</div>
-
 				<div>
 					{isLoaded && sessionLinks && (
 						<ProfileButton

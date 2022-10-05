@@ -61,7 +61,6 @@ function ReviewForm({ setShowModal }) {
 						))}
 					</ul>
 				)}
-
 				<input
 					className="modal-input"
 					type="number"
@@ -76,7 +75,6 @@ function ReviewForm({ setShowModal }) {
 					onChange={(e) => setReview(e.target.value)}
 					required
 				></textarea>
-
 				<button type="submit" className="login-register-submit">
 					Submit Review
 				</button>

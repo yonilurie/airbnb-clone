@@ -1,11 +1,7 @@
 import { NavLink } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-
-import { deleteBooking } from "../../../store/session";
+import { useSelector } from "react-redux";
 
 const Booking = ({ booking }) => {
-	const session = useSelector((state) => state.session);
-
 	const bookingStart = new Date(booking.startDate).toString().split(" ");
 	const bookingEnd = new Date(booking.endDate).toString().split(" ");
 	const [

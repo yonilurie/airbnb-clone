@@ -93,8 +93,6 @@ router.post(
 	}
 );
 
-
-
 //Edit a booking
 router.put(
 	"/:bookingId",

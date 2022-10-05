@@ -220,7 +220,6 @@ const EditRoomForm = () => {
 							required
 						></input>
 					</div>
-
 					<div className="input-container">
 						<label htmlFor="state" className="form-label">
 							State
@@ -290,7 +289,6 @@ const EditRoomForm = () => {
 							</>
 						)}
 					</div>
-
 					<div className="input-container">
 						{" "}
 						<label htmlFor="country" className="form-label">
@@ -307,7 +305,6 @@ const EditRoomForm = () => {
 							<option value="United States">United States</option>
 						</select>
 					</div>
-
 					<div className="lat-lng-container input-container">
 						<div className="input-container">
 							{" "}
@@ -339,7 +336,6 @@ const EditRoomForm = () => {
 								required
 							></input>
 						</div>
-
 						<div className="input-container">
 							{" "}
 							<label htmlFor="longitude" className="form-label">
@@ -375,7 +371,6 @@ const EditRoomForm = () => {
 						<label htmlFor="price" className="form-label">
 							Price per Night
 						</label>
-
 						<input
 							type="number"
 							className="form-input"

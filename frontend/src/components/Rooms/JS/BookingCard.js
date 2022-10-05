@@ -174,46 +174,9 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 						)}
 					</div>
 				</div>
-				<form
-					className="booking-info"
-					onSubmit={(e) => {
-						handleSubmit(e);
-					}}
-				>
+				<form className="booking-info" onSubmit={handleSubmit}>
 					<div className="booking-info-wrapper">
 						<div className="choose-dates-container">
-							{/* <div className="check-in">
-								<div className="check-in-text">CHECK-IN</div>
-								<input
-									id="check-in"
-									type="date"
-									value={bookingStartDate
-										.toISOString()
-										.slice(0, 10)}
-									onChange={(e) => onStartDateChange(e)}
-									min={startDate.toISOString().slice(0, 10)}
-									max={bookingEndDate
-										.toISOString()
-										.slice(0, 10)}
-									invalid={bookedDates}
-								></input>
-							</div> */}
-
-							{/* <div className="check-out">
-								<div className="checkout-text">CHECKOUT</div>
-								<input
-									id="checkout"
-									type="date"
-									value={getPreviousDay(bookingEndDate)
-										.toISOString()
-										.slice(0, 10)}
-									onChange={(e) => checkBookingEnd(e)}
-									min={getNextDay(bookingStartDate)
-										.toISOString()
-										.slice(0, 10)}
-								></input>
-							</div> */}
-
 							<CalendarMenu
 								minDate={startDate}
 								tileDisabled={checkInvalidTile}
@@ -262,16 +225,15 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 					<div className="price-items">
 						<div className="nightly-total">
 							<div className="row-detail">
-								${currentRoom.price} x {bookingDuration} nights
+								${currentRoom.price} x {bookingDuration}{" "}
+								{bookingDuration === 1 ? "night" : "nights"}
 							</div>
 							<div className="row-total">{nightlyTotal}</div>
 						</div>
-
 						<div className="cleaning-total">
 							<div className="row-detail">Cleaning fee</div>
 							<div className="row-total">{cleaningFee}</div>
 						</div>
-
 						<div className="nightly-total">
 							<div className="row-detail">Service fee</div>
 							<div className="row-total">{serviceFee}</div>

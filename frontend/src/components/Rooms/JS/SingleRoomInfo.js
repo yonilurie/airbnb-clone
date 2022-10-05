@@ -78,7 +78,6 @@ const SingleRoomInfo = () => {
 				setShowModal={setShowModal}
 				currentRoom={currentRoom}
 			></ReviewsModal>
-
 			{!currentRoom && (
 				<div className="placeholder-container">
 					<div className="placeholder-loading-section-1">
@@ -102,14 +101,12 @@ const SingleRoomInfo = () => {
 							></div>
 						</div>
 					</div>
-
 					<div className="placeholder-loading-section-3">
 						<div className="loading-strip-3"></div>
 						<div className="loading-strip-4"></div>
 					</div>
 				</div>
 			)}
-
 			{currentRoom && Number(currentRoom.id) === Number(roomId) && (
 				<div className="room-content">
 					<div className="gallery">
@@ -173,7 +170,6 @@ const SingleRoomInfo = () => {
 							</div>
 						)}
 					</div>
-
 					<div className="room-images">
 						<div className="room-images-left">
 							{currentRoom.previewImage && (
@@ -184,75 +180,51 @@ const SingleRoomInfo = () => {
 								></img>
 							)}
 						</div>
-						<div className="room-images-side">
-							<div className="room-images-container">
-								{currentRoom.images[1] ? (
+						{currentRoom.images && (
+							<div className="room-images-side">
+								<div className="room-images-container">
 									<img
 										src={currentRoom.images[0].imageUrl}
 										className="room-image-small"
 									></img>
-								) : (
-									<div className="room-image-small-placeholder"></div>
-								)}
-								{currentRoom.images[1] ? (
 									<img
 										src={currentRoom.images[1].imageUrl}
 										className="room-image-small"
 									></img>
-								) : (
-									<div className="room-image-small-placeholder"></div>
-								)}
-							</div>
-							<div
-								className="room-images-container"
-								style={{
-									paddingLeft: "10px",
-								}}
-							>
-								{currentRoom.images[2] ? (
+								</div>
+								<div
+									className="room-images-container"
+									style={{
+										paddingLeft: "10px",
+									}}
+								>
 									<img
 										src={currentRoom.images[2].imageUrl}
 										className="room-image-small top-right"
 									></img>
-								) : (
-									<div className="room-image-small-placeholder top-right"></div>
-								)}
-								{currentRoom.images[3] ? (
 									<img
 										src={currentRoom.images[3].imageUrl}
 										className="room-image-small bottom-right"
 									></img>
-								) : (
-									<div
-										className="room-image-small-placeholder bottom-right"
-										// style={{
-										// 	marginTop: "16px",
-										// }}
-									></div>
-								)}
+								</div>
 							</div>
-						</div>
+						)}
 					</div>
-					{/* </div> */}
 					<div className="room-details-container">
 						<div className="room-owner-and-description">
-							<>
-								<h2>
-									Entire home hosted by{" "}
-									{sessionuser &&
-									currentRoom.owner.id === sessionuser.id
-										? "You"
-										: currentRoom.owner.firstName}
-								</h2>
-							</>
-
+							<h2>
+								Entire home hosted by{" "}
+								{sessionuser &&
+								currentRoom.owner.id === sessionuser.id
+									? "You"
+									: currentRoom.owner.firstName}
+							</h2>
 							<div className="description-container">
 								<div className="description">
 									{currentRoom.description}
 								</div>
 							</div>
 						</div>
-
 						<BookingCard
 							currentRoom={currentRoom}
 							setShowModal={setShowModal}
@@ -279,7 +251,6 @@ const SingleRoomInfo = () => {
 										: "reviews"}
 								</h2>
 							)}
-
 							<div className="reviews">
 								{Object.values(currentRoom.reviews).length >
 									0 &&
@@ -296,7 +267,6 @@ const SingleRoomInfo = () => {
 											);
 										}
 									)}
-
 								{!Object.values(currentRoom.reviews).length && (
 									<div className="no-reviews-placeholder">
 										No Reviews
@@ -311,15 +281,13 @@ const SingleRoomInfo = () => {
 					<div className="room-page-map">
 						<h3>Where you'll be</h3>
 						{isLoaded && (
-							<>
-								<GoogleMap
-									zoom={15}
-									center={center}
-									mapContainerClassName="map-small"
-								>
-									<Marker position={center}></Marker>
-								</GoogleMap>
-							</>
+							<GoogleMap
+								zoom={15}
+								center={center}
+								mapContainerClassName="map-small"
+							>
+								<Marker position={center}></Marker>
+							</GoogleMap>
 						)}
 					</div>
 				</div>

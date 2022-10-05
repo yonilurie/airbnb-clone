@@ -150,7 +150,6 @@ const CreateRoomForm = () => {
 						);
 					})}
 			</div>
-
 			<form className="create-room-form" onSubmit={onSubmit}>
 				<div className="input-container-flex">
 					<div className="input-container">
@@ -200,7 +199,6 @@ const CreateRoomForm = () => {
 							></input>
 						</div>
 					</div>
-
 					<div className="input-container state-country">
 						{" "}
 						<div className="country-container">
@@ -300,7 +298,6 @@ const CreateRoomForm = () => {
 							)}
 						</div>
 					</div>
-
 					<div className="lat-lng-container input-container">
 						<div className="input-container">
 							{" "}
@@ -332,7 +329,6 @@ const CreateRoomForm = () => {
 								required
 							></input>
 						</div>
-
 						<div className="input-container">
 							{" "}
 							<label htmlFor="longitude" className="form-label">
@@ -368,7 +364,6 @@ const CreateRoomForm = () => {
 						<label htmlFor="price" className="form-label">
 							Price per Night
 						</label>
-
 						<input
 							type="number"
 							className="form-input"
@@ -406,12 +401,10 @@ const CreateRoomForm = () => {
 							required
 						></textarea>
 					</div>
-
 					<div className="input-container">
 						<label htmlFor="images" className="form-label">
 							Images - First image will be preview
 						</label>
-
 						{images.length !== 5 && (
 							<label
 								htmlFor="images"
@@ -420,7 +413,6 @@ const CreateRoomForm = () => {
 								Choose Images
 							</label>
 						)}
-
 						<div className="create-room-gallery">
 							{images &&
 								Array.from(images).map((img, idx) => {
@@ -464,7 +456,6 @@ const CreateRoomForm = () => {
 							id="images"
 							accept="image/png, image/jpg, image/jpeg"
 							onChange={updateFile}
-							// multiple
 						></input>
 					</div>
 				</div>

@@ -55,7 +55,6 @@ const EditReviewFormModal = ({ setShowModal, review }) => {
 			<div className="modal-header">
 				<div className="modal-title">Edit review</div>
 			</div>
-
 			<form onSubmit={handleSubmit}>
 				<h3 className="modal-welcome">Welcome to Airbnb</h3>
 				{isSubmitted && validationErrors.length > 0 && (
@@ -69,7 +68,6 @@ const EditReviewFormModal = ({ setShowModal, review }) => {
 					<div className="modal-input-label" hidden={!stars}>
 						Stars
 					</div>
-
 					<input
 						className="modal-input"
 						type="number"
@@ -92,7 +90,6 @@ const EditReviewFormModal = ({ setShowModal, review }) => {
 						required
 					/>
 				</div>
-
 				<button type="submit" className="login-register-submit">
 					Submit Review
 				</button>

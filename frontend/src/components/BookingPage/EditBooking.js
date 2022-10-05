@@ -25,12 +25,6 @@ const EditBooking = ({ booking, setShowModal }) => {
 		return false;
 	};
 
-	function getPreviousDay(date = new Date()) {
-		const previous = new Date(date.getTime());
-		previous.setDate(date.getDate() - 1);
-		return previous;
-	}
-
 	//Handle user input in calendar
 	const calendarOnChange = (e) => {
 		let start = new Date(e[0]);
@@ -77,13 +71,11 @@ const EditBooking = ({ booking, setShowModal }) => {
 	return (
 		<div className="edit-booking-modal">
 			<h3>Edit reservation</h3>
-
 			<div className="calendar-menu-main-container">
 				<div className="booking-card-dates">
 					<div>
 						Check in: {new Date(bookingStartDate).toDateString()}
 					</div>
-
 					<div>
 						Check out: {new Date(bookingEndDate).toDateString()}
 					</div>

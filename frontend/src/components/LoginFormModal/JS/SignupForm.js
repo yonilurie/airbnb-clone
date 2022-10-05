@@ -107,12 +107,10 @@ function SignupForm({ setShowModal }) {
 						))}
 					</ul>
 				)}
-
 				<div className="input-container">
 					<div className="modal-input-label" hidden={!email}>
 						Email
 					</div>
-
 					<input
 						className="modal-input"
 						type="email"
@@ -122,7 +120,6 @@ function SignupForm({ setShowModal }) {
 						required
 					/>
 				</div>
-
 				<div className="input-container">
 					<div className="modal-input-label" hidden={!username}>
 						Username
@@ -136,7 +133,6 @@ function SignupForm({ setShowModal }) {
 						required
 					/>
 				</div>
-
 				<div className="input-container">
 					<div className="modal-input-label" hidden={!firstName}>
 						First Name
@@ -150,7 +146,6 @@ function SignupForm({ setShowModal }) {
 						required
 					/>
 				</div>
-
 				<div className="input-container">
 					<div className="modal-input-label" hidden={!lastName}>
 						Last Name
@@ -164,7 +159,6 @@ function SignupForm({ setShowModal }) {
 						required
 					/>
 				</div>
-
 				<div className="input-container">
 					<div className="modal-input-label" hidden={!password}>
 						Password
@@ -178,7 +172,6 @@ function SignupForm({ setShowModal }) {
 						required
 					/>
 				</div>
-
 				<div className="input-container">
 					<div
 						className="modal-input-label"
