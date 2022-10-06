@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getMyRoomsData } from "../../../store/session";
@@ -11,11 +11,15 @@ const MyRooms = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 
+	const [isDisplayed, setIsDisplayed] = useState(false);
+
 	const rooms = useSelector((state) => state.session.rooms);
 
 	useEffect(() => {
-		if (!rooms) dispatch(getMyRoomsData());
-	}, [dispatch, rooms]);
+		dispatch(getMyRoomsData()).then(() => {
+			setIsDisplayed(true);
+		});
+	}, [dispatch]);
 
 	useEffect(() => {
 		if (document.title !== "My Rooms") document.title = "My Rooms";
@@ -24,14 +28,14 @@ const MyRooms = () => {
 	return (
 		<div className="rooms-main-container">
 			<h1>Your rooms</h1>
-			{rooms && Object.values(rooms).length > 0 && (
+			{isDisplayed && rooms && Object.values(rooms).length > 0 && (
 				<div className="my-rooms-container">
 					{Object.values(rooms).map((room) => {
 						return <MyRoom room={room} key={room.id}></MyRoom>;
 					})}
 				</div>
 			)}
-			{rooms && Object.values(rooms).length === 0 && (
+			{isDisplayed && rooms && Object.values(rooms).length === 0 && (
 				<div className="no-rooms-container">
 					<h2>You are not currently hosting</h2>
 					<button
@@ -40,6 +44,17 @@ const MyRooms = () => {
 					>
 						Start hosting
 					</button>
+				</div>
+			)}
+
+			{!isDisplayed && (
+				<div className="loading-container">
+					<div className="lds-ring">
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+					</div>
 				</div>
 			)}
 		</div>

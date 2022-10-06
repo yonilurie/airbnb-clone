@@ -108,7 +108,7 @@ const Bookings = () => {
 			)}
 			{!Object.values(bookings).length && (
 				<div className="loading-container">
-					<div class="lds-ring">
+					<div className="lds-ring">
 						<div></div>
 						<div></div>
 						<div></div>

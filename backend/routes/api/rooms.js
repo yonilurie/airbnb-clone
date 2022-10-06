@@ -447,9 +447,10 @@ router.get("/search", checkQuery, async (req, res) => {
 
 //Get all of a current users owned rooms
 router.get("/my-rooms", [restoreUser, requireAuth], async (req, res) => {
-	let userId = req.user.id;
+	const { id } = req.user;
+	console.log(id)
 	let rooms = await Room.findAll({
-		where: { ownerId: userId },
+		where: { ownerId: id },
 	});
 
 	for (let i = 0; i < rooms.length; i++) {
@@ -635,7 +636,7 @@ router.post(
 			previewImage: gallery[0],
 			rules: "No Smoking&",
 		});
-		
+
 		for (let i = 1; i < gallery.length; i++) {
 			let roomImages = await UserRoomImage.create({
 				roomId: room.id,

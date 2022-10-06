@@ -189,27 +189,29 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 								setDate={setDate}
 							></CalendarMenu>
 						</div>
-						<div className="guests">
-							<div className="num-guests">GUESTS</div>
-							<div className="custom-select-container">
-								<select
-									id="guest"
-									className="custom-select"
-									value={guests}
-									onChange={(e) =>
-										setGuests(Number(e.target.value))
-									}
-								>
-									{maxGuestsArr.map((num) => {
-										return (
-											<option value={num} key={num}>
-												{num}
-											</option>
-										);
-									})}
-								</select>
+						{currentRoom.owner.id !== sessionuser.id && (
+							<div className="guests">
+								<div className="num-guests">GUESTS</div>
+								<div className="custom-select-container">
+									<select
+										id="guest"
+										className="custom-select"
+										value={guests}
+										onChange={(e) =>
+											setGuests(Number(e.target.value))
+										}
+									>
+										{maxGuestsArr.map((num) => {
+											return (
+												<option value={num} key={num}>
+													{num}
+												</option>
+											);
+										})}
+									</select>
+								</div>
 							</div>
-						</div>
+						)}
 					</div>
 					{validationErrors.length > 0 &&
 						validationErrors.map((err) => {
@@ -219,35 +221,39 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 								</div>
 							);
 						})}
-					<button className="edit-btn">Reserve</button>
+					{currentRoom.owner.id !== sessionuser.id && (
+						<button className="edit-btn">Reserve</button>
+					)}
 				</form>
-				<div className="pricing-info">
-					<div className="price-items">
-						<div className="nightly-total">
-							<div className="row-detail">
-								${currentRoom.price} x {bookingDuration}{" "}
-								{bookingDuration === 1 ? "night" : "nights"}
+				{currentRoom.owner.id !== sessionuser.id && (
+					<div className="pricing-info">
+						<div className="price-items">
+							<div className="nightly-total">
+								<div className="row-detail">
+									${currentRoom.price} x {bookingDuration}{" "}
+									{bookingDuration === 1 ? "night" : "nights"}
+								</div>
+								<div className="row-total">{nightlyTotal}</div>
 							</div>
-							<div className="row-total">{nightlyTotal}</div>
+							<div className="cleaning-total">
+								<div className="row-detail">Cleaning fee</div>
+								<div className="row-total">{cleaningFee}</div>
+							</div>
+							<div className="nightly-total">
+								<div className="row-detail">Service fee</div>
+								<div className="row-total">{serviceFee}</div>
+							</div>
 						</div>
-						<div className="cleaning-total">
-							<div className="row-detail">Cleaning fee</div>
-							<div className="row-total">{cleaningFee}</div>
-						</div>
-						<div className="nightly-total">
-							<div className="row-detail">Service fee</div>
-							<div className="row-total">{serviceFee}</div>
+						<div className="price-total">
+							<div className="booking-total-detail">
+								Total before taxes
+							</div>
+							<div className="booking-total-price">
+								{bookingTotal}
+							</div>
 						</div>
 					</div>
-					<div className="price-total">
-						<div className="booking-total-detail">
-							Total before taxes
-						</div>
-						<div className="booking-total-price">
-							{bookingTotal}
-						</div>
-					</div>
-				</div>
+				)}
 			</div>
 		</div>
 	);
