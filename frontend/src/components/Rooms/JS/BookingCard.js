@@ -222,8 +222,9 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 							);
 						})}
 					{currentRoom.owner.id !== sessionuser.id && (
-						<button className="edit-btn">Reserve</button>
+						<button className="reserve-btn">Reserve</button>
 					)}
+					<div>You wont be charged yet</div>
 				</form>
 				{currentRoom.owner.id !== sessionuser.id && (
 					<div className="pricing-info">

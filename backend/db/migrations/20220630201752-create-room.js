@@ -56,6 +56,26 @@ module.exports = {
 					type: Sequelize.DECIMAL,
 					allowNull: false,
 				},
+				guests: {
+					type: Sequelize.INTEGER,
+					allowNull: false,
+				},
+				bedrooms: {
+					type: Sequelize.INTEGER,
+					allowNull: false,
+				},
+				beds: {
+					type: Sequelize.INTEGER,
+					allowNull: false,
+				},
+				baths: {
+					type: Sequelize.INTEGER,
+					allowNull: false,
+				},
+				amenities: {
+					type: Sequelize.STRING(10000),
+					allowNull: false,
+				},
 				previewImage: {
 					type: Sequelize.STRING,
 					allowNull: true,

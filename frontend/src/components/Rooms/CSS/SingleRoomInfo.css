@@ -32,8 +32,9 @@ h2 {
 	display: flex;
 	justify-content: flex-start;
 	border-top: solid 1px rgb(221, 221, 221);
-	border-bottom: solid 1px rgb(221, 221, 221);
-	padding: 1.25rem;
+	border-top: solid 1px rgb(221, 221, 221);
+	padding-top: 32px;
+	padding-bottom: 48px;
 	align-self: flex-start;
 	max-width: 700px;
 	/* min-width: 300px; */
@@ -45,6 +46,87 @@ h2 {
 	color: #484848;
 	/* min-width: 300px; */
 	/* max-width: 45rem; */
+}
+
+.room-check-in-container {
+	display: flex;
+	flex-direction: column;
+	padding: 32px 0px;
+	justify-content: flex-start;
+	border-top: solid 1px rgb(221, 221, 221);
+	max-width: 700px;
+	gap: 20px;
+}
+
+.room-check-in-single {
+	display: flex;
+	gap: 10px;
+	align-items: flex-start;
+}
+
+.check-in-text-container {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.check-in-text-small {
+	font-size: 14px;
+	color: #717171;
+	font-weight: 400;
+}
+
+.aircover-container-main {
+	display: flex;
+	flex-direction: column;
+	padding: 32px 0px;
+	justify-content: flex-start;
+	border-top: solid 1px rgb(221, 221, 221);
+
+	max-width: 700px;
+}
+
+.aircover-logo {
+	margin-bottom: 16px;
+	height: 26px;
+	width: 125.156px;
+}
+
+.aircover-description {
+	color: rgb(34, 34, 34);
+	font-size: 16px;
+	margin-bottom: 16px;
+}
+
+.aircover-learn-more {
+	text-decoration: underline;
+	cursor: pointer;
+	color: rgb(34, 34, 34);
+	font-weight: 600;
+}
+
+.room-amenities-container {
+	display: flex;
+	flex-direction: column;
+	padding: 32px 0px;
+	justify-content: flex-start;
+	border-top: solid 1px rgb(221, 221, 221);
+	border-bottom: solid 1px rgb(221, 221, 221);
+	max-width: 700px;
+}
+
+.room-amenities {
+	display: flex;
+	flex-wrap: wrap;
+	width: 100%;
+}
+
+.room-amenity {
+	width: 50%;
+	max-width: 50%;
+	height: 24px;
+	color: rgb(34, 34, 34);
+	padding-bottom: 16px;
 }
 
 .room-content {
@@ -255,11 +337,35 @@ h2 {
 
 .room-details-container {
 	display: flex;
-	margin: 2rem 0rem;
+	/* margin: 2rem 0rem; */
 	justify-content: space-between;
 	width: 95%;
 	gap: 20px;
 }
+
+.room-size {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	padding-top: 48px;
+	padding-bottom: 24px;
+}
+
+.room-size-detail {
+	font: 16px;
+	color: #222222;
+	font-weight: 400;
+	line-height: 20px;
+}
+
+.room-hosted-by {
+	font-size: 22px;
+	font-weight: 600;
+	margin: 0px;
+	padding: 0px;
+	color: #222222;
+}
+
 .room-details {
 	width: 95%;
 }
@@ -329,8 +435,10 @@ h2 {
 
 .reviews-container {
 	width: 95%;
-
 	box-sizing: border-box;
+	margin-top: 48px;
+	padding-bottom: 24px;
+	border-bottom: solid 1px rgb(221, 221, 221);
 }
 @media screen and (max-width: 780px) {
 	.room-images {

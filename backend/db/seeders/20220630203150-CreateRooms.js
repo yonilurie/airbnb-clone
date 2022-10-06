@@ -17,6 +17,12 @@ module.exports = {
 					description:
 						"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id augue sed neque euismod posuere. Nulla facilisi. Sed purus ligula, molestie vel condimentum et, rutrum et mi. Sed pretium id neque vel tempus. Suspendisse id dolor eu dolor rhoncus luctus eu eget nisl. Duis eget felis dapibus, convallis tellus sed, dictum quam. Proin quis urna sapien. Aenean posuere semper massa sit amet varius. Nullam faucibus ",
 					price: 200.0,
+					guests: 2,
+					bedrooms: 2,
+					beds: 2,
+					baths: 1,
+					amenities:
+						"Kitchen&Washer&Wifi&TV&Dryer&Free parking on premises&Hiardryes&Extra pillows and blankets&",
 					previewImage:
 						"https://bucket-airbnb-clone.s3.us-west-2.amazonaws.com/1664509261002.webp",
 				},
@@ -47,6 +53,12 @@ module.exports = {
 					description:
 						"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id augue sed neque euismod posuere. Nulla facilisi. Sed purus ligula, molestie vel condimentum et, rutrum et mi. Sed pretium id neque vel tempus. Suspendisse id dolor eu dolor rhoncus luctus eu eget nisl. Duis eget felis dapibus, convallis tellus sed, dictum quam. Proin quis urna sapien. Aenean posuere semper massa sit amet varius. Nullam faucibus auctor urna vel porttitor. Aenean ante lectus, ",
 					price: 500.0,
+					guests: 2,
+					bedrooms: 2,
+					beds: 2,
+					baths: 1,
+					amenities:
+						"Kitchen&Washer&Wifi&TV&Dryer&Free parking on premises&Hiardryes&Extra pillows and blankets&",
 					previewImage:
 						"https://bucket-airbnb-clone.s3.us-west-2.amazonaws.com/1664509936932.jpeg",
 				},
@@ -62,7 +74,12 @@ module.exports = {
 					description:
 						"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id augue sed neque euismod posuere. Nulla facilisi. Sed purus ligula, molestie vel condimentum et, rutrum et mi. Sed pretium id neque vel tempus. Suspendisse id dolor eu dolor rhoncus luctus eu eget nisl. Duis eget felis dapibus, convallis tellus sed, dictum quam. Proin quis urna sapien. Aenean posuere semper massa sit amet varius. Nullam faucibus auctor urna vel porttitor. Aenean ante lectus, ",
 					price: 500,
-					rules: "&No smoking&No parties&No pets",
+					guests: 2,
+					bedrooms: 2,
+					beds: 2,
+					baths: 1,
+					amenities:
+						"Kitchen&Washer&Wifi&TV&Dryer&Free parking on premises&Hiardryes&Extra pillows and blankets&",
 					previewImage:
 						"https://bucket-airbnb-clone.s3.us-west-2.amazonaws.com/1664510359804.jpeg",
 				},
@@ -78,6 +95,12 @@ module.exports = {
 					description:
 						"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id augue sed neque euismod posuere. Nulla facilisi. Sed purus ligula, molestie vel condimentum et, rutrum et mi. Sed pretium id neque vel tempus. Suspendisse id dolor eu dolor rhoncus luctus eu eget nisl. Duis eget felis dapibus, convallis tellus sed, dictum quam. Proin quis urna sapien. Aenean posuere semper massa sit amet varius. Nullam faucibus auctor urna vel porttitor. Aenean ante lectus, ",
 					price: 190.0,
+					guests: 2,
+					bedrooms: 2,
+					beds: 2,
+					baths: 1,
+					amenities:
+						"Kitchen&Washer&Wifi&TV&Dryer&Free parking on premises&Hiardryes&Extra pillows and blankets&",
 					previewImage:
 						"https://bucket-airbnb-clone.s3.us-west-2.amazonaws.com/1664510715830.jpeg",
 				},
@@ -93,6 +116,12 @@ module.exports = {
 					description:
 						"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id augue sed neque euismod posuere. Nulla facilisi. Sed purus ligula, molestie vel condimentum et, rutrum et mi. Sed pretium id neque vel tempus. Suspendisse id dolor eu dolor rhoncus luctus eu eget nisl. Duis eget felis dapibus, convallis tellus sed, dictum quam. Proin quis urna sapien. Aenean posuere semper massa ",
 					price: 350.0,
+					guests: 2,
+					bedrooms: 2,
+					beds: 2,
+					baths: 1,
+					amenities:
+						"Kitchen&Washer&Wifi&TV&Dryer&Free parking on premises&Hiardryes&Extra pillows and blankets&",
 					previewImage:
 						"https://bucket-airbnb-clone.s3.us-west-2.amazonaws.com/1664511204513.webp",
 				},
@@ -108,6 +137,12 @@ module.exports = {
 					description:
 						"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id augue sed neque euismod posuere. Nulla facilisi. Sed purus ligula, molestie vel condimentum et, rutrum et mi. Sed pretium id neque vel tempus. Suspendisse id dolor eu dolor rhoncus luctus eu eget nisl. Duis eget felis dapibus, convallis tellus sed, dictum quam. Proin quis urna sapien. Aenean posuere semper massa ",
 					price: 600.0,
+					guests: 2,
+					bedrooms: 2,
+					beds: 2,
+					baths: 1,
+					amenities:
+						"Kitchen&Washer&Wifi&TV&Dryer&Free parking on premises&Hiardryes&Extra pillows and blankets&",
 					previewImage:
 						"https://bucket-airbnb-clone.s3.us-west-2.amazonaws.com/1664511509761.webp",
 				},
@@ -123,6 +158,12 @@ module.exports = {
 					description:
 						"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id augue sed neque euismod posuere. Nulla facilisi. Sed purus ligula, molestie vel condimentum et, rutrum et mi. Sed pretium id neque vel tempus. Suspendisse id dolor eu dolor rhoncus luctus eu eget nisl. Duis eget felis dapibus, convallis tellus sed, dictum quam. Proin quis urna sapien. Aenean posuere semper massa ",
 					price: 100.0,
+					guests: 2,
+					bedrooms: 2,
+					beds: 2,
+					baths: 1,
+					amenities:
+						"Kitchen&Washer&Wifi&TV&Dryer&Free parking on premises&Hiardryes&Extra pillows and blankets&",
 					previewImage:
 						"https://bucket-airbnb-clone.s3.us-west-2.amazonaws.com/1664511887803.webp",
 				},

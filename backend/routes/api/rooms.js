@@ -448,7 +448,7 @@ router.get("/search", checkQuery, async (req, res) => {
 //Get all of a current users owned rooms
 router.get("/my-rooms", [restoreUser, requireAuth], async (req, res) => {
 	const { id } = req.user;
-	console.log(id)
+	console.log(id);
 	let rooms = await Room.findAll({
 		where: { ownerId: id },
 	});
@@ -477,23 +477,6 @@ router.get("/my-rooms", [restoreUser, requireAuth], async (req, res) => {
 //Get details about a room with id
 router.get("/:roomId", validateRoomId, async (req, res) => {
 	let room = await Room.findByPk(req.params.roomId, {
-		attributes: [
-			"id",
-			"ownerId",
-			"address",
-			"city",
-			"state",
-			"country",
-			"lat",
-			"lng",
-			"name",
-			"description",
-			"price",
-			"previewImage",
-			"createdAt",
-			"updatedAt",
-			"rules",
-		],
 		include: [
 			{
 				model: UserRoomImage,

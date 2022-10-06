@@ -1,11 +1,13 @@
 .room-price-card {
 	padding: 1.5rem;
-	border: solid 1px rgb(175, 175, 175);
+	border: solid 1px rgb(221, 221, 221);
 	border-radius: 12px;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18);
+	box-shadow: rgba(0, 0, 0, 0.12) 0 6px 16px;
 	width: 100%;
 	max-width: 375px;
 	box-sizing: border-box;
+	margin-left: 87.25px;
+	margin-top: 48px;
 }
 
 .room-price-card-top-text {
@@ -158,8 +160,36 @@ select {
 	max-width: 100%;
 }
 
-.edit-btn {
+.reserve-btn {
+	box-sizing: border-box;
+	transition-duration: 0.25s;
+	background-image: radial-gradient(
+		circle at center center,
+		rgb(189, 30, 89) 0%,
+		rgb(189, 30, 89) 27.5%,
+		rgb(215, 4, 102) 40%,
+		rgb(227, 28, 95) 57.5%,
+		rgb(230, 30, 77) 75%,
+		rgb(255, 56, 92) 100%
+	);
+	background-size: 200% 200%;
+	border: none;
+	border-radius: 12px;
+	font-size: 1rem;
+	color: rgb(255, 255, 255);
 	width: 100%;
+	margin: 16px 0px;
+	height: 3rem;
+	cursor: pointer;
+}
+
+.reserve-btn:active {
+	transform: scale(0.96);
+	background-image: radial-gradient(
+		circle at center,
+		rgb(255, 56, 92) 100%,
+		rgb(103, 102, 102) 0%
+	);
 }
 
 .react-calendar {
