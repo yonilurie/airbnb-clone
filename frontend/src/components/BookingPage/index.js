@@ -5,6 +5,7 @@ import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 
 import CancelBookingModal from "./CancelBookingModal";
 import EditBookingModal from "./EditBookingModal";
+import ReviewModal from "../Review/ReviewModal";
 
 import { getAUsersBookings, getAUsersReviews } from "../../store/session";
 
@@ -20,10 +21,13 @@ const BookingPage = () => {
 	const [center, setCenter] = useState({});
 	const [showModal, setShowModal] = useState(false);
 	const [showEditModal, setShowEditModal] = useState(false);
+	const [showReviewModal, setShowReviewModal] = useState(false);
 	const [bookingDuration, setBookingDuration] = useState(0);
+	const [hasReview, setHasReview] = useState(false);
 
 	const userBookings = useSelector((state) => state.session.bookings);
 	const user = useSelector((state) => state.session.user);
+	const reviews = useSelector((state) => state.session.reviews);
 
 	const { isLoaded } = useLoadScript({
 		googleMapsApiKey: process.env.REACT_APP_NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
@@ -49,7 +53,7 @@ const BookingPage = () => {
 
 	const checkReview = (reviews) => {
 		for (let review of reviews) {
-			if (review.userId === user.id) return true;
+			if (review.userId === user.id) return review;
 		}
 		return false;
 	};
@@ -58,6 +62,12 @@ const BookingPage = () => {
 		dispatch(getAUsersReviews());
 		dispatch(getAUsersBookings());
 	}, [dispatch]);
+
+	useEffect(() => {
+		let res = checkReview(Object.values(reviews));
+		console.log('res', res)
+		setHasReview(res);
+	}, [reviews]);
 
 	useEffect(() => {
 		let booking = null;
@@ -93,6 +103,12 @@ const BookingPage = () => {
 		<>
 			{booking.room && (
 				<div className="booking-page-main-container">
+					<ReviewModal
+						review={hasReview}
+						showReviewModal={showReviewModal}
+						setShowReviewModal={setShowReviewModal}
+						roomId={room.id}
+					></ReviewModal>
 					<div className="booking-page-left">
 						<div className="booking-page-location-details">
 							<div className="booking-page-image">
@@ -169,6 +185,7 @@ const BookingPage = () => {
 									setShowModal={setShowEditModal}
 									booking={booking}
 								></EditBookingModal>
+
 								{!isPast(booking.startDate) ? (
 									<>
 										<div
@@ -188,29 +205,35 @@ const BookingPage = () => {
 									</>
 								) : (
 									<>
-										{checkReview(room.reviews) ? (
+										{hasReview ? (
 											<div className="booking-action-edit">
-												<Link
+												<div
 													to={`/review-room/${booking.room.id}`}
 													style={{
 														width: "100%",
 														display: "inline-block",
 													}}
+													onClick={() =>
+														setShowReviewModal(true)
+													}
 												>
 													Edit review
-												</Link>
+												</div>
 											</div>
 										) : (
 											<div className="booking-action-edit">
-												<Link
+												<div
 													to={`/review-room/${booking.room.id}`}
 													style={{
 														width: "100%",
 														display: "inline-block",
 													}}
+													onClick={() =>
+														setShowReviewModal(true)
+													}
 												>
 													Create review
-												</Link>
+												</div>
 											</div>
 										)}
 									</>

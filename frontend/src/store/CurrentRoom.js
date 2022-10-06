@@ -69,6 +69,7 @@ export const getARoomsBookings = (id) => async (dispatch) => {
 //Create a review of a room, requires reviews as a JSON.stringify string and roomId
 export const createRoomReview = (reviewData) => async (dispatch) => {
 	const [roomId, review] = reviewData;
+	console.log(reviewData);
 	const response = await csrfFetch(`/api/rooms/${Number(roomId)}/reviews`, {
 		method: "POST",
 		headers: {
@@ -138,7 +139,9 @@ const singleRoomReducer = (state = initialState, action) => {
 		}
 		case CREATE_ROOM_REVIEW: {
 			newState = { ...state };
-			newState.reviews[action.reviewInfo.id] = action.reviewInfo;
+			if (newState.reviews) {
+				newState.reviews[action.reviewInfo.id] = action.reviewInfo;
+			}
 			return newState;
 		}
 		case EDIT_ROOM_REVIEW: {

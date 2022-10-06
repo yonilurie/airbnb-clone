@@ -50,43 +50,38 @@ const Bookings = () => {
 						</div>
 					</div>
 				)}
-			{bookings.futureBookings && (
+			{bookings.currentBookings && (
 				<div>
-					{bookings.currentBookings &&
-						Object.values(bookings.currentBookings).length > 0 && (
-							<>
-								<h2>Current trips</h2>
-								<div className="past-bookings">
-									{Object.values(bookings.pastBookings)
-										.length > 0 &&
-										Object.values(
-											bookings.pastBookings
-										).map((booking) => (
-											<Booking
-												booking={booking}
-												key={booking.id}
-												reviewDisabled={true}
-											/>
-										))}
-								</div>
-							</>
-						)}
+					{Object.values(bookings.currentBookings).length > 0 && (
+						<>
+							<h2>Current trips</h2>
+							<div className="past-bookings">
+								{Object.values(bookings.currentBookings).map(
+									(booking) => (
+										<Booking
+											booking={booking}
+											key={booking.id}
+											reviewDisabled={true}
+										/>
+									)
+								)}
+							</div>
+						</>
+					)}
 					{bookings.futureBookings &&
 						Object.values(bookings.futureBookings).length > 0 && (
 							<div>
 								<h2>Where you're headed</h2>
 								<div className="past-bookings">
-									{Object.values(bookings.futureBookings)
-										.length > 0 &&
-										Object.values(
-											bookings.futureBookings
-										).map((booking) => (
+									{Object.values(bookings.futureBookings).map(
+										(booking) => (
 											<Booking
 												booking={booking}
 												key={booking.id}
 												reviewDisabled={true}
 											/>
-										))}
+										)
+									)}
 								</div>
 							</div>
 						)}
@@ -97,20 +92,28 @@ const Bookings = () => {
 									Where you've been
 								</h2>
 								<div className="past-bookings">
-									{Object.values(bookings.pastBookings)
-										.length > 0 &&
-										Object.values(
-											bookings.pastBookings
-										).map((booking) => (
+									{Object.values(bookings.pastBookings).map(
+										(booking) => (
 											<Booking
 												booking={booking}
 												key={booking.id}
 												reviewDisabled={false}
 											/>
-										))}
+										)
+									)}
 								</div>
 							</div>
 						)}
+				</div>
+			)}
+			{!Object.values(bookings).length && (
+				<div className="loading-container">
+					<div class="lds-ring">
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+					</div>
 				</div>
 			)}
 		</div>

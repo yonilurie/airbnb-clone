@@ -22,19 +22,19 @@ function Rooms() {
 	}, []);
 
 	useEffect(() => {
-		if (!rooms.length) {
-			const timeout = setTimeout(() => {
-				setIsDisplayed(true);
-			}, 250);
+		// if (!rooms.length) {
+		const timeout = setTimeout(() => {
+			setIsDisplayed(true);
+		}, 250);
 
-			return () => clearTimeout(timeout);
-		} else setIsDisplayed(true);
+		return () => clearTimeout(timeout);
+		// } else setIsDisplayed(true);
 	}, []);
-
+	console.log(rooms);
 	return (
 		<div className="rooms-main-container">
 			<div className="rooms-container">
-				{rooms &&
+				{rooms.length > 0 &&
 					isDisplayed &&
 					rooms.map((room) => {
 						return (
@@ -42,6 +42,16 @@ function Rooms() {
 						);
 					})}
 			</div>
+			{!rooms.length && (
+				<div className="loading-container">
+					<div class="lds-ring">
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+					</div>
+				</div>
+			)}
 		</div>
 	);
 }

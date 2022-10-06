@@ -47,9 +47,6 @@ function App() {
 					<ProtectedRoute exact path="/trips/:bookingId">
 						<BookingPage></BookingPage>
 					</ProtectedRoute>
-					<ProtectedRoute exact path="/review-room/:roomId">
-						<CreateReview></CreateReview>
-					</ProtectedRoute>
 					<Route>
 						<Rooms></Rooms>
 					</Route>
