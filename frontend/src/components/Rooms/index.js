@@ -22,15 +22,14 @@ function Rooms() {
 	}, []);
 
 	useEffect(() => {
-		// if (!rooms.length) {
-		const timeout = setTimeout(() => {
-			setIsDisplayed(true);
-		}, 250);
+		if (!rooms.length) {
+			const timeout = setTimeout(() => {
+				setIsDisplayed(true);
+			}, 250);
 
-		return () => clearTimeout(timeout);
-		// } else setIsDisplayed(true);
+			return () => clearTimeout(timeout);
+		} else setIsDisplayed(true);
 	}, []);
-	console.log(rooms);
 	return (
 		<div className="rooms-main-container">
 			<div className="rooms-container">

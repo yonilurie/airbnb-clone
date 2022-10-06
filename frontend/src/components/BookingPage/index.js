@@ -65,7 +65,6 @@ const BookingPage = () => {
 
 	useEffect(() => {
 		let res = checkReview(Object.values(reviews));
-		console.log('res', res)
 		setHasReview(res);
 	}, [reviews]);
 

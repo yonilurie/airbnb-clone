@@ -69,7 +69,6 @@ export const getARoomsBookings = (id) => async (dispatch) => {
 //Create a review of a room, requires reviews as a JSON.stringify string and roomId
 export const createRoomReview = (reviewData) => async (dispatch) => {
 	const [roomId, review] = reviewData;
-	console.log(reviewData);
 	const response = await csrfFetch(`/api/rooms/${Number(roomId)}/reviews`, {
 		method: "POST",
 		headers: {
