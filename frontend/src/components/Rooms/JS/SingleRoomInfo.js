@@ -71,6 +71,7 @@ const SingleRoomInfo = () => {
 			setGalleryImage((galleryImage) => galleryImage + 1);
 		}
 	};
+	console.log(currentRoom)
 	return (
 		<div className="content-container">
 			<ReviewsModal
@@ -78,7 +79,7 @@ const SingleRoomInfo = () => {
 				setShowModal={setShowModal}
 				currentRoom={currentRoom}
 			></ReviewsModal>
-			{!currentRoom && (
+			{!currentRoom.id && (
 				<div className="placeholder-container">
 					<div className="placeholder-loading-section-1">
 						<div className="loading-strip-1"></div>
