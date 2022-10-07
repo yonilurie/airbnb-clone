@@ -320,10 +320,6 @@ input[type="number"]::-webkit-outer-spin-button {
 .input-plus:hover {
 	border: solid 1px rgb(33, 33, 33);
 }
-.input-minus:active,
-.input-plus:active {
-	background-color: rgb(184, 181, 181);
-}
 
 .toggle-disabled {
 	cursor: not-allowed;
@@ -333,7 +329,6 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .toggle-disabled:hover,
 .toggle-disabled:active {
-	background-color: white;
 	border: solid 1px rgb(236, 236, 236);
 	color: rgb(236, 236, 236);
 }
