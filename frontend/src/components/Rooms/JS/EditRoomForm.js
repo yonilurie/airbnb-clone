@@ -20,6 +20,10 @@ const EditRoomForm = () => {
 	const [longitude, setLongitude] = useState(0);
 	const [description, setDescription] = useState("");
 	const [price, setPrice] = useState(100);
+	const [guests, setGuests] = useState(1);
+	const [bedrooms, setBedrooms] = useState(1);
+	const [beds, setBeds] = useState(1);
+	const [baths, setBaths] = useState(1);
 	const [validationErrors, setValidationErrors] = useState([]);
 	const [isLoaded, setIsLoaded] = useState(false);
 
@@ -60,6 +64,10 @@ const EditRoomForm = () => {
 				lng,
 				description,
 				price,
+				guests,
+				bedrooms,
+				beds,
+				baths,
 			} = currentRoom;
 
 			//Set all the states with the rooms information
@@ -72,6 +80,10 @@ const EditRoomForm = () => {
 			setLongitude(lng);
 			setDescription(description);
 			setPrice(price);
+			setGuests(guests);
+			setBedrooms(bedrooms);
+			setBeds(beds);
+			setBaths(baths);
 		}
 	}, [currentRoom]);
 
@@ -96,6 +108,10 @@ const EditRoomForm = () => {
 		longitude,
 		description,
 		price,
+		guests,
+		bedrooms,
+		beds,
+		baths,
 	]);
 
 	//If user is not logged in or is not the owner of the room, redirect them
@@ -165,6 +181,10 @@ const EditRoomForm = () => {
 		}
 	};
 
+	const setSize = (func, calc, state) => {
+		if (calc === "-" && state > 1) func((state) => state - 1);
+		if (calc === "+" && state < 10) func((state) => state + 1);
+	};
 	return (
 		<div className="form-container">
 			<h1 className="form-description">Edit home information</h1>
@@ -393,6 +413,120 @@ const EditRoomForm = () => {
 							onChange={(e) => setPrice(e.target.value)}
 							required
 						></input>
+					</div>
+					<div className="input-container size">
+						<div className="input-toggle-container">
+							<label>Guests</label>
+							<div className="input-toggle">
+								<button
+									className={`input-minus ${
+										guests === 1 && "toggle-disabled"
+									}`}
+									type="button"
+									onClick={() => {
+										setSize(setGuests, "-", guests);
+									}}
+								>
+									-
+								</button>
+								<div className="input-nums">{guests}</div>
+								<button
+									className={`input-plus ${
+										guests === 10 && "toggle-disabled"
+									}`}
+									type="button"
+									onClick={() => {
+										setSize(setGuests, "+", guests);
+									}}
+								>
+									+
+								</button>
+							</div>
+						</div>
+						<div className="input-toggle-container">
+							<label>Bedrooms</label>
+							<div className="input-toggle">
+								<button
+									className={`input-plus ${
+										bedrooms === 1 && "toggle-disabled"
+									}`}
+									type="button"
+									onClick={() => {
+										setSize(setBedrooms, "-", bedrooms);
+									}}
+								>
+									-
+								</button>
+								<div className="input-nums">{bedrooms}</div>
+								<button
+									className={`input-plus ${
+										bedrooms === 10 && "toggle-disabled"
+									}`}
+									type="button"
+									onClick={() => {
+										setSize(setBedrooms, "+", bedrooms);
+									}}
+								>
+									+
+								</button>
+							</div>
+						</div>
+						<div className="input-toggle-container">
+							<label>Beds</label>
+							<div className="input-toggle">
+								<button
+									className={`input-minus ${
+										beds === 1 && "toggle-disabled"
+									}`}
+									type="button"
+									onClick={() => {
+										setSize(setBeds, "-", beds);
+									}}
+								>
+									-
+								</button>
+								<div className="input-nums">{beds}</div>
+								<button
+									className={`input-plus ${
+										beds === 10 && "toggle-disabled"
+									}`}
+									type="button"
+									onClick={() => {
+										setSize(setBeds, "+", beds);
+									}}
+								>
+									+
+								</button>
+							</div>
+						</div>
+						<div className="input-toggle-container">
+							<label>Baths</label>
+							<div className="input-toggle">
+								<button
+									className={`input-minus ${
+										baths === 1 && "toggle-disabled"
+									}`}
+									type="button"
+									onClick={() => {
+										setSize(setBaths, "-", baths);
+									}}
+								>
+									-
+								</button>
+								<div className="input-nums">{baths}</div>
+								<button
+									className={`input-plus ${
+										baths === 10 && "toggle-disabled"
+									}`}
+									type="button"
+									onClick={() => {
+										setSize(setBaths, "+", baths);
+									}}
+								>
+									+
+								</button>
+							</div>
+						</div>
 					</div>
 					<div className="input-container">
 						{" "}

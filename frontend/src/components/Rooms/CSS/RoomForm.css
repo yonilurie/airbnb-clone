@@ -169,12 +169,12 @@ input[type="file"] {
 	transition-duration: 0.25s;
 	background-image: radial-gradient(
 		circle at center center,
-		rgb(255, 56, 92) 0%,
-		rgb(230, 30, 77) 27.5%,
-		rgb(227, 28, 95) 40%,
-		rgb(215, 4, 102) 57.5%,
-		rgb(189, 30, 89) 75%,
-		rgb(189, 30, 89) 100%
+		rgb(255, 56, 92) 100%,
+		rgb(230, 30, 77) 75%,
+		rgb(227, 28, 95) 57.5%,
+		rgb(215, 4, 102) 40%,
+		rgb(189, 30, 89) 27.5%,
+		rgb(189, 30, 89) 0%
 	);
 	background-size: 200% 200%;
 
@@ -273,4 +273,67 @@ input[type="number"]::-webkit-outer-spin-button {
 .state-country-container {
 	display: flex;
 	justify-content: space-around;
+}
+
+.input-container.size {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.input-toggle {
+	display: flex;
+	gap: 10px;
+	align-items: center;
+}
+
+.input-toggle-container {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	justify-content: center;
+	align-items: center;
+}
+
+.input-nums {
+	font-size: 25px;
+	width: 30px;
+	text-align: center;
+}
+
+.input-minus,
+.input-plus {
+	background-color: white;
+	border: solid 1px rgb(177, 177, 177);
+	border-radius: 9999px;
+	height: 32px;
+	width: 32px;
+	padding: 5px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	font-size: 20px;
+}
+
+.input-minus:hover,
+.input-plus:hover {
+	border: solid 1px rgb(33, 33, 33);
+}
+.input-minus:active,
+.input-plus:active {
+	background-color: rgb(184, 181, 181);
+}
+
+.toggle-disabled {
+	cursor: not-allowed;
+	border: solid 1px rgb(236, 236, 236);
+	color: rgb(236, 236, 236);
+}
+
+.toggle-disabled:hover,
+.toggle-disabled:active {
+	background-color: white;
+	border: solid 1px rgb(236, 236, 236);
+	color: rgb(236, 236, 236);
 }
