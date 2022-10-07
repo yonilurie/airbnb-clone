@@ -20,22 +20,16 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 	let endDate = new Date();
 	const cleaningFeeCost = 22;
 	const serviceFeeCost = 35;
-	const maxGuests = 4;
 	const maxGuestsArr = [];
-	const nights = 1;
-	endDate.setDate(Number(endDate.getDate()) + nights);
+	for (let i = 1; i <= currentRoom.guests; i++) maxGuestsArr.push(i);
 
-	for (let i = 1; i <= maxGuests; i++) maxGuestsArr.push(i);
-
-	const [bookingStartDate, setBookingStartDate] = useState(startDate);
-	const [bookingEndDate, setBookingEndDate] = useState(endDate);
-	const [bookingDuration, setBookingDuration] = useState(nights);
+	const [bookingStartDate, setBookingStartDate] = useState(null);
+	const [bookingEndDate, setBookingEndDate] = useState(null);
+	const [bookingDuration, setBookingDuration] = useState(null);
 	const [guests, setGuests] = useState(1);
-	const [nightlyTotal, setNightlyTotal] = useState(
-		currentRoom.price * nights
-	);
-	const [cleaningFee, setCleaningFee] = useState(nights * cleaningFeeCost);
-	const [serviceFee, setServiceFee] = useState(nights * serviceFeeCost);
+	const [nightlyTotal, setNightlyTotal] = useState(null);
+	const [cleaningFee, setCleaningFee] = useState(null);
+	const [serviceFee, setServiceFee] = useState(null);
 	const [bookingTotal, setBookingTotal] = useState(
 		nightlyTotal + cleaningFee + serviceFee
 	);
@@ -56,6 +50,7 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 				guests: guests,
 			})
 		);
+
 		if (data.errors) {
 			setValidationErrors([data.errors.error]);
 		} else {
@@ -89,10 +84,13 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 	};
 
 	useEffect(() => {
-		let difference = bookingEndDate.getTime() - bookingStartDate.getTime();
-		if (difference !== endDate.getTime() - startDate.getTime()) {
-			let duration = Math.ceil(difference / (1000 * 3600 * 24) - 1);
-			setBookingDuration(duration);
+		if (bookingEndDate && bookingStartDate) {
+			let difference =
+				bookingEndDate.getTime() - bookingStartDate.getTime();
+			if (difference !== endDate.getTime() - startDate.getTime()) {
+				let duration = Math.ceil(difference / (1000 * 3600 * 24) - 1);
+				setBookingDuration(duration);
+			}
 		}
 	}, [bookingStartDate, bookingEndDate]);
 
@@ -222,7 +220,12 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 							);
 						})}
 					{currentRoom.owner.id !== sessionuser.id && (
-						<button className="reserve-btn">Reserve</button>
+						<button
+							className="reserve-btn"
+							disabled={!bookingEndDate || !bookingStartDate}
+						>
+							Reserve
+						</button>
 					)}
 					<div>You wont be charged yet</div>
 				</form>
