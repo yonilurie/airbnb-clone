@@ -6,7 +6,12 @@ const LearnMore = ({ setShowLearnMore }) => {
 			<div className="learn-more-modal">
 				<div className="learn-more-modal-top">
 					<div className="exit-learn-more-header">
-						<div className="exit-learn-more">X</div>
+						<div
+							className="exit-learn-more"
+							onClick={() => setShowLearnMore(false)}
+						>
+							X
+						</div>
 					</div>
 				</div>
 				<div className="learn-more-subheader">
