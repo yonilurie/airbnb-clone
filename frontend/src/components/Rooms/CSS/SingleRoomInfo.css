@@ -457,6 +457,74 @@ h2 {
 	border-radius: 9999px;
 }
 
+.learn-more-modal {
+	display: flex;
+	flex-direction: column;
+	width: 1032px;
+	height: 574px;
+	background-color: white;
+	border-radius: 12px;
+
+	box-sizing: border-box;
+}
+.exit-learn-more {
+	width: 32px;
+	height: 32px;
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 9999px;
+	box-sizing: border-box;
+}
+
+.exit-learn-more-header {
+	height: 64px;
+	padding: 24px;
+	box-sizing: border-box;
+}
+
+.learn-more-subheader {
+	padding: 0px 32px;
+}
+
+.exit-learn-more:hover {
+	background-color: rgb(247, 247, 247);
+}
+
+.learn-more-modal-top {
+}
+
+.aircover-logo.in-modal {
+	height: 32px;
+	margin-top: 8px;
+	margin-bottom: 16px;
+	object-fit: contain;
+}
+
+.learn-more-subheader-description {
+	padding-bottom: 32px;
+	margin-bottom: 16px;
+	border-bottom: solid 1px lightgray;
+}
+
+.learn-more-content-box {
+	height: 100%;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 40px;
+	padding: 32px;
+	box-sizing: border-box;
+}
+
+.learn-more-grid-cell-title {
+	font-size: 16px;
+	margin-bottom: 8px;
+}
+.learn-more-grid-cell-text {
+	color: #717171;
+}
+
 @media screen and (max-width: 780px) {
 	.room-images {
 		display: none;

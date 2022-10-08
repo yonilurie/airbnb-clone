@@ -10,6 +10,7 @@ import Reviews from "./Reviews";
 import ReviewsModal from "./ReviewsModal";
 import BookingCard from "./BookingCard";
 import ImageModal from "./ImageModal";
+import LearnMore from "./LearnMore";
 
 import "../CSS/SingleRoomInfo.css";
 
@@ -21,7 +22,7 @@ const SingleRoomInfo = () => {
 	const [gallery, setGallery] = useState([]);
 	const [galleryImage, setGalleryImage] = useState(0);
 	const [showImageModal, setShowImageModal] = useState(false);
-
+	const [showLearnMore, setShowLearnMore] = useState(false);
 	const sessionuser = useSelector((state) => state.session.user);
 	const currentRoom = useSelector((state) => state.currentRoom);
 
@@ -315,9 +316,13 @@ const SingleRoomInfo = () => {
 									Host cancellations, listing inaccuracies,
 									and other issues like trouble checking in.
 								</div>
-								<div className="aircover-learn-more">
+								<div
+									className="aircover-learn-more"
+									onClick={() => setShowLearnMore(true)}
+								>
 									Learn more
 								</div>
+								{showLearnMore && <LearnMore setShowLearnMore={setShowLearnMore}></LearnMore>}
 							</div>
 							<div className="description-container">
 								<div className="description">
@@ -349,9 +354,7 @@ const SingleRoomInfo = () => {
 						)}
 						{currentRoom.owner.id === sessionuser.id && (
 							<div className="owner-bookings">
-								<h2 className="room-detail-title">
-									Bookings
-								</h2>
+								<h2 className="room-detail-title">Bookings</h2>
 								{currentRoom.bookings &&
 									Object.values(currentRoom.bookings).map(
 										(booking) => {
