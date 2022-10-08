@@ -598,4 +598,9 @@ h2 {
 	.reviews-overview {
 		text-align: center;
 	}
+
+	.learn-more-modal {
+		width: 90vw;
+		overflow-y: scroll;
+	}
 }
