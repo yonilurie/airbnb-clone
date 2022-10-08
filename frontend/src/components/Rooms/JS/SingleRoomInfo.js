@@ -71,7 +71,6 @@ const SingleRoomInfo = () => {
 			setGalleryImage((galleryImage) => galleryImage + 1);
 		}
 	};
-	console.log(currentRoom);
 	return (
 		<div className="content-container">
 			<ReviewsModal
@@ -347,6 +346,36 @@ const SingleRoomInfo = () => {
 								currentRoom={currentRoom}
 								setShowModal={setShowModal}
 							/>
+						)}
+						{currentRoom.owner.id === sessionuser.id && (
+							<div className="owner-bookings">
+								<h2 className="room-detail-title">
+									Bookings
+								</h2>
+								{currentRoom.bookings &&
+									Object.values(currentRoom.bookings).map(
+										(booking) => {
+											return (
+												<div
+													className="owner-booking"
+													key={booking.id}
+												>
+													<div>
+														{new Date(
+															booking.startDate
+														).toDateString()}
+													</div>
+													{" - "}
+													<div>
+														{new Date(
+															booking.endDate
+														).toDateString()}
+													</div>
+												</div>
+											);
+										}
+									)}
+							</div>
 						)}
 					</div>
 					{Object.values(currentRoom.reviews).length > 0 && (

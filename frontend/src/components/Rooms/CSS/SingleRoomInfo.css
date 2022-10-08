@@ -440,6 +440,23 @@ h2 {
 	padding-bottom: 24px;
 	border-bottom: solid 1px rgb(221, 221, 221);
 }
+
+.owner-bookings {
+	width: 100%;
+	max-width: 300px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	padding-top: 48px;
+}
+
+.owner-booking {
+	display: flex;
+	padding: 5px;
+	border: solid 1px rgb(221, 221, 221);
+	border-radius: 9999px;
+}
+
 @media screen and (max-width: 780px) {
 	.room-images {
 		display: none;

@@ -9,7 +9,6 @@ const CreateRoomForm = () => {
 	const history = useHistory();
 	const dispatch = useDispatch();
 
-	// State
 	const [name, setName] = useState("");
 	const [address, setAddress] = useState("");
 	const [city, setCity] = useState("");
@@ -19,12 +18,10 @@ const CreateRoomForm = () => {
 	const [longitude, setLongitude] = useState(0);
 	const [description, setDescription] = useState("");
 	const [price, setPrice] = useState(100);
-
 	const [guests, setGuests] = useState(1);
 	const [bedrooms, setBedrooms] = useState(1);
 	const [beds, setBeds] = useState(1);
 	const [baths, setBaths] = useState(1);
-
 	const [images, setImages] = useState([]);
 	const [validationErrors, setValidationErrors] = useState([]);
 	const [imageErrors, setImageErrors] = useState([]);
@@ -140,6 +137,7 @@ const CreateRoomForm = () => {
 		}
 	};
 
+	//Set the amount of bedrooms, baths, guests, or bedrooms
 	const setSize = (func, calc, state) => {
 		if (calc === "-" && state > 1) func((state) => state - 1);
 		if (calc === "+" && state < 10) func((state) => state + 1);
@@ -559,7 +557,6 @@ const CreateRoomForm = () => {
 														images
 													);
 													newArr.splice(idx, 1);
-
 													setImages(newArr);
 												}}
 											>
