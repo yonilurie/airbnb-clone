@@ -217,6 +217,7 @@ const SingleRoomInfo = () => {
 								<h2 className="room-hosted-by">
 									Entire home hosted by{" "}
 									{sessionuser &&
+									sessionuser.id &&
 									currentRoom.owner.id === sessionuser.id
 										? "You"
 										: currentRoom.owner.firstName}
@@ -322,7 +323,11 @@ const SingleRoomInfo = () => {
 								>
 									Learn more
 								</div>
-								{showLearnMore && <LearnMore setShowLearnMore={setShowLearnMore}></LearnMore>}
+								{showLearnMore && (
+									<LearnMore
+										setShowLearnMore={setShowLearnMore}
+									></LearnMore>
+								)}
 							</div>
 							<div className="description-container">
 								<div className="description">
@@ -346,40 +351,46 @@ const SingleRoomInfo = () => {
 							</div>
 						</div>
 
-						{currentRoom.owner.id !== sessionuser.id && (
-							<BookingCard
-								currentRoom={currentRoom}
-								setShowModal={setShowModal}
-							/>
-						)}
-						{currentRoom.owner.id === sessionuser.id && (
-							<div className="owner-bookings">
-								<h2 className="room-detail-title">Bookings</h2>
-								{currentRoom.bookings &&
-									Object.values(currentRoom.bookings).map(
-										(booking) => {
-											return (
-												<div
-													className="owner-booking"
-													key={booking.id}
-												>
-													<div>
-														{new Date(
-															booking.startDate
-														).toDateString()}
+						{currentRoom &&
+							sessionuser &&
+							currentRoom.owner.id !== sessionuser.id && (
+								<BookingCard
+									currentRoom={currentRoom}
+									setShowModal={setShowModal}
+								/>
+							)}
+						{currentRoom &&
+							sessionuser &&
+							currentRoom.owner.id === sessionuser.id && (
+								<div className="owner-bookings">
+									<h2 className="room-detail-title">
+										Bookings
+									</h2>
+									{currentRoom.bookings &&
+										Object.values(currentRoom.bookings).map(
+											(booking) => {
+												return (
+													<div
+														className="owner-booking"
+														key={booking.id}
+													>
+														<div>
+															{new Date(
+																booking.startDate
+															).toDateString()}
+														</div>
+														{" - "}
+														<div>
+															{new Date(
+																booking.endDate
+															).toDateString()}
+														</div>
 													</div>
-													{" - "}
-													<div>
-														{new Date(
-															booking.endDate
-														).toDateString()}
-													</div>
-												</div>
-											);
-										}
-									)}
-							</div>
-						)}
+												);
+											}
+										)}
+								</div>
+							)}
 					</div>
 					{Object.values(currentRoom.reviews).length > 0 && (
 						<div className="reviews-container">
