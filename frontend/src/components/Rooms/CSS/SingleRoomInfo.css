@@ -540,6 +540,10 @@ h2 {
 		width: 100%;
 		padding: 0px;
 	}
+
+	.room-size {
+		padding-top: 0px;
+	}
 	.gallery {
 		display: flex;
 		position: relative;
@@ -585,6 +589,12 @@ h2 {
 		justify-content: center;
 		align-items: center;
 	}
+
+	.room-price-card {
+		margin: 0px;
+		padding: 10px;
+	}
+
 	.room-page-map {
 		padding: 10px;
 	}

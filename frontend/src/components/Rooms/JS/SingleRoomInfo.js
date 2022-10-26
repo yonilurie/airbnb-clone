@@ -252,7 +252,7 @@ const SingleRoomInfo = () => {
 									</span>
 								</div>
 							</div>
-							<div className="room-check-in-container">
+							{/* <div className="room-check-in-container">
 								<div className="room-check-in-single">
 									<svg
 										viewBox="0 0 32 32"
@@ -306,7 +306,7 @@ const SingleRoomInfo = () => {
 										</div>
 									</div>
 								</div>
-							</div>
+							</div> */}
 							<div className="aircover-container-main">
 								<img
 									className="aircover-logo"
