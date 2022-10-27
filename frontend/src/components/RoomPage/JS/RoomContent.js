@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 
 import LearnMore from "./LearnMore.js";
-const RoomContent = ({ currentRoom,  setShowModal }) => {
+const RoomContent = ({ room, setShowModal }) => {
 	const sessionuser = useSelector((state) => state.session.user);
 
 	const [showLearnMore, setShowLearnMore] = useState(false);
@@ -19,9 +19,9 @@ const RoomContent = ({ currentRoom,  setShowModal }) => {
 	});
 
 	useEffect(() => {
-		if (currentRoom) {
-			let lat = parseFloat(currentRoom.lat);
-			let lng = parseFloat(currentRoom.lng);
+		if (room) {
+			let lat = parseFloat(room.lat);
+			let lng = parseFloat(room.lng);
 			if (!isNaN(lat) || !isNaN(lng)) {
 				setCenter({
 					lat,
@@ -30,66 +30,62 @@ const RoomContent = ({ currentRoom,  setShowModal }) => {
 			}
 		}
 
-		if (currentRoom.images) {
-			let tempGallery = [currentRoom.previewImage];
-			currentRoom.images.forEach((image) => {
+		if (room.images) {
+			let tempGallery = [room.previewImage];
+			room.images.forEach((image) => {
 				tempGallery.push(image.imageUrl);
 			});
 			setGallery(tempGallery);
 		}
-    }, [currentRoom]);
-    
+	}, [room]);
+
 	return (
 		<div className="room-content">
 			<RoomGallery gallery={gallery}></RoomGallery>
 			<div className="room-details">
-				<h1 className="room-name">{currentRoom.name}</h1>
-				{currentRoom.avgStarRating >= 1 && (
+				<h1 className="room-name">{room.name}</h1>
+				{room.avgStarRating >= 1 && (
 					<div className="room-reviews-and-location">
-						★{Number(currentRoom.avgStarRating).toFixed(2)}
+						★{Number(room.avgStarRating).toFixed(2)}
 						{" · "}
 						<span
 							id="reviews-modal-link"
 							onClick={() => setShowModal(true)}
 						>
-							{Number(Object.values(currentRoom.reviews).length)}{" "}
-							{Number(
-								Object.values(currentRoom.reviews).length
-							) === 1
+							{Object.values(room.reviews).length}{" "}
+							{Object.values(room.reviews).length === 1
 								? "review"
 								: "reviews"}
 						</span>
 						{" · "}
-						{currentRoom.city}, {currentRoom.state},{" "}
-						{currentRoom.country}
+						{room.city}, {room.state}, {room.country}
 					</div>
 				)}
-				{currentRoom.avgStarRating < 1 && (
+				{room.avgStarRating < 1 && (
 					<div className="room-reviews-and-location">
-						No Reviews Yet {currentRoom.city}, {currentRoom.state},{" "}
-						{currentRoom.country}
+						No Reviews Yet {room.city}, {room.state}, {room.country}
 					</div>
 				)}
 			</div>
 			<div className="room-images">
 				<div className="room-images-left">
-					{currentRoom.previewImage && (
+					{room.previewImage && (
 						<img
-							src={currentRoom.previewImage}
+							src={room.previewImage}
 							alt="preview"
 							className="main-image"
 						></img>
 					)}
 				</div>
-				{currentRoom.images && (
+				{room.images && (
 					<div className="room-images-side">
 						<div className="room-images-container">
 							<img
-								src={currentRoom.images[0].imageUrl}
+								src={room.images[0].imageUrl}
 								className="room-image-small"
 							></img>
 							<img
-								src={currentRoom.images[1].imageUrl}
+								src={room.images[1].imageUrl}
 								className="room-image-small"
 							></img>
 						</div>
@@ -100,11 +96,11 @@ const RoomContent = ({ currentRoom,  setShowModal }) => {
 							}}
 						>
 							<img
-								src={currentRoom.images[2].imageUrl}
+								src={room.images[2].imageUrl}
 								className="room-image-small top-right"
 							></img>
 							<img
-								src={currentRoom.images[3].imageUrl}
+								src={room.images[3].imageUrl}
 								className="room-image-small bottom-right"
 							></img>
 						</div>
@@ -118,33 +114,28 @@ const RoomContent = ({ currentRoom,  setShowModal }) => {
 							Entire home hosted by{" "}
 							{sessionuser &&
 							sessionuser.id &&
-							currentRoom.owner.id === sessionuser.id
+							room.owner.id === sessionuser.id
 								? "You"
-								: currentRoom.owner.firstName}
+								: room.owner.firstName}
 						</h2>
 						<div>
 							<span className="room-size-detail">
-								{currentRoom.guests}
-								{currentRoom.guests === 1
-									? " guest"
-									: " guests"}
+								{room.guests}
+								{room.guests === 1 ? " guest" : " guests"}
 							</span>
 							{" · "}
 							<span className="room-size-detail">
-								{currentRoom.bedrooms}{" "}
-								{currentRoom.bedrooms === 1
-									? " bedroom"
-									: " bedrooms"}
+								{room.bedrooms}{" "}
+								{room.bedrooms === 1 ? " bedroom" : " bedrooms"}
 							</span>
 							{" · "}
 							<span className="room-size-detail">
-								{currentRoom.beds}{" "}
-								{currentRoom.beds === 1 ? " bed" : " beds"}
+								{room.beds} {room.beds === 1 ? " bed" : " beds"}
 							</span>
 							{" · "}
 							<span className="room-size-detail">
-								{currentRoom.baths}{" "}
-								{currentRoom.baths === 1 ? "  bath" : "  baths"}
+								{room.baths}{" "}
+								{room.baths === 1 ? "  bath" : "  baths"}
 							</span>
 						</div>
 					</div>
@@ -171,16 +162,14 @@ const RoomContent = ({ currentRoom,  setShowModal }) => {
 						)}
 					</div>
 					<div className="description-container">
-						<div className="description">
-							{currentRoom.description}
-						</div>
+						<div className="description">{room.description}</div>
 					</div>
 					<div className="room-amenities-container">
 						<h2 className="room-detail-title">
 							What this place offers
 						</h2>
 						<div className="room-amenities">
-							{currentRoom.amenities
+							{room.amenities
 								.split("&")
 								.slice(0, -1)
 								.map((amenity) => (
@@ -192,70 +181,62 @@ const RoomContent = ({ currentRoom,  setShowModal }) => {
 					</div>
 				</div>
 
-				{currentRoom &&
-					sessionuser &&
-					currentRoom.owner.id !== sessionuser.id && (
-						<BookingCard
-							currentRoom={currentRoom}
-							setShowModal={setShowModal}
-						/>
-					)}
-				{currentRoom &&
-					sessionuser &&
-					currentRoom.owner.id === sessionuser.id && (
-						<div className="owner-bookings">
-							<h2 className="room-detail-title">Bookings</h2>
-							{currentRoom.bookings &&
-								Object.values(currentRoom.bookings).map(
-									(booking) => {
-										return (
-											<div
-												className="owner-booking"
-												key={booking.id}
-											>
-												<div>
-													{new Date(
-														booking.startDate
-													).toDateString()}
-												</div>
-												{" - "}
-												<div>
-													{new Date(
-														booking.endDate
-													).toDateString()}
-												</div>
-											</div>
-										);
-									}
-								)}
-						</div>
-					)}
+				{sessionuser && room.owner.id !== sessionuser.id ? (
+					<BookingCard
+						currentRoom={room}
+						setShowModal={setShowModal}
+					/>
+				) : (
+					<div className="owner-bookings">
+						<h2 className="room-detail-title">Bookings</h2>
+						{room.bookings &&
+							Object.values(room.bookings).map((booking) => {
+								return (
+									<div
+										className="owner-booking"
+										key={booking.id}
+									>
+										<div>
+											{new Date(
+												booking.startDate
+											).toDateString()}
+										</div>
+										{" - "}
+										<div>
+											{new Date(
+												booking.endDate
+											).toDateString()}
+										</div>
+									</div>
+								);
+							})}
+					</div>
+				)}
 			</div>
-			{Object.values(currentRoom.reviews).length > 0 && (
+			{Object.values(room.reviews).length > 0 && (
 				<div className="reviews-container">
-					{currentRoom.avgStarRating >= 1 && (
+					{room.avgStarRating >= 1 && (
 						<h2 className="reviews-overview">
-							★{Number(currentRoom.avgStarRating).toFixed(2)}
+							★{Number(room.avgStarRating).toFixed(2)}
 							{" · "}
-							{Object.values(currentRoom.reviews).length}{" "}
-							{Object.values(currentRoom.reviews).length === 1
+							{Object.values(room.reviews).length}{" "}
+							{Object.values(room.reviews).length === 1
 								? "review"
 								: "reviews"}
 						</h2>
 					)}
 					<div className="reviews">
-						{Object.values(currentRoom.reviews).length > 0 &&
-							typeof Object.values(currentRoom.reviews)[0] ===
-								"object" &&
-							Object.values(currentRoom.reviews).map((review) => {
+						{Object.values(room.reviews).length > 0 &&
+						typeof Object.values(room.reviews)[0] === "object" ? (
+							Object.values(room.reviews).map((review) => {
 								return (
 									<Reviews
 										review={review}
 										key={review.id}
 									></Reviews>
 								);
-							})}
-						{!Object.values(currentRoom.reviews).length && (
+							})
+						) : (
 							<div className="no-reviews-placeholder">
 								No Reviews
 							</div>
@@ -263,7 +244,7 @@ const RoomContent = ({ currentRoom,  setShowModal }) => {
 					</div>
 				</div>
 			)}
-			{currentRoom.avgStarRating < 1 && (
+			{room.avgStarRating < 1 && (
 				<h2 className="reviews-overview">No Reviews Yet</h2>
 			)}
 			<div className="room-page-map">

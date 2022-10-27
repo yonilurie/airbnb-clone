@@ -39,12 +39,16 @@ const RoomPage = () => {
 				setShowModal={setShowModal}
 				currentRoom={currentRoom}
 			></ReviewsModal>
-			{!currentRoom.id && <Placeholder></Placeholder>}
-			{currentRoom && Number(currentRoom.id) === Number(roomId) && (
-				<RoomContent
-					setShowModal={setShowModal}
-					currentRoom={currentRoom}
-				></RoomContent>
+			{!currentRoom.id ? (
+				<Placeholder></Placeholder>
+			) : (
+				currentRoom &&
+				Number(currentRoom.id) === Number(roomId) && (
+					<RoomContent
+						setShowModal={setShowModal}
+						room={currentRoom}
+					></RoomContent>
+				)
 			)}
 		</div>
 	);

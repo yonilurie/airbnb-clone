@@ -222,3 +222,10 @@ select {
 	width: fit-content;
 	cursor: pointer;
 }
+
+@media screen and (max-width: 820px) {
+	.room-price-card {
+		margin: 0px;
+		margin-top: 40px;
+	}
+}
