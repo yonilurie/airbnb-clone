@@ -1,12 +1,18 @@
 import { useDispatch } from "react-redux";
+import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { deleteARoom, getMyRoomsData } from "../../../store/session";
 
 import "../CSS/MyRoom.css";
 
+import "./DeleteRoomModal";
+import DeleteRoomModal from "./DeleteRoomModal";
+
 function MyRoom({ room }) {
 	const dispatch = useDispatch();
 	const history = useHistory();
+
+	const [showModal, setShowModal] = useState(false);
 
 	//Redirects user to room they click on
 	const showRoomDetails = (e) => {
@@ -30,13 +36,13 @@ function MyRoom({ room }) {
 				</div>
 				<div className="room-detail price"> ${room.price} Night</div>
 				<div className="room-detail-actions">
+					<DeleteRoomModal
+						showModal={showModal}
+						setShowModal={setShowModal}
+					></DeleteRoomModal>
 					<button
 						className="my-room-btn"
-						onClick={() =>
-							dispatch(deleteARoom(room.id)).then(() =>
-								dispatch(getMyRoomsData())
-							)
-						}
+						onClick={() => setShowModal(true)}
 					>
 						Delete
 					</button>

@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getMyRoomsData } from "../../../store/session";
+import { getMyRoomsData } from "../../store/session";
 
-import MyRoom from "./MyRoom";
+import MyRoom from "./JS/MyRoom";
 
-import "../CSS/RoomContainer.css";
+import "./CSS/RoomContainer.css";
 
 const MyRooms = () => {
 	const dispatch = useDispatch();
@@ -26,7 +26,7 @@ const MyRooms = () => {
 	}, []);
 
 	return (
-		<div className="rooms-main-container">
+		<div className="my-rooms-main-container">
 			<h1>Your rooms</h1>
 			{isDisplayed && rooms && Object.values(rooms).length > 0 && (
 				<div className="my-rooms-container">
@@ -36,7 +36,7 @@ const MyRooms = () => {
 				</div>
 			)}
 			{isDisplayed && rooms && Object.values(rooms).length === 0 && (
-				<div className="no-rooms-container">
+				<div className="no-hosted-rooms-container">
 					<h2>You are not currently hosting</h2>
 					<button
 						className="submit-form-btn"

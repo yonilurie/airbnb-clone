@@ -16,7 +16,6 @@ const LearnMore = ({ setShowLearnMore }) => {
 				</div>
 				<div className="learn-more-subheader">
 					<div>
-						{" "}
 						<img
 							className="aircover-logo in-modal"
 							src="https://a0.muscache.com/im/pictures/54e427bb-9cb7-4a81-94cf-78f19156faad.jpg"

@@ -1,0 +1,86 @@
+.my-rooms-main-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.my-rooms-container {
+	display: flex;
+	flex-direction: column;
+	width: 80vw;
+	max-width: 1100px;
+	gap: 10px;
+}
+
+.no-hosted-rooms-container {
+	width: 100%;
+	height: 100%;
+	max-width: 400px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 20px;
+	box-sizing: border-box;
+	flex-direction: column;
+}
+
+/* Loading animation  */
+
+.loading-container {
+	width: 50vw;
+	height: 50vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.lds-ring {
+	display: inline-block;
+	position: relative;
+	width: 80px;
+	height: 80px;
+}
+.lds-ring div {
+	box-sizing: border-box;
+	display: block;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	margin: 8px;
+	border: 8px solid rgb(255, 56, 92);
+	border-radius: 50%;
+	animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+	border-color: rgb(255, 56, 92) transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+	animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+	animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+	animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+/* Media queries */
+
+@media screen and (max-width: 770px) {
+	.rooms-container {
+		width: 550px;
+		max-width: 100%;
+
+		padding-left: 15px;
+		padding-right: 15px;
+		box-sizing: border-box;
+	}
+}

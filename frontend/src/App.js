@@ -2,15 +2,14 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 
-import SingleRoomInfo from "./components/Rooms/JS/SingleRoomInfo";
+import SingleRoomInfo from "./components/RoomPage/SingleRoomInfo";
 import Navigation from "./components/Navigation";
-import Rooms from "./components/Rooms";
-import CreateRoomForm from "./components/Rooms/JS/CreateRoomForm";
-import EditRoomForm from "./components/Rooms/JS/EditRoomForm";
-import MyRooms from "./components/Rooms/JS/MyRooms";
+import HomePage from "./components/HomePage";
+import CreateRoomForm from "./components/CreateRoom/JS/CreateRoomForm";
+import EditRoomForm from "./components/CreateRoom/JS/EditRoomForm";
+import MyRooms from "./components/MyRooms";
 import Bookings from "./components/Bookings";
 import BookingPage from "./components/BookingPage";
-import CreateReview from "./components/Review";
 import ProtectedRoute from "./ProtectedRoute";
 import * as sessionActions from "./store/session";
 
@@ -27,7 +26,7 @@ function App() {
 			{isLoaded && (
 				<Switch>
 					<Route exact path="/">
-						<Rooms></Rooms>
+						<HomePage></HomePage>
 					</Route>
 					<ProtectedRoute exact path="/host-your-home">
 						<CreateRoomForm></CreateRoomForm>
@@ -48,7 +47,7 @@ function App() {
 						<BookingPage></BookingPage>
 					</ProtectedRoute>
 					<Route>
-						<Rooms></Rooms>
+						<HomePage></HomePage>
 					</Route>
 				</Switch>
 			)}

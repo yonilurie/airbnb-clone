@@ -23,6 +23,8 @@ const CreateRoomForm = () => {
 	const [beds, setBeds] = useState(1);
 	const [baths, setBaths] = useState(1);
 	const [images, setImages] = useState([]);
+
+	const [amenities, setAmenities] = useState([]);
 	const [validationErrors, setValidationErrors] = useState([]);
 	const [imageErrors, setImageErrors] = useState([]);
 
@@ -141,6 +143,15 @@ const CreateRoomForm = () => {
 	const setSize = (func, calc, state) => {
 		if (calc === "-" && state > 1) func((state) => state - 1);
 		if (calc === "+" && state < 10) func((state) => state + 1);
+	};
+
+	const toggleAmenity = (amenity) => {
+		let res = amenities.find((element) => element === amenity);
+		if (res) {
+			console.log(true);
+		} else {
+			setAmenities([...amenities, amenity]);
+		}
 	};
 
 	return (
@@ -515,6 +526,52 @@ const CreateRoomForm = () => {
 								</button>
 							</div>
 						</div>
+					</div>
+					<div className="input-container amenities">
+						<label className="amenity-radio-container">
+							Kitchen
+							<input
+								type="checkbox"
+								value="kitchen"
+								onClick={(e) => toggleAmenity(e.target.value)}
+							></input>
+							<span className="checkmark"></span>
+						</label>
+						<label className="amenity-radio-container">
+							Wifi
+							<input type="checkbox"></input>
+							<span className="checkmark"></span>
+						</label>
+						<label className="amenity-radio-container">
+							Dryer
+							<input type="checkbox"></input>
+							<span className="checkmark"></span>
+						</label>
+						<label className="amenity-radio-container">
+							Washer
+							<input type="checkbox"></input>
+							<span className="checkmark"></span>
+						</label>
+						<label className="amenity-radio-container">
+							Hairdryer
+							<input type="checkbox"></input>
+							<span className="checkmark"></span>
+						</label>
+						<label className="amenity-radio-container">
+							Tv
+							<input type="checkbox"></input>
+							<span className="checkmark"></span>
+						</label>
+						<label className="amenity-radio-container">
+							Free Parking
+							<input type="checkbox"></input>
+							<span className="checkmark"></span>
+						</label>
+						<label className="amenity-radio-container">
+							Extra pillows and blankets
+							<input type="checkbox"></input>
+							<span className="checkmark"></span>
+						</label>
 					</div>
 					<div className="input-container">
 						{" "}
