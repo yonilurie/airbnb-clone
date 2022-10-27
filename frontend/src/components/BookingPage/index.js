@@ -5,7 +5,7 @@ import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 
 import CancelBookingModal from "./JS/CancelBookingModal";
 import EditBookingModal from "./JS/EditBookingModal";
-import ReviewModal from "../Review/ReviewModal";
+import ReviewModal from "../Review/JS/ReviewModal";
 
 import { getAUsersBookings, getAUsersReviews } from "../../store/session";
 

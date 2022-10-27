@@ -84,7 +84,7 @@ function ProfileButton({ user }) {
 				</button>
 				{showMenu && (
 					<div className="profile-dropdown">
-						{!user && (
+						{!user ? (
 							<>
 								<div
 									style={{ fontWeight: "600" }}
@@ -120,8 +120,7 @@ function ProfileButton({ user }) {
 									Sign Up
 								</div>
 							</>
-						)}
-						{user && (
+						) : (
 							<>
 								<div
 									className="profile-button-info name"

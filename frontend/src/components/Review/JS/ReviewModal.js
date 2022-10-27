@@ -1,5 +1,5 @@
-import { Modal } from "../../context/Modal";
-import CreateReview from "./";
+import { Modal } from "../../../context/Modal";
+import CreateReview from "..";
 const ReviewModal = ({
 	review,
 	showReviewModal,

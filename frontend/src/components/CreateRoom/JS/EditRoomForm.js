@@ -136,18 +136,6 @@ const EditRoomForm = () => {
 	const onSubmit = async (e) => {
 		e.preventDefault();
 		const { id } = currentRoom;
-		const room = {
-			id,
-			name,
-			address,
-			city,
-			state,
-			country,
-			lat: Number(latitude),
-			lng: Number(longitude),
-			description,
-			price,
-		};
 
 		if (!validationErrors.length) {
 			const checkIfLocationTaken = await fetch(
@@ -170,6 +158,23 @@ const EditRoomForm = () => {
 				document.documentElement.scrollTop = 0;
 				return;
 			}
+
+			const room = {
+				id,
+				name,
+				address,
+				city,
+				state,
+				country,
+				lat: Number(latitude),
+				lng: Number(longitude),
+				description,
+				price,
+				guests,
+				bedrooms,
+				baths,
+				beds,
+			};
 
 			dispatch(editRoom(JSON.stringify(room)));
 
@@ -194,10 +199,6 @@ const EditRoomForm = () => {
 		}
 	};
 
-	const setSize = (func, calc, state) => {
-		if (calc === "-" && state > 1) func((state) => state - 1);
-		if (calc === "+" && state < 10) func((state) => state + 1);
-	};
 	return (
 		<div className="form-container">
 			<h1 className="form-description">Edit home information</h1>
