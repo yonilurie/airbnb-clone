@@ -1,6 +1,12 @@
+import { useDispatch } from "react-redux";
+import { deleteARoom, getMyRoomsData } from "../../../store/session";
 import { Modal } from "../../../context/Modal";
 
-const DeleteRoomModal = ({ showModal, setShowModal }) => {
+import '../CSS/DeleteRoomModal.css'
+
+const DeleteRoomModal = ({ showModal, setShowModal, room }) => {
+	const dispatch = useDispatch();
+
 	return (
 		<>
 			{showModal && (
@@ -10,7 +16,16 @@ const DeleteRoomModal = ({ showModal, setShowModal }) => {
 						<div>
 							This will delete all associated bookings as well
 						</div>
-						<button className="delete-btn">Delete room</button>
+						<button
+							className="delete-btn"
+							onClick={() =>
+								dispatch(deleteARoom(room.id)).then(
+									dispatch * getMyRoomsData()
+								)
+							}
+						>
+							Delete room
+						</button>
 					</div>
 				</Modal>
 			)}

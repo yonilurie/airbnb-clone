@@ -602,6 +602,10 @@ router.post(
 			name,
 			description,
 			price,
+			guests,
+			bedrooms,
+			beds,
+			baths,
 		} = req.body;
 
 		const gallery = await multiplePublicFileUpload(req.files);
@@ -618,6 +622,10 @@ router.post(
 			price: price,
 			previewImage: gallery[0],
 			rules: "No Smoking&",
+			guests: guests,
+			bedrooms: bedrooms,
+			beds: beds,
+			baths: baths,
 		});
 
 		for (let i = 1; i < gallery.length; i++) {

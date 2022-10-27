@@ -1,7 +1,7 @@
-import { useDispatch } from "react-redux";
+
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { deleteARoom, getMyRoomsData } from "../../../store/session";
+
 
 import "../CSS/MyRoom.css";
 
@@ -9,7 +9,7 @@ import "./DeleteRoomModal";
 import DeleteRoomModal from "./DeleteRoomModal";
 
 function MyRoom({ room }) {
-	const dispatch = useDispatch();
+
 	const history = useHistory();
 
 	const [showModal, setShowModal] = useState(false);
@@ -39,6 +39,7 @@ function MyRoom({ room }) {
 					<DeleteRoomModal
 						showModal={showModal}
 						setShowModal={setShowModal}
+						room={room}
 					></DeleteRoomModal>
 					<button
 						className="my-room-btn"

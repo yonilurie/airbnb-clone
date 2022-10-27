@@ -1,0 +1,8 @@
+.delete-room-modal-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 20px;
+	box-sizing: border-box;
+	max-width: 90vw;
+}

@@ -118,6 +118,10 @@ const CreateRoomForm = () => {
 					description,
 					price,
 					images,
+					guests,
+					bedrooms,
+					baths,
+					beds,
 				})
 			);
 
@@ -139,7 +143,7 @@ const CreateRoomForm = () => {
 		}
 	};
 
-	//Set the amount of bedrooms, baths, guests, or bedrooms
+	//Set the amount of bedrooms, beds, baths, guests,
 	const setSize = (func, calc, state) => {
 		if (calc === "-" && state > 1) func((state) => state - 1);
 		if (calc === "+" && state < 10) func((state) => state + 1);

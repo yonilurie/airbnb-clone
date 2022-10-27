@@ -105,7 +105,7 @@ module.exports = (sequelize, DataTypes) => {
 			},
 			amenities: {
 				type: DataTypes.STRING,
-				allowNull: false
+				allowNull: true,
 			},
 			previewImage: {
 				type: DataTypes.STRING,
