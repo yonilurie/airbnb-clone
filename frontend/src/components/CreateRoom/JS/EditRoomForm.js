@@ -7,6 +7,15 @@ import Errors from "../../Errors";
 import { editRoom } from "../../../store/rooms";
 import { getMyRoomsData } from "../../../store/session";
 import StateSelector from "./StateSelector";
+import CreateRoomName from "./CreateRoomName";
+import CreateRoomAddress from "./CreateRoomAddress";
+import CreateRoomCity from "./CreateRoomCity";
+import CreateRoomCountry from "./CreateRoomCountry";
+import CreateRoomCoordinates from "./CreateRoomCoordinates";
+import CreateRoomPrice from "./CreateRoomPrice";
+import RoomSize from "./RoomSize";
+import RoomAmenities from "./RoomAmenities";
+import CreateRoomDescription from "./CreateRoomDescription";
 
 const EditRoomForm = () => {
 	const history = useHistory();
@@ -26,6 +35,8 @@ const EditRoomForm = () => {
 	const [bedrooms, setBedrooms] = useState(1);
 	const [beds, setBeds] = useState(1);
 	const [baths, setBaths] = useState(1);
+
+	const [amenities, setAmenities] = useState([]);
 	const [validationErrors, setValidationErrors] = useState([]);
 	const [isLoaded, setIsLoaded] = useState(false);
 
@@ -196,297 +207,51 @@ const EditRoomForm = () => {
 					<Errors error={error}></Errors>
 				))}
 			<form className="create-room-form" onSubmit={onSubmit}>
-				<div className="input-container-flex">
-					<div className="input-container">
-						<label htmlFor="name" className="form-label">
-							Name
-						</label>
-						<input
-							type="text"
-							className="form-input"
-							id="name"
-							placeholder="Name of your Home"
-							value={name}
-							onChange={(e) => {
-								setName(e.target.value);
-							}}
-							required
-						></input>
-					</div>
-					<div className="input-container">
-						<label htmlFor="address" className="form-label">
-							Address
-						</label>
-						<input
-							type="text"
-							className="form-input"
-							id="address"
-							placeholder="Address"
-							value={address}
-							onChange={(e) => setAddress(e.target.value)}
-							required
-						></input>
-					</div>
-					<div className="input-container">
-						{" "}
-						<label htmlFor="city" className="form-label">
-							City
-						</label>
-						<input
-							type="text"
-							className="form-input"
-							id="city"
-							placeholder="City"
-							value={city}
-							onChange={(e) => setCity(e.target.value)}
-							required
-						></input>
-					</div>
-					<div className="input-container">
-						<label htmlFor="state" className="form-label">
-							State
-						</label>
-
-						{country === "United States" && (
-							<StateSelector
-								state={state}
-								setState={setState}
-							></StateSelector>
-						)}
-					</div>
-					<div className="input-container">
-						<label htmlFor="country" className="form-label">
-							Country
-						</label>
-						<select
-							id="country"
-							className="form-input"
-							name="country"
-							value={country}
-							onChange={(e) => setCountry(e.target.value)}
-							required
-						>
-							<option value="United States">United States</option>
-						</select>
-					</div>
-					<div className="lat-lng-container input-container">
-						<div className="input-container">
-							{" "}
-							<label htmlFor="latitude" className="form-label">
-								Latitude
-							</label>
-							<input
-								type="number"
-								className="form-input"
-								min="-90"
-								max="90"
-								step="0.01"
-								maxLength="9"
-								onInput={(e) => {
-									if (
-										e.target.value.length >
-										e.target.maxLength
-									) {
-										e.target.value = e.target.value.slice(
-											0,
-											e.target.maxLength
-										);
-									}
-								}}
-								id="latitude"
-								placeholder="Latitude -90 to 90"
-								value={latitude}
-								onChange={(e) => setLatitude(e.target.value)}
-								required
-							></input>
-						</div>
-						<div className="input-container">
-							{" "}
-							<label htmlFor="longitude" className="form-label">
-								Longitude
-							</label>
-							<input
-								type="number"
-								className="form-input"
-								min="-180"
-								max="180"
-								step="0.01"
-								maxLength="9"
-								onInput={(e) => {
-									if (
-										e.target.value.length >
-										e.target.maxLength
-									) {
-										e.target.value = e.target.value.slice(
-											0,
-											e.target.maxLength
-										);
-									}
-								}}
-								id="longitude"
-								placeholder="Longitude -180 to 180"
-								value={longitude}
-								onChange={(e) => setLongitude(e.target.value)}
-								required
-							></input>
-						</div>
-					</div>
-					<div className="input-container price">
-						<label htmlFor="price" className="form-label">
-							Price per Night
-						</label>
-						<input
-							type="number"
-							className="form-input"
-							min="1"
-							max="1000"
-							step="1"
-							value={price}
-							maxLength="4"
-							onInput={(e) => {
-								if (
-									e.target.value.length > e.target.maxLength
-								) {
-									e.target.value = e.target.value.slice(
-										0,
-										e.target.maxLength
-									);
-								}
-							}}
-							id="price"
-							onChange={(e) => setPrice(e.target.value)}
-							required
-						></input>
-					</div>
-					<div className="input-container size">
-						<div className="input-toggle-container">
-							<label>Guests</label>
-							<div className="input-toggle">
-								<button
-									className={`input-minus ${
-										guests === 1 && "toggle-disabled"
-									}`}
-									type="button"
-									onClick={() => {
-										setSize(setGuests, "-", guests);
-									}}
-								>
-									-
-								</button>
-								<div className="input-nums">{guests}</div>
-								<button
-									className={`input-plus ${
-										guests === 10 && "toggle-disabled"
-									}`}
-									type="button"
-									onClick={() => {
-										setSize(setGuests, "+", guests);
-									}}
-								>
-									+
-								</button>
-							</div>
-						</div>
-						<div className="input-toggle-container">
-							<label>Bedrooms</label>
-							<div className="input-toggle">
-								<button
-									className={`input-plus ${
-										bedrooms === 1 && "toggle-disabled"
-									}`}
-									type="button"
-									onClick={() => {
-										setSize(setBedrooms, "-", bedrooms);
-									}}
-								>
-									-
-								</button>
-								<div className="input-nums">{bedrooms}</div>
-								<button
-									className={`input-plus ${
-										bedrooms === 10 && "toggle-disabled"
-									}`}
-									type="button"
-									onClick={() => {
-										setSize(setBedrooms, "+", bedrooms);
-									}}
-								>
-									+
-								</button>
-							</div>
-						</div>
-						<div className="input-toggle-container">
-							<label>Beds</label>
-							<div className="input-toggle">
-								<button
-									className={`input-minus ${
-										beds === 1 && "toggle-disabled"
-									}`}
-									type="button"
-									onClick={() => {
-										setSize(setBeds, "-", beds);
-									}}
-								>
-									-
-								</button>
-								<div className="input-nums">{beds}</div>
-								<button
-									className={`input-plus ${
-										beds === 10 && "toggle-disabled"
-									}`}
-									type="button"
-									onClick={() => {
-										setSize(setBeds, "+", beds);
-									}}
-								>
-									+
-								</button>
-							</div>
-						</div>
-						<div className="input-toggle-container">
-							<label>Baths</label>
-							<div className="input-toggle">
-								<button
-									className={`input-minus ${
-										baths === 1 && "toggle-disabled"
-									}`}
-									type="button"
-									onClick={() => {
-										setSize(setBaths, "-", baths);
-									}}
-								>
-									-
-								</button>
-								<div className="input-nums">{baths}</div>
-								<button
-									className={`input-plus ${
-										baths === 10 && "toggle-disabled"
-									}`}
-									type="button"
-									onClick={() => {
-										setSize(setBaths, "+", baths);
-									}}
-								>
-									+
-								</button>
-							</div>
-						</div>
-					</div>
-					<div className="input-container">
-						{" "}
-						<label htmlFor="description" className="form-label">
-							Description
-						</label>
-						<textarea
-							type="textArea"
-							className="form-input"
-							id="description"
-							value={description}
-							onChange={(e) => setDescription(e.target.value)}
-							required
-						></textarea>
-					</div>
+				<CreateRoomName name={name} setName={setName}></CreateRoomName>
+				<CreateRoomAddress
+					address={address}
+					setAddress={setAddress}
+				></CreateRoomAddress>
+				<CreateRoomCity city={city} setCity={setCity}></CreateRoomCity>
+				<div className="input-container state-country">
+					<CreateRoomCountry
+						country={country}
+						setCountry={setCountry}
+					></CreateRoomCountry>
+					<StateSelector
+						state={state}
+						setState={setState}
+					></StateSelector>
 				</div>
+				<CreateRoomCoordinates
+					latitude={latitude}
+					setLatitude={setLatitude}
+					longitude={longitude}
+					setLongitude={setLongitude}
+				></CreateRoomCoordinates>
+				<CreateRoomPrice
+					price={price}
+					setPrice={setPrice}
+				></CreateRoomPrice>
+				<RoomSize
+					guests={guests}
+					setGuests={setGuests}
+					bedrooms={bedrooms}
+					setBedrooms={setBedrooms}
+					beds={beds}
+					setBeds={setBeds}
+					baths={baths}
+					setBaths={setBaths}
+				></RoomSize>
+				<RoomAmenities
+					setAmenities={setAmenities}
+					amenities={amenities}
+				></RoomAmenities>
+				<CreateRoomDescription
+					description={description}
+					setDescription={setDescription}
+				></CreateRoomDescription>
+
 				<button className="submit-form-btn">Submit Changes</button>
 			</form>
 		</div>
