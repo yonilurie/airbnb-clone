@@ -8,20 +8,18 @@ import {
 	deleteAReview,
 } from "../../store/session";
 
+import Errors from "../Errors";
+
 import "./CSS/Review.css";
 
 function CreateReview({ userReview, roomId, setShowReviewModal }) {
-	const history = useHistory();
 	const dispatch = useDispatch();
-
-	// const { roomId } = useParams();
 
 	const [stars, setStars] = useState("");
 	const [review, setReview] = useState("");
 	const [validationErrors, setValidationErrors] = useState([]);
 	const [isSubmitted, setIsSubmitted] = useState(false);
 	const [showModal, setShowModal] = useState(false);
-	// const [usersReview, setUsersReview] = useState(false);
 
 	//Form validation
 	useEffect(() => {
@@ -115,9 +113,7 @@ function CreateReview({ userReview, roomId, setShowReviewModal }) {
 						{isSubmitted && validationErrors.length > 0 && (
 							<ul className="errors">
 								{validationErrors.map((error, idx) => (
-									<li key={idx} className="error">
-										{error}
-									</li>
+									<Errors error={error}></Errors>
 								))}
 							</ul>
 						)}

@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import Calendar from "react-calendar";
+import Errors from "../../Errors";
 import { getAUsersBookings, editBooking } from "../../../store/session";
 
 const EditBooking = ({ booking, setShowModal }) => {
@@ -91,13 +92,9 @@ const EditBooking = ({ booking, setShowModal }) => {
 					]}
 				></Calendar>
 				{validationErrors.length > 0 &&
-					validationErrors.map((err) => {
-						return (
-							<li className="error" key={err}>
-								{err}
-							</li>
-						);
-					})}
+					validationErrors.map((error) => (
+						<Errors error={error} key={error}></Errors>
+					))}
 				<button className="delete-btn" onClick={handleSubmit}>
 					Confirm
 				</button>

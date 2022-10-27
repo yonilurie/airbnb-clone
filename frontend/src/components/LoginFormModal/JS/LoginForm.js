@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 import * as sessionActions from "../../../store/session";
+import Errors from "../../Errors";
 
 import "../CSS/Login-SignupForm.css";
 
@@ -42,9 +43,7 @@ function LoginForm({ setShowModal, showModal }) {
 				{validationErrors.length > 0 && (
 					<ul className="errors">
 						{validationErrors.map((error, idx) => (
-							<li key={idx} className="error">
-								{error}
-							</li>
+							<Errors error={error}></Errors>
 						))}
 					</ul>
 				)}

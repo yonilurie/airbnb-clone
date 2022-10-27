@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { getRoomInfo } from "../../../store/CurrentRoom";
 import { editAUsersReview } from "../../../store/session";
+import Errors from "../../Errors";
 
 const EditReviewFormModal = ({ setShowModal, review }) => {
 	const dispatch = useDispatch();
@@ -60,7 +61,7 @@ const EditReviewFormModal = ({ setShowModal, review }) => {
 				{isSubmitted && validationErrors.length > 0 && (
 					<ul className="errors">
 						{validationErrors.map((error, idx) => (
-							<li key={idx} className='error'>{error}</li>
+							<Errors error={error}></Errors>
 						))}
 					</ul>
 				)}

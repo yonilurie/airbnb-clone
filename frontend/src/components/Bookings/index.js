@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getAUsersBookings } from "../../store/session";
 
 import Booking from "./JS/Booking";
+import LoadingCircle from "../Loading/JS/LoadingCircle";
 import "./CSS/Bookings.css";
 
 const Bookings = () => {
@@ -106,16 +107,7 @@ const Bookings = () => {
 						)}
 				</div>
 			)}
-			{!Object.values(bookings).length && (
-				<div className="loading-container">
-					<div className="lds-ring">
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-					</div>
-				</div>
-			)}
+			{!Object.values(bookings).length && <LoadingCircle />}
 		</div>
 	);
 };

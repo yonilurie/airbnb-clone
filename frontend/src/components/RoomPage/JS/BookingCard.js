@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { createBooking, getAUsersBookings } from "../../../store/session";
 
 import CalendarMenu from "./CalendarMenu";
+import Errors from "../../Errors";
 
 import "../CSS/BookingCard.css";
 import "react-calendar/dist/Calendar.css";
@@ -212,13 +213,9 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 						)}
 					</div>
 					{validationErrors.length > 0 &&
-						validationErrors.map((err) => {
-							return (
-								<div key={err} style={{ color: "red" }}>
-									{err}
-								</div>
-							);
-						})}
+						validationErrors.map((error) => (
+							<Errors error={error}></Errors>
+						))}
 					{currentRoom.owner.id !== sessionuser.id && (
 						<button
 							className="reserve-btn"
