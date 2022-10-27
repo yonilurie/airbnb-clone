@@ -10,10 +10,13 @@ import ReviewModal from "../Review/ReviewModal";
 import { getAUsersBookings, getAUsersReviews } from "../../store/session";
 
 import "./CSS/index.css";
+import BookingLocationDetails from "./JS/BookingLocationDetails";
+import ReservationDetails from "./JS/ReservationDetails";
+import BookingPageDirections from "./JS/BookingPageDirections";
+import BookingActions from "./JS/BookingActions";
 
 const BookingPage = () => {
 	const dispatch = useDispatch();
-	const history = useHistory();
 	const { bookingId } = useParams();
 
 	const [booking, setBooking] = useState({});
@@ -32,17 +35,6 @@ const BookingPage = () => {
 	const { isLoaded } = useLoadScript({
 		googleMapsApiKey: process.env.REACT_APP_NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
 	});
-
-	const getDate = (date) => {
-		let newDate = new Date(date);
-		return newDate.toDateString();
-	};
-
-	const isPast = (date, date2) => {
-		const endDate = new Date(date).getTime();
-		const today = new Date().getTime();
-		return endDate < today;
-	};
 
 	const isCurrent = (start, end) => {
 		start = new Date(start);
@@ -109,68 +101,14 @@ const BookingPage = () => {
 						roomId={room.id}
 					></ReviewModal>
 					<div className="booking-page-left">
-						<div className="booking-page-location-details">
-							<div className="booking-page-image">
-								<h1 className="booking-page-title">
-									Your stay at {room.owner.firstName}
-									's place
-								</h1>
-								<div
-									className="booking-page-back"
-									onClick={() => history.push("/trips")}
-								>
-									Back
-								</div>
-								<img
-									src={room.previewImage}
-									className="booking-page-room-image"
-									alt="booking preview"
-								></img>
-							</div>
-							<div className="booking-page-location-bottom">
-								<div className="booking-page-dates">
-									<div className="booking-page-checkin">
-										<h3>Check-in</h3>
-										<div>{getDate(booking.startDate)}</div>
-									</div>
-									<div className="booking-page-checkout">
-										<h3>Checkout</h3>
-										<div>{getDate(booking.endDate)}</div>
-									</div>
-								</div>
-								<div className="directions-cards">
-									<a
-										href={`https://www.google.com/maps/search/?api=1&query=${room.lat}%2C${room.lng}`}
-										className="direction-card"
-										target="_blank"
-										rel="noreferrer"
-									>
-										Get directions
-									</a>
-									<Link
-										to={`/rooms/${room.id}`}
-										className="direction-card"
-									>
-										Show listing
-									</Link>
-								</div>
-							</div>
-						</div>
-						<div className="booking-page-reservation-details">
-							<h3>Reservation Details</h3>
-							<div className="reservation-details-container">
-								<div>Who's coming</div>
-								<div className="reservation-details">
-									<div>
-										{" "}
-										{booking.guests === 1
-											? "1 Guest"
-											: `${booking.guests} Guests`}
-									</div>
-									<div>{user.firstName}</div>
-								</div>
-							</div>
-						</div>
+						<BookingLocationDetails
+							room={room}
+							booking={booking}
+						></BookingLocationDetails>
+						<ReservationDetails
+							booking={booking}
+							user={user}
+						></ReservationDetails>
 						{!isCurrent(booking.startDate, booking.endDate) && (
 							<div className="booking-page-actions">
 								<h3>Action</h3>
@@ -185,94 +123,19 @@ const BookingPage = () => {
 									booking={booking}
 								></EditBookingModal>
 
-								{!isPast(booking.startDate) ? (
-									<>
-										<div
-											className="booking-action-cancel"
-											onClick={() => setShowModal(true)}
-										>
-											Cancel booking
-										</div>
-										<div
-											className="booking-action-edit"
-											onClick={() =>
-												setShowEditModal(true)
-											}
-										>
-											Edit booking
-										</div>
-									</>
-								) : (
-									<>
-										{hasReview ? (
-											<div className="booking-action-edit">
-												<div
-													to={`/review-room/${booking.room.id}`}
-													style={{
-														width: "100%",
-														display: "inline-block",
-													}}
-													onClick={() =>
-														setShowReviewModal(true)
-													}
-												>
-													Edit review
-												</div>
-											</div>
-										) : (
-											<div className="booking-action-edit">
-												<div
-													to={`/review-room/${booking.room.id}`}
-													style={{
-														width: "100%",
-														display: "inline-block",
-													}}
-													onClick={() =>
-														setShowReviewModal(true)
-													}
-												>
-													Create review
-												</div>
-											</div>
-										)}
-									</>
-								)}
+								<BookingActions
+									booking={booking}
+									hasReview={hasReview}
+									showModal={showModal}
+									setShowModal={setShowModal}
+									setShowReviewModal={setShowReviewModal}
+									setShowEditModal={setShowEditModal}
+								></BookingActions>
 							</div>
 						)}
-						<div className="booking-page-directions">
-							<h3 className="booking-page-directions-label">
-								Getting there
-							</h3>
-							<div className="booking-page-address">
-								<h4>Address</h4>
-								{room.address}
-								<br></br>
-								{room.city}
-								{", "}
-								{room.state}
-							</div>
-							<div className="directions-cards">
-								<div
-									className="direction-card"
-									onClick={async () => {
-										await navigator.clipboard.writeText(
-											`${room.address} ${room.city}, ${room.state}`
-										);
-										alert("Copied address to clipboard");
-									}}
-								>
-									Copy address
-								</div>
-								<a
-									href={`https://www.google.com/maps/search/?api=1&query=${room.lat}%2C${room.lng}`}
-									className="direction-card"
-									target="_blank"
-									rel="noreferrer"
-								>
-									Get directions
-								</a>
-							</div>
-						</div>
+						<BookingPageDirections
+							room={room}
+						></BookingPageDirections>
 						<div className="booking-page-payment">
 							<h3>Payment info</h3>
 							<div>
