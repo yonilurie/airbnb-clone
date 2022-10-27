@@ -1,7 +1,5 @@
-
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-
 
 import "../CSS/MyRoom.css";
 
@@ -9,7 +7,6 @@ import "./DeleteRoomModal";
 import DeleteRoomModal from "./DeleteRoomModal";
 
 function MyRoom({ room }) {
-
 	const history = useHistory();
 
 	const [showModal, setShowModal] = useState(false);
@@ -32,7 +29,7 @@ function MyRoom({ room }) {
 			<div className="my-room-right">
 				<div className="room-detail name">{room.name}</div>
 				<div className="room-detail name">
-					{room.city}, {room.state} {room.country}
+					{room.city}, {room.state}
 				</div>
 				<div className="room-detail price"> ${room.price} Night</div>
 				<div className="room-detail-actions">

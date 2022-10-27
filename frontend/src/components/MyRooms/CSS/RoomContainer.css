@@ -83,4 +83,23 @@
 		padding-right: 15px;
 		box-sizing: border-box;
 	}
+
+	.my-room {
+		max-height: fit-content;
+		gap: 15px;
+	}
+
+	.my-rooms-container {
+		width: 100vw;
+	}
+
+	.my-rooms-main-container {
+		height: 100%;
+	}
+
+	.my-room-left {
+		width: 100vw;
+		display: flex;
+		justify-content: center;
+	}
 }

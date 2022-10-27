@@ -1,10 +1,9 @@
-
-
 .my-room {
 	display: flex;
 	flex-direction: row;
 	max-height: 200px;
 	justify-content: center;
+	max-width: 1100px;
 }
 
 .preview-image-my-room {
@@ -13,21 +12,22 @@
 
 .my-room-left {
 	width: 30%;
-    cursor: pointer;
+	cursor: pointer;
 }
 
 .my-room-right {
 	width: 70%;
 	display: flex;
 	flex-direction: column;
+	align-items: flex-end;
+	justify-content: space-between;
 	gap: 5px;
-	padding: 10px;
 	box-sizing: border-box;
 }
 
 .room-detail-actions {
 	display: flex;
-	justify-content: space-around;
+	gap: 10px;
 	padding: 10px;
 	box-sizing: border-box;
 }
@@ -49,7 +49,7 @@
 	border-radius: 12px;
 	font-size: 16px;
 	color: rgb(255, 255, 255);
-	width: fit-content;
+	width: 75px;
 	padding: 10px;
 	box-sizing: border-box;
 	cursor: pointer;
@@ -62,4 +62,22 @@
 		rgb(255, 56, 92) 100%,
 		rgb(103, 102, 102) 0%
 	);
+}
+
+
+@media screen and (max-width:750px) {
+	.my-room {
+		flex-direction: column;
+		align-items: center;
+		width: 100vw;
+		height: fit-content;
+	}
+
+	.my-room-right {
+		align-items: center;
+	}
+
+	.preview-image-my-room {
+		width: 100vw;
+	}
 }
