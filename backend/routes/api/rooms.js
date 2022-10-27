@@ -9,7 +9,6 @@ const sequelize = require("sequelize");
 const { check } = require("express-validator");
 const { query } = require("express-validator");
 const { param } = require("express-validator");
-const { Op } = require("sequelize");
 const {
 	Room,
 	Review,
@@ -145,123 +144,6 @@ const checkQuery = [
 		.withMessage("Maximum price must be greater than 0"),
 	handleValidationErrors,
 ];
-
-// //Edit an existing review
-// router.put(
-// 	"/:roomId/reviews/:reviewId",
-// 	[validateRoomId, validateReview, restoreUser, requireAuth],
-// 	async (req, res) => {
-// 		const { roomId, reviewId } = req.params;
-// 		const { id } = req.user;
-// 		const { review, stars } = req.body;
-// 		//Check if a room with that ID exists
-// 		let room = await Room.findByPk(roomId);
-// 		//Check if room exists
-// 		if (!room) return res.json(noRoomError());
-// 		//Find review that needs editing
-// 		let reviewToEdit = await Review.findByPk(reviewId, {
-// 			include: [
-// 				{
-// 					model: User,
-// 					attributes: ["id", "firstName", "lastName"],
-// 				},
-// 			],
-// 		});
-// 		//if it doesnt exist or belongs to the wrong room
-// 		if (!reviewToEdit || reviewToEdit.roomId !== Number(roomId)) {
-// 			return res.json(noRoomError());
-// 		}
-// 		// If review does not belong to user return error
-// 		if (reviewToEdit.userId !== Number(id)) {
-// 			return res.json(noReviewError());
-// 		}
-// 		// Edit review message and stars
-// 		reviewToEdit.review = review;
-// 		reviewToEdit.stars = stars;
-// 		await reviewToEdit.save();
-// 		res.status = 200;
-// 		return res.json(reviewToEdit);
-// 	}
-// );
-
-// //Delete an existing review
-// router.delete(
-// 	"/:roomId/reviews/:reviewId",
-// 	[validateRoomId, restoreUser, requireAuth],
-// 	async (req, res) => {
-// 		const { roomId, reviewId } = req.params;
-// 		const { id } = req.user;
-// 		//Check if room exists
-// 		let room = await Room.findByPk(roomId);
-// 		//Check if room exists
-// 		if (!room) return res.json(noRoomError());
-// 		//Check if review exists
-// 		let review = await Review.findByPk(reviewId);
-// 		//If not return 404 code
-// 		if (
-// 			!review ||
-// 			review.userId !== Number(id) ||
-// 			review.roomId !== Number(roomId)
-// 		) {
-// 			return res.json(noReviewError());
-// 		}
-
-// 		await review.destroy();
-// 		res.status = 200;
-// 		return res.json({
-// 			message: "Successfully deleted",
-// 			statusCode: 200,
-// 		});
-// 	}
-// );
-
-// //Add an image to an existing review
-// router.post(
-// 	"/:roomId/reviews/:reviewId/add-image",
-// 	[validateRoomId, restoreUser, requireAuth],
-// 	async (req, res) => {
-// 		const { roomId, reviewId } = req.params;
-// 		const { id } = req.user;
-// 		const { url } = req.body;
-// 		let review = await Review.findByPk(reviewId);
-// 		//If review cant be found return 404 code
-// 		if (
-// 			!review ||
-// 			review.roomId !== Number(roomId) ||
-// 			review.userId !== id
-// 		) {
-// 			return res.json(noReviewError());
-// 		}
-
-// 		//Find all review images
-// 		let reviewImages = await UserReviewImage.findAll({
-// 			where: { userId: id },
-// 		});
-
-// 		//Check if the image limit has been reached
-// 		//If it has send 400 code
-// 		if (reviewImages.length && reviewImages.length >= 10) {
-// 			const err = {};
-// 			(err.message = "Max images"), (err.status = 404);
-// 			err.errors = {
-// 				error: "Maximum number of images for this resource was reached",
-// 				statusCode: 404,
-// 			};
-// 			return res.json(err);
-// 		}
-
-// 		//Create a new reviewImage
-// 		let reviewImage = await UserReviewImage.build({
-// 			reviewId: reviewId,
-// 			userId: id,
-// 			imageUrl: url,
-// 		});
-// 		await reviewImage.save();
-
-// 		res.status = 200;
-// 		return res.json(reviewImage);
-// 	}
-// );
 
 //Get all of a rooms bookings
 router.get(

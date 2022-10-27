@@ -4,12 +4,7 @@ const { setTokenCookie } = require("../../utils/auth");
 const { User } = require("../../db/models");
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
-const {
-	singlePublicFileUpload,
-	multiplePublicFileUpload,
-	singleMulterUpload,
-	multipleMulterUpload,
-} = require("../../awsS3");
+
 const router = express.Router();
 
 const validateSignup = [
