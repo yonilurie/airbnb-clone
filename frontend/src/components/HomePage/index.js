@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getRooms } from "../../store/rooms";
 import SingleRoom from "./JS/SingleRoom";
+import LoadingCircle from "../Loading/JS/LoadingCircle";
 import "./CSS/RoomContainer.css";
 
 function Rooms() {
@@ -41,16 +42,7 @@ function Rooms() {
 						);
 					})}
 			</div>
-			{!rooms.length && (
-				<div className="loading-container">
-					<div className="lds-ring">
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-					</div>
-				</div>
-			)}
+			{!rooms.length && <LoadingCircle />}
 		</div>
 	);
 }

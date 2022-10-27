@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
-import { deleteBooking } from "../../store/session";
+import { deleteBooking } from "../../../store/session";
 
 const CancelBooking = ({ booking }) => {
 	const dispatch = useDispatch();

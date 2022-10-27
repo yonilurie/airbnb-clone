@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 
-import SingleRoomInfo from "./components/RoomPage/SingleRoomInfo";
+import SingleRoomInfo from "./components/RoomPage";
 import Navigation from "./components/Navigation";
 import HomePage from "./components/HomePage";
 import CreateRoomForm from "./components/CreateRoom/JS/CreateRoomForm";

@@ -11,10 +11,11 @@ import ReviewsModal from "./JS/ReviewsModal";
 import BookingCard from "./JS/BookingCard.js";
 import ImageModal from "./JS/ImageModal.js";
 import LearnMore from "./JS/LearnMore.js";
+import Placeholder from "./JS/Placeholder";
 
 import "./CSS/SingleRoomInfo.css";
 
-const SingleRoomInfo = () => {
+const RoomPage = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const [showModal, setShowModal] = useState(false);
@@ -79,35 +80,7 @@ const SingleRoomInfo = () => {
 				setShowModal={setShowModal}
 				currentRoom={currentRoom}
 			></ReviewsModal>
-			{!currentRoom.id && (
-				<div className="placeholder-container">
-					<div className="placeholder-loading-section-1">
-						<div className="loading-strip-1"></div>
-						<div className="loading-strip-2"></div>
-					</div>
-					<div className="placeholder-loading-section-2">
-						<div className="placeholder-loading-box-1-container">
-							<div className="loading-box-1"></div>
-						</div>
-						<div className="placeholder-loading-box-2-container">
-							<div className="loading-box-2"></div>
-							<div
-								className="loading-box-2"
-								style={{ borderTopRightRadius: "12px" }}
-							></div>
-							<div className="loading-box-2"></div>
-							<div
-								className="loading-box-2"
-								style={{ borderBottomRightRadius: "12px" }}
-							></div>
-						</div>
-					</div>
-					<div className="placeholder-loading-section-3">
-						<div className="loading-strip-3"></div>
-						<div className="loading-strip-4"></div>
-					</div>
-				</div>
-			)}
+			{!currentRoom.id && <Placeholder></Placeholder>}
 			{currentRoom && Number(currentRoom.id) === Number(roomId) && (
 				<div className="room-content">
 					<div className="gallery">
@@ -403,4 +376,4 @@ const SingleRoomInfo = () => {
 	);
 };
 
-export default SingleRoomInfo;
+export default RoomPage;

@@ -3,13 +3,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 
-import CancelBookingModal from "./CancelBookingModal";
-import EditBookingModal from "./EditBookingModal";
+import CancelBookingModal from "./JS/CancelBookingModal";
+import EditBookingModal from "./JS/EditBookingModal";
 import ReviewModal from "../Review/ReviewModal";
 
 import { getAUsersBookings, getAUsersReviews } from "../../store/session";
 
-import "./index.css";
+import "./CSS/index.css";
 
 const BookingPage = () => {
 	const dispatch = useDispatch();

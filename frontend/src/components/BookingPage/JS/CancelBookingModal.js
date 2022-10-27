@@ -1,4 +1,4 @@
-import { Modal } from "../../context/Modal";
+import { Modal } from "../../../context/Modal";
 import CancelBooking from "./CancelBooking";
 const CancelBookingModal = ({ showModal, setShowModal, booking }) => {
 	return (

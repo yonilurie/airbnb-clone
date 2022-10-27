@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getMyRoomsData } from "../../store/session";
 
 import MyRoom from "./JS/MyRoom";
+import LoadingCircle from "../Loading/JS/LoadingCircle";
 
 import "./CSS/RoomContainer.css";
 
@@ -47,16 +48,7 @@ const MyRooms = () => {
 				</div>
 			)}
 
-			{!isDisplayed && (
-				<div className="loading-container">
-					<div className="lds-ring">
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-					</div>
-				</div>
-			)}
+			{!isDisplayed && <LoadingCircle />}
 		</div>
 	);
 };

@@ -1,5 +1,5 @@
 import EditBooking from "./EditBooking";
-import { Modal } from "../../context/Modal";
+import { Modal } from "../../../context/Modal";
 
 const EditBookingModal = ({ showModal, setShowModal, booking }) => {
 	return (
