@@ -248,7 +248,9 @@ const RoomContent = ({ room, setShowModal }) => {
 				</div>
 			)}
 			{room.avgStarRating < 1 && (
-				<h2 className="reviews-overview">No Reviews Yet</h2>
+				<div className="reviews-container">
+					<h2 className="reviews-overview">No Reviews Yet</h2>
+				</div>
 			)}
 			<div className="room-page-map">
 				<h3>Where you'll be</h3>
