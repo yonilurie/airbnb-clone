@@ -55,6 +55,11 @@ export const createRoom = (room) => async (dispatch) => {
 		description,
 		price,
 		image,
+		guests,
+		bedrooms,
+		beds,
+		bathrooms,
+		amenities,
 	} = room;
 	const formData = new FormData();
 	formData.append("name", name);
@@ -67,6 +72,11 @@ export const createRoom = (room) => async (dispatch) => {
 	formData.append("description", description);
 	formData.append("price", price);
 	formData.append("image", image);
+	formData.append("guests", guests);
+	formData.append("bedrooms", bedrooms);
+	formData.append("beds", beds);
+	formData.append("bathrooms", bathrooms);
+	formData.append("amenities", amenities);
 
 	const response = await csrfFetch("/api/rooms/add", {
 		method: "POST",

@@ -189,7 +189,7 @@ const RoomContent = ({ room, setShowModal }) => {
 				) : (
 					<div className="owner-bookings">
 						<h2 className="room-detail-title">Bookings</h2>
-						{room.bookings &&
+						{room.bookings && room.bookings.length > 0 ? (
 							Object.values(room.bookings).map((booking) => {
 								return (
 									<div
@@ -209,7 +209,10 @@ const RoomContent = ({ room, setShowModal }) => {
 										</div>
 									</div>
 								);
-							})}
+							})
+						) : (
+							<h4>No Bookings Yet</h4>
+						)}
 					</div>
 				)}
 			</div>

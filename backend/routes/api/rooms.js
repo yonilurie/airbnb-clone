@@ -488,6 +488,7 @@ router.post(
 			bedrooms,
 			beds,
 			baths,
+			amenities,
 		} = req.body;
 
 		const gallery = await multiplePublicFileUpload(req.files);
@@ -508,6 +509,7 @@ router.post(
 			bedrooms: bedrooms,
 			beds: beds,
 			baths: baths,
+			amenities: amenities,
 		});
 
 		for (let i = 1; i < gallery.length; i++) {

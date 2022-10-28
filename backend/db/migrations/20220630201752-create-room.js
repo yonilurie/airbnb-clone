@@ -74,7 +74,7 @@ module.exports = {
 				},
 				amenities: {
 					type: Sequelize.STRING(10000),
-					allowNull: false,
+					allowNull: true,
 				},
 				previewImage: {
 					type: Sequelize.STRING,

@@ -278,6 +278,7 @@ export const createRoom = (room) => async (dispatch) => {
 		beds,
 		bedrooms,
 		baths,
+		amenities,
 	} = room;
 	const formData = new FormData();
 	formData.append("name", name);
@@ -293,6 +294,7 @@ export const createRoom = (room) => async (dispatch) => {
 	formData.append("beds", beds);
 	formData.append("bedrooms", bedrooms);
 	formData.append("baths", baths);
+	formData.append("amenities", amenities);
 
 	images.forEach((image) => {
 		formData.append("images", image);

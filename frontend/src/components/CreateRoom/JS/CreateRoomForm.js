@@ -38,7 +38,15 @@ const CreateRoomForm = () => {
 	const [baths, setBaths] = useState(1);
 	const [images, setImages] = useState([]);
 
-	const [amenities, setAmenities] = useState([]);
+	const [kitchen, setKitchen] = useState(false);
+	const [wifi, setWifi] = useState(false);
+	const [dryer, setDryer] = useState(false);
+	const [washer, setWasher] = useState(false);
+	const [hairdryer, setHairdryer] = useState(false);
+	const [TV, setTV] = useState(false);
+	const [freeParking, setFreeParking] = useState(false);
+	const [pillowsAndBlankets, setPillowsAndBlankets] = useState(false);
+
 	const [validationErrors, setValidationErrors] = useState([]);
 	const [imageErrors, setImageErrors] = useState([]);
 
@@ -99,7 +107,18 @@ const CreateRoomForm = () => {
 				return;
 			}
 
-			dispatch(
+			let amenities = "";
+
+			if (kitchen) amenities += "Kitchen&";
+			if (wifi) amenities += "Wifi&";
+			if (dryer) amenities += "Dryer&";
+			if (washer) amenities += "Washer&";
+			if (hairdryer) amenities += "Haidryer&";
+			if (TV) amenities += "TV&";
+			if (freeParking) amenities += "Free Parking&";
+			if (pillowsAndBlankets) amenities += "Extra pillows and blankets&";
+			
+			await dispatch(
 				createRoom({
 					name,
 					address,
@@ -115,6 +134,7 @@ const CreateRoomForm = () => {
 					bedrooms,
 					baths,
 					beds,
+					amenities,
 				})
 			);
 
@@ -190,8 +210,14 @@ const CreateRoomForm = () => {
 					setBaths={setBaths}
 				></RoomSize>
 				<RoomAmenities
-					setAmenities={setAmenities}
-					amenities={amenities}
+					setKitchen={setKitchen}
+					setWifi={setWifi}
+					setDryer={setDryer}
+					setWasher={setWasher}
+					setHairdryer={setHairdryer}
+					setTV={setTV}
+					setFreeParking={setFreeParking}
+					setPillowsAndBlankets={setPillowsAndBlankets}
 				></RoomAmenities>
 				<CreateRoomDescription
 					description={description}
