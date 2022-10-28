@@ -100,7 +100,6 @@ const CreateRoomForm = () => {
 				`/api/rooms/search?minLat=${latitude}&maxLat=${latitude}&minLng=${longitude}&maxLng=${longitude}`
 			);
 			const checkIfLocationTakenData = await checkIfLocationTaken.json();
-			console.log(checkIfLocationTakenData);
 			if (checkIfLocationTakenData.rooms.length > 0) {
 				setValidationErrors(["This location is already taken"]);
 				document.body.scrollTop = 0;

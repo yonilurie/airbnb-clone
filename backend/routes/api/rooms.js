@@ -331,7 +331,6 @@ router.get("/search", checkQuery, async (req, res) => {
 //Get all of a current users owned rooms
 router.get("/my-rooms", [restoreUser, requireAuth], async (req, res) => {
 	const { id } = req.user;
-	console.log(id);
 	let rooms = await Room.findAll({
 		where: { ownerId: id },
 	});
@@ -496,7 +495,6 @@ router.post(
 			baths,
 			amenities,
 		} = req.body;
-		console.log(amenities);
 		const gallery = await multiplePublicFileUpload(req.files);
 		let room = await Room.create({
 			ownerId: req.user.id,
