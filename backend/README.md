@@ -1198,7 +1198,7 @@ Delete an existing booking.
         }
         ```
 
-## Add an Image to a room based on the room's id
+<!-- ## Add an Image to a room based on the room's id
 
 Create and return a new image for a room specified by id.
 
@@ -1244,72 +1244,9 @@ Create and return a new image for a room specified by id.
         	"message": "room couldn't be found",
         	"statusCode": 404
         }
-        ```
+        ``` -->
 
-## Add an Image to a Review based on the Review's id
-
-Create and return a new image for a review specified by id.
-
--   Require Authentication: true
--   Require proper authorization: Review must belong to the current user
--   Request
-
-    -   Method: POST
-    -   URL: /api/rooms/:roomId/reviews/:reviewId/add-image
-    -   Headers:
-        -   Content-Type: application/json
-    -   Body:
-
-        ```json
-        {
-        	"url": "image url"
-        }
-        ```
-
--   Successful Response
-
-    -   Status Code: 200
-    -   Headers:
-        -   Content-Type: application/json
-    -   Body:
-
-        ```json
-        {
-        	"id": 1,
-        	"url": "image url"
-        }
-        ```
-
--   Error response: Couldn't find a Review with the specified id
-
-    -   Status Code: 404
-    -   Headers:
-        -   Content-Type: application/json
-    -   Body:
-
-        ```json
-        {
-        	"message": "Review couldn't be found",
-        	"statusCode": 404
-        }
-        ```
-
--   Error response: Cannot add any more images because there is a maximum of 10
-    images per resource
-
-    -   Status Code: 400
-    -   Headers:
-        -   Content-Type: application/json
-    -   Body:
-
-        ```json
-        {
-        	"message": "Maximum number of images for this resource was reached",
-        	"statusCode": 400
-        }
-        ```
-
-## Delete a room Image
+<!-- ## Delete a room Image
 
 Delete an existing image.
 
@@ -1348,47 +1285,7 @@ Delete an existing image.
         	"message": "Image couldn't be found",
         	"statusCode": 404
         }
-        ```
-
-## Delete a review Image
-
-Delete an existing image.
-
--   Require Authentication: true
--   Require proper authorization: Image must belong to the current user
--   Request
-
-    -   Method: DELETE
-    -   URL: /api/reviews/images/:imageId
-    -   Body: none
-
--   Successful Response
-
-    -   Status Code: 200
-    -   Headers:
-        -   Content-Type: application/json
-    -   Body:
-
-        ```json
-        {
-        	"message": "Successfully deleted",
-        	"statusCode": 200
-        }
-        ```
-
--   Error response: Couldn't find an Image with the specified id
-
-    -   Status Code: 404
-    -   Headers:
-        -   Content-Type: application/json
-    -   Body:
-
-        ```json
-        {
-        	"message": "Image couldn't be found",
-        	"statusCode": 404
-        }
-        ```
+        ``` -->
 
 ## Add Query Filters to Get All rooms
 
