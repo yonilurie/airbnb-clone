@@ -21,7 +21,6 @@ const {
 
 const { requireAuth, restoreUser } = require("../../utils/auth");
 const { handleValidationErrors } = require("../../utils/validation");
-const amenity = require("../../db/models/amenity");
 
 //----------------- Validations
 
@@ -516,7 +515,7 @@ router.post(
 			beds: beds,
 			baths: baths,
 		});
-
+		// Create the images for the room
 		for (let i = 1; i < gallery.length; i++) {
 			let roomImages = await UserRoomImage.create({
 				roomId: room.id,
@@ -524,7 +523,7 @@ router.post(
 				imageUrl: gallery[i],
 			});
 		}
-
+		// Add amenities for the room
 		amenities.forEach(async (amenity) => {
 			await Amenity.create({
 				roomId: room.id,
@@ -600,10 +599,12 @@ router.put(
 		if (description) room.description = description;
 		if (price) room.price = price;
 
+		//Find all of the rooms current amenities
 		let currentAmenities = await Amenity.findAll({
 			where: { roomId: room.id },
 		});
 
+		//Delete all amenities that have been removed
 		let amenitiesList = [];
 		currentAmenities.forEach(async (amenity) => {
 			if (!amenities.includes(amenity.type)) {
@@ -613,6 +614,7 @@ router.put(
 			}
 		});
 
+		//Add all new amenities
 		amenities.forEach(async (amenity) => {
 			if (!amenitiesList.includes(amenity)) {
 				await Amenity.create({

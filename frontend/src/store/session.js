@@ -172,7 +172,6 @@ export const deleteARoom = (id) => async (dispatch) => {
 		method: "DELETE",
 	});
 	if (response.ok) {
-		const data = await response.json();
 		dispatch(deleteMyRoom(id));
 		return id;
 	}

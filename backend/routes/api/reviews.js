@@ -72,33 +72,6 @@ router.put(
 	}
 );
 
-//Delete review image
-router.delete(
-	"/images/:imageId",
-	[restoreUser, requireAuth],
-	async (req, res) => {
-		const { imageId } = req.params;
-		const { id } = req.user;
-		//Find image to edit
-		let image = await UserReviewImage.findByPk(imageId);
-		//Check if image exists or is not the users
-		if (!image || image.userId !== id) {
-			res.status = 404;
-			return res.json({
-				message: "Image couldn't be found",
-				statusCode: 404,
-			});
-		}
-		//Delete the image and return message
-		await image.destroy();
-		res.status = 200;
-		return res.json({
-			message: "Successfully deleted",
-			statusCode: 200,
-		});
-	}
-);
-
 //Get all of a current users posted reviews
 router.get("/", [restoreUser, requireAuth], async (req, res) => {
 	let { id } = req.user;
@@ -124,11 +97,6 @@ router.get("/", [restoreUser, requireAuth], async (req, res) => {
 				model: Room,
 				as: "room",
 				attributes: ["id", "ownerId"],
-			},
-			{
-				model: UserReviewImage,
-				as: "images",
-				attributes: ["imageUrl"],
 			},
 		],
 	});

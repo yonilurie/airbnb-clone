@@ -83,10 +83,12 @@ const RoomContent = ({ room, setShowModal }) => {
 							<img
 								src={room.images[0].imageUrl}
 								className="room-image-small"
+								alt={room.images[0].imageUrl}
 							></img>
 							<img
 								src={room.images[1].imageUrl}
 								className="room-image-small"
+								alt={room.images[1].imageUrl}
 							></img>
 						</div>
 						<div
@@ -98,10 +100,12 @@ const RoomContent = ({ room, setShowModal }) => {
 							<img
 								src={room.images[2].imageUrl}
 								className="room-image-small top-right"
+								alt={room.images[2].imageUrl}
 							></img>
 							<img
 								src={room.images[3].imageUrl}
 								className="room-image-small bottom-right"
+								alt={room.images[3].imageUrl}
 							></img>
 						</div>
 					</div>
@@ -143,6 +147,7 @@ const RoomContent = ({ room, setShowModal }) => {
 						<img
 							className="aircover-logo"
 							src="https://a0.muscache.com/im/pictures/54e427bb-9cb7-4a81-94cf-78f19156faad.jpg"
+							alt="aircover"
 						></img>
 						<div className="aircover-description">
 							Every booking includes free protection from Host
@@ -164,7 +169,7 @@ const RoomContent = ({ room, setShowModal }) => {
 					<div className="description-container">
 						<div className="description">{room.description}</div>
 					</div>
-					{room.amenities.length > 0 && (
+					{room.amenities.length > 0 ? (
 						<div className="room-amenities-container">
 							<h2 className="room-detail-title">
 								What this place offers
@@ -175,6 +180,15 @@ const RoomContent = ({ room, setShowModal }) => {
 										{amenity.type}
 									</div>
 								))}
+							</div>
+						</div>
+					) : (
+						<div className="room-amenities-container">
+							<h2 className="room-detail-title">
+								What this place offers
+							</h2>
+							<div className="room-amenities">
+								The owner has not provided any amenities
 							</div>
 						</div>
 					)}
