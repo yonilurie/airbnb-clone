@@ -280,6 +280,7 @@ export const createRoom = (room) => async (dispatch) => {
 		baths,
 		amenities,
 	} = room;
+
 	const formData = new FormData();
 	formData.append("name", name);
 	formData.append("address", address);
@@ -294,10 +295,13 @@ export const createRoom = (room) => async (dispatch) => {
 	formData.append("beds", beds);
 	formData.append("bedrooms", bedrooms);
 	formData.append("baths", baths);
-	formData.append("amenities", amenities);
 
 	images.forEach((image) => {
 		formData.append("images", image);
+	});
+
+	amenities.forEach((amenity) => {
+		formData.append("amenities", amenity);
 	});
 
 	const response = await csrfFetch("/api/rooms/add", {

@@ -70,7 +70,7 @@ const CreateRoomForm = () => {
 			errors.push("Must include five files");
 		}
 
-		// setValidationErrors(errors);
+		setValidationErrors(errors);
 	}, [
 		name,
 		address,
@@ -100,24 +100,29 @@ const CreateRoomForm = () => {
 				`/api/rooms/search?minLat=${latitude}&maxLat=${latitude}&minLng=${longitude}&maxLng=${longitude}`
 			);
 			const checkIfLocationTakenData = await checkIfLocationTaken.json();
+			console.log(checkIfLocationTakenData);
 			if (checkIfLocationTakenData.rooms.length > 0) {
 				setValidationErrors(["This location is already taken"]);
 				document.body.scrollTop = 0;
 				document.documentElement.scrollTop = 0;
 				return;
+			} else {
+				setValidationErrors([]);
 			}
 
-			let amenities = "";
+			let amenities = [];
 
-			if (kitchen) amenities += "Kitchen&";
-			if (wifi) amenities += "Wifi&";
-			if (dryer) amenities += "Dryer&";
-			if (washer) amenities += "Washer&";
-			if (hairdryer) amenities += "Haidryer&";
-			if (TV) amenities += "TV&";
-			if (freeParking) amenities += "Free Parking&";
-			if (pillowsAndBlankets) amenities += "Extra pillows and blankets&";
-			
+			if (kitchen) amenities.push("Kitchen");
+			if (wifi) amenities.push("Wifi");
+			if (dryer) amenities.push("Dryer");
+			if (washer) amenities.push("Washer");
+			if (hairdryer) amenities.push("Hairdryer");
+			if (TV) amenities.push("TV");
+			if (freeParking) amenities.push("Free Parking");
+			if (pillowsAndBlankets)
+				amenities.push("Extra pillows and blankets");
+			console.log("Amenities", amenities);
+
 			await dispatch(
 				createRoom({
 					name,

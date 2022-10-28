@@ -21,6 +21,7 @@ const {
 
 const { requireAuth, restoreUser } = require("../../utils/auth");
 const { handleValidationErrors } = require("../../utils/validation");
+const amenity = require("../../db/models/amenity");
 
 //----------------- Validations
 
@@ -496,7 +497,7 @@ router.post(
 			baths,
 			amenities,
 		} = req.body;
-
+		console.log(amenities);
 		const gallery = await multiplePublicFileUpload(req.files);
 		let room = await Room.create({
 			ownerId: req.user.id,
@@ -510,12 +511,10 @@ router.post(
 			description: description,
 			price: price,
 			previewImage: gallery[0],
-			rules: "No Smoking&",
 			guests: guests,
 			bedrooms: bedrooms,
 			beds: beds,
 			baths: baths,
-			amenities: amenities,
 		});
 
 		for (let i = 1; i < gallery.length; i++) {
@@ -525,6 +524,13 @@ router.post(
 				imageUrl: gallery[i],
 			});
 		}
+
+		amenities.forEach(async (amenity) => {
+			await Amenity.create({
+				roomId: room.id,
+				type: amenity,
+			});
+		});
 
 		res.status = 201;
 		return res.json(room);
