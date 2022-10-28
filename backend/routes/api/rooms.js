@@ -576,7 +576,9 @@ router.put(
 			description,
 			price,
 			id,
+			amenities,
 		} = req.body;
+
 		//Find the room
 		let room = await Room.findOne({
 			exclude: "previewImage",
@@ -597,6 +599,28 @@ router.put(
 		if (name) room.name = name;
 		if (description) room.description = description;
 		if (price) room.price = price;
+
+		let currentAmenities = await Amenity.findAll({
+			where: { roomId: room.id },
+		});
+
+		let amenitiesList = [];
+		currentAmenities.forEach(async (amenity) => {
+			if (!amenities.includes(amenity.type)) {
+				await amenity.destroy();
+			} else {
+				amenitiesList.push(amenity.type);
+			}
+		});
+
+		amenities.forEach(async (amenity) => {
+			if (!amenitiesList.includes(amenity)) {
+				await Amenity.create({
+					roomId: room.id,
+					type: amenity,
+				});
+			}
+		});
 		await room.save();
 		res.status = 200;
 		return res.json(room);

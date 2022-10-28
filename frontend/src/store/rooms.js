@@ -94,6 +94,7 @@ export const createRoom = (room) => async (dispatch) => {
 
 //Edit a room
 export const editRoom = (roomEdits) => async (dispatch) => {
+	console.log(roomEdits)
 	const response = await csrfFetch(`/api/rooms/${roomEdits.id}`, {
 		method: "PUT",
 		headers: {

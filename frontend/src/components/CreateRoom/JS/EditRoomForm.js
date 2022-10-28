@@ -36,7 +36,16 @@ const EditRoomForm = () => {
 	const [beds, setBeds] = useState(1);
 	const [baths, setBaths] = useState(1);
 
-	const [amenities, setAmenities] = useState([]);
+	const [kitchen, setKitchen] = useState(false);
+	const [wifi, setWifi] = useState(false);
+	const [dryer, setDryer] = useState(false);
+	const [washer, setWasher] = useState(false);
+	const [hairdryer, setHairdryer] = useState(false);
+	const [TV, setTV] = useState(false);
+	const [freeParking, setFreeParking] = useState(false);
+	const [pillowsAndBlankets, setPillowsAndBlankets] = useState(false);
+
+	// const [amenities, setAmenities] = useState([]);
 	const [validationErrors, setValidationErrors] = useState([]);
 	const [isLoaded, setIsLoaded] = useState(false);
 
@@ -44,6 +53,23 @@ const EditRoomForm = () => {
 	const { roomId } = useParams();
 
 	const currentRoom = useSelector((state) => state.currentRoom);
+
+	useEffect(() => {
+		if (currentRoom.amenities) {
+			currentRoom.amenities.forEach((amenity) => {
+				if (amenity.type === "Kitchen") return setKitchen(true);
+				if (amenity.type === "Wifi") return setWifi(true);
+				if (amenity.type === "Dryer") return setDryer(true);
+				if (amenity.type === "Washer") return setWasher(true);
+				if (amenity.type === "Hairdryer") return setHairdryer(true);
+				if (amenity.type === "TV") return setTV(true);
+				if (amenity.type === "Free Parking")
+					return setFreeParking(true);
+				if (amenity.type === "Extra pillows and blankets")
+					return setPillowsAndBlankets(true);
+			});
+		}
+	}, [currentRoom]);
 
 	// On initial render set isLoaded to false
 	useEffect(() => {
@@ -159,6 +185,18 @@ const EditRoomForm = () => {
 				return;
 			}
 
+			let amenities = [];
+
+			if (kitchen) amenities.push("Kitchen");
+			if (wifi) amenities.push("Wifi");
+			if (dryer) amenities.push("Dryer");
+			if (washer) amenities.push("Washer");
+			if (hairdryer) amenities.push("Hairdryer");
+			if (TV) amenities.push("TV");
+			if (freeParking) amenities.push("Free Parking");
+			if (pillowsAndBlankets)
+				amenities.push("Extra pillows and blankets");
+
 			const room = {
 				id,
 				name,
@@ -174,6 +212,7 @@ const EditRoomForm = () => {
 				bedrooms,
 				baths,
 				beds,
+				amenities,
 			};
 
 			dispatch(editRoom(JSON.stringify(room)));
@@ -245,8 +284,22 @@ const EditRoomForm = () => {
 					setBaths={setBaths}
 				></RoomSize>
 				<RoomAmenities
-					setAmenities={setAmenities}
-					amenities={amenities}
+					setKitchen={setKitchen}
+					kitchen={kitchen}
+					setWifi={setWifi}
+					wifi={wifi}
+					setDryer={setDryer}
+					dryer={dryer}
+					setWasher={setWasher}
+					washer={washer}
+					setHairdryer={setHairdryer}
+					hairdryer={hairdryer}
+					setTV={setTV}
+					TV={TV}
+					setFreeParking={setFreeParking}
+					freeParking={freeParking}
+					setPillowsAndBlankets={setPillowsAndBlankets}
+					pillowsAndBlankets={pillowsAndBlankets}
 				></RoomAmenities>
 				<CreateRoomDescription
 					description={description}

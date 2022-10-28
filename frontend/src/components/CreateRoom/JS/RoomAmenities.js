@@ -1,12 +1,20 @@
 const RoomAmenities = ({
 	setKitchen,
+	kitchen,
 	setWifi,
+	wifi,
 	setDryer,
+	dryer,
 	setWasher,
+	washer,
 	setHairdryer,
+	hairdryer,
 	setTV,
+	TV,
 	setFreeParking,
+	freeParking,
 	setPillowsAndBlankets,
+	pillowsAndBlankets,
 }) => {
 	return (
 		<div className="input-container amenities">
@@ -14,8 +22,8 @@ const RoomAmenities = ({
 				Kitchen
 				<input
 					type="checkbox"
-					value="kitchen"
-					onClick={(e) => setKitchen(e.target.checked)}
+					checked={kitchen}
+					onChange={(e) => setKitchen(e.target.checked)}
 				></input>
 				<span className="checkmark"></span>
 			</label>
@@ -23,7 +31,8 @@ const RoomAmenities = ({
 				Wifi
 				<input
 					type="checkbox"
-					onClick={(e) => setWifi(e.target.checked)}
+					checked={wifi}
+					onChange={(e) => setWifi(e.target.checked)}
 				></input>
 				<span className="checkmark"></span>
 			</label>
@@ -31,7 +40,8 @@ const RoomAmenities = ({
 				Dryer
 				<input
 					type="checkbox"
-					onClick={(e) => setDryer(e.target.checked)}
+					checked={dryer}
+					onChange={(e) => setDryer(e.target.checked)}
 				></input>
 				<span className="checkmark"></span>
 			</label>
@@ -39,7 +49,8 @@ const RoomAmenities = ({
 				Washer
 				<input
 					type="checkbox"
-					onClick={(e) => setWasher(e.target.checked)}
+					checked={washer}
+					onChange={(e) => setWasher(e.target.checked)}
 				></input>
 				<span className="checkmark"></span>
 			</label>
@@ -47,7 +58,8 @@ const RoomAmenities = ({
 				Hairdryer
 				<input
 					type="checkbox"
-					onClick={(e) => setHairdryer(e.target.checked)}
+					checked={hairdryer}
+					onChange={(e) => setHairdryer(e.target.checked)}
 				></input>
 				<span className="checkmark"></span>
 			</label>
@@ -55,7 +67,8 @@ const RoomAmenities = ({
 				Tv
 				<input
 					type="checkbox"
-					onClick={(e) => setTV(e.target.checked)}
+					checked={TV}
+					onChange={(e) => setTV(e.target.checked)}
 				></input>
 				<span className="checkmark"></span>
 			</label>
@@ -63,7 +76,8 @@ const RoomAmenities = ({
 				Free Parking
 				<input
 					type="checkbox"
-					onClick={(e) => setFreeParking(e.target.checked)}
+					checked={freeParking}
+					onChange={(e) => setFreeParking(e.target.checked)}
 				></input>
 				<span className="checkmark"></span>
 			</label>
@@ -71,7 +85,8 @@ const RoomAmenities = ({
 				Extra pillows and blankets
 				<input
 					type="checkbox"
-					onClick={(e) => setPillowsAndBlankets(e.target.checked)}
+					checked={pillowsAndBlankets}
+					onChange={(e) => setPillowsAndBlankets(e.target.checked)}
 				></input>
 				<span className="checkmark"></span>
 			</label>

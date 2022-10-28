@@ -121,7 +121,6 @@ const CreateRoomForm = () => {
 			if (freeParking) amenities.push("Free Parking");
 			if (pillowsAndBlankets)
 				amenities.push("Extra pillows and blankets");
-			console.log("Amenities", amenities);
 
 			await dispatch(
 				createRoom({
@@ -216,13 +215,21 @@ const CreateRoomForm = () => {
 				></RoomSize>
 				<RoomAmenities
 					setKitchen={setKitchen}
+					kitchen={kitchen}
 					setWifi={setWifi}
+					wifi={wifi}
 					setDryer={setDryer}
+					dryer={dryer}
 					setWasher={setWasher}
+					washer={washer}
 					setHairdryer={setHairdryer}
+					hairdryer={hairdryer}
 					setTV={setTV}
+					TV={TV}
 					setFreeParking={setFreeParking}
+					freeParking={freeParking}
 					setPillowsAndBlankets={setPillowsAndBlankets}
+					pillowsAndBlankets={pillowsAndBlankets}
 				></RoomAmenities>
 				<CreateRoomDescription
 					description={description}
