@@ -194,15 +194,25 @@ const RoomContent = ({ room, setShowModal }) => {
 					)}
 				</div>
 
-				{sessionuser && room.owner.id !== sessionuser.id ? (
+				{sessionuser && room.owner.id !== sessionuser.id && (
 					<BookingCard
 						currentRoom={room}
 						setShowModal={setShowModal}
 					/>
-				) : (
+				)}
+
+				{!sessionuser && (
+					<BookingCard
+						currentRoom={room}
+						setShowModal={setShowModal}
+					/>
+				)}
+
+				{sessionuser && room.owner.id === sessionuser.id && (
 					<div className="owner-bookings">
 						<h2 className="room-detail-title">Bookings</h2>
-						{room.bookings && room.bookings.length > 0 ? (
+						{room.bookings &&
+							room.bookings.length > 0 &&
 							Object.values(room.bookings).map((booking) => {
 								return (
 									<div
@@ -222,10 +232,7 @@ const RoomContent = ({ room, setShowModal }) => {
 										</div>
 									</div>
 								);
-							})
-						) : (
-							<h4>No Bookings Yet</h4>
-						)}
+							})}
 					</div>
 				)}
 			</div>

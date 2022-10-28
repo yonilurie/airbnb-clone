@@ -42,7 +42,7 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 	//Handle creating a booking
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		if (!sessionuser) return;
+		if (!sessionuser) return alert("Log in to reserve");
 		const data = await dispatch(
 			createBooking({
 				startDate: bookingStartDate,
@@ -188,73 +188,69 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 								setDate={setDate}
 							></CalendarMenu>
 						</div>
-						{currentRoom.owner.id !== sessionuser.id && (
-							<div className="guests">
-								<div className="num-guests">GUESTS</div>
-								<div className="custom-select-container">
-									<select
-										id="guest"
-										className="custom-select"
-										value={guests}
-										onChange={(e) =>
-											setGuests(Number(e.target.value))
-										}
-									>
-										{maxGuestsArr.map((num) => {
-											return (
-												<option value={num} key={num}>
-													{num}
-												</option>
-											);
-										})}
-									</select>
-								</div>
+
+						<div className="guests">
+							<div className="num-guests">GUESTS</div>
+							<div className="custom-select-container">
+								<select
+									id="guest"
+									className="custom-select"
+									value={guests}
+									onChange={(e) =>
+										setGuests(Number(e.target.value))
+									}
+								>
+									{maxGuestsArr.map((num) => {
+										return (
+											<option value={num} key={num}>
+												{num}
+											</option>
+										);
+									})}
+								</select>
 							</div>
-						)}
+						</div>
 					</div>
 					{validationErrors.length > 0 &&
 						validationErrors.map((error) => (
 							<Errors error={error}></Errors>
 						))}
-					{currentRoom.owner.id !== sessionuser.id && (
-						<button
-							className="reserve-btn"
-							disabled={!bookingEndDate || !bookingStartDate}
-						>
-							Reserve
-						</button>
-					)}
+					<button
+						className="reserve-btn"
+						disabled={!bookingEndDate || !bookingStartDate}
+					>
+						Reserve
+					</button>
 					<div>You wont be charged yet</div>
 				</form>
-				{currentRoom.owner.id !== sessionuser.id && (
-					<div className="pricing-info">
-						<div className="price-items">
-							<div className="nightly-total">
-								<div className="row-detail">
-									${currentRoom.price} x {bookingDuration}{" "}
-									{bookingDuration === 1 ? "night" : "nights"}
-								</div>
-								<div className="row-total">{nightlyTotal}</div>
+
+				<div className="pricing-info">
+					<div className="price-items">
+						<div className="nightly-total">
+							<div className="row-detail">
+								${currentRoom.price} x {bookingDuration}{" "}
+								{bookingDuration === 1 ? "night" : "nights"}
 							</div>
-							<div className="cleaning-total">
-								<div className="row-detail">Cleaning fee</div>
-								<div className="row-total">{cleaningFee}</div>
-							</div>
-							<div className="nightly-total">
-								<div className="row-detail">Service fee</div>
-								<div className="row-total">{serviceFee}</div>
-							</div>
+							<div className="row-total">{nightlyTotal}</div>
 						</div>
-						<div className="price-total">
-							<div className="booking-total-detail">
-								Total before taxes
-							</div>
-							<div className="booking-total-price">
-								{bookingTotal}
-							</div>
+						<div className="cleaning-total">
+							<div className="row-detail">Cleaning fee</div>
+							<div className="row-total">{cleaningFee}</div>
+						</div>
+						<div className="nightly-total">
+							<div className="row-detail">Service fee</div>
+							<div className="row-total">{serviceFee}</div>
 						</div>
 					</div>
-				)}
+					<div className="price-total">
+						<div className="booking-total-detail">
+							Total before taxes
+						</div>
+						<div className="booking-total-price">
+							{bookingTotal}
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	);
