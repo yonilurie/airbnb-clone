@@ -164,21 +164,20 @@ const RoomContent = ({ room, setShowModal }) => {
 					<div className="description-container">
 						<div className="description">{room.description}</div>
 					</div>
-					<div className="room-amenities-container">
-						<h2 className="room-detail-title">
-							What this place offers
-						</h2>
-						<div className="room-amenities">
-							{room.amenities
-								.split("&")
-								.slice(0, -1)
-								.map((amenity) => (
+					{room.amenities.length > 0 && (
+						<div className="room-amenities-container">
+							<h2 className="room-detail-title">
+								What this place offers
+							</h2>
+							<div className="room-amenities">
+								{room.amenities.map((amenity) => (
 									<div className="room-amenity">
-										{amenity}
+										{amenity.type}
 									</div>
 								))}
+							</div>
 						</div>
-					</div>
+					)}
 				</div>
 
 				{sessionuser && room.owner.id !== sessionuser.id ? (

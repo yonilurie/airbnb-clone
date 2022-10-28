@@ -16,6 +16,7 @@ const {
 	UserReviewImage,
 	UserRoomImage,
 	Booking,
+	Amenity,
 } = require("../../db/models");
 
 const { requireAuth, restoreUser } = require("../../utils/auth");
@@ -369,6 +370,11 @@ router.get("/:roomId", validateRoomId, async (req, res) => {
 				model: User,
 				as: "owner",
 				attributes: ["id", "firstName", "lastName"],
+			},
+			{
+				model: Amenity,
+				as: "amenities",
+				attributes: ["type"],
 			},
 			{
 				model: Review,

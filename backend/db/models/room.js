@@ -20,6 +20,10 @@ module.exports = (sequelize, DataTypes) => {
 				foreignKey: "roomId",
 				as: "bookings",
 			});
+			Room.hasMany(models.Amenity, {
+				foreignKey: "roomId",
+				as: "amenities",
+			});
 			Room.hasMany(models.Review, {
 				foreignKey: "roomId",
 				as: "reviews",
@@ -102,10 +106,6 @@ module.exports = (sequelize, DataTypes) => {
 			baths: {
 				type: DataTypes.INTEGER,
 				allowNull: false,
-			},
-			amenities: {
-				type: DataTypes.STRING,
-				allowNull: true,
 			},
 			previewImage: {
 				type: DataTypes.STRING,

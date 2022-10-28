@@ -21,8 +21,6 @@ module.exports = {
 					bedrooms: 2,
 					beds: 2,
 					baths: 1,
-					amenities:
-						"Kitchen&Washer&Wifi&TV&Dryer&Free parking on premises&Hairdryers&Extra pillows and blankets&",
 					previewImage:
 						"https://bucket-airbnb-clone.s3.us-west-2.amazonaws.com/1664509261002.webp",
 				},
@@ -57,8 +55,6 @@ module.exports = {
 					bedrooms: 2,
 					beds: 2,
 					baths: 1,
-					amenities:
-						"Kitchen&Washer&Wifi&TV&Dryer&Free parking on premises&Hairdryers&Extra pillows and blankets&",
 					previewImage:
 						"https://bucket-airbnb-clone.s3.us-west-2.amazonaws.com/1664509936932.jpeg",
 				},
@@ -78,8 +74,6 @@ module.exports = {
 					bedrooms: 2,
 					beds: 2,
 					baths: 1,
-					amenities:
-						"Kitchen&Washer&Wifi&TV&Dryer&Free parking on premises&Hairdryers&Extra pillows and blankets&",
 					previewImage:
 						"https://bucket-airbnb-clone.s3.us-west-2.amazonaws.com/1664510359804.jpeg",
 				},
@@ -99,8 +93,6 @@ module.exports = {
 					bedrooms: 2,
 					beds: 2,
 					baths: 1,
-					amenities:
-						"Kitchen&Washer&Wifi&TV&Dryer&Free parking on premises&Hairdryers&Extra pillows and blankets&",
 					previewImage:
 						"https://bucket-airbnb-clone.s3.us-west-2.amazonaws.com/1664510715830.jpeg",
 				},
@@ -120,8 +112,6 @@ module.exports = {
 					bedrooms: 2,
 					beds: 2,
 					baths: 1,
-					amenities:
-						"Kitchen&Washer&Wifi&TV&Dryer&Free parking on premises&Hairdryers&Extra pillows and blankets&",
 					previewImage:
 						"https://bucket-airbnb-clone.s3.us-west-2.amazonaws.com/1664511204513.webp",
 				},
@@ -141,8 +131,6 @@ module.exports = {
 					bedrooms: 2,
 					beds: 2,
 					baths: 1,
-					amenities:
-						"Kitchen&Washer&Wifi&TV&Dryer&Free parking on premises&Hairdryers&Extra pillows and blankets&",
 					previewImage:
 						"https://bucket-airbnb-clone.s3.us-west-2.amazonaws.com/1664511509761.webp",
 				},
@@ -162,8 +150,6 @@ module.exports = {
 					bedrooms: 2,
 					beds: 2,
 					baths: 1,
-					amenities:
-						"Kitchen&Washer&Wifi&TV&Dryer&Free parking on premises&Hairdryers&Extra pillows and blankets&",
 					previewImage:
 						"https://bucket-airbnb-clone.s3.us-west-2.amazonaws.com/1664511887803.webp",
 				},
