@@ -351,6 +351,7 @@ h2 {
 	height: 574px;
 	background-color: white;
 	border-radius: 12px;
+	max-width: 90vw;
 
 	box-sizing: border-box;
 }
@@ -497,7 +498,10 @@ h2 {
 	}
 
 	.learn-more-modal {
-		width: 90vw;
 		overflow-y: scroll;
+	}
+
+	.learn-more-content-box {
+		grid-template-columns: 1fr;
 	}
 }

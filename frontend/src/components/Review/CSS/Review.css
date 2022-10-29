@@ -84,5 +84,6 @@
 
 .modal-body.reviews-container {
 	max-width: 90vw;
-	max-height: 90vh;
+	max-height: 80vh;
+	box-sizing: border-box;
 }
