@@ -49,6 +49,7 @@ const CreateRoomForm = () => {
 
 	const [validationErrors, setValidationErrors] = useState([]);
 	const [imageErrors, setImageErrors] = useState([]);
+	const [hasSubmitted, setHasSubmitted] = useState(false);
 
 	useEffect(() => {
 		if (document.title !== "Host your Home") {
@@ -67,7 +68,7 @@ const CreateRoomForm = () => {
 			errors.push("Description must be between 10 and 500 characters");
 		}
 		if (images && images.length !== 5) {
-			errors.push("Must include five files");
+			errors.push("Must include five images of your home");
 		}
 
 		setValidationErrors(errors);
@@ -91,9 +92,7 @@ const CreateRoomForm = () => {
 	//When form is submitted
 	const onSubmit = async (e) => {
 		e.preventDefault();
-		if (images.length !== 5) {
-			return setImageErrors(["Please use five images"]);
-		}
+		setHasSubmitted(true);
 
 		if (!validationErrors.length) {
 			const checkIfLocationTaken = await fetch(
@@ -154,8 +153,7 @@ const CreateRoomForm = () => {
 			// Redirect user to rooms page
 			history.push("/my-rooms");
 		} else {
-			document.body.scrollTop = 0;
-			document.documentElement.scrollTop = 0;
+			window.scrollTo(0, 0);
 		}
 	};
 
@@ -163,11 +161,13 @@ const CreateRoomForm = () => {
 		<div className="form-container">
 			<h1 className="form-description">Host your home</h1>
 			<div className="errors">
-				{validationErrors.length > 0 &&
+				{hasSubmitted &&
+					validationErrors.length > 0 &&
 					validationErrors.map((error) => (
 						<Errors error={error}></Errors>
 					))}
-				{imageErrors.length > 0 &&
+				{hasSubmitted &&
+					imageErrors.length > 0 &&
 					imageErrors.map((error) => <Errors error={error}></Errors>)}
 			</div>
 			<form className="create-room-form" onSubmit={onSubmit}>

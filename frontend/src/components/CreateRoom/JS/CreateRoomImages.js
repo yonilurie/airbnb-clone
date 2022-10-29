@@ -1,6 +1,6 @@
 import CreateRoomGallery from "./CreateRoomGallery";
 
-const CreateRoomImages = ({ images, setImages , setImageErrors}) => {
+const CreateRoomImages = ({ images, setImages, setImageErrors }) => {
 	const updateFile = (e) => {
 		const file = e.target.files[0];
 		if (!file) return;
@@ -24,9 +24,11 @@ const CreateRoomImages = ({ images, setImages , setImageErrors}) => {
 
 	return (
 		<div className="input-container">
-			<label htmlFor="images" className="form-label">
-				Images - First image will be preview
-			</label>
+			{images.length !== 5 && (
+				<label htmlFor="images" className="form-label">
+					Images - First image will be preview
+				</label>
+			)}
 			{images.length !== 5 && (
 				<label htmlFor="images" className="image-input-select">
 					Choose Images
