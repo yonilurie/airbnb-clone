@@ -5,6 +5,7 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+	max-width: 95vw;
 }
 .placeholder-loading-section-2 {
 	height: 450px;
@@ -12,8 +13,8 @@
 	margin-top: 30px;
 	display: flex;
 	flex-direction: row;
-
-	/* justify-content: space-between; */
+	max-width: 95vw;
+	justify-content: center;
 }
 
 .placeholder-loading-box-2-container {
@@ -21,38 +22,45 @@
 	flex-wrap: wrap;
 	gap: 5px;
 	margin-left: 5px;
+	min-width: 500px;
 }
 
 .loading-strip-1 {
 	width: 450px;
 	height: 30px;
 	background-color: rgb(224, 224, 224);
+	max-width: 95vw;
 }
 .loading-strip-2 {
 	width: 350px;
 	height: 20px;
 	background-color: rgb(224, 224, 224);
+	max-width: 95vw;
 }
 
 .loading-strip-3 {
 	width: 375px;
 	height: 25px;
 	background-color: rgb(224, 224, 224);
+	max-width: 95vw;
 }
 .loading-strip-4 {
 	width: 150px;
 	height: 20px;
 	background-color: rgb(224, 224, 224);
+	max-width: 95vw;
 }
 .loading-strip-5 {
 	width: 150px;
 	height: 20px;
 	background-color: rgb(224, 224, 224);
+	max-width: 95vw;
 }
 .loading-strip-6 {
 	width: 150px;
 	height: 20px;
 	background-color: rgb(224, 224, 224);
+	max-width: 95vw;
 }
 
 .loading-box-1 {
@@ -61,6 +69,7 @@
 	background-color: rgb(224, 224, 224);
 	border-bottom-left-radius: 12px;
 	border-top-left-radius: 12px;
+	max-width: 95vw;
 }
 
 .loading-box-2 {
@@ -78,10 +87,16 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+	max-width: 95vw;
 }
 
-@media screen and (max-width: 750px) {
-	.placeholder-container {
-		max-width: 90vw;
+@media screen and (max-width: 900px) {
+	.placeholder-loading-box-2-container {
+		display: none;
+	}
+
+	.loading-box-1 {
+		border-radius: 4px;
+		width: 95vw;
 	}
 }
