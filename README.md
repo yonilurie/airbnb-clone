@@ -29,23 +29,23 @@ Images are hosted with Amazon Web Services and maps are from the Google Maps API
 
 # Features
 
-## User Authentication
+# User Authentication
+
+### Users may login using the demo link in the profile button
+
+### Users may also login to an existing account
 
 <br>
 
-## • Users may login using the demo link in the profile button
-
-## • Users may also login to an existing account
-
 ![Login Form](./images/login-form.png)
 
-If the credentials are invalid an error message will show so the user knows they provided the wrong credentials
+• If the credentials are invalid an error message will show so the user knows they provided the wrong credentials
 
-## Or signup for a new account
+# Or signup for a new account
 
 ![Signup form](./images/signup-form.png)
 
-The user can signup and will be propmpted with any errors about their form
+• The user can signup and will be propmpted with any errors about their form
 and will not be able to submit until they are corrected
 
 ## Once the user is logged in the contents of the profile button will change
@@ -59,25 +59,40 @@ The user can now
 -   View their existing rooms through <b>My Rooms</b>
 -   And logout through <b>Log Out</b>
 
-## My Trips
+<br>
+
+# My Trips
 
 ![My trips](./images/my-trips.png)
 
-Here the user can see their past bookings under <b>Where you've been</b>
+• Here the user can see their past bookings under <b>Where you've been</b>
 and their future bookings under <b>Where you're headed</b>
 
-Clicking on any of the bookings will take the user to the bookings information page
+• Clicking on any of the bookings will take the user to the bookings information page
 
-Under the users past bookings theire are buttons to leave or edit a review whcih dynamically change based on whether or not a user has left a review
+• Under the users past bookings theire are buttons to leave or edit a review whcih dynamically change based on whether or not a user has left a review
 
-## Submit review
+<br>
+
+# View a Booking
+
+![View a Booking](./images/airbnb-booking-page.png)
+
+On a specific bookings page a user can:
+
+-   Edit or cancel a booking for a future stay
+-   Delete or create a new review for a past stay
+-   Get directions to your stay
+-   Copy the address to the clipboard
+
+# Submit review
 
 ![Submit review](./images/submit-review.png)
 
-## Home Page
+# Home Page
 
 ![Home page](./images/airbnb-home-page.png)
 
-## Create a booking
+# Create a booking
 
 ![Create a booking](./images/create-booking.gif)

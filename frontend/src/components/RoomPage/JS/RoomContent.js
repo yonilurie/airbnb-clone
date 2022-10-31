@@ -233,6 +233,9 @@ const RoomContent = ({ room, setShowModal }) => {
 									</div>
 								);
 							})}
+						{!room.bookings.length && (
+							<div>No nights booked yet</div>
+						)}
 					</div>
 				)}
 			</div>

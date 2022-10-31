@@ -261,12 +261,18 @@
 /* Edit Booking */
 
 .edit-booking-modal {
-	width: 50vw;
-	height: 50vh;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+}
+
+.calendar-menu-main-container {
+	max-width: 50vw;
+}
+
+.booking-card-dates {
+	margin-top: 20px;
 }
 
 @media screen and (max-width: 1000px) {
@@ -291,7 +297,7 @@
 		height: 100%;
 	}
 	.calendar-menu-main-container {
-		height: 100%;
+		min-width: 100%;
 	}
 	.booking-page-main-container {
 		display: flex;

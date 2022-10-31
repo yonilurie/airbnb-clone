@@ -1,4 +1,4 @@
-import { Link, useParams, useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
@@ -44,7 +44,7 @@ const BookingPage = () => {
 	};
 
 	const checkReview = (reviews) => {
-		for (let review of reviews) {                
+		for (let review of reviews) {
 			if (review.userId === user.id) return review;
 		}
 		return false;

@@ -8,7 +8,6 @@ import ReviewsModal from "./JS/ReviewsModal";
 
 import Placeholder from "./JS/Placeholder";
 
-import LoadingCircle from "../Loading/JS/LoadingCircle";
 import "./CSS/SingleRoomInfo.css";
 
 import RoomContent from "./JS/RoomContent";
