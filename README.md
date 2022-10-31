@@ -1,10 +1,9 @@
 # Airbnb Clone
 
-## Deployed Application: [Heroku](https://airbnb-clone-fullstack.herokuapp.com/)
+## [Deployed Application](https://airbnb-clone-fullstack.herokuapp.com/)
 
-## Description
 
-This project is a clone of Airbnb. Features include; user authentication, hosting a room, creating a booking, and leaving reviews for places you have stayed at. 
+This project is a clone of Airbnb. Features include; user authentication, hosting a room, creating a booking, and leaving reviews for places you have stayed at.
 
 Images are hosted with Amazon Web Services and maps are from the Google Maps API.
 
@@ -27,9 +26,6 @@ Images are hosted with Amazon Web Services and maps are from the Google Maps API
 ![SQLite](https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white) ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white) ![Heroku](https://img.shields.io/badge/heroku-%23430098.svg?style=for-the-badge&logo=heroku&logoColor=white)
 ![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)
 
-
-
-
 <br>
 
 # Features
@@ -39,8 +35,6 @@ Images are hosted with Amazon Web Services and maps are from the Google Maps API
 <br>
 
 ## Users may login using the demo link in the profile button
-
-
 
 ## Users may also login to an existing account
 
@@ -77,7 +71,7 @@ Clicking on any of the bookings will take the user to the bookings information p
 
 Under the users past bookings theire are buttons to leave or edit a review whcih dynamically change based on whether or not a user has left a review
 
-## Submit review 
+## Submit review
 
 ![Submit review](./images/submit-review.png)
 
@@ -88,5 +82,3 @@ Under the users past bookings theire are buttons to leave or edit a review whcih
 ## Create a booking
 
 ![Create a booking](./images/create-booking.gif)
-
-

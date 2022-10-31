@@ -26,7 +26,7 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 
 	const [bookingStartDate, setBookingStartDate] = useState(null);
 	const [bookingEndDate, setBookingEndDate] = useState(null);
-	const [bookingDuration, setBookingDuration] = useState(null);
+	const [bookingDuration, setBookingDuration] = useState(0);
 	const [guests, setGuests] = useState(1);
 	const [nightlyTotal, setNightlyTotal] = useState(null);
 	const [cleaningFee, setCleaningFee] = useState(null);

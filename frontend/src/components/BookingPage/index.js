@@ -44,7 +44,7 @@ const BookingPage = () => {
 	};
 
 	const checkReview = (reviews) => {
-		for (let review of reviews) {
+		for (let review of reviews) {                
 			if (review.userId === user.id) return review;
 		}
 		return false;
