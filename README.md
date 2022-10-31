@@ -2,7 +2,6 @@
 
 ## [Deployed Application](https://airbnb-clone-fullstack.herokuapp.com/)
 
-
 This project is a clone of Airbnb. Features include; user authentication, hosting a room, creating a booking, and leaving reviews for places you have stayed at.
 
 Images are hosted with Amazon Web Services and maps are from the Google Maps API.
@@ -34,9 +33,9 @@ Images are hosted with Amazon Web Services and maps are from the Google Maps API
 
 <br>
 
-## Users may login using the demo link in the profile button
+## • Users may login using the demo link in the profile button
 
-## Users may also login to an existing account
+## • Users may also login to an existing account
 
 ![Login Form](./images/login-form.png)
 
