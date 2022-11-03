@@ -112,7 +112,8 @@ ul {
 	margin: auto;
 }
 
-.login-register-submit {
+.login-register-submit,
+.demo {
 	box-sizing: border-box;
 	transition-duration: 0.25s;
 	background-image: radial-gradient(
@@ -136,7 +137,8 @@ ul {
 	margin-top: 1.25rem;
 }
 
-.login-register-submit:active {
+.login-register-submit:active,
+.demo:active {
 	transform: scale(0.96);
 	background-image: radial-gradient(
 		circle at center,

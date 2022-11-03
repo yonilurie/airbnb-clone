@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { createBooking, getAUsersBookings } from "../../../store/session";
 
+import LoginFormModal from "../../LoginFormModal/index.js";
 import CalendarMenu from "./CalendarMenu";
 import Errors from "../../Errors";
 
@@ -39,10 +40,13 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 	const [showMenu, setShowMenu] = useState(false);
 	const [setDate, setSetDate] = useState(false);
 
+	const [showLoginModal, setShowLoginModal] = useState(false);
+	const [interaction, setInteraction] = useState("login");
+
 	//Handle creating a booking
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		if (!sessionuser) return alert("Log in to reserve");
+		if (!sessionuser) return setShowLoginModal(true);
 		const data = await dispatch(
 			createBooking({
 				startDate: bookingStartDate,
@@ -173,6 +177,12 @@ const BookingCard = ({ currentRoom, setShowModal }) => {
 						)}
 					</div>
 				</div>
+				<LoginFormModal
+					showModal={showLoginModal}
+					setShowModal={showLoginModal}
+					interaction={interaction}
+					setInteraction={setInteraction}
+				></LoginFormModal>
 				<form className="booking-info" onSubmit={handleSubmit}>
 					<div className="booking-info-wrapper">
 						<div className="choose-dates-container">

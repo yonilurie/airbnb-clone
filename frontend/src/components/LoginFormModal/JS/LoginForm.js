@@ -77,6 +77,19 @@ function LoginForm({ setShowModal, showModal, setInteraction }) {
 					Log in
 				</button>
 			</form>
+			<button
+				className="demo"
+				onClick={() =>
+					dispatch(
+						sessionActions.login({
+							credential: "Demo-lition",
+							password: "password",
+						})
+					).then(() => setShowModal(false))
+				}
+			>
+				Demo
+			</button>
 			<div
 				onClick={() => setInteraction("signup")}
 				className="auth-toggle"
