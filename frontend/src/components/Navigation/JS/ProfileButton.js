@@ -43,6 +43,7 @@ function ProfileButton({ user }) {
 				showModal={showModal}
 				setShowModal={setShowModal}
 				interaction={interaction}
+				setInteraction={setInteraction}
 			/>
 			<div className="profile-container">
 				<button onClick={openMenu} className="profile-button">

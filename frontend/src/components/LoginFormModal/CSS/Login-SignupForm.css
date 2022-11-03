@@ -163,3 +163,13 @@ ul {
 	justify-content: center;
 	align-items: center;
 }
+
+.auth-toggle {
+	cursor: pointer;
+	margin-top: 10px;
+}
+
+.auth-toggle:hover {
+	color: rgb(255, 131, 135);
+	text-decoration: underline;
+}

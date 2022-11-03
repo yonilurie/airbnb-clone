@@ -6,7 +6,7 @@ import Errors from "../../Errors";
 
 import "../CSS/Login-SignupForm.css";
 
-function LoginForm({ setShowModal, showModal }) {
+function LoginForm({ setShowModal, showModal, setInteraction }) {
 	const dispatch = useDispatch();
 
 	const [credential, setCredential] = useState("");
@@ -77,6 +77,12 @@ function LoginForm({ setShowModal, showModal }) {
 					Log in
 				</button>
 			</form>
+			<div
+				onClick={() => setInteraction("signup")}
+				className="auth-toggle"
+			>
+				Create an account
+			</div>
 		</div>
 	);
 }

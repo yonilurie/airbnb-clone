@@ -5,7 +5,7 @@ import * as sessionActions from "../../../store/session";
 import Errors from "../../Errors";
 import "../CSS/Login-SignupForm.css";
 
-function SignupForm({ setShowModal }) {
+function SignupForm({ setShowModal, setInteraction }) {
 	const dispatch = useDispatch();
 
 	const [email, setEmail] = useState("");
@@ -198,6 +198,12 @@ function SignupForm({ setShowModal }) {
 					Sign Up
 				</button>
 			</form>
+			<div
+				onClick={() => setInteraction("login")}
+				className="auth-toggle"
+			>
+				Already a user?
+			</div>
 		</div>
 	);
 }
