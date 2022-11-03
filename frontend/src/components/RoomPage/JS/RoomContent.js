@@ -41,6 +41,9 @@ const RoomContent = ({ room, setShowModal }) => {
 
 	return (
 		<div className="room-content">
+			{room && sessionuser && room.owner.id === sessionuser.id && (
+				<div className="owned-room-header">Your Owned Room</div>
+			)}
 			<RoomGallery gallery={gallery}></RoomGallery>
 			<div className="room-details">
 				<h1 className="room-name">{room.name}</h1>
