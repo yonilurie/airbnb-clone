@@ -12,6 +12,7 @@ import Bookings from "./components/Bookings";
 import BookingPage from "./components/BookingPage";
 import ProtectedRoute from "./ProtectedRoute";
 import * as sessionActions from "./store/session";
+import Footer from "./components/Footer";
 
 function App() {
 	const dispatch = useDispatch();
@@ -27,6 +28,7 @@ function App() {
 				<Switch>
 					<Route exact path="/">
 						<HomePage></HomePage>
+						<Footer></Footer>
 					</Route>
 					<ProtectedRoute exact path="/host-your-home">
 						<CreateRoomForm></CreateRoomForm>

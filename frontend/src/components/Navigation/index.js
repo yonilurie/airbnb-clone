@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import ProfileButton from "./JS/ProfileButton";
 import LoginFormModal from "../LoginFormModal";
 
-import logo from "../../images/logo.svg";
+import logo from "../../images/logo.png";
 import * as sessionActions from "../../store/session";
 import "./CSS/Navigation.css";
 
