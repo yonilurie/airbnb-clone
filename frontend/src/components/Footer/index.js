@@ -4,7 +4,7 @@ const Footer = () => {
 	return (
 		<div className="footer">
 			<div className="footer-left">
-				<span>2022 Airbnb Clone · </span>
+				<span>2022 A-bnb clone · </span>
 				<span>JavaScript · </span>
 				<span>Express · </span>
 				<span>React · </span>
@@ -17,17 +17,26 @@ const Footer = () => {
 					<a
 						href="https://www.linkedin.com/in/yonilurie/"
 						target="_blank"
+						rel="noreferrer"
 					>
 						LinkedIn
 					</a>
 				</span>
 				<span>
-					<a href="https://github.com/yonilurie" target="_blank">
+					<a
+						href="https://github.com/yonilurie"
+						target="_blank"
+						rel="noreferrer"
+					>
 						Github
 					</a>
 				</span>
 				<span>
-					<a href="https://angel.co/u/yonatan-lurie" target="_blank">
+					<a
+						href="https://angel.co/u/yonatan-lurie"
+						target="_blank"
+						rel="noreferrer"
+					>
 						Angellist
 					</a>
 				</span>
