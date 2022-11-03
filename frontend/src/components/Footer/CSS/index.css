@@ -19,3 +19,12 @@ span > a:hover {
 	text-decoration: underline;
 	color: rgb(255, 90, 95);
 }
+
+@media screen and (max-width: 1000px) {
+	.footer-left {
+		display: none;
+	}
+	.footer {
+		justify-content: center;
+	}
+}
