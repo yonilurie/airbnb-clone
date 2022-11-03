@@ -1,7 +1,8 @@
 .footer {
-	position: absolute;
+	position: sticky;
 	bottom: 0px;
 	border-top: solid 1px rgb(221, 221, 221);
+	background-color: white;
 	padding: 13px 40px 14px 40px;
 	box-sizing: border-box;
 	width: 100%;
