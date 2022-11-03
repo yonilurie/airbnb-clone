@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getRooms } from "../../store/rooms";
 import SingleRoom from "./JS/SingleRoom";
 import LoadingCircle from "../Loading/JS/LoadingCircle";
+import Footer from "../Footer";
 import "./CSS/RoomContainer.css";
 
 function Rooms() {
@@ -43,6 +44,7 @@ function Rooms() {
 					})}
 			</div>
 			{!rooms.length && <LoadingCircle />}
+			<Footer></Footer>
 		</div>
 	);
 }

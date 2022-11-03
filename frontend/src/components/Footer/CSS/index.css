@@ -1,0 +1,20 @@
+.footer {
+	position: absolute;
+	bottom: 0px;
+	border-top: solid 1px rgb(221, 221, 221);
+	padding: 13px 40px 14px 40px;
+	box-sizing: border-box;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+
+.footer-right {
+	display: flex;
+	gap: 20px;
+}
+
+span > a:hover {
+	text-decoration: underline;
+	color: rgb(255, 90, 95);
+}

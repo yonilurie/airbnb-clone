@@ -233,7 +233,7 @@ const RoomContent = ({ room, setShowModal }) => {
 									</div>
 								);
 							})}
-						{!room.bookings.length && (
+						{room.bookings && !room.bookings.length && (
 							<div>No nights booked yet</div>
 						)}
 					</div>
