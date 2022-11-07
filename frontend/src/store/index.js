@@ -12,6 +12,7 @@ const rootReducer = combineReducers({
 	currentRoom: singleRoomReducer,
 });
 
+
 let enhancer;
 
 if (process.env.NODE_ENV === "production") {

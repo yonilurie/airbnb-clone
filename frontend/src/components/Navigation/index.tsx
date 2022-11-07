@@ -1,19 +1,24 @@
-import React from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-
-import ProfileButton from "./JS/ProfileButton";
-import LoginFormModal from "../LoginFormModal";
-
-import logo from "../../images/logo.png";
-import * as sessionActions from "../../store/session";
 import "./CSS/Navigation.css";
+const logo = require("../../images/logo.png");
 
-function Navigation({ isLoaded }) {
+const ProfileButton = require("./JS/ProfileButton");
+const LoginFormModal = require("../LoginFormModal");
+
+const sessionActions = require("../../store/session");
+
+type Props = {
+	isLoaded: boolean;
+};
+
+interface State {
+	sessionuser: Object;
+}
+
+function Navigation({ isLoaded }: Props) {
 	const dispatch = useDispatch();
-	const sessionuser = useSelector((state) => state.session.user);
-
-	
+	const sessionuser: State = useSelector((state) => state.session.user);
 
 	//Determines what will render in the navbar depending on whether user is logged in
 	//Passed as prop to Profile button component
