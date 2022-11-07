@@ -1,18 +1,24 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
-
-import LoginFormModal from "../../LoginFormModal";
-
-import * as sessionActions from "../../../store/session";
 import "../CSS/ProfileButton.css";
+const LoginFormModal = require("../../LoginFormModal/index.js").default;
+const sessionActions = require("../../../store/session");
 
-function ProfileButton({ user }) {
+type Props = {
+	user: {
+		firstName: string;
+		lastName: string;
+		email: string;
+	};
+};
+
+function ProfileButton({ user }: Props) {
 	const dispatch = useDispatch();
 
 	const [showMenu, setShowMenu] = useState(false);
 	const [showModal, setShowModal] = useState(false);
-	const [interaction, setInteraction] = useState();
+	const [interaction, setInteraction] = useState("login");
 
 	useEffect(() => {
 		if (!showMenu) return;
@@ -22,7 +28,7 @@ function ProfileButton({ user }) {
 	}, [showMenu]);
 
 	//Logout functionality
-	const logout = (e) => {
+	const logout = (e: React.ChangeEvent<any>) => {
 		e.preventDefault();
 		dispatch(sessionActions.logout());
 	};
@@ -31,11 +37,6 @@ function ProfileButton({ user }) {
 		if (showMenu) return;
 		setShowMenu(true);
 	};
-
-	// useEffect(() => {
-	// 	if (showModal) document.body.style.overflow = "hidden";
-	// 	else document.body.style.overflow = "auto";
-	// }, [showModal]);
 
 	return (
 		<>
