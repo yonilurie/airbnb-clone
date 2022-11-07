@@ -1,4 +1,8 @@
-const Errors = ({error}) => {
+type Props = {
+	error: string
+}
+
+const Errors = ({ error }: Props) => {
 	return (
 		<div key={error} className="error">
 			{error}
