@@ -19,6 +19,7 @@ const RoomGallery = ({ gallery }) => {
 				className="gallery-img"
 				src={gallery[galleryImage]}
 				onClick={() => setShowImageModal(true)}
+				alt='current gallery'
 			></img>
 			<ImageModal
 				showImageModal={showImageModal}

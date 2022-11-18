@@ -13,7 +13,7 @@ const ImageModal = ({ image, showImageModal, setShowImageModal }) => {
 					>
 						x
 					</div>
-					<img src={image} className="modal-img"></img>
+					<img src={image} className="modal-img" alt='room modal'></img>
 				</Modal>
 			)}
 		</>
