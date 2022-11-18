@@ -19,6 +19,7 @@ const LearnMore = ({ setShowLearnMore }) => {
 						<img
 							className="aircover-logo in-modal"
 							src="https://a0.muscache.com/im/pictures/54e427bb-9cb7-4a81-94cf-78f19156faad.jpg"
+							alt='aircover'
 						></img>
 					</div>
 					<div className="learn-more-subheader-description">

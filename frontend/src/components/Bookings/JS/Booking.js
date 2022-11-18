@@ -1,17 +1,10 @@
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
 
 const Booking = ({ booking }) => {
 	const bookingStart = new Date(booking.startDate).toString().split(" ");
 	const bookingEnd = new Date(booking.endDate).toString().split(" ");
-	const [
-		startDay,
-		startMonth,
-		startDate,
-		startYear,
-		startTime,
-	] = bookingStart;
-	const [endDay, endMonth, endDate, endYear, endTime] = bookingEnd;
+	const [startDay, startMonth, startDate, startYear] = bookingStart;
+	const [endDay, endMonth, endDate, endYear] = bookingEnd;
 
 	let month;
 	let duration;

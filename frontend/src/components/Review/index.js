@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useHistory, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { createRoomReview } from "../../store/CurrentRoom";
 import {
@@ -19,7 +19,7 @@ function CreateReview({ userReview, roomId, setShowReviewModal }) {
 	const [review, setReview] = useState("");
 	const [validationErrors, setValidationErrors] = useState([]);
 	const [isSubmitted, setIsSubmitted] = useState(false);
-	const [showModal, setShowModal] = useState(false);
+	const [, setShowModal] = useState(false);
 
 	//Form validation
 	useEffect(() => {

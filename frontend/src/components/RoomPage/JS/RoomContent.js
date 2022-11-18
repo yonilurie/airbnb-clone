@@ -179,7 +179,10 @@ const RoomContent = ({ room, setShowModal }) => {
 							</h2>
 							<div className="room-amenities">
 								{room.amenities.map((amenity) => (
-									<div className="room-amenity">
+									<div
+										className="room-amenity"
+										key={amenity.type}
+									>
 										• {amenity.type}
 									</div>
 								))}
