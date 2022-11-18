@@ -4,12 +4,12 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider as ReduxProvider } from "react-redux";
 import "./index.css";
 import App from "./App";
-import store from "./store";
+import configureStore from "./store";
 import { restoreCSRF, csrfFetch } from "./store/csrf";
 import { ModalProvider } from "./context/Modal";
 import * as sessionActions from "./store/session";
 
-
+const store = configureStore();
 
 if (process.env.NODE_ENV !== "production") {
 	restoreCSRF();

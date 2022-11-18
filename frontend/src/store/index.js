@@ -1,9 +1,8 @@
-import {combineReducers, applyMiddleware, compose } from "redux";
+import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
-import { configureStore } from "@reduxjs/toolkit";
+
 import sessionReducer from "./session";
 import roomReducer from "./rooms";
-import logger from "redux-logger";
 
 import singleRoomReducer from "./CurrentRoom";
 
@@ -12,6 +11,7 @@ const rootReducer = combineReducers({
 	rooms: roomReducer,
 	currentRoom: singleRoomReducer,
 });
+
 
 let enhancer;
 
@@ -24,10 +24,8 @@ if (process.env.NODE_ENV === "production") {
 	enhancer = composeEnhancers(applyMiddleware(thunk, logger));
 }
 
-const store = configureStore({
-	reducer: rootReducer,
-	middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
-	devTools: process.env.NODE_ENV !== "production",
-});
+const configureStore = (preloadedState) => {
+	return createStore(rootReducer, preloadedState, enhancer);
+};
 
-export default store;
+export default configureStore;
