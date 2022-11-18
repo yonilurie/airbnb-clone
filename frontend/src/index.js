@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { Provider as ReduxProvider } from "react-redux";
 import "./index.css";
@@ -13,7 +13,6 @@ const store = configureStore();
 
 if (process.env.NODE_ENV !== "production") {
 	restoreCSRF();
-
 	window.csrfFetch = csrfFetch;
 	window.store = store;
 	window.sessionActions = sessionActions;
@@ -30,10 +29,11 @@ function Root() {
 		</ReduxProvider>
 	);
 }
+const container = document.getElementById("root");
+const root = createRoot(container);
 
-ReactDOM.render(
+root.render(
 	<React.StrictMode>
 		<Root />
-	</React.StrictMode>,
-	document.getElementById("root")
+	</React.StrictMode>
 );
