@@ -132,9 +132,7 @@ const singleRoomReducer = (state = initialState, action) => {
 			return newState;
 		}
 		case GET_CURRENT_ROOM_BOOKINGS: {
-			newState = { ...state };
-			newState.bookings = action.bookings;
-			return newState;
+			return { ...state, bookings: action.bookings };
 		}
 		case CREATE_ROOM_REVIEW: {
 			newState = { ...state };
