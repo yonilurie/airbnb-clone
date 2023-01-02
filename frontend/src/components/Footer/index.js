@@ -4,7 +4,7 @@ const Footer = () => {
 	return (
 		<div className="footer">
 			<div className="footer-left">
-				<span>2022 A-bnb clone · </span>
+				<span>2023 A-bnb clone · </span>
 				<span>JavaScript · </span>
 				<span>Express · </span>
 				<span>React · </span>
